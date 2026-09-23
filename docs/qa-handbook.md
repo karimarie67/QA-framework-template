@@ -36,8 +36,10 @@ user story ──► test case(s) ──► automated test ──► CI run ─�
  (issue)       (sub-issues)      (one per case)
 ```
 
-1. **User story**: a GitHub issue labeled `user-story` that states a
-   behavior and numbers its acceptance criteria (AC).
+1. **User story**: a GitHub issue created from the **User Story** form
+   ([`.github/ISSUE_TEMPLATE/user-story.yml`](../.github/ISSUE_TEMPLATE/user-story.yml)),
+   labeled `user-story`, that states a behavior and numbers its acceptance
+   criteria (AC).
 2. **Test case**: a GitHub issue created from the **Test Case** form
    ([`.github/ISSUE_TEMPLATE/test-case.yml`](../.github/ISSUE_TEMPLATE/test-case.yml)),
    labeled `test-case`. It names its source story and the ACs it covers, and
