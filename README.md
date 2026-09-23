@@ -11,6 +11,26 @@ Pick one:
   clean history.
 - **Clone the repo.**
 
+## Where we started, and where we are now
+
+This Framework was extracted from a real Engagement, and a new Engagement has
+since been built from it. The three repos show the path:
+
+| | Repo | What it is |
+|---|---|---|
+| **Where we started** | [`karimarie67/QA-boost`](https://github.com/karimarie67/QA-boost) | The original Boost.org Engagement, with its real history: 7 Boost-specific specs (47 tests) run against stage and production boost.org, and a CI dashboard with 170 runs through July 2026. Restored from [`QA-documentation@boost-final`](https://github.com/karimarie67/QA-documentation/tree/boost-final). |
+| **The Framework** | this repo | That Engagement generalized: the Boost content is removed, Site config is isolated in `config-helper.js` and `selectors.js` behind `TODO(Engagement)` markers, self-checks are added, and Atlas guardrails are on. |
+| **Where we are now** | [`karimarie67/QA-example`](https://github.com/karimarie67/QA-example) (private) | A new Engagement created from this template against [Sauce Demo](https://www.saucedemo.com). It traces every user story to its manual test cases (as GitHub sub-issues) and every test case to one automated Playwright test. |
+
+| | Started (QA-boost) | Framework (this repo) | Now (QA-example) |
+|---|---|---|---|
+| Site config | Boost URLs, selectors, and content in both the config files and the specs | Isolated in `config-helper.js` / `selectors.js`, marked `TODO(Engagement)` | Filled in for Sauce Demo; element hooks in `selectors.shop.*` |
+| Test cases | Spreadsheets ([functional](./examples/boost/Functional-Table%201.csv), [regression](./examples/boost/Regression-Table%201.csv)) | A Test Case issue design ([`docs/github_test_management.md`](./docs/github_test_management.md)) | 9 Test Case issues, each a sub-issue of its user story |
+| Traceability | `TC_*` IDs as test annotations | — | Story → test case → test (named by ID, linked to its issue) → CI → dashboard |
+| CI e2e | On every push and PR, against staging | Manual dispatch only, until Site config is real | Smoke and functional jobs on every push and PR |
+| Self-checks | None | Unit tests and `template-check` | 94 unit tests and `template-check` |
+| Guardrails | None | Atlas | Atlas |
+
 ## Worked example
 
 [`examples/boost/README.md`](./examples/boost/README.md) is a complete, real
