@@ -2,7 +2,7 @@
 /**
  * template-check.js
  *
- * Structural smoke check for the QA-documentation framework template.
+ * Structural smoke check for the QA-framework-template framework template.
  *
  * 1. Confirms the framework's two site-config modules (config-helper.js,
  *    selectors.js) import cleanly.

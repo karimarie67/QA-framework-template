@@ -1,4 +1,4 @@
-# QA-documentation
+# QA-framework-template
 
 A reusable, site-agnostic Playwright QA automation framework. Each client engagement instantiates it from this template and supplies its own site-specific configuration and specs.
 
