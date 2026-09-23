@@ -23,9 +23,7 @@ This handbook deliberately leaves two kinds of content out:
 | How to run the tests day to day | [`README.md`](../README.md) |
 
 The original Boost.org handbook this was extracted from lives in
-[`examples/boost/QA_handbook.md`](../examples/boost/QA_handbook.md). Several of
-its counts and schedules had drifted from its own repo, which is why derived
-facts are now generated instead of written down.
+[`examples/boost/QA_handbook.md`](../examples/boost/QA_handbook.md).
 
 ---
 
