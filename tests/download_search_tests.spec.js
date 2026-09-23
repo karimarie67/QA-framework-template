@@ -9,8 +9,7 @@ fs.mkdirSync('test-results', { recursive: true });
 
 test.describe('Download Tests', () => {
 
-  test('Download links return valid HTTP status codes', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_DOWNLOAD_001' });
+  test('Download links return valid HTTP status codes', { annotation: { type: 'test_case', description: 'TC_DOWNLOAD_001' } }, async ({ page }, testInfo) => {
     const testId = 'TC_DOWNLOAD_001';
     testInfo.setTimeout(60000);
 
@@ -58,8 +57,7 @@ test.describe('Download Tests', () => {
     }
   });
 
-  test('Download file names are correct format', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_DOWNLOAD_002' });
+  test('Download file names are correct format', { annotation: { type: 'test_case', description: 'TC_DOWNLOAD_002' } }, async ({ page }, testInfo) => {
     const testId = 'TC_DOWNLOAD_002';
     testInfo.setTimeout(45000);
 
@@ -87,8 +85,7 @@ test.describe('Download Tests', () => {
     }
   });
 
-  test('Version selector displays available versions', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_DOWNLOAD_003' });
+  test('Version selector displays available versions', { annotation: { type: 'test_case', description: 'TC_DOWNLOAD_003' } }, async ({ page }, testInfo) => {
     const testId = 'TC_DOWNLOAD_003';
     testInfo.setTimeout(30000);
 
@@ -133,8 +130,7 @@ test.describe('Download Tests', () => {
     }
   });
 
-  test('Download page displays file sizes', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_DOWNLOAD_004' });
+  test('Download page displays file sizes', { annotation: { type: 'test_case', description: 'TC_DOWNLOAD_004' } }, async ({ page }, testInfo) => {
     const testId = 'TC_DOWNLOAD_004';
     testInfo.setTimeout(30000);
 
@@ -173,8 +169,7 @@ test.describe('Download Tests', () => {
 
 test.describe('Search Tests', () => {
 
-  test('Search returns relevant results for common queries', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_SEARCH_001' });
+  test('Search returns relevant results for common queries', { annotation: { type: 'test_case', description: 'TC_SEARCH_001' } }, async ({ page }, testInfo) => {
     const testId = 'TC_SEARCH_001';
     testInfo.setTimeout(45000);
 
@@ -207,8 +202,7 @@ test.describe('Search Tests', () => {
     }
   });
 
-  test('Search with special characters handles gracefully', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_SEARCH_002' });
+  test('Search with special characters handles gracefully', { annotation: { type: 'test_case', description: 'TC_SEARCH_002' } }, async ({ page }, testInfo) => {
     const testId = 'TC_SEARCH_002';
     testInfo.setTimeout(60000); // Increased timeout
 
@@ -245,8 +239,7 @@ test.describe('Search Tests', () => {
     }
   });
 
-  test('Empty search shows appropriate message', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_SEARCH_003' });
+  test('Empty search shows appropriate message', { annotation: { type: 'test_case', description: 'TC_SEARCH_003' } }, async ({ page }, testInfo) => {
     const testId = 'TC_SEARCH_003';
     testInfo.setTimeout(30000);
 
@@ -300,8 +293,7 @@ test.describe('Search Tests', () => {
     }
   });
 
-  test('Search result pagination works correctly', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_SEARCH_004' });
+  test('Search result pagination works correctly', { annotation: { type: 'test_case', description: 'TC_SEARCH_004' } }, async ({ page }, testInfo) => {
     const testId = 'TC_SEARCH_004';
     testInfo.setTimeout(45000);
 
@@ -353,8 +345,7 @@ test.describe('Search Tests', () => {
     }
   });
 
-  test('Search autocomplete/suggestions appear', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_SEARCH_005' });
+  test('Search autocomplete/suggestions appear', { annotation: { type: 'test_case', description: 'TC_SEARCH_005' } }, async ({ page }, testInfo) => {
     const testId = 'TC_SEARCH_005';
     testInfo.setTimeout(30000);
 

@@ -9,8 +9,7 @@ fs.mkdirSync('test-results', { recursive: true });
 
 test.describe('Error Handling Tests', () => {
 
-  test('404 page displays appropriate error message', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_ERROR_001' });
+  test('404 page displays appropriate error message', { annotation: { type: 'test_case', description: 'TC_ERROR_001' } }, async ({ page }, testInfo) => {
     const testId = 'TC_ERROR_001';
     testInfo.setTimeout(30000);
 
@@ -59,8 +58,7 @@ test.describe('Error Handling Tests', () => {
     expect(errorFound).toBeTruthy();
   });
 
-  test('Broken documentation link returns appropriate error', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_ERROR_002' });
+  test('Broken documentation link returns appropriate error', { annotation: { type: 'test_case', description: 'TC_ERROR_002' } }, async ({ page }, testInfo) => {
     const testId = 'TC_ERROR_002';
     testInfo.setTimeout(30000);
 
@@ -87,8 +85,7 @@ test.describe('Error Handling Tests', () => {
     fs.appendFileSync('test-results/test-logs.txt', `${testId} Error message displayed for broken doc link\n`);
   });
 
-  test('Invalid search query handles gracefully', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_ERROR_003' });
+  test('Invalid search query handles gracefully', { annotation: { type: 'test_case', description: 'TC_ERROR_003' } }, async ({ page }, testInfo) => {
     const testId = 'TC_ERROR_003';
     testInfo.setTimeout(45000);
 
@@ -136,8 +133,7 @@ test.describe('Error Handling Tests', () => {
     }
   });
 
-  test('Malformed URL redirects or shows error appropriately', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_ERROR_004' });
+  test('Malformed URL redirects or shows error appropriately', { annotation: { type: 'test_case', description: 'TC_ERROR_004' } }, async ({ page }, testInfo) => {
     const testId = 'TC_ERROR_004';
     testInfo.setTimeout(30000);
 
@@ -181,8 +177,7 @@ test.describe('Error Handling Tests', () => {
     }
   });
 
-  test('Broken external links are identified', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_ERROR_005' });
+  test('Broken external links are identified', { annotation: { type: 'test_case', description: 'TC_ERROR_005' } }, async ({ page }, testInfo) => {
     const testId = 'TC_ERROR_005';
     testInfo.setTimeout(60000);
 
@@ -224,8 +219,7 @@ test.describe('Error Handling Tests', () => {
     expect(checkedLinks).toBeGreaterThan(0);
   });
 
-  test('Form validation errors display correctly', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_ERROR_006' });
+  test('Form validation errors display correctly', { annotation: { type: 'test_case', description: 'TC_ERROR_006' } }, async ({ page }, testInfo) => {
     const testId = 'TC_ERROR_006';
     testInfo.setTimeout(30000);
 

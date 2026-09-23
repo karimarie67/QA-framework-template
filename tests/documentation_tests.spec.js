@@ -9,8 +9,7 @@ fs.mkdirSync('test-results', { recursive: true });
 
 test.describe('Documentation Tests', () => {
   
-  test('Documentation page loads with table of contents', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_DOC_001' });
+  test('Documentation page loads with table of contents', { annotation: { type: 'test_case', description: 'TC_DOC_001' } }, async ({ page }, testInfo) => {
     const testId = 'TC_DOC_001';
     testInfo.setTimeout(45000);
 
@@ -50,8 +49,7 @@ test.describe('Documentation Tests', () => {
     await testElementVisibility(page, testInfo, contentLocator, [], 'Documentation content', testId);
   });
 
-  test('Library documentation links are accessible', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_DOC_002' });
+  test('Library documentation links are accessible', { annotation: { type: 'test_case', description: 'TC_DOC_002' } }, async ({ page }, testInfo) => {
     const testId = 'TC_DOC_002';
     testInfo.setTimeout(60000);
 
@@ -101,8 +99,7 @@ test.describe('Documentation Tests', () => {
     fs.appendFileSync('test-results/test-logs.txt', `${testId} Found ${foundLibraries} library links\n`);
   });
 
-  test('Code examples are properly formatted', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_DOC_003' });
+  test('Code examples are properly formatted', { annotation: { type: 'test_case', description: 'TC_DOC_003' } }, async ({ page }, testInfo) => {
     const testId = 'TC_DOC_003';
     testInfo.setTimeout(45000);
 
@@ -154,8 +151,7 @@ test.describe('Documentation Tests', () => {
     }
   });
 
-  test('Documentation breadcrumbs navigation works', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_DOC_004' });
+  test('Documentation breadcrumbs navigation works', { annotation: { type: 'test_case', description: 'TC_DOC_004' } }, async ({ page }, testInfo) => {
     const testId = 'TC_DOC_004';
     testInfo.setTimeout(45000);
 
@@ -208,8 +204,7 @@ test.describe('Documentation Tests', () => {
     }
   });
 
-  test('Documentation version switcher works', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_DOC_005' });
+  test('Documentation version switcher works', { annotation: { type: 'test_case', description: 'TC_DOC_005' } }, async ({ page }, testInfo) => {
     const testId = 'TC_DOC_005';
     testInfo.setTimeout(45000);
 
@@ -263,8 +258,7 @@ test.describe('Documentation Tests', () => {
     }
   });
 
-  test('Documentation search within docs works', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_DOC_006' });
+  test('Documentation search within docs works', { annotation: { type: 'test_case', description: 'TC_DOC_006' } }, async ({ page }, testInfo) => {
     const testId = 'TC_DOC_006';
     testInfo.setTimeout(45000);
 
@@ -306,8 +300,7 @@ test.describe('Documentation Tests', () => {
     }
   });
 
-  test('Documentation anchor links work correctly', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_DOC_007' });
+  test('Documentation anchor links work correctly', { annotation: { type: 'test_case', description: 'TC_DOC_007' } }, async ({ page }, testInfo) => {
     const testId = 'TC_DOC_007';
     testInfo.setTimeout(30000);
 
@@ -360,8 +353,7 @@ test.describe('Documentation Tests', () => {
     }
   });
 
-  test('Documentation external links open correctly', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_DOC_008' });
+  test('Documentation external links open correctly', { annotation: { type: 'test_case', description: 'TC_DOC_008' } }, async ({ page }, testInfo) => {
     const testId = 'TC_DOC_008';
     testInfo.setTimeout(45000);
 
@@ -413,8 +405,7 @@ test.describe('Documentation Tests', () => {
     }
   });
 
-  test('Documentation page titles are descriptive', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_DOC_009' });
+  test('Documentation page titles are descriptive', { annotation: { type: 'test_case', description: 'TC_DOC_009' } }, async ({ page }, testInfo) => {
     const testId = 'TC_DOC_009';
     testInfo.setTimeout(45000); // Increased timeout
 
@@ -474,8 +465,7 @@ test.describe('Documentation Tests', () => {
     }
   });
 
-  test('Documentation PDF/print versions are accessible', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_DOC_010' });
+  test('Documentation PDF/print versions are accessible', { annotation: { type: 'test_case', description: 'TC_DOC_010' } }, async ({ page }, testInfo) => {
     const testId = 'TC_DOC_010';
     testInfo.setTimeout(30000);
 
