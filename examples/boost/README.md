@@ -29,8 +29,7 @@ own config — even accidentally.
   people) in the Framework's brief format. The generic process from the same
   handbook is now the Framework's [`docs/qa-handbook.md`](../../docs/qa-handbook.md).
 - `QA_handbook.md`: the original Boost handbook, kept unchanged as the
-  historical source. Some of its counts and schedules had drifted from the
-  repo; `engagement-brief.md` notes each difference.
+  historical source.
 - `playwright_setup_guide.md`, `playwright_cicd_implementation.md`, and
   `playwright_test_optimization_guide.md`: the setup, CI, and optimization
   guides written for the Boost engagement.

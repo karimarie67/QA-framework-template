@@ -3,10 +3,8 @@
 <!--
 The Boost-specific part of the original QA_handbook.md, restated in the
 docs/engagement-brief-template.md format. The generic process from that
-handbook is now docs/qa-handbook.md.
-
-Where the handbook disagreed with its own repo, this brief follows the repo
-(karimarie67/QA-boost at 1eecc1a) and notes the difference.
+handbook is now docs/qa-handbook.md. Facts about what ran are taken from
+the repo itself (karimarie67/QA-boost at 1eecc1a).
 -->
 
 **Status:** Closed Engagement (last pre-Framework run: 2026-07-02, dashboard run #170)
@@ -17,7 +15,7 @@ Where the handbook disagreed with its own repo, this brief follows the repo
 - **Product:** the Boost C++ Libraries website (boost.org), source in [`boostorg/website-v2`](https://github.com/boostorg/website-v2)
 - **In scope:** homepage and navigation, library browsing, documentation pages (TOC, breadcrumbs, version switcher, anchors, in-doc search), site search, release downloads and version selection, error handling (404s, malformed URLs, invalid searches), and a site-wide link check
 - **Out of scope:** the libraries themselves; site authoring and CMS workflows
-- **Browsers and devices:** Chromium at 1280x720, plus an 800x600 mobile viewport. *(The handbook listed Chrome, Firefox, and Safari; every `playwright.config.js` project was Chromium.)*
+- **Browsers and devices:** Chromium at 1280x720, plus an 800x600 mobile viewport.
 
 ## Environments
 
@@ -37,8 +35,6 @@ From `.github/workflows/qa-test.yml` at `1eecc1a`:
 - **Manual dispatch**: any suite, against staging or production.
 - The dashboard is regenerated after every run.
 
-*(The handbook also described smoke runs against production every 6 hours. The workflow had no schedule.)*
-
 ## Release gates
 
 Deployments were owned by the website team in `boostorg/website-v2`. QA
@@ -52,8 +48,7 @@ gated them:
 
 After release: smoke tests against production, a 5-minute manual spot check,
 and 15 minutes of monitoring. Rollback belonged to the website team's
-deployment process. *(The handbook referenced `scripts/rollback-website.sh`,
-which was never in this repo.)*
+deployment process.
 
 ## Severity examples
 
