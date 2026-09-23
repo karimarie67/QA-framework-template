@@ -2,7 +2,7 @@
 
 ### Issue tracker
 
-Issues are tracked as GitHub Issues in this repo (karimarie67/QA-documentation), via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+Issues are tracked as GitHub Issues in this repo (karimarie67/QA-framework-template), via the `gh` CLI. See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 

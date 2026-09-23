@@ -7,11 +7,9 @@ you instantiate per Engagement, not a finished product built for one site.
 
 Pick one:
 
-- **Clone the repo.** This always works, regardless of any GitHub setting.
-- **Click "Use this template" on GitHub.** This only appears once a repo
-  admin has enabled it: **Settings → General → Template repository**. That
-  is a one-time, admin-only action — nothing in this codebase can enable it
-  for you. Until it's enabled, clone instead.
+- **Click "Use this template" on GitHub.** This creates a new repo with a
+  clean history.
+- **Clone the repo.**
 
 ## Worked example
 
