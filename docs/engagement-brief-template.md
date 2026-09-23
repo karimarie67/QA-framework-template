@@ -80,6 +80,7 @@ for this product:
 - [ ] Brief filled in and agreed with the client contact
 - [ ] Site config replaced (`playwright.config.js`, `config-helper.js`, `selectors.js`; search for `TODO(Engagement)`)
 - [ ] Labels created: `user-story`, `test-case`, `test-manual`, `test-needs-automation`, `test-automated` (see [`docs/github_test_management.md`](./github_test_management.md))
+- [ ] Project board created: `npm run board:setup -- owner/repo`, then add a Board view grouped by Status in the web UI
 - [ ] `.github/ISSUE_TEMPLATE/config.yml` links point at the Engagement's channels
 - [ ] Browser e2e jobs in `qa-test.yml` enabled on push and PR once the Site config is real
 - [ ] `npm run coverage` run and `docs/coverage-map.md` committed
