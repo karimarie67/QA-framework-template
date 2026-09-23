@@ -19,7 +19,7 @@ what Atlas will write on a ticket later, while it does the work.
 
 | Item | Value |
 |---|---|
-| Workspace name | QA-documentation |
+| Workspace name | QA-framework-template |
 | What this repository is for | A generic, site-agnostic Playwright QA automation Framework template: test suites, a CI-driven QA metrics dashboard, and process documentation, instantiated per client Engagement. |
 | Folder for proof of work | `test-results` |
 
@@ -27,7 +27,7 @@ Atlas may change the repositories below, and nothing else.
 
 | Repository | Path | Base branch |
 |---|---|---|
-| `QA-documentation` | `.` | `main` |
+| `QA-framework-template` | `.` | `main` |
 
 A *base branch* is the line of work that new work starts from. Atlas starts
 each new branch from it. Atlas opens one pull request for each repository it

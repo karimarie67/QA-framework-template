@@ -54,7 +54,7 @@
   "mattpocock_skills_tested": "1.2.0",
   "repositories": [
     {
-      "id": "QA-documentation",
+      "id": "QA-framework-template",
       "path": ".",
       "protected_branches": [
         "main",

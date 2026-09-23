@@ -120,7 +120,7 @@ Available to claim: Issue is open, unassigned, sits in Backlog or To Do, and has
 
 | Repository | Path | Source host | Base branch | PR creation command |
 |---|---|---|---|---|
-| `QA-documentation` | `.` | github | `main` | `gh pr create --base main --head <feature-branch>` |
+| `QA-framework-template` | `.` | github | `main` | `gh pr create --base main --head <feature-branch>` |
 
 Open one PR per affected repository.
 
