@@ -345,8 +345,17 @@ jobs:
           git add dashboards/
           if git diff --staged --quiet; then
             echo "No changes to commit"
-          else
-            git pull --rebase origin ${{ github.ref_name }} || true
-            git commit -m "📊 Update QA Dashboard - Run #${{ github.run_number }} [${{ github.ref_name }}]"
-            git push
+            exit 0
           fi
+          git commit -m "📊 Update QA Dashboard - Run #${{ github.run_number }} [${{ github.ref_name }}]"
+          # Another run (or a merge) may have pushed since checkout. Commit
+          # first, then replay this commit on the latest branch; on a conflict
+          # in the generated dashboard files, this run's output wins (-X theirs
+          # during a rebase means the commit being replayed).
+          for attempt in 1 2 3; do
+            git pull --rebase -X theirs origin ${{ github.ref_name }} && git push && exit 0
+            echo "Push attempt $attempt failed; retrying"
+            sleep $((attempt * 5))
+          done
+          echo "::error::Could not push the dashboard update after 3 attempts"
+          exit 1
