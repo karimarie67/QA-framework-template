@@ -285,6 +285,14 @@ jobs:
       - name: Run Template Structural Check
         run: npm run test:template-check
 
+      - name: Check coverage map is current
+        run: |
+          npm run coverage
+          if ! git diff --exit-code -- docs/coverage-map.md; then
+            echo "::error::docs/coverage-map.md is out of date. Run 'npm run coverage' and commit the result."
+            exit 1
+          fi
+
   update-dashboard:
     runs-on: ubuntu-latest
     needs: [smoke-tests, error-handling-tests, download-search-tests, documentation-tests]

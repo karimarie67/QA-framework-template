@@ -24,10 +24,16 @@ own config — even accidentally.
 - `boost_io_tests.spec.js` and `boost_version_tests.spec.js` — the Boost.io
   and Boost version Playwright specs, as they were written against the live
   Boost.org site.
-- `QA_handbook.md`, `playwright_setup_guide.md`,
-  `playwright_cicd_implementation.md`, and
-  `playwright_test_optimization_guide.md` — the QA handbook and the
-  setup/CI/optimization guides written for the Boost engagement.
+- `engagement-brief.md`: the Boost-specific part of the QA handbook (what
+  was tested, environments, release gates, severity examples, targets,
+  people) in the Framework's brief format. The generic process from the same
+  handbook is now the Framework's [`docs/qa-handbook.md`](../../docs/qa-handbook.md).
+- `QA_handbook.md`: the original Boost handbook, kept unchanged as the
+  historical source. Some of its counts and schedules had drifted from the
+  repo; `engagement-brief.md` notes each difference.
+- `playwright_setup_guide.md`, `playwright_cicd_implementation.md`, and
+  `playwright_test_optimization_guide.md`: the setup, CI, and optimization
+  guides written for the Boost engagement.
 - `Functional-Table 1.csv` and `Regression-Table 1.csv` — the Boost
   functional and regression test-case tables.
 - `Automate Release Notes.md` and `Ticketing Workflow for Boost.md` — the

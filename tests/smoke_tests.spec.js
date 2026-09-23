@@ -18,8 +18,7 @@ fs.mkdirSync('test-results', { recursive: true });
 test.describe('Smoke Tests', () => {
   
   // TC_SMOKE_001: Homepage Accessibility
-  test('Homepage loads with key elements', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_SMOKE_001' });
+  test('Homepage loads with key elements', { annotation: { type: 'test_case', description: 'TC_SMOKE_001' } }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_001';
     testInfo.setTimeout(30000);
 
@@ -61,8 +60,7 @@ test.describe('Smoke Tests', () => {
   });
 
   // TC_SMOKE_002: Navigation Menu
-  test('Navigation menu links work correctly', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_SMOKE_002' });
+  test('Navigation menu links work correctly', { annotation: { type: 'test_case', description: 'TC_SMOKE_002' } }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_002';
     testInfo.setTimeout(60000);
 
@@ -169,8 +167,7 @@ test.describe('Smoke Tests', () => {
   });
 
   // TC_SMOKE_003: Content Listings
-  test('a listing page displays expected items and links to detail pages', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_SMOKE_003' });
+  test('a listing page displays expected items and links to detail pages', { annotation: { type: 'test_case', description: 'TC_SMOKE_003' } }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_003';
     testInfo.setTimeout(45000);
 
@@ -230,8 +227,7 @@ test.describe('Smoke Tests', () => {
   });
 
   // TC_SMOKE_004: Download Functionality
-  test('Download section works correctly', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_SMOKE_004' });
+  test('Download section works correctly', { annotation: { type: 'test_case', description: 'TC_SMOKE_004' } }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_004';
     testInfo.setTimeout(45000);
 
@@ -292,8 +288,7 @@ test.describe('Smoke Tests', () => {
   });
 
   // TC_SMOKE_005: Search functionality
-  test('Search bar works with basic query', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_SMOKE_005' });
+  test('Search bar works with basic query', { annotation: { type: 'test_case', description: 'TC_SMOKE_005' } }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_005';
     testInfo.setTimeout(45000);
 
@@ -331,8 +326,7 @@ test.describe('Smoke Tests', () => {
   });
 
   // TC_SMOKE_006: Responsive Design
-  test('Homepage is responsive on mobile', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_SMOKE_006' });
+  test('Homepage is responsive on mobile', { annotation: { type: 'test_case', description: 'TC_SMOKE_006' } }, async ({ page }, testInfo) => {
     const testId = 'TC_SMOKE_006';
     testInfo.setTimeout(30000);
 

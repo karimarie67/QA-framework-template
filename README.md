@@ -11,6 +11,12 @@ Pick one:
   clean history.
 - **Clone the repo.**
 
+Then copy [`docs/engagement-brief-template.md`](./docs/engagement-brief-template.md)
+to `docs/engagement-brief.md` and fill it in with the client. It's the only
+per-Engagement document to write, and its kickoff checklist covers the rest of
+the setup. The process itself is in the shared
+[QA Handbook](./docs/qa-handbook.md).
+
 ## Where we started, and where we are now
 
 This Framework was extracted from a real Engagement, and a new Engagement has
@@ -52,6 +58,7 @@ npm run test:regression      # regression suite (documentation, download/search,
 npm run test:links           # link checker
 npm run test:unit            # unit tests for config-helper.js/selectors.js
 npm run test:template-check  # structural smoke check that the template itself is intact
+npm run coverage             # regenerate docs/coverage-map.md from the specs' test_case annotations
 ```
 
 ## Configuring a new site
