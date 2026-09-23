@@ -3,6 +3,12 @@
 This directory is a **closed-engagement reference**: the original Boost.org
 implementation of this QA Framework, kept here for illustration only.
 
+The complete, runnable Boost.org repo, with its full history, is
+[`karimarie67/QA-boost`](https://github.com/karimarie67/QA-boost). The guides
+below still refer to its old name, `karimarie67/QA-documentation`. That repo
+now holds the genericized Framework, and its Boost state is tagged
+[`boost-final`](https://github.com/karimarie67/QA-documentation/tree/boost-final).
+
 It is **not live**. The Boost.org engagement has ended, and nothing in this
 directory is actively maintained, updated, or tested against a real site.
 
