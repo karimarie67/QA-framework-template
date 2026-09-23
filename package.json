@@ -13,6 +13,7 @@
     "report": "playwright show-report",
     "test:unit": "node --test tests/unit/*.test.js",
     "test:template-check": "node scripts/template-check.js",
+    "board:setup": "node scripts/setup-project-board.js",
     "test:links": "playwright test tests/check-links.spec.js --project=link-checker"
   },
   "keywords": [
