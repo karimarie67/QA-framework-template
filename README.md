@@ -59,6 +59,8 @@ npm run test:links           # link checker
 npm run test:unit            # unit tests for config-helper.js/selectors.js
 npm run test:template-check  # structural smoke check that the template itself is intact
 npm run coverage             # regenerate docs/coverage-map.md from the specs' test_case annotations
+npm run labels:setup -- owner/repo  # create the labels the issue forms and triage need
+npm run board:setup -- owner/repo   # create the project board, with Status from docs/agents/issue-tracker.md
 ```
 
 ## Configuring a new site
