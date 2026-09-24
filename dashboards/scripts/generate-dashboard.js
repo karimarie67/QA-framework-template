@@ -16,11 +16,11 @@ const SLACK_FILE = path.join(RESULTS_DIR, 'slack-payload.json');
 
 function main() {
   console.log('🔄 Generating QA Dashboard (v9.0 - Chart Removed)...');
-  
+
   if (!fs.existsSync(RESULTS_DIR)) {
     fs.mkdirSync(RESULTS_DIR, { recursive: true });
   }
-  
+
   const testResults = collectTestResults();
   const metrics = calculateMetrics(testResults);
 
@@ -38,18 +38,18 @@ function main() {
 
   updateHistory(metrics);
   const history = loadHistory();
-  
+
   const trends = calculateTrends(metrics, history);
   const dashboard = generateDashboardMarkdown(metrics, testResults, history, trends);
-  
+
   fs.writeFileSync(DASHBOARD_PATH, dashboard);
-  
+
   // Save detailed latest results
   fs.writeFileSync(
     path.join(RESULTS_DIR, 'latest-results.json'),
     JSON.stringify({ timestamp: new Date().toISOString(), metrics, testResults }, null, 2)
   );
-  
+
   // --- SLACK PAYLOAD ---
   if (metrics.failed > 0 || trends.flakyTests.length > 0) {
     const slackPayload = {
@@ -103,13 +103,34 @@ function collectTestResults() {
       console.log(`⚠️ Missing functional file: ${filepath}`);
     }
   });
-  
+
   if (Object.values(results).every(arr => arr.length === 0)) {
     console.warn("⚠️ No artifacts found. Dashboard will show a 'no data' state.");
     return results;
   }
 
   return results;
+}
+
+/**
+ * A test's outcome from Playwright's own verdict, across all its attempts:
+ * 'expected' passed first time, 'flaky' passed on a retry, 'skipped' never ran
+ * (e.g. a phone-only test in a desktop project), and 'unexpected' failed.
+ * @param {{status?: string, results?: {status: string}[]}} test - A test from the JSON report
+ * @returns {'passed'|'flaky'|'skipped'|'failed'}
+ */
+function testStatus(test) {
+  switch (test.status) {
+    case 'expected': return 'passed';
+    case 'flaky': return 'flaky';
+    case 'skipped': return 'skipped';
+    case 'unexpected': return 'failed';
+    default: {
+      // Older reports without a verdict: fall back to the last attempt.
+      const last = test.results[test.results.length - 1].status;
+      return last === 'passed' ? 'passed' : last === 'skipped' ? 'skipped' : 'failed';
+    }
+  }
 }
 
 function parsePlaywrightJson(filepath) {
@@ -119,20 +140,20 @@ function parsePlaywrightJson(filepath) {
 
     const data = JSON.parse(fileContent);
     const tests = [];
-    
+
     function traverse(node) {
       if (node.specs) {
         node.specs.forEach(spec => {
           if (spec.tests) {
             spec.tests.forEach(test => {
               if (test.results && test.results.length > 0) {
-                const result = test.results[0];
+                const failedAttempt = test.results.find(r => r.errors && r.errors.length > 0);
                 tests.push({
                   name: spec.title || test.title || 'Unknown Test',
-                  status: result.status === 'passed' ? 'passed' : 'failed',
-                  durationSec: (result.duration || 0) / 1000,
-                  projectName: test.projectName || 'Default', 
-                  error: result.errors && result.errors.length > 0 ? result.errors[0].message : null
+                  status: testStatus(test),
+                  durationSec: test.results.reduce((acc, r) => acc + (r.duration || 0), 0) / 1000,
+                  projectName: test.projectName || 'Default',
+                  error: failedAttempt ? failedAttempt.errors[0].message : null
                 });
               }
             });
@@ -141,7 +162,7 @@ function parsePlaywrightJson(filepath) {
       }
       if (node.suites) node.suites.forEach(suite => traverse(suite));
     }
-    
+
     traverse(data);
     return tests;
   } catch (e) {
@@ -156,20 +177,26 @@ function calculateMetrics(results) {
     ...results.functional
   ];
 
-  const passed = allTests.filter(t => t.status === 'passed').length;
+  const passed = allTests.filter(t => t.status === 'passed' || t.status === 'flaky').length;
+  const flaky = allTests.filter(t => t.status === 'flaky').length;
+  const skipped = allTests.filter(t => t.status === 'skipped').length;
   const failedTests = allTests.filter(t => t.status === 'failed');
+  const ran = allTests.length - skipped;
   const totalDuration = allTests.reduce((acc, t) => acc + (t.durationSec || 0), 0);
 
   return {
     totalTests: allTests.length,
     passed,
+    flaky,
+    skipped,
     failed: failedTests.length,
     failedTestNames: failedTests.map(t => t.name),
-    passRate: allTests.length > 0 ? (passed / allTests.length) * 100 : 0,
+    // Skipped tests didn't run, so they count neither for nor against.
+    passRate: ran > 0 ? (passed / ran) * 100 : 0,
     totalDuration: totalDuration,
     smokeCount: results.smoke.length,
     functionalCount: results.functional.length,
-    allTestObjects: allTests, 
+    allTestObjects: allTests,
     timestamp: new Date().toISOString(),
     environment: process.env.TEST_ENV || 'staging',
     runId: process.env.GITHUB_RUN_ID || 'local',
@@ -187,9 +214,9 @@ function updateHistory(metrics) {
       console.warn('⚠️ Could not parse history file, starting fresh.');
     }
   }
-  
+
   const runNumber = process.env.GITHUB_RUN_NUMBER || '0';
-  
+
   const newEntry = {
     date: new Date().toISOString().split('T')[0],
     time: new Date().toISOString(),
@@ -201,10 +228,10 @@ function updateHistory(metrics) {
     failedTestNames: metrics.failedTestNames,
     runNumber: runNumber
   };
-  
+
   history = history.filter(entry => entry.runNumber !== runNumber);
   history.push(newEntry);
-  
+
   if (history.length > 50) history = history.slice(-50);
   fs.writeFileSync(HISTORY_FILE, JSON.stringify(history, null, 2));
 }
@@ -221,7 +248,7 @@ function calculateTrends(metrics, history) {
 
   const recentHistory = history.slice(-10);
   const failureCounts = {};
-  
+
   recentHistory.forEach(run => {
     if (run.failedTestNames && Array.isArray(run.failedTestNames)) {
       run.failedTestNames.forEach(name => {
@@ -267,7 +294,7 @@ function generateDashboardMarkdown(metrics, results, history, trends) {
 |--------|---------------|----------------|
 | **Pass Rate** | **${metrics.passRate.toFixed(1)}%** | ${getPassRateStatus(metrics.passRate)} |
 | **Duration** | **${durationText}** | ${metrics.totalDuration > QUALITY_GATES.MAX_DURATION_SEC ? '⚠️ Long' : '✅ Good'} |
-| **Total Tests** | ${metrics.totalTests} | ${metrics.passed} Pass / ${metrics.failed} Fail |
+| **Total Tests** | ${metrics.totalTests} | ${metrics.passed} Pass (${metrics.flaky} flaky) / ${metrics.failed} Fail / ${metrics.skipped} Skipped |
 | **Functional** | ${results.functional.length} Tests | ${results.functional.length > 0 ? '✅ Active' : '❌ Missing'} |
 
 ---
@@ -303,8 +330,9 @@ function generateBrowserBreakdown(allTests) {
   allTests.forEach(t => {
     const p = t.projectName || 'Default';
     if (!browsers[p]) browsers[p] = { total: 0, passed: 0 };
+    if (t.status === 'skipped') return;
     browsers[p].total++;
-    if (t.status === 'passed') browsers[p].passed++;
+    if (t.status === 'passed' || t.status === 'flaky') browsers[p].passed++;
   });
   const keys = Object.keys(browsers);
   if (keys.length < 2 && keys[0] === 'Default') return '';
@@ -333,15 +361,13 @@ function getPassRateStatus(passRate) {
 
 function generateTestTable(tests) {
   if (!tests || tests.length === 0) return '> *No tests found in this category* \n';
-  const displayTests = tests.slice(0, 10);
-  const remaining = tests.length - displayTests.length;
+  const icons = { passed: '✅', flaky: '⚠️', skipped: '⏭️', failed: '❌' };
   let table = '| Test Name | Status | Duration | Project |\n|-----------|--------|----------|---------|\n';
-  displayTests.forEach(test => {
-    const statusIcon = test.status === 'passed' ? '✅' : '❌';
+  tests.forEach(test => {
+    const statusIcon = icons[test.status] || '❌';
     const dur = test.durationSec < 1 ? '<1s' : `${test.durationSec.toFixed(1)}s`;
     table += `| ${test.name} | ${statusIcon} ${test.status} | ${dur} | ${test.projectName} |\n`;
   });
-  if (remaining > 0) table += `\n*... and ${remaining} more tests*\n`;
   return table;
 }
 
@@ -355,4 +381,8 @@ function generateHistoryTable(history) {
   }).join('\n');
 }
 
-main();
+if (require.main === module) {
+  main();
+}
+
+module.exports = { testStatus, parsePlaywrightJson, calculateMetrics };
