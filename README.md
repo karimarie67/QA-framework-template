@@ -17,6 +17,12 @@ per-Engagement document to write, and its kickoff checklist covers the rest of
 the setup. The process itself is in the shared
 [QA Handbook](./docs/qa-handbook.md).
 
+**Or let Claude Code do it.** From a clone of this template, run
+**`/new-engagement <site URL>`**. It creates the repo and works through the
+kickoff checklist, one logged, reviewed PR per step, and hands you the steps
+only you can do. See
+[`.claude/skills/new-engagement/`](./.claude/skills/new-engagement/SKILL.md).
+
 ## Where we started, and where we are now
 
 This Framework was extracted from a real Engagement, and a new Engagement has
