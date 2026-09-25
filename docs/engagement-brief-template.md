@@ -84,4 +84,5 @@ for this product:
 - [ ] `.github/ISSUE_TEMPLATE/config.yml` links point at the Engagement's channels
 - [ ] Browser e2e jobs in `qa-test.yml` enabled on push and PR once the Site config is real
 - [ ] `npm run coverage` run and `docs/coverage-map.md` committed
+- [ ] `README.md` rewritten for the Engagement: where things stand, where things are, how to run it, and what to do going forward
 - [ ] Git hooks activated (`git config core.hooksPath .githooks`)

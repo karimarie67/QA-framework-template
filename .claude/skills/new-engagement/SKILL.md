@@ -165,9 +165,29 @@ every filed finding is caught by a test or says why it can't be.
 
 After the step 9 PR merges, relabel its new test cases `test-automated` and
 set their Automation Status. Watch the first runs on `main`, read the
-dashboard they publish, and check that its counts match the runs'. Hand off the
-client agreement.
+dashboard they publish, and check that its counts match the runs'.
+
+Rewrite `README.md` as the Engagement's front door. It still describes the
+template: how to create an Engagement, and the Framework's history. Replace
+that with:
+
+- what the repo tests, and on which devices;
+- where things stand: the stories and test cases, the known defects, and any
+  check that's red on purpose;
+- the rules the tests keep (read-only, no staging, rate limits);
+- where things are: the brief, the log, the board, the coverage map, the
+  dashboard, and the Site config;
+- how to run each suite, and what CI runs when;
+- what to do going forward: triage, a red test turning green, a new defect,
+  and an intended site change.
+
+Carry the Atlas section over byte for byte: setup manages everything between
+its `atlas-v3:readme` markers. Link to the brief and the log rather than
+copying facts from them.
+
+Hand off the client agreement.
 
 **Done when:** every test case is `test-automated`; the dashboard's pass,
-fail, and skip counts match the latest run; and the only unticked kickoff item
-is the client agreement.
+fail, and skip counts match the latest run; the README describes the
+Engagement, not the template; and the only unticked kickoff item is the
+client agreement.
