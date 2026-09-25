@@ -8,6 +8,7 @@
  *
  * Each row comes from `playwright test --list --reporter=json`:
  *   - Test case ID: the test's `test_case` annotation
+ *   - Client case:  every `client_case` annotation, joined with ", "
  *   - Issue:        the test's `issue` annotation, when present
  *   - Tags:         Playwright tags such as @smoke
  *   - Spec / Test:  the file and title the test lives under
@@ -34,7 +35,7 @@ const OUTPUT = path.join(repoRoot, 'docs', 'coverage-map.md');
  * Flatten a Playwright `--list --reporter=json` report into one entry per
  * test (deduplicated across projects).
  * @param {object} report - Parsed JSON report
- * @returns {{file: string, title: string, testCase: string|null, issue: string|null, tags: string[], projects: string[]}[]}
+ * @returns {{file: string, title: string, testCase: string|null, issue: string|null, clientCases: string[], tags: string[], projects: string[]}[]}
  */
 export function collectTests(report) {
   const byKey = new Map();
@@ -45,12 +46,24 @@ export function collectTests(report) {
       for (const test of spec.tests || []) {
         const annotations = test.annotations || [];
         const find = type => annotations.find(a => a.type === type)?.description ?? null;
+        const filterAll = type => {
+          const results = [];
+          const seen = new Set();
+          for (const a of annotations) {
+            if (a.type === type && a.description && !seen.has(a.description)) {
+              results.push(a.description);
+              seen.add(a.description);
+            }
+          }
+          return results;
+        };
         const key = `${spec.file}::${[...nextTitles, spec.title].join(' › ')}`;
         const entry = byKey.get(key) || {
           file: spec.file,
           title: [...nextTitles, spec.title].join(' › '),
           testCase: find('test_case'),
           issue: find('issue'),
+          clientCases: filterAll('client_case'),
           tags: spec.tags || [],
           projects: [],
         };
@@ -80,6 +93,7 @@ export function renderMarkdown(tests) {
     return number ? `[#${number[1]}](${url})` : cell(url);
   };
   const tagsCell = tags => (tags.length ? tags.map(t => `\`${t.startsWith('@') ? t : `@${t}`}\``).join(' ') : '—');
+  const clientCasesCell = cases => (cases.length ? cases.map(c => cell(c)).join(', ') : '—');
 
   const withId = tests
     .filter(t => t.testCase)
@@ -97,9 +111,9 @@ export function renderMarkdown(tests) {
   ];
 
   if (withId.length) {
-    lines.push('| Test case | Issue | Tags | Spec | Test |', '|---|---|---|---|---|');
+    lines.push('| Test case | Client case | Issue | Tags | Spec | Test |', '|---|---|---|---|---|---|');
     for (const t of withId) {
-      lines.push(`| ${cell(t.testCase)} | ${issueCell(t.issue)} | ${tagsCell(t.tags)} | \`${cell(t.file)}\` | ${cell(t.title)} |`);
+      lines.push(`| ${cell(t.testCase)} | ${clientCasesCell(t.clientCases)} | ${issueCell(t.issue)} | ${tagsCell(t.tags)} | \`${cell(t.file)}\` | ${cell(t.title)} |`);
     }
     lines.push('');
   }

@@ -25,6 +25,7 @@
   ],
   "author": "karimarie67",
   "devDependencies": {
-    "@playwright/test": "^1.40.0"
+    "@playwright/test": "^1.40.0",
+    "exceljs": "4.4.0"
   }
 }
