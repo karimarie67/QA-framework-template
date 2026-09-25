@@ -222,6 +222,11 @@ Conventions:
   `playwright test --list`, so the coverage map can't see them.
 - **One test case per test.** If a case has sub-scenarios, use `test.step()`
   inside the one test.
+- **Add a `client_case` annotation when a test traces to a client's own test
+  case.** Declare it in the details object next to `test_case` and `issue`,
+  with the client's own ID as its description. `npm run coverage` shows it in
+  the Client case column. A test covering several client cases gets one
+  `client_case` annotation per case.
 
 ### Step by step
 

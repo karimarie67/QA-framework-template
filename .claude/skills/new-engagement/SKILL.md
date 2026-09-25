@@ -127,6 +127,12 @@ submission. Copy the brief template to `docs/engagement-brief.md` and fill in
 everything the site shows. Mark the people and contacts `TBD`, and the status
 Draft.
 
+Ask the human whether the client has manual test cases already written. If
+so, run `node .claude/skills/import-test-cases/import.js normalise <file>
+--preview` on the file, and draft the brief's scope from the cases' `section`
+values instead of guessing it from the probe alone. Otherwise draft the scope
+from the probe as usual.
+
 **Done when:** every section of the brief is filled in or explicitly `TBD`, and
 the read-only rule (or what the client allows instead) is in the Environments table's "What we may do there".
 
@@ -188,7 +194,9 @@ filed or dropped (with the reason logged), and every filed one is on the board.
 
 ### 9. Write the stories and test cases
 
-Follow the "Stories and test cases" section of
+Ask the human whether the client has manual test cases. If so, run
+[`/import-test-cases <file>`](../import-test-cases/SKILL.md) in place of the
+"Stories and test cases" section below. Otherwise follow that section of
 [`stories-and-tests.md`](stories-and-tests.md).
 
 **Done when:** `npm run coverage` lists every test with a test case ID and an
