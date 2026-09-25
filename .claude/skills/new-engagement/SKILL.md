@@ -83,9 +83,31 @@ If this clone is the template itself (`gh repo view --json isTemplate`), ask the
 new clone from here. Run `npm install`, `npm run test:unit`, and
 `npm run test:template-check`. Hand off the git hooks. Start the log.
 
+Rename the Atlas framing. The new repo inherits the template's: it calls
+itself `QA-framework-template`, names the template repo as its issue
+tracker, and describes itself as the generic template. Agents read those
+files as instructions, so a stale name sends them to the wrong repo (a bare
+`#N` means the template's issue, not the Engagement's), and a stale
+description has them treat the Engagement as the template. Change the
+workspace and repository name to the new repo's, and describe it as the
+Engagement for the site:
+
+- `CLAUDE.md`: the issue tracker's repo; the workspace, repository, and
+  protected-branch names; and the repository framing.
+- `.atlas/manifest.json`: the repository `id`.
+- `docs/agents/issue-tracker.md` and `docs/atlas-operators-guide.md`: the
+  repository name, and what the repo is for.
+- `CONTEXT.md`: its title and opening line. The vocabulary stays.
+
+Keep mentions that say where the repo came from. `CLAUDE.md` and the
+manifest are guardrail files: hand off the approval, and after the PR
+merges, the `/setup-atlas adopt` step for each. The framing's structure and
+rules name the template's specs and projects; step 3 brings them up to date.
+
 **Done when:** the new repo exists, both self-checks pass, the hooks are
-active, and step 1's log entry records the count of `TODO(Engagement)` markers
-left.
+active, the framing names the new repo (`grep -rn QA-framework-template`
+finds only "created from" mentions), and step 1's log entry records the
+count of `TODO(Engagement)` markers left.
 
 ### 2. Draft the brief
 
@@ -103,6 +125,10 @@ the read-only rule (or what the client allows instead) is in the Environments ta
 ### 3. Replace the Site config
 
 Follow [`site-config.md`](site-config.md).
+
+Update `CLAUDE.md`'s repository structure and rules to match: the specs
+kept, the Playwright projects, and what the tests may do on each environment.
+It's a guardrail edit, so it's a hand-off like step 1's.
 
 **Done when:** no `TODO(Engagement)` marker is left in code; the skeleton
 specs that don't fit the site are replaced or removed; every remaining test
