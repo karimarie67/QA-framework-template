@@ -52,12 +52,19 @@ it. Hand-offs in this skill:
   `.git/config` directly.
 - Adding the project board's Board view (grouped by Status). GitHub's API
   can't create views.
-- Approving any edit to a guardrail file (`.atlas/manifest.json`, `CLAUDE.md`,
-  `.claude/settings.json`, `.claude/hooks/**`, `.githooks/**`). Auto mode may
-  refuse the edit outright; when it does, stop, and leave the edit to the human.
-- Recording an approved guardrail edit, in a Claude Code session started in the
-  Engagement repo: `/setup-atlas adopt <file> --approval <PR URL> --approver "<name>"`.
-  That skill is user-invoked; the agent can't run it.
+- Approving any edit to a guardrail file (`.atlas/manifest.json`,
+  `.claude/settings.json`, `.claude/hooks/**`, `.githooks/**`) or to
+  `CLAUDE.md`. Auto mode may refuse the edit outright; when it does, stop, and
+  leave the edit to the human.
+- Checking an approved edit, after its PR merges, in a Claude Code session
+  started in the Engagement repo: ask for the `setup-atlas` skill's **verify**
+  step, not a setup or refresh. An edited Atlas-managed section (`CLAUDE.md`,
+  `docs/agents/*`, the operators guide) shows as "sanctioned drift (preserved
+  edit)": setup keeps it on reruns, and nothing more is needed. Run
+  `/setup-atlas adopt <file> --approval <PR URL> --approver "<name>"` only for
+  a file verify names as needing it. Adopt covers the installed guard and
+  git-hook files, and refuses the rest, `CLAUDE.md` included. That skill is
+  user-invoked; the agent can't run it.
 - Agreeing the brief and the user stories with the client contact.
 
 ### Guardrails you'll meet
@@ -99,9 +106,10 @@ Engagement for the site:
   repository name, and what the repo is for.
 - `CONTEXT.md`: its title and opening line. The vocabulary stays.
 
-Keep mentions that say where the repo came from. `CLAUDE.md` and the
-manifest are guardrail files: hand off the approval, and after the PR
-merges, the `/setup-atlas adopt` step for each. The framing's structure and
+Keep mentions that say where the repo came from. Hand off the approval of
+the `CLAUDE.md` and manifest edits and, after the PR merges, the verify check
+(see Hand-offs). Verify accepts the rename, the manifest's repository `id`
+included, so there's normally nothing to adopt. The framing's structure and
 rules name the template's specs and projects; step 3 brings them up to date.
 
 **Done when:** the new repo exists, both self-checks pass, the hooks are
