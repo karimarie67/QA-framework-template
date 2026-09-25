@@ -72,7 +72,7 @@ test('validate: rule 2 - client_id unique and non-null', async t => {
   });
 });
 
-test('validate: rule 3 - manual and partly-automatable require a reason (AC5)', async t => {
+test('validate: rule 3 - manual and partly-automatable require a reason', async t => {
   await t.test('passes when a reason is given', () => {
     const result = validate([
       makeCase({ import: baseImport({ bucket: 'manual', reason: 'requires visual review' }) }),
@@ -92,7 +92,7 @@ test('validate: rule 3 - manual and partly-automatable require a reason (AC5)', 
   });
 });
 
-test('validate: rule 4 - stale requires missing and forbids a test (AC6)', async t => {
+test('validate: rule 4 - stale requires missing and forbids a test', async t => {
   await t.test('passes when stale.missing is set and test/covered_by/test_case_id are null', () => {
     const result = validate([
       makeCase({ import: baseImport({ bucket: 'stale', stale: { missing: 'page removed', outcome: null, finding_issue: null } }) }),
@@ -123,7 +123,7 @@ test('validate: rule 4 - stale requires missing and forbids a test (AC6)', async
   });
 });
 
-test('validate: rule 5 - test_case_id shape and client_id agreement (AC8)', async t => {
+test('validate: rule 5 - test_case_id shape and client_id agreement', async t => {
   await t.test('passes when a TC_ client_id matches its own test_case_id', () => {
     const result = validate([
       makeCase({ client_id: 'TC_LOGIN_001', import: baseImport({ bucket: 'automatable', test_case_id: 'TC_LOGIN_001' }) }),
@@ -145,6 +145,16 @@ test('validate: rule 5 - test_case_id shape and client_id agreement (AC8)', asyn
     ]);
     assert.equal(result.ok, false);
     assert.ok(result.errors.some(e => e.includes('must equal client_id')));
+  });
+
+  await t.test('skips the client_id agreement check for a stale case (its test_case_id must be null)', () => {
+    const result = validate([
+      makeCase({
+        client_id: 'TC_BST_009',
+        import: baseImport({ bucket: 'stale', stale: { missing: 'page removed', outcome: null, finding_issue: null } }),
+      }),
+    ]);
+    assert.equal(result.ok, true);
   });
 });
 

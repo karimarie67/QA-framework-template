@@ -21,7 +21,7 @@ const BOOST_HEADERS = [
 ];
 
 test('proposeMap', async t => {
-  await t.test('maps every Boost header per interfaces.md', () => {
+  await t.test('maps every Boost header', () => {
     const { column_map, unmapped } = proposeMap(BOOST_HEADERS);
     assert.deepEqual(column_map, {
       client_id: 'Test Case ID',

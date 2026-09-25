@@ -38,7 +38,7 @@ function casesFile(cases) {
   return { source_file: 'docs/client-test-cases/boost-cases.xlsx', sha256: 'x', format: 'testrail', column_map: {}, imported_at: 'x', cases };
 }
 
-test('reconcile: rule 1 - no duplicate TEST CASE or STORY issue titles (AC12)', async t => {
+test('reconcile: rule 1 - no duplicate TEST CASE or STORY issue titles', async t => {
   await t.test('passes with distinct titles', () => {
     const issues = [
       { number: 1, title: '[TEST CASE] TC_LOGIN_001 - Sign in', labels: [{ name: 'test-automated' }], state: 'open' },
@@ -158,7 +158,7 @@ test('reconcile: rule 4 - test-automated and covered cases need a matching cover
   });
 });
 
-test('reconcile: rule 5 - no coverage test may reference a stale case (AC6/AC12 traceability)', async t => {
+test('reconcile: rule 5 - no coverage test may reference a stale case', async t => {
   await t.test('passes when no coverage test references a stale client_id', () => {
     const cases = [makeCase({ client_id: 'C-STALE', import: baseImport({ bucket: 'stale', stale: { missing: 'gone', outcome: null, finding_issue: null } }) })];
     const coverageTests = [{ testCase: 'TC_LOGIN_001', clientCases: [] }];

@@ -8,6 +8,7 @@
  *
  * Each row comes from `playwright test --list --reporter=json`:
  *   - Test case ID: the test's `test_case` annotation
+ *   - Client case:  every `client_case` annotation, joined with ", "
  *   - Issue:        the test's `issue` annotation, when present
  *   - Tags:         Playwright tags such as @smoke
  *   - Spec / Test:  the file and title the test lives under

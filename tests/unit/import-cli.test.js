@@ -12,7 +12,7 @@ import { fileURLToPath } from 'node:url';
 // nothing here touches the real repo working tree. See
 // `tests/unit/import-*.test.js` for exhaustive coverage of the underlying
 // lib functions; these tests cover only how the CLI wires them together
-// (AC1, AC4, AC12).
+// how the CLI wires them together.
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CLI_PATH = path.join(repoRoot, '.claude', 'skills', 'import-test-cases', 'import.js');
@@ -58,7 +58,7 @@ const emptyImportState = {
   test: null,
 };
 
-test('normalise --preview writes nothing (AC1)', () => {
+test('normalise --preview writes nothing', () => {
   const dir = freshDir();
   fs.copyFileSync(path.join(FIXTURES_DIR, 'boost-format.csv'), path.join(dir, 'boost-format.csv'));
   const before = fs.readdirSync(dir).sort();
@@ -72,7 +72,7 @@ test('normalise --preview writes nothing (AC1)', () => {
   assert.deepEqual(fs.readdirSync(dir).sort(), before, 'preview must not create or change any file');
 });
 
-test('normalise --write without --map exits 2 and creates nothing (AC4)', () => {
+test('normalise --write without --map exits 2 and creates nothing', () => {
   const dir = freshDir();
   fs.copyFileSync(path.join(FIXTURES_DIR, 'boost-format.csv'), path.join(dir, 'boost-format.csv'));
 
@@ -82,7 +82,7 @@ test('normalise --write without --map exits 2 and creates nothing (AC4)', () => 
   assert.equal(fs.existsSync(path.join(dir, 'docs')), false, '--write without a confirmed map must create nothing');
 });
 
-test('normalise --write with a confirmed map creates cases.json, reuses it unchanged, and refuses a changed source (AC12)', () => {
+test('normalise --write with a confirmed map creates cases.json, reuses it unchanged, and refuses a changed source', () => {
   const dir = freshDir();
   fs.copyFileSync(path.join(FIXTURES_DIR, 'boost-format.csv'), path.join(dir, 'boost-format.csv'));
 

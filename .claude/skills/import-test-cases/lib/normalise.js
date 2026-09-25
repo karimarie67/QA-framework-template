@@ -2,8 +2,8 @@
  * normalise.js
  *
  * Turns raw spreadsheet rows plus a confirmed column map into the shared
- * normalised case shape (see `interfaces.md` "Normalised case"). Pure: no
- * I/O, no knowledge of CSV vs XLSX.
+ * normalised case shape (see the `normalise()` JSDoc below for its exact
+ * fields). Pure: no I/O, no knowledge of CSV vs XLSX.
  */
 
 const SCALAR_FIELDS = [
@@ -45,9 +45,9 @@ export function splitNumbered(text) {
 }
 
 /**
- * Build a header-name -> column-index lookup, trimming header text and
- * ignoring empty (trailing) header columns. When a header name repeats, the
- * first occurrence wins.
+ * Build a header-name -> column-index lookup, matching case-insensitively
+ * (trimmed, lowercased), and ignoring empty (trailing) header columns. When
+ * a header name repeats, the first occurrence wins.
  * @param {string[]} headerRow
  * @returns {Record<string, number>}
  */
@@ -55,8 +55,9 @@ function buildHeaderIndex(headerRow) {
   const index = {};
   (headerRow || []).forEach((header, i) => {
     const trimmed = (header ?? '').trim();
-    if (trimmed !== '' && !(trimmed in index)) {
-      index[trimmed] = i;
+    const key = trimmed.toLowerCase();
+    if (trimmed !== '' && !(key in index)) {
+      index[key] = i;
     }
   });
   return index;
@@ -64,7 +65,8 @@ function buildHeaderIndex(headerRow) {
 
 /**
  * Read a single mapped cell from a row, trimmed, `null` when absent, unmapped,
- * or empty.
+ * or empty. The column map's header name is matched against the header row
+ * case-insensitively (trimmed, lowercased), same as `buildHeaderIndex`.
  * @param {string[]} row
  * @param {Record<string, number>} headerIndex
  * @param {string|null} headerName
@@ -74,7 +76,7 @@ function readCell(row, headerIndex, headerName) {
   if (!headerName) {
     return null;
   }
-  const idx = headerIndex[headerName];
+  const idx = headerIndex[headerName.trim().toLowerCase()];
   if (idx === undefined) {
     return null;
   }
@@ -87,16 +89,24 @@ function readCell(row, headerIndex, headerName) {
 }
 
 /**
- * Normalise raw spreadsheet rows into the shared case shape.
+ * Normalise raw spreadsheet rows into the shared case shape: `client_id`,
+ * `title`, `objective`, `preconditions`, `steps` (string[]), `expected`
+ * (string[]), `section`, `priority`, `notes`, and `source_row`.
  *
- * `rows[0]` is treated as the header row. A row whose mapped `client_id`
- * cell is empty but has any other non-empty *mapped* cell continues the
- * case above it: its mapped steps cell adds steps, and its mapped expected
- * cell adds expected results, independently of one another. A row with no
- * non-empty mapped cell at all is skipped. A continuation row before any
- * case has started is ignored.
+ * `rows[0]` is treated as the header row. A row continues the case above
+ * it — its mapped steps cell adds steps, and its mapped expected cell adds
+ * expected results, independently of one another — in either of two cases:
+ * its mapped `client_id` cell is empty, or its mapped `client_id` cell
+ * repeats the current case's client_id while its mapped `title` cell is
+ * empty. The second form is the layout some tools use for a case's step
+ * rows (for example Xray's Test Case Importer, which repeats the TCID on
+ * every step row), and is also how a merged ID cell reads back from XLSX.
+ * A row with no non-empty mapped cell at all is skipped. A continuation row
+ * before any case has started is ignored.
  * @param {string[][]} rows
- * @param {object} columnMap - See `interfaces.md` "Column map".
+ * @param {object} columnMap - maps each normalised field name to the header
+ *   text of the column that holds it, or `null` when the source has no such
+ *   column.
  * @returns {object[]} NormalisedCase[]
  */
 export function normalise(rows, columnMap) {
@@ -119,7 +129,9 @@ export function normalise(rows, columnMap) {
     }
 
     const clientId = cell('client_id');
-    if (clientId !== null) {
+    const continuesCurrentId = clientId !== null && current !== null && clientId === current.client_id && cell('title') === null;
+
+    if (clientId !== null && !continuesCurrentId) {
       const stepsCell = cell('steps');
       const expectedCell = cell('expected');
       current = {

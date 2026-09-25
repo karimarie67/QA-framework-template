@@ -69,8 +69,10 @@ say why it's theirs, and confirm the result before logging it.
   form on a read-only site, stops there; that case goes Manual instead.
 - A new spec file is a bigger change than one batch: it needs its own CI job,
   an entry in the dashboard generator's inputs, and a place in
-  `template-check`'s spec list. Make that its own reviewed change, never
-  folded into a batch PR.
+  `template-check`'s spec list. Because it touches `.github/workflows/` and
+  `dashboards/scripts/generate-dashboard.js`, it needs `/atlas-red-team`
+  review first. Make that its own reviewed change, never folded into a batch
+  PR.
 
 ## Steps
 
@@ -107,7 +109,7 @@ For each case, walk its steps against the live site, doing only what the
 brief's "What we may do there" allows: load pages and look for the elements
 the case names. Never take a forbidden action to find out whether a step can
 be automated. A case whose next step needs one stops there and goes in the
-Manual bucket, with that reason.
+Manual bucket, with that reason. Record what you saw in `import.probe`.
 
 Mark a case stale when a page, control, or text it names isn't on the site.
 Note what's missing; that becomes `import.stale.missing`.
@@ -125,6 +127,11 @@ test case when one covers the same page and the same assertion intent.
 proposed match. A confirmed match stays Automatable with `covered_by` set to
 the existing test case's ID; it gets no new issue and no new test.
 
+Set `import.bucket` to exactly one of `automatable`, `partly-automatable`,
+`manual`, or `stale` (lowercase). Put the reason for a manual or
+partly-automatable case in `import.reason`. Record a confirmed match in
+`import.covered_by`.
+
 **Done when:** `import.bucket` is set on every case, every match is
 confirmed or rejected, and the confirmed table is logged.
 
@@ -141,14 +148,7 @@ its issue number in `import.stale.finding_issue`.
 **Done when:** every stale case has an outcome, and every finding from one is
 on the board.
 
-### 5. Validate and assign IDs
-
-```
-node .claude/skills/import-test-cases/import.js validate
-```
-
-Fix anything it reports (a missing reason, a bucket not set, a bad stale
-record) and re-run it until it exits 0. Then:
+### 5. Assign IDs and validate
 
 ```
 gh issue list --state all --limit 1000 --json number,title,labels,state > <issues file>
@@ -161,7 +161,15 @@ the case's section. "Free" counts every ID in `docs/coverage-map.md`,
 `cases.json`, and all Test Case issue titles, open and closed, so no ID is
 ever reused. The client's own ID is kept alongside it. An ID already in
 `cases.json` is never changed. Show the assigned IDs to the human, and log
-them.
+them. Then:
+
+```
+node .claude/skills/import-test-cases/import.js validate
+```
+
+Fix anything it reports (a missing reason, a bucket not set, a bad stale
+record), re-running `assign-ids` first if the fix changes an ID, and re-run
+`validate` until it exits 0.
 
 **Done when:** `validate` exits 0, and every non-stale, non-covered case has
 a `test_case_id`.
@@ -188,7 +196,8 @@ its exact title prefix (`[TEST CASE] <TC id> - ` or `[STORY] <title>`), and
 reuse it instead of creating a duplicate. Add each Test Case issue as a
 sub-issue of its story with the sub-issues API, as in
 [`stories-and-tests.md`](../new-engagement/stories-and-tests.md). Reuse
-existing board items; add new ones to `Backlog`.
+existing board items; add new ones to `Backlog`. Record each story's issue
+number in `import.story` and each Test Case issue's number in `import.issue`.
 
 **Done when:** every non-stale, non-covered case has a Test Case issue that's
 a sub-issue of its story, every matched case's existing issue has its
@@ -203,7 +212,8 @@ annotations, declared in the test's details object. Selectors go in
 `selectors.<site>.*`, and data in `config-helper.js`. A partly automatable
 case's test checks what it can and says, in a comment, what stays manual and
 why. A matched case (`covered_by` set) gets no new test: add the
-`client_case` annotation to the existing test instead.
+`client_case` annotation to the existing test instead. Record `import.test`
+as `<spec file> › <test title>`.
 
 **Done when:** every automatable and partly automatable case in the batch has
 a test or an annotation, and its batch PR is open.
@@ -233,8 +243,8 @@ node .claude/skills/import-test-cases/import.js report
 ```
 
 Add its output to `docs/engagement-log.md`'s import report, and carry its
-counts into the PR summary, for example "41 of 58 automated, 12 manual,
-5 stale".
+counts into the PR summary, for example "41 of 58 automated, 6 partly
+automated, 12 manual, 5 stale".
 
 ```
 gh issue list --state all --limit 1000 --json number,title,labels,state > <issues file>

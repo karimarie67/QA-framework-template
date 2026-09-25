@@ -95,9 +95,9 @@ async function readFileRows(file, sheet) {
 }
 
 /** Load and parse a JSON file, failing with a usage error when it's missing. */
-function readJsonFile(filePath, label) {
+function readJsonFile(filePath) {
   if (typeof filePath !== 'string' || !fs.existsSync(filePath)) {
-    fail(`File not found: ${label ?? filePath}`);
+    fail(`File not found: ${filePath}`);
   }
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
@@ -108,7 +108,7 @@ function casesPathFrom(args) {
 
 function loadCasesFile(args) {
   const casesPath = casesPathFrom(args);
-  const doc = readJsonFile(casesPath, casesPath);
+  const doc = readJsonFile(casesPath);
   return { casesPath, doc };
 }
 
@@ -129,12 +129,9 @@ async function cmdNormalise(args) {
     if (typeof mapArg !== 'string' || !fs.existsSync(mapArg)) {
       fail('normalise --write requires --map <column-map.json>, and the file must exist');
     }
-    mapFromFile = JSON.parse(fs.readFileSync(mapArg, 'utf8'));
+    mapFromFile = readJsonFile(mapArg);
   } else if (typeof args.flags.map === 'string') {
-    if (!fs.existsSync(args.flags.map)) {
-      fail(`File not found: ${args.flags.map}`);
-    }
-    mapFromFile = JSON.parse(fs.readFileSync(args.flags.map, 'utf8'));
+    mapFromFile = readJsonFile(args.flags.map);
   }
 
   if (!fs.existsSync(file)) {
@@ -201,7 +198,7 @@ async function cmdNormalise(args) {
     }
     fail(
       `Refusing to overwrite ${outPath}: its sha256 does not match ${file}. ` +
-        're-import is out of scope; ask for a fresh file name instead.',
+        'Re-import is out of scope; ask for a fresh file name instead.',
       3,
     );
   }

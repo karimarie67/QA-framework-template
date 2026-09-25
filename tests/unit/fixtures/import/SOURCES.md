@@ -1,9 +1,9 @@
-# Vendor header research (D7)
+# Vendor header research
 
 Every fixture in this directory is hand-made. Before writing the four
 test-tool fixtures below, each tool's real CSV export/import column headers
-were checked against that vendor's own official documentation, as required
-by the approved plan's decision D7. Access date for every source below is
+were checked against that vendor's own official documentation, per
+issue #11's plan. Access date for every source below is
 **2026-09-25**. `formats.js` carries the same URLs in a comment above each
 map.
 
@@ -96,14 +96,18 @@ inferred.
   with the header row
   `TCID;Test Summary;Test Priority;Component;Component;Action;Data;Result`
   (the doubled "Component" column is that page's own multi-component
-  example; this fixture uses a single Component column) and shows
-  continuation rows for a case's later steps:
+  example; this fixture uses a single Component column) and shows a
+  continuation row for a case's later steps repeating the TCID column on
+  every row (`1;Test 1...;High;...;Go to login page;;` then
+  `1;;;;;Enter username;peter;`), rather than leaving it blank:
   - https://docs.getxray.app/space/XRAY/301406204
 
 **Headers used:** `TCID, Test Summary, Test Priority, Component, Action,
 Data, Result`. `Data` (a per-step input value) is a real column in the
 vendor format but is left unmapped in `column_map`, same as any other
-extra column a real export might carry.
+extra column a real export might carry. This fixture's step rows repeat the
+TCID column, matching the vendor sample above, rather than leaving it
+blank.
 
 Xray's CSV Test Case Importer has no Preconditions or Objective column —
 Xray models a precondition as a separate, linked "Pre-Condition" issue

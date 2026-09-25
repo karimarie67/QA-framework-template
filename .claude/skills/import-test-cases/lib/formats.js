@@ -189,11 +189,11 @@ const QTEST = {
 export const FORMATS = [TESTRAIL, ZEPHYR_SCALE, XRAY, QTEST];
 
 /**
- * Normalise a header for case/space/punctuation-insensitive comparison.
+ * Reduce a header to its comparison key: trimmed, lowercased.
  * @param {string} header
  * @returns {string}
  */
-function normaliseHeader(header) {
+function headerKey(header) {
   return (header ?? '').trim().toLowerCase();
 }
 
@@ -203,9 +203,9 @@ function normaliseHeader(header) {
  * @returns {{name: string, column_map: object}|null}
  */
 export function detectFormat(headers) {
-  const present = new Set((headers || []).map(normaliseHeader));
+  const present = new Set((headers || []).map(headerKey));
   for (const format of FORMATS) {
-    if (format.signature.every(header => present.has(normaliseHeader(header)))) {
+    if (format.signature.every(header => present.has(headerKey(header)))) {
       return { name: format.name, column_map: format.column_map };
     }
   }

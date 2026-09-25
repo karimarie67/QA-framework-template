@@ -10,7 +10,11 @@
  * more than one physical line), both CRLF and LF line endings, and a
  * leading UTF-8 byte-order mark. A genuinely empty physical line becomes an
  * empty record `[]` (not `['']`), so row indices stay aligned with
- * spreadsheet row numbers for the normaliser (see `normalise.js`).
+ * spreadsheet row numbers for the normaliser (see `normalise.js`). A `"`
+ * that appears in a field after other characters is literal text, not a
+ * quote (only a `"` as a field's first character opens a quoted field). A
+ * quoted field left open at end of input throws rather than silently
+ * swallowing the rest of the file.
  */
 
 /**
@@ -18,6 +22,7 @@
  * @param {string} text - Raw CSV file contents.
  * @returns {string[][]} One array of field values per record. `rows[0]` is
  *   the header row when the source has one.
+ * @throws {Error} when a quoted field is still open at end of input.
  */
 export function parseCsv(text) {
   let s = String(text ?? '');
@@ -31,6 +36,8 @@ export function parseCsv(text) {
   let row = [];
   let field = '';
   let inQuotes = false;
+  let line = 1;
+  let quoteStartLine = 0;
 
   const endField = () => {
     row.push(field);
@@ -59,12 +66,18 @@ export function parseCsv(text) {
         i += 1;
         continue;
       }
+      if (c === '\n') {
+        line += 1;
+      }
       field += c;
       i += 1;
       continue;
     }
-    if (c === '"') {
+    // A `"` only opens a quoted field as the field's first character; a `"`
+    // after other characters is literal text (for example `5" screen`).
+    if (c === '"' && field === '') {
       inQuotes = true;
+      quoteStartLine = line;
       i += 1;
       continue;
     }
@@ -75,11 +88,15 @@ export function parseCsv(text) {
     }
     if (c === '\n') {
       endRecord();
+      line += 1;
       i += 1;
       continue;
     }
     field += c;
     i += 1;
+  }
+  if (inQuotes) {
+    throw new Error(`Unterminated quoted field starting on line ${quoteStartLine}`);
   }
   // A trailing newline already closed the last record above; only close a
   // final unterminated record here.

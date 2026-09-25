@@ -3,8 +3,7 @@
  *
  * Proposes a column map for a spreadsheet that doesn't match one of the
  * built-in formats in `formats.js`, from a table of header synonyms. Never
- * used without a human confirming or correcting the result first (see
- * `interfaces.md` "Column map" and D6 in the approved plan).
+ * used without a human confirming or correcting the result first.
  */
 
 /**

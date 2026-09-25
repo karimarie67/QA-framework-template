@@ -62,13 +62,21 @@ export function validate(cases) {
   }
 
   // Rule 5: a non-null test_case_id matches TC_ID; when client_id matches
-  // TC_ID and the case is not covered, test_case_id === client_id.
+  // TC_ID and the case is not covered, test_case_id === client_id. A stale
+  // case is exempt from the client_id agreement half of this rule, since
+  // Rule 4 already requires its test_case_id to be null.
   for (const c of cases) {
     const tcid = c.import?.test_case_id ?? null;
     if (tcid !== null && !TC_ID.test(tcid)) {
       errors.push(`${label(c)}: import.test_case_id "${tcid}" does not match ${TC_ID}`);
     }
-    if (c.client_id && TC_ID.test(c.client_id) && !c.import?.covered_by && tcid !== c.client_id) {
+    if (
+      c.import?.bucket !== 'stale' &&
+      c.client_id &&
+      TC_ID.test(c.client_id) &&
+      !c.import?.covered_by &&
+      tcid !== c.client_id
+    ) {
       errors.push(`${label(c)}: import.test_case_id must equal client_id "${c.client_id}"`);
     }
   }

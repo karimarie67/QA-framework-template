@@ -86,4 +86,15 @@ test('parseCsv', async t => {
   await t.test('returns an empty array for an empty string', () => {
     assert.deepEqual(parseCsv(''), []);
   });
+
+  await t.test('a quote inside an unquoted field, after other characters, is literal text', () => {
+    assert.deepEqual(parseCsv('a\n5" screen,foo\n'), [['a'], ['5" screen', 'foo']]);
+  });
+
+  await t.test('a quote still open at end of input throws, naming the line it started on', () => {
+    assert.throws(
+      () => parseCsv('a,b\n1,"unterminated\n2,3\n'),
+      /Unterminated quoted field starting on line 2/,
+    );
+  });
 });

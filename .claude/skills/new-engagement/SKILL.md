@@ -196,8 +196,9 @@ filed or dropped (with the reason logged), and every filed one is on the board.
 
 Ask the human whether the client has manual test cases. If so, run
 [`/import-test-cases <file>`](../import-test-cases/SKILL.md) in place of the
-"Stories and test cases" section below. Otherwise follow that section of
-[`stories-and-tests.md`](stories-and-tests.md).
+"Stories and test cases" section of
+[`stories-and-tests.md`](stories-and-tests.md). Otherwise follow that
+section.
 
 **Done when:** `npm run coverage` lists every test with a test case ID and an
 issue, and no untraced tests; every acceptance criterion has a test case; and

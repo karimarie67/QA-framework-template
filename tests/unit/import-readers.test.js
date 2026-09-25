@@ -211,3 +211,40 @@ test('splitNumbered edge cases used by the row rules', async t => {
     assert.deepEqual(splitNumbered('   '), []);
   });
 });
+
+test('normalise: a row that repeats the current case\'s client_id with an empty title continues that case', () => {
+  const rows = [
+    ['TCID', 'Test Summary', 'Action', 'Result'],
+    ['WEB-1', 'Login', 'Go to login page', ''],
+    ['WEB-1', '', 'Enter username', ''],
+    ['WEB-1', '', 'Click login', 'User is redirected to the dashboard'],
+  ];
+  const columnMap = { client_id: 'TCID', title: 'Test Summary', steps: 'Action', expected: 'Result' };
+  const cases = normalise(rows, columnMap);
+  assert.equal(cases.length, 1);
+  assert.deepEqual(cases[0].steps, ['Go to login page', 'Enter username', 'Click login']);
+  assert.deepEqual(cases[0].expected, ['User is redirected to the dashboard']);
+});
+
+test('normalise: headers are matched case-insensitively', () => {
+  const rows = [
+    ['tcid', 'TEST SUMMARY'],
+    ['WEB-1', 'Login'],
+  ];
+  const columnMap = { client_id: 'TCID', title: 'Test Summary' };
+  const cases = normalise(rows, columnMap);
+  assert.deepEqual(cases, [
+    {
+      client_id: 'WEB-1',
+      title: 'Login',
+      objective: null,
+      preconditions: null,
+      steps: [],
+      expected: [],
+      section: null,
+      priority: null,
+      notes: null,
+      source_row: 2,
+    },
+  ]);
+});

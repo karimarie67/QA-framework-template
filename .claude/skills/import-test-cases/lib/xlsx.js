@@ -9,14 +9,14 @@ import ExcelJS from 'exceljs';
 
 /**
  * Render one cell's resolved value as text, matching how the same content
- * would appear in a CSV export: rich-text runs joined, a formula cell's
- * computed result (not the formula), a hyperlink's display text, a Date at
- * exactly midnight as `YYYY-MM-DD`, any other Date as a full ISO string,
- * and a number as its plain string form.
+ * would appear in a CSV export: rich-text runs joined, a formula or
+ * shared-formula cell's computed result (not the formula), a hyperlink's
+ * display text, a Date at exactly midnight as `YYYY-MM-DD`, any other Date
+ * as a full ISO string, and a number as its plain string form.
  * @param {*} value - An ExcelJS cell value.
  * @returns {string}
  */
-function cellToText(value) {
+export function cellToText(value) {
   if (value === null || value === undefined) {
     return '';
   }
@@ -35,7 +35,7 @@ function cellToText(value) {
     if (value.hyperlink !== undefined) {
       return cellToText(value.text);
     }
-    if (value.formula !== undefined) {
+    if (value.formula !== undefined || value.sharedFormula !== undefined) {
       return cellToText(value.result);
     }
     if (value.error !== undefined) {

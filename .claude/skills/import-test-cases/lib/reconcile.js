@@ -2,7 +2,7 @@
  * reconcile.js
  *
  * Cross-references a parsed `cases.json` against GitHub issues and the
- * coverage map's collected tests (AC12 and traceability).
+ * coverage map's collected tests, for traceability.
  */
 import { countBuckets } from './report.js';
 

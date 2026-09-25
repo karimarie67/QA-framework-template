@@ -5,7 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ExcelJS from 'exceljs';
 import { parseCsv } from '../../.claude/skills/import-test-cases/lib/csv.js';
-import { readXlsx } from '../../.claude/skills/import-test-cases/lib/xlsx.js';
+import { readXlsx, cellToText } from '../../.claude/skills/import-test-cases/lib/xlsx.js';
 import { proposeMap } from '../../.claude/skills/import-test-cases/lib/propose-map.js';
 import { normalise } from '../../.claude/skills/import-test-cases/lib/normalise.js';
 
@@ -55,6 +55,10 @@ test('readXlsx cell text conversion', async t => {
       sheet.addRow([{ formula: 'A1', result: 'computed value' }]);
     });
     assert.deepEqual(row, ['computed value']);
+  });
+
+  await t.test('cellToText treats a sharedFormula cell like a formula cell', () => {
+    assert.equal(cellToText({ sharedFormula: 'D2', result: 3 }), '3');
   });
 
   await t.test('uses a hyperlink cell\'s display text', async () => {

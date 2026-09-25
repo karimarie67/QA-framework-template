@@ -51,7 +51,7 @@ test('countBuckets', async t => {
   });
 });
 
-test('renderReport (AC10)', async t => {
+test('renderReport', async t => {
   const casesFile = {
     source_file: 'docs/client-test-cases/boost-cases.xlsx',
     sha256: 'deadbeef',
