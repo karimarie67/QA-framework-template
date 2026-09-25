@@ -27,10 +27,14 @@ const report = {
             { projectName: 'staging', annotations: [
               { type: 'test_case', description: 'TC_CART_001' },
               { type: 'issue', description: 'https://github.com/o/r/issues/7' },
+              { type: 'client_case', description: 'SD-7' },
+              { type: 'client_case', description: 'SD-9' },
             ] },
             { projectName: 'production', annotations: [
               { type: 'test_case', description: 'TC_CART_001' },
               { type: 'issue', description: 'https://github.com/o/r/issues/7' },
+              { type: 'client_case', description: 'SD-7' },
+              { type: 'client_case', description: 'SD-9' },
             ] },
           ],
         },
@@ -60,6 +64,18 @@ test('collectTests', async t => {
   await t.test('leaves testCase null when the annotation is missing', () => {
     assert.equal(tests.find(x => x.title.includes('Untracked')).testCase, null);
   });
+
+  await t.test('collects clientCases from all client_case annotations', () => {
+    const first = tests.find(x => x.testCase === 'TC_CART_001');
+    assert.deepEqual(first.clientCases, ['SD-7', 'SD-9']);
+  });
+
+  await t.test('returns empty array for clientCases when no client_case annotation', () => {
+    const second = tests.find(x => x.testCase === 'TC_CART_002');
+    assert.deepEqual(second.clientCases, []);
+    const untracked = tests.find(x => x.title.includes('Untracked'));
+    assert.deepEqual(untracked.clientCases, []);
+  });
 });
 
 test('renderMarkdown', async t => {
@@ -69,9 +85,9 @@ test('renderMarkdown', async t => {
     assert.ok(md.indexOf('| TC_CART_001 |') < md.indexOf('| TC_CART_002 |'));
   });
 
-  await t.test('links issues by number and shows tags', () => {
-    assert.match(md, /\| TC_CART_001 \| \[#7\]\(https:\/\/github\.com\/o\/r\/issues\/7\) \| `@smoke` \|/);
-    assert.match(md, /\| TC_CART_002 \| — \| — \|/);
+  await t.test('links issues by number and shows tags, with client cases', () => {
+    assert.match(md, /\| TC_CART_001 \| SD-7, SD-9 \| \[#7\]\(https:\/\/github\.com\/o\/r\/issues\/7\) \| `@smoke` \|/);
+    assert.match(md, /\| TC_CART_002 \| — \| — \| — \|/);
   });
 
   await t.test('lists tests without an ID separately and escapes pipes', () => {
