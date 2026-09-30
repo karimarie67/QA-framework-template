@@ -18,7 +18,7 @@ opening table.
 - **Product:** <name, one-line description>
 - **In scope:** <user journeys and features under test>
 - **Out of scope:** <what we deliberately don't test, and why>
-- **Browsers and devices:** <e.g. Chromium desktop and 800x600 mobile viewport>. Must match the `playwright.config.js` projects.
+- **Browsers and devices:** <e.g. Chromium desktop and Pixel 5 phone emulation>. Must match the `playwright.config.js` projects.
 
 ## Environments
 
