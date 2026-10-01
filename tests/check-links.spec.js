@@ -186,7 +186,7 @@ async function checkPage(page, url, sourceUrl = 'direct', depth = 0) {
 
 function saveReport() {
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
-  const reportDir = path.join(process.cwd(), 'test-results', 'link-check');
+  const reportDir = path.join(process.cwd(), 'playwright-output', 'link-check');
   
   if (!fs.existsSync(reportDir)) {
     fs.mkdirSync(reportDir, { recursive: true });
@@ -340,7 +340,7 @@ test.describe('Production Link Check', () => {
     // Always pass the test but report findings
     if (siteBroken.length > 0) {
       console.log(`\n⚠️  WARNING: Found ${siteBroken.length} broken site links, but test will pass for reporting purposes.`);
-      console.log(`Check the CSV reports in test-results/link-check/ for details.`);
+      console.log(`Check the CSV reports in playwright-output/link-check/ for details.`);
     }
     
     // Optional: Uncomment the line below if you want the test to actually fail on broken links

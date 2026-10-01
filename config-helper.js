@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, devices } from '@playwright/test';
 
 /**
  * Get the base URL from the current project configuration
@@ -93,6 +93,7 @@ export const testData = {
   },
   viewport: {
     desktop: { width: 1280, height: 720 },
-    mobile: { width: 800, height: 600 },
+    // The same phone the *-mobile projects emulate (playwright.config.js).
+    mobile: devices['Pixel 5'].viewport,
   }
 };

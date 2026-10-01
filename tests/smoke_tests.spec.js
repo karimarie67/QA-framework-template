@@ -13,7 +13,7 @@ import {
   testPatterns 
 } from '../test-helpers.js';
 
-fs.mkdirSync('test-results', { recursive: true });
+fs.mkdirSync('playwright-output', { recursive: true });
 
 test.describe('Smoke Tests', () => {
   
@@ -56,7 +56,7 @@ test.describe('Smoke Tests', () => {
     ];
     await testElementVisibility(page, testInfo, contentLocator, contentFallbacks, 'Main content', testId);
 
-    fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Homepage smoke test completed successfully\n`);
+    fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Homepage smoke test completed successfully\n`);
   });
 
   // TC_SMOKE_002: Navigation Menu
@@ -69,7 +69,7 @@ test.describe('Smoke Tests', () => {
 
     // Get all navigation links with improved selectors
     const navLinks = await selectors.navLinks(page).all();
-    fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Found ${navLinks.length} navigation links\n`);
+    fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Found ${navLinks.length} navigation links\n`);
 
     // Log all nav links for debugging
     for (let i = 0; i < navLinks.length; i++) {
@@ -77,13 +77,13 @@ test.describe('Smoke Tests', () => {
     }
 
     // First, let's debug what links we actually have
-    fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Debugging all ${navLinks.length} navigation links:\n`);
+    fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Debugging all ${navLinks.length} navigation links:\n`);
     for (let i = 0; i < Math.min(navLinks.length, 10); i++) {
       const link = navLinks[i];
       const text = await link.textContent().catch(() => '');
       const href = await link.getAttribute('href').catch(() => '');
       const isVisible = await link.isVisible().catch(() => false);
-      fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Link ${i}: text="${text.trim()}", href="${href}", visible=${isVisible}\n`);
+      fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Link ${i}: text="${text.trim()}", href="${href}", visible=${isVisible}\n`);
     }
 
     // Filter to only test visible, internal navigation links
@@ -100,7 +100,7 @@ test.describe('Smoke Tests', () => {
       }
     }
 
-    fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Found ${visibleNavLinks.length} visible internal navigation links\n`);
+    fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Found ${visibleNavLinks.length} visible internal navigation links\n`);
 
     // Test visible navigation links
     let testedLinks = 0;
@@ -113,7 +113,7 @@ test.describe('Smoke Tests', () => {
       try {
         // Record starting URL
         const startUrl = page.url();
-        fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Testing visible link ${index}: "${text.trim()}" -> "${href}"\n`);
+        fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Testing visible link ${index}: "${text.trim()}" -> "${href}"\n`);
 
         // Click the link
         await link.click();
@@ -124,19 +124,19 @@ test.describe('Smoke Tests', () => {
         
         // Check if URL changed appropriately
         if (currentUrl !== startUrl && currentUrl.includes(href.replace('/', ''))) {
-          fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ✓ Navigation successful: ${startUrl} -> ${currentUrl}\n`);
+          fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} ✓ Navigation successful: ${startUrl} -> ${currentUrl}\n`);
           testedLinks++;
           
           // Verify some content loaded
           try {
             await expect(page.locator('h1, h2, main, .content, body')).toBeVisible({ timeout: 3000 });
-            fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ✓ Page content loaded\n`);
+            fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} ✓ Page content loaded\n`);
           } catch (e) {
-            fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ⚠ Navigation worked but content check failed\n`);
+            fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} ⚠ Navigation worked but content check failed\n`);
           }
           
         } else {
-          fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ⚠ Unexpected navigation: ${startUrl} -> ${currentUrl}\n`);
+          fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} ⚠ Unexpected navigation: ${startUrl} -> ${currentUrl}\n`);
           // Still count as working if URL changed
           if (currentUrl !== startUrl) {
             testedLinks += 0.5;
@@ -147,21 +147,21 @@ test.describe('Smoke Tests', () => {
         await safeGoto(page, testInfo, homepageUrl, { waitUntil: 'domcontentloaded' });
         
       } catch (error) {
-        fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ✗ Link test failed: ${error.message}\n`);
+        fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} ✗ Link test failed: ${error.message}\n`);
       }
     }
 
-    fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Navigation test summary: ${testedLinks} successful navigations out of ${visibleNavLinks.length} visible links\n`);
+    fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Navigation test summary: ${testedLinks} successful navigations out of ${visibleNavLinks.length} visible links\n`);
 
     // For smoke test, require at least one working navigation link
     if (testedLinks > 0) {
       expect(testedLinks).toBeGreaterThan(0);
-      fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ✓ Navigation smoke test PASSED - ${testedLinks} links work\n`);
+      fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} ✓ Navigation smoke test PASSED - ${testedLinks} links work\n`);
     } else if (visibleNavLinks.length > 0) {
-      fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ⚠ Visible navigation links found but none functional\n`);
+      fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} ⚠ Visible navigation links found but none functional\n`);
       // For smoke test, having visible nav structure might be sufficient
     } else {
-      fs.appendFileSync('test-results/smoke-logs.txt', `${testId} ✗ No functional navigation links found\n`);
+      fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} ✗ No functional navigation links found\n`);
       throw new Error('No functional navigation links found');
     }
   });
@@ -195,7 +195,7 @@ test.describe('Smoke Tests', () => {
           const visibleElement = await findVisibleElement(selector, `${libName} library`, testId);
           if (visibleElement) {
             foundLibraries.push(libName);
-            fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Found ${libName} library on page\n`);
+            fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Found ${libName} library on page\n`);
             break;
           }
         }
@@ -203,7 +203,7 @@ test.describe('Smoke Tests', () => {
     }
 
     expect(foundLibraries.length).toBeGreaterThan(0); // Ensure at least one library found
-    fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Found libraries: ${foundLibraries.join(', ')}\n`);
+    fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Found libraries: ${foundLibraries.join(', ')}\n`);
 
     // Test library link navigation for first found library
     if (foundLibraries.length > 0) {
@@ -218,10 +218,10 @@ test.describe('Smoke Tests', () => {
         if (currentUrl.includes(firstLib.toLowerCase()) || 
             currentUrl.includes('doc') || 
             currentUrl.includes('lib')) {
-          fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Successfully navigated to ${firstLib} documentation: ${currentUrl}\n`);
+          fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Successfully navigated to ${firstLib} documentation: ${currentUrl}\n`);
         }
       } catch (error) {
-        fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Library link navigation failed: ${error.message}\n`);
+        fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Library link navigation failed: ${error.message}\n`);
       }
     }
   });
@@ -266,7 +266,7 @@ test.describe('Smoke Tests', () => {
         if (download) {
           const filename = await download.suggestedFilename();
           expect(filename).toMatch(testData.downloadFiles.supported);
-          fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Download initiated successfully: ${filename}\n`);
+          fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Download initiated successfully: ${filename}\n`);
           
           // Cancel download to avoid large file transfer
           await download.cancel();
@@ -274,16 +274,16 @@ test.describe('Smoke Tests', () => {
           // Check if we navigated to download page instead
           const currentUrl = page.url();
           if (expectedUrlPatterns.downloadSite.test(currentUrl)) {
-            fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Navigated to download page: ${currentUrl}\n`);
+            fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Navigated to download page: ${currentUrl}\n`);
           } else {
-            fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Download test inconclusive - no download or navigation\n`);
+            fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Download test inconclusive - no download or navigation\n`);
           }
         }
       } catch (error) {
-        fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Download test failed: ${error.message}\n`);
+        fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Download test failed: ${error.message}\n`);
       }
     } else {
-      fs.appendFileSync('test-results/smoke-logs.txt', `${testId} No download links found\n`);
+      fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} No download links found\n`);
     }
   });
 
@@ -304,7 +304,7 @@ test.describe('Smoke Tests', () => {
       
       if (searchResults && resultCount > 0) {
         await expect(searchResults).toBeVisible({ timeout: testData.timeouts.medium });
-        fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Search results found (${resultCount} results)\n`);
+        fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Search results found (${resultCount} results)\n`);
         
         // Try to click first result if it's a link
         try {
@@ -312,16 +312,16 @@ test.describe('Smoke Tests', () => {
             await searchResults.click();
             await page.waitForTimeout(2000);
             const currentUrl = page.url();
-            fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Clicked search result, navigated to: ${currentUrl}\n`);
+            fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Clicked search result, navigated to: ${currentUrl}\n`);
           }
         } catch (error) {
-          fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Search result click failed: ${error.message}\n`);
+          fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Search result click failed: ${error.message}\n`);
         }
       } else {
-        fs.appendFileSync('test-results/smoke-logs.txt', `${testId} No search results found\n`);
+        fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} No search results found\n`);
       }
     } catch (error) {
-      fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Search functionality test failed: ${error.message}\n`);
+      fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Search functionality test failed: ${error.message}\n`);
     }
   });
 
@@ -330,8 +330,11 @@ test.describe('Smoke Tests', () => {
     const testId = 'TC_SMOKE_006';
     testInfo.setTimeout(30000);
 
-    // Set mobile viewport
-    await testPatterns.setViewport(page, testData.viewport.mobile, testId);
+    // A *-mobile project already emulates a phone; resizing it would undo that.
+    // Other projects get a phone-sized window.
+    if (!testInfo.project.use.isMobile) {
+      await testPatterns.setViewport(page, testData.viewport.mobile, testId);
+    }
     
     const homepageUrl = buildURL(testInfo, urlPatterns.homepage, { cachebust: true });
     await testPatterns.loadAndValidatePage(page, testInfo, homepageUrl, testId);
@@ -365,15 +368,15 @@ test.describe('Smoke Tests', () => {
       if (navBox && contentBox) {
         const noOverlap = navBox.y + navBox.height <= contentBox.y + 10; // 10px tolerance
         if (noOverlap) {
-          fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Mobile layout: No navigation/content overlap\n`);
+          fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Mobile layout: No navigation/content overlap\n`);
         } else {
-          fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Mobile layout: Potential overlap detected\n`);
+          fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Mobile layout: Potential overlap detected\n`);
         }
       }
     } catch (error) {
-      fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Mobile layout check failed: ${error.message}\n`);
+      fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Mobile layout check failed: ${error.message}\n`);
     }
 
-    fs.appendFileSync('test-results/smoke-logs.txt', `${testId} Mobile responsiveness test completed\n`);
+    fs.appendFileSync('playwright-output/smoke-logs.txt', `${testId} Mobile responsiveness test completed\n`);
   });
 });

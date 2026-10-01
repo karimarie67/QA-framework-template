@@ -59,3 +59,4 @@ node_modules/
 # Playwright's own output; never proof of work (that is test-results/)
 playwright-output/
 playwright-report/
+/test-results.json
