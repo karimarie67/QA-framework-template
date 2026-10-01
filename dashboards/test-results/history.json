@@ -31,5 +31,44 @@
       "Documentation PDF/print versions are accessible"
     ],
     "runNumber": "173"
+  },
+  {
+    "date": "2026-10-01",
+    "time": "2026-10-01T13:25:12.073Z",
+    "total": 31,
+    "passed": 4,
+    "failed": 27,
+    "passRate": 12.903225806451612,
+    "duration": 167.67000000000004,
+    "failedTestNames": [
+      "Homepage loads with key elements",
+      "Navigation menu links work correctly",
+      "a listing page displays expected items and links to detail pages",
+      "Download section works correctly",
+      "Search bar works with basic query",
+      "Homepage is responsive on mobile",
+      "404 page displays appropriate error message",
+      "Broken documentation link returns appropriate error",
+      "Invalid search query handles gracefully",
+      "Broken external links are identified",
+      "Form validation errors display correctly",
+      "Download links return valid HTTP status codes",
+      "Download file names are correct format",
+      "Version selector displays available versions",
+      "Download page displays file sizes",
+      "Search returns relevant results for common queries",
+      "Search with special characters handles gracefully",
+      "Empty search shows appropriate message",
+      "Search result pagination works correctly",
+      "Search autocomplete/suggestions appear",
+      "Documentation page loads with table of contents",
+      "Library documentation links are accessible",
+      "Code examples are properly formatted",
+      "Documentation breadcrumbs navigation works",
+      "Documentation version switcher works",
+      "Documentation search within docs works",
+      "Documentation PDF/print versions are accessible"
+    ],
+    "runNumber": "37"
   }
 ]
