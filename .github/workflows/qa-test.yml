@@ -74,9 +74,9 @@ jobs:
             echo "✓ Copying playwright-report"
             cp -r playwright-report artifacts/smoke-test-results/
           fi
-          if [ -d "test-results" ]; then
-            echo "✓ Copying test-results directory"
-            cp -r test-results artifacts/smoke-test-results/
+          if [ -d "playwright-output" ]; then
+            echo "✓ Copying playwright-output directory"
+            cp -r playwright-output artifacts/smoke-test-results/
           fi
 
       - name: Upload Smoke Test Results
@@ -127,8 +127,8 @@ jobs:
           if [ -d "playwright-report" ]; then
             cp -r playwright-report artifacts/error-handling-test-results/
           fi
-          if [ -d "test-results" ]; then
-            cp -r test-results artifacts/error-handling-test-results/
+          if [ -d "playwright-output" ]; then
+            cp -r playwright-output artifacts/error-handling-test-results/
           fi
 
       - name: Upload Error Handling Test Results
@@ -179,8 +179,8 @@ jobs:
           if [ -d "playwright-report" ]; then
             cp -r playwright-report artifacts/download-search-test-results/
           fi
-          if [ -d "test-results" ]; then
-            cp -r test-results artifacts/download-search-test-results/
+          if [ -d "playwright-output" ]; then
+            cp -r playwright-output artifacts/download-search-test-results/
           fi
 
       - name: Upload Download & Search Test Results
@@ -231,8 +231,8 @@ jobs:
           if [ -d "playwright-report" ]; then
             cp -r playwright-report artifacts/documentation-test-results/
           fi
-          if [ -d "test-results" ]; then
-            cp -r test-results artifacts/documentation-test-results/
+          if [ -d "playwright-output" ]; then
+            cp -r playwright-output artifacts/documentation-test-results/
           fi
 
       - name: Upload Documentation Test Results

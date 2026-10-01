@@ -33,7 +33,7 @@ rereading this guide.
 - For UI screenshots and videos, use one directory per test name beneath the
   proof-artifact root. Rerunning a test replaces that test directory.
 - Visual/browser behavior: screenshot by default for UI/browser assertions; video only when motion, timing, or a multi-step interaction cannot be proved by a still image.
-- Integration and non-UI behavior: committed Playwright HTML report and test-results.json for each run.
+- Integration and non-UI behavior: committed Playwright HTML report and test-results.json for each run. Playwright writes these outside the proof-artifact root (`playwright-report/` and the repository-root `test-results.json`, both git-ignored), so copy the ones cited as evidence beneath `test-results/` before committing. Its other run output (`playwright-output/`, also git-ignored) is cleared at the start of each run and is never proof of work.
 - External integration: real staging/production smoke or regression run against the Engagement's configured target (playwright.config.js's staging/production baseURL, once replaced from its placeholder).
 - Sensitive data: scrub any auth tokens, cookies, session data, or PII captured in traces before commit; do not assume the target site has none.
 - Any screenshot, video, test report, captured output, or other artifact cited as

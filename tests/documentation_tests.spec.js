@@ -5,7 +5,7 @@ import { logAndScreenshot } from '../utils.js';
 import { buildURL, testData, urlPatterns } from '../config-helper.js';
 import { testPatterns, testElementVisibility, findVisibleElement } from '../test-helpers.js';
 
-fs.mkdirSync('test-results', { recursive: true });
+fs.mkdirSync('playwright-output', { recursive: true });
 
 test.describe('Documentation Tests', () => {
   
@@ -31,7 +31,7 @@ test.describe('Documentation Tests', () => {
         const isVisible = await selector.first().isVisible().catch(() => false);
         if (isVisible) {
           await expect(selector.first()).toBeVisible({ timeout: testData.timeouts.medium });
-          fs.appendFileSync('test-results/test-logs.txt', `${testId} Table of contents found\n`);
+          fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Table of contents found\n`);
           tocFound = true;
           break;
         }
@@ -39,9 +39,9 @@ test.describe('Documentation Tests', () => {
     }
 
     if (tocFound) {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Documentation TOC verified\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Documentation TOC verified\n`);
     } else {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} No explicit TOC found - doc may use different navigation\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No explicit TOC found - doc may use different navigation\n`);
     }
 
     // Verify main content area exists
@@ -70,7 +70,7 @@ test.describe('Documentation Tests', () => {
         
         if (isVisible) {
           const href = await libraryLink.getAttribute('href');
-          fs.appendFileSync('test-results/test-logs.txt', `${testId} Found ${libName} library: ${href}\n`);
+          fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Found ${libName} library: ${href}\n`);
           
           // Verify it's a valid link
           expect(href).toBeTruthy();
@@ -82,7 +82,7 @@ test.describe('Documentation Tests', () => {
             await page.waitForLoadState('networkidle', { timeout: testData.timeouts.medium });
             
             const newUrl = page.url();
-            fs.appendFileSync('test-results/test-logs.txt', `${testId} Navigated to library doc: ${newUrl}\n`);
+            fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Navigated to library doc: ${newUrl}\n`);
             
             // Verify we're on a documentation page
             const hasDocContent = await page.locator('h1, h2, main, article').count();
@@ -96,7 +96,7 @@ test.describe('Documentation Tests', () => {
     }
 
     expect(foundLibraries).toBeGreaterThan(0);
-    fs.appendFileSync('test-results/test-logs.txt', `${testId} Found ${foundLibraries} library links\n`);
+    fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Found ${foundLibraries} library links\n`);
   });
 
   test('Code examples are properly formatted', { annotation: { type: 'test_case', description: 'TC_DOC_003' } }, async ({ page }, testInfo) => {
@@ -124,12 +124,12 @@ test.describe('Documentation Tests', () => {
           
           if (isVisible) {
             const codeText = await firstCode.textContent();
-            fs.appendFileSync('test-results/test-logs.txt', `${testId} Found code block with ${codeText?.length} characters\n`);
+            fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Found code block with ${codeText?.length} characters\n`);
             
             // Verify it contains code-like content
             const looksLikeCode = /[{};()#include]/.test(codeText || '');
             if (looksLikeCode) {
-              fs.appendFileSync('test-results/test-logs.txt', `${testId} Code block appears properly formatted\n`);
+              fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Code block appears properly formatted\n`);
               codeBlockFound = true;
             }
             break;
@@ -138,12 +138,12 @@ test.describe('Documentation Tests', () => {
       }
 
       if (codeBlockFound) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Code examples verified\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Code examples verified\n`);
       } else {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} No code examples found on this page\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No code examples found on this page\n`);
       }
     } catch (error) {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Test failed: ${error.message}\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Test failed: ${error.message}\n`);
       // Don't fail the test if page doesn't exist
       if (!error.message.includes('closed')) {
         throw error;
@@ -173,7 +173,7 @@ test.describe('Documentation Tests', () => {
         const isVisible = await selector.first().isVisible().catch(() => false);
         
         if (isVisible) {
-          fs.appendFileSync('test-results/test-logs.txt', `${testId} Breadcrumbs found\n`);
+          fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Breadcrumbs found\n`);
           breadcrumbsFound = true;
           
           // Try clicking a breadcrumb link
@@ -188,7 +188,7 @@ test.describe('Documentation Tests', () => {
               await page.waitForLoadState('networkidle', { timeout: testData.timeouts.medium });
               const urlAfter = page.url();
               
-              fs.appendFileSync('test-results/test-logs.txt', `${testId} Breadcrumb navigation: ${urlBefore} -> ${urlAfter}\n`);
+              fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Breadcrumb navigation: ${urlBefore} -> ${urlAfter}\n`);
               expect(urlAfter).not.toBe(urlBefore);
             }
           }
@@ -198,9 +198,9 @@ test.describe('Documentation Tests', () => {
     }
 
     if (breadcrumbsFound) {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Breadcrumbs navigation verified\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Breadcrumbs navigation verified\n`);
     } else {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} No breadcrumbs found - may not be used on this page\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No breadcrumbs found - may not be used on this page\n`);
     }
   });
 
@@ -240,7 +240,7 @@ test.describe('Documentation Tests', () => {
         const options = await versionSwitcher.locator('option').all();
         const optionCount = options.length;
         
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Found ${optionCount} version options\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Found ${optionCount} version options\n`);
         expect(optionCount).toBeGreaterThan(0);
         
         // Try switching version if multiple options exist
@@ -250,11 +250,11 @@ test.describe('Documentation Tests', () => {
           await page.waitForTimeout(2000);
           const urlAfter = page.url();
           
-          fs.appendFileSync('test-results/test-logs.txt', `${testId} Version switch: ${urlBefore} -> ${urlAfter}\n`);
+          fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Version switch: ${urlBefore} -> ${urlAfter}\n`);
         }
       }
     } else {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} No version switcher found - may be on latest version only\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No version switcher found - may be on latest version only\n`);
     }
   });
 
@@ -291,12 +291,12 @@ test.describe('Documentation Tests', () => {
       const resultsFound = await page.locator('text=/result|found|match/i').count() > 0;
       
       if (resultsFound) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Documentation search returned results\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Documentation search returned results\n`);
       } else {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Search executed but results format unclear\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Search executed but results format unclear\n`);
       }
     } else {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} No doc-specific search found - uses global search\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No doc-specific search found - uses global search\n`);
     }
   });
 
@@ -310,13 +310,13 @@ test.describe('Documentation Tests', () => {
 
       // Check if page is still open
       if (page.isClosed()) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Page closed, skipping test\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Page closed, skipping test\n`);
         return;
       }
 
       // Find anchor links (links starting with #)
       const anchorLinks = await page.locator('a[href^="#"]').all();
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Found ${anchorLinks.length} anchor links\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Found ${anchorLinks.length} anchor links\n`);
 
       if (anchorLinks.length > 0) {
         // Test first anchor link
@@ -329,24 +329,24 @@ test.describe('Documentation Tests', () => {
           
           // Click the anchor link
           await firstAnchor.click().catch(() => {
-            fs.appendFileSync('test-results/test-logs.txt', `${testId} Could not click anchor link\n`);
+            fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Could not click anchor link\n`);
           });
           
           await page.waitForTimeout(500);
           const yAfter = await page.evaluate(() => window.scrollY).catch(() => 0);
 
-          fs.appendFileSync('test-results/test-logs.txt', `${testId} Anchor click: scroll from ${yBefore} to ${yAfter}\n`);
+          fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Anchor click: scroll from ${yBefore} to ${yAfter}\n`);
           
           // Verify page scrolled (unless already at top)
           if (yBefore > 100 && yAfter !== yBefore) {
-            fs.appendFileSync('test-results/test-logs.txt', `${testId} Anchor link successfully scrolled page\n`);
+            fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Anchor link successfully scrolled page\n`);
           }
         }
       } else {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} No anchor links found on this page\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No anchor links found on this page\n`);
       }
     } catch (error) {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Test error: ${error.message}\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Test error: ${error.message}\n`);
       if (error.message.includes('closed')) {
         return;
       }
@@ -363,13 +363,13 @@ test.describe('Documentation Tests', () => {
 
       // Check if page is still open
       if (page.isClosed()) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Page closed, skipping test\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Page closed, skipping test\n`);
         return;
       }
 
       // Find external links in documentation
       const externalLinks = await page.locator('a[href^="http"]').all();
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Found ${externalLinks.length} external links\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Found ${externalLinks.length} external links\n`);
 
       let checkedLinks = 0;
       const maxToCheck = 3;
@@ -381,11 +381,11 @@ test.describe('Documentation Tests', () => {
         const target = await link.getAttribute('target');
 
         if (href && isVisible) {
-          fs.appendFileSync('test-results/test-logs.txt', `${testId} External link ${i}: ${href}, target=${target}\n`);
+          fs.appendFileSync('playwright-output/test-logs.txt', `${testId} External link ${i}: ${href}, target=${target}\n`);
           
           // Check if link opens in new tab
           if (target === '_blank') {
-            fs.appendFileSync('test-results/test-logs.txt', `${testId} Link correctly set to open in new tab\n`);
+            fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Link correctly set to open in new tab\n`);
           }
           
           checkedLinks++;
@@ -393,12 +393,12 @@ test.describe('Documentation Tests', () => {
       }
 
       if (checkedLinks > 0) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Checked ${checkedLinks} external links\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Checked ${checkedLinks} external links\n`);
       } else {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} No external links found in documentation\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No external links found in documentation\n`);
       }
     } catch (error) {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Test error: ${error.message}\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Test error: ${error.message}\n`);
       if (error.message.includes('closed')) {
         return;
       }
@@ -419,19 +419,19 @@ test.describe('Documentation Tests', () => {
       }).catch(() => null);
 
       if (!response) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Could not load page, skipping test\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Could not load page, skipping test\n`);
         return;
       }
 
       // Quick check if page is still open
       if (page.isClosed()) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Page closed, skipping test\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Page closed, skipping test\n`);
         return;
       }
 
       // Get title with timeout
       const pageTitle = await page.title().catch(() => '');
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Page title: "${pageTitle}"\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Page title: "${pageTitle}"\n`);
 
       // Get H1 with timeout
       const h1 = page.locator('h1').first();
@@ -439,9 +439,9 @@ test.describe('Documentation Tests', () => {
       
       if (h1Count > 0) {
         const h1Text = await h1.textContent().catch(() => '');
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} H1 text: "${h1Text}"\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} H1 text: "${h1Text}"\n`);
       } else {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} No H1 found on page\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No H1 found on page\n`);
       }
 
       // Verify title is descriptive (not generic)
@@ -451,16 +451,16 @@ test.describe('Documentation Tests', () => {
         const isDescriptive = expectedTitleKeywords.some(kw => pageTitle.includes(kw));
         
         if (isDescriptive) {
-          fs.appendFileSync('test-results/test-logs.txt', `${testId} Title is descriptive\n`);
+          fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Title is descriptive\n`);
         } else {
-          fs.appendFileSync('test-results/test-logs.txt', `${testId} Title may not be descriptive: "${pageTitle}"\n`);
+          fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Title may not be descriptive: "${pageTitle}"\n`);
         }
       } else {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Title is too short: "${pageTitle}"\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Title is too short: "${pageTitle}"\n`);
       }
 
     } catch (error) {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Test error: ${error.message}\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Test error: ${error.message}\n`);
       // Don't fail test - just log and continue
     }
   });
@@ -487,7 +487,7 @@ test.describe('Documentation Tests', () => {
         const isVisible = await selector.first().isVisible().catch(() => false);
         if (isVisible) {
           const text = await selector.first().textContent();
-          fs.appendFileSync('test-results/test-logs.txt', `${testId} Found PDF/Print option: ${text}\n`);
+          fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Found PDF/Print option: ${text}\n`);
           pdfPrintFound = true;
           break;
         }
@@ -495,9 +495,9 @@ test.describe('Documentation Tests', () => {
     }
 
     if (pdfPrintFound) {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} PDF/Print version available\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} PDF/Print version available\n`);
     } else {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} No PDF/Print options found - may not be offered\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No PDF/Print options found - may not be offered\n`);
     }
   });
 });

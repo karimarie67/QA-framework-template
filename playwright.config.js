@@ -1,6 +1,10 @@
-const { defineConfig } = require('@playwright/test');
+const { defineConfig, devices } = require('@playwright/test');
 
 module.exports = defineConfig({
+  // Playwright empties its output directory at the start of every run. Keep it
+  // away from `test-results/`, which holds committed proof of work
+  // (docs/agents/testing.md): with the default, a run deleted that evidence.
+  outputDir: 'playwright-output',
   reporter: [
     ['html'],
     ['json', { outputFile: 'test-results.json' }]
@@ -42,22 +46,26 @@ module.exports = defineConfig({
     {
       name: 'staging-mobile',
       use: {
+        // A phone emulation, not a narrow desktop window: many sites send phones
+        // a separate layout (for example a menu button instead of the header menu).
+        ...devices['Pixel 5'],
         // TODO(Engagement): replace with your actual staging URL
         baseURL: 'https://staging.example.com',
         browserName: 'chromium',
         headless: true,
-        viewport: { width: 800, height: 600 },
         trace: 'on-first-retry',
       },
     },
     {
       name: 'production-mobile',
       use: {
+        // A phone emulation, not a narrow desktop window: many sites send phones
+        // a separate layout (for example a menu button instead of the header menu).
+        ...devices['Pixel 5'],
         // TODO(Engagement): replace with your actual production URL
         baseURL: 'https://www.example.com',
         browserName: 'chromium',
         headless: true,
-        viewport: { width: 800, height: 600 },
         trace: 'on-first-retry',
       },
     },

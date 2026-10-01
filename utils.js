@@ -5,7 +5,7 @@ function sanitizeForPath(str) {
   return String(str).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
 }
 
-export async function logAndScreenshot(page, testInfo, message, path, logFile = 'test-results/test-logs.txt') {
+export async function logAndScreenshot(page, testInfo, message, path, logFile = 'playwright-output/test-logs.txt') {
   fs.mkdirSync(nodePath.dirname(logFile), { recursive: true });
   fs.appendFileSync(logFile, `TC_${testInfo.title}: ${message}\n`);
   if (!page.isClosed()) {
@@ -21,7 +21,7 @@ export async function logAndScreenshot(page, testInfo, message, path, logFile = 
   }
 }
 
-export async function logOnFailure(page, testInfo, message, screenshotPath, logFile = 'test-results/test-logs.txt') {
+export async function logOnFailure(page, testInfo, message, screenshotPath, logFile = 'playwright-output/test-logs.txt') {
   await logAndScreenshot(page, testInfo, message, screenshotPath, logFile);
   throw new Error(message);
 }
@@ -29,7 +29,7 @@ export async function logOnFailure(page, testInfo, message, screenshotPath, logF
 export async function safeGoto(page, testInfo, url, options = { waitUntil: 'networkidle' }) {
   const maxRetries = 3;
   let finalUrl = url;
-  const screenshotDir = `test-results/screenshots/${sanitizeForPath(testInfo.title)}`;
+  const screenshotDir = `playwright-output/screenshots/${sanitizeForPath(testInfo.title)}`;
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     if (page.isClosed()) {
       await logAndScreenshot(page, testInfo, `Page is closed before goto attempt ${attempt} for ${url}`, `${screenshotDir}/goto_attempt_${attempt}_closed.png`);

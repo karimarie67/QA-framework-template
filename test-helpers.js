@@ -3,7 +3,7 @@ import { expect } from '@playwright/test';
 import { logAndScreenshot, safeGoto } from './utils.js';
 import { testData } from './config-helper.js';
 
-fs.mkdirSync('test-results', { recursive: true });
+fs.mkdirSync('playwright-output', { recursive: true });
 
 /**
  * Find and return the first visible element from a locator
@@ -14,12 +14,12 @@ fs.mkdirSync('test-results', { recursive: true });
  */
 export async function findVisibleElement(locator, elementName, testId) {
   const count = await locator.count();
-  fs.appendFileSync('test-results/test-logs.txt', `${testId} ${elementName} locator matched ${count} elements\n`);
+  fs.appendFileSync('playwright-output/test-logs.txt', `${testId} ${elementName} locator matched ${count} elements\n`);
   
   for (let i = 0; i < count; i++) {
     const element = locator.nth(i);
     const isVisible = await element.isVisible().catch(() => false);
-    fs.appendFileSync('test-results/test-logs.txt', `${testId} ${elementName} ${i} visible: ${isVisible}\n`);
+    fs.appendFileSync('playwright-output/test-logs.txt', `${testId} ${elementName} ${i} visible: ${isVisible}\n`);
     if (isVisible) {
       return element;
     }
@@ -49,14 +49,14 @@ export async function testElementVisibility(page, testInfo, primaryLocator, fall
   for (let i = 0; i < fallbackLocators.length; i++) {
     const fallbackElement = await findVisibleElement(fallbackLocators[i], `${elementName} (fallback ${i})`, testId);
     if (fallbackElement) {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Using ${elementName} fallback ${i}\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Using ${elementName} fallback ${i}\n`);
       await expect(fallbackElement).toBeVisible({ timeout: testData.timeouts.medium });
       return fallbackElement;
     }
   }
 
   // Element not found
-  await logAndScreenshot(page, testInfo, `${elementName} not visible`, `test-results/screenshots/${testId.toLowerCase()}/${elementName.toLowerCase().replace(/\s+/g, '_')}_not_visible.png`);
+  await logAndScreenshot(page, testInfo, `${elementName} not visible`, `playwright-output/screenshots/${testId.toLowerCase()}/${elementName.toLowerCase().replace(/\s+/g, '_')}_not_visible.png`);
   throw new Error(`${elementName} not visible`);
 }
 
@@ -72,13 +72,13 @@ export async function handleMobileMenu(page, selectors, testId) {
   
   if (mobileToggleCount > 0) {
     const isToggleVisible = await mobileToggle.first().isVisible().catch(() => false);
-    fs.appendFileSync('test-results/test-logs.txt', `${testId} Mobile toggle visible: ${isToggleVisible}\n`);
+    fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Mobile toggle visible: ${isToggleVisible}\n`);
     
     if (isToggleVisible) {
       try {
         await mobileToggle.first().click();
         await page.waitForTimeout(500); // Allow menu animation
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Mobile menu opened\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Mobile menu opened\n`);
         
         // Verify mobile menu is visible
         const mobileMenu = selectors.mobileMenu(page);
@@ -87,7 +87,7 @@ export async function handleMobileMenu(page, selectors, testId) {
           await expect(mobileMenu).toBeVisible({ timeout: testData.timeouts.short });
         }
       } catch (error) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Mobile menu interaction failed: ${error.message}\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Mobile menu interaction failed: ${error.message}\n`);
       }
     }
   }
@@ -110,12 +110,12 @@ export async function performSearch(page, testInfo, selectors, searchTerm, testI
 
   // Click search trigger
   await searchTrigger.click();
-  fs.appendFileSync('test-results/test-logs.txt', `${testId} Search trigger clicked\n`);
+  fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Search trigger clicked\n`);
 
   // Wait for search input - handle multiple matches (strict mode violation fix)
   const searchInput = selectors.searchInput(page);
   const searchInputCount = await searchInput.count();
-  fs.appendFileSync('test-results/test-logs.txt', `${testId} Found ${searchInputCount} search input elements\n`);
+  fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Found ${searchInputCount} search input elements\n`);
   
   // Get the actual input element (not the Algolia link or other elements)
   let actualSearchInput = null;
@@ -128,7 +128,7 @@ export async function performSearch(page, testInfo, selectors, searchTerm, testI
     // Look for actual input elements, not links
     if (tagName === 'input' && (type === 'text' || type === 'search' || type === '' || role === 'combobox')) {
       actualSearchInput = element;
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Using search input element ${i} (${tagName}, type: ${type}, role: ${role})\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Using search input element ${i} (${tagName}, type: ${type}, role: ${role})\n`);
       break;
     }
   }
@@ -138,10 +138,10 @@ export async function performSearch(page, testInfo, selectors, searchTerm, testI
     actualSearchInput = page.locator('input[role="combobox"][placeholder*="Search"]').first();
     const fallbackExists = await actualSearchInput.count() > 0;
     if (fallbackExists) {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Using fallback search input selector\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Using fallback search input selector\n`);
     } else {
       actualSearchInput = searchInput.first(); // Last resort
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Using first search element as last resort\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Using first search element as last resort\n`);
     }
   }
   
@@ -150,7 +150,7 @@ export async function performSearch(page, testInfo, selectors, searchTerm, testI
   // Perform search
   await actualSearchInput.fill(searchTerm);
   await actualSearchInput.press('Enter');
-  fs.appendFileSync('test-results/test-logs.txt', `${testId} Search performed for: ${searchTerm}\n`);
+  fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Search performed for: ${searchTerm}\n`);
   
   // Allow time for search to process
   await page.waitForTimeout(2000);
@@ -176,7 +176,7 @@ export async function findSearchResults(page, searchTerm, testId) {
   for (const selector of resultSelectors) {
     const elements = page.locator(selector);
     const count = await elements.count();
-    fs.appendFileSync('test-results/test-logs.txt', `${testId} Found ${count} elements with selector: ${selector}\n`);
+    fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Found ${count} elements with selector: ${selector}\n`);
     if (count > 0) {
       return { element: elements.first(), count };
     }
@@ -185,7 +185,7 @@ export async function findSearchResults(page, searchTerm, testId) {
   // Try content-based search
   const contentResults = page.locator('h1, h2, h3, p, div, span, li').filter({ hasText: new RegExp(searchTerm, 'i') });
   const contentCount = await contentResults.count();
-  fs.appendFileSync('test-results/test-logs.txt', `${testId} Found ${contentCount} content elements containing "${searchTerm}"\n`);
+  fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Found ${contentCount} content elements containing "${searchTerm}"\n`);
   
   if (contentCount > 0) {
     return { element: contentResults.first(), count: contentCount };
@@ -194,7 +194,7 @@ export async function findSearchResults(page, searchTerm, testId) {
   // Broad text search as last resort
   const broadResults = page.getByText(new RegExp(searchTerm, 'i'));
   const broadCount = await broadResults.count();
-  fs.appendFileSync('test-results/test-logs.txt', `${testId} Broad text search found ${broadCount} matches\n`);
+  fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Broad text search found ${broadCount} matches\n`);
   
   return { element: broadCount > 0 ? broadResults.first() : null, count: broadCount };
 }
@@ -214,7 +214,7 @@ export async function testNavigationLink(page, testInfo, link, index, testId, ho
   
   // Skip invalid links
   if (!href || href === '#' || href.match(/^https?:\/\//)) {
-    fs.appendFileSync('test-results/test-logs.txt', `${testId} Skipping invalid nav link ${index}: text="${text}", href="${href}"\n`);
+    fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Skipping invalid nav link ${index}: text="${text}", href="${href}"\n`);
     return;
   }
 
@@ -226,14 +226,14 @@ export async function testNavigationLink(page, testInfo, link, index, testId, ho
     const escapedHref = href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     await expect(page).toHaveURL(new RegExp(escapedHref), { timeout: testData.timeouts.short });
     
-    fs.appendFileSync('test-results/test-logs.txt', `${testId} Nav link ${index} successful: "${text}" -> ${href}\n`);
+    fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Nav link ${index} successful: "${text}" -> ${href}\n`);
     
     // Return to homepage for next test
     await safeGoto(page, testInfo, homeUrl, { waitUntil: 'domcontentloaded' });
     
   } catch (error) {
-    fs.appendFileSync('test-results/test-logs.txt', `${testId} Nav link ${index} failed: text="${text}", href="${href}", error="${error.message}"\n`);
-    await logAndScreenshot(page, testInfo, `Navigation failed for link ${index}`, `test-results/screenshots/${testId.toLowerCase()}/link_${index}_failed.png`);
+    fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Nav link ${index} failed: text="${text}", href="${href}", error="${error.message}"\n`);
+    await logAndScreenshot(page, testInfo, `Navigation failed for link ${index}`, `playwright-output/screenshots/${testId.toLowerCase()}/link_${index}_failed.png`);
   }
 }
 
@@ -253,7 +253,7 @@ export async function validateElementDetails(element, elementName, testId) {
     isVisible: await element.isVisible().catch(() => false),
   };
   
-  fs.appendFileSync('test-results/test-logs.txt', `${testId} ${elementName} details: ${JSON.stringify(details)}\n`);
+  fs.appendFileSync('playwright-output/test-logs.txt', `${testId} ${elementName} details: ${JSON.stringify(details)}\n`);
   return details;
 }
 
@@ -269,12 +269,12 @@ export const testPatterns = {
     const { success, finalUrl } = await safeGoto(page, testInfo, url, { waitUntil: 'domcontentloaded' });
     
     if (!success) {
-      await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);
+      await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `playwright-output/screenshots/${testId.toLowerCase()}/load_failed.png`);
       throw new Error(`Page load failed: ${finalUrl}`);
     }
 
     const loadTime = Date.now() - startTime;
-    await logAndScreenshot(page, testInfo, `Page loaded in ${loadTime}ms, URL: ${page.url()}`, `test-results/screenshots/${testId.toLowerCase()}/loaded.png`);
+    await logAndScreenshot(page, testInfo, `Page loaded in ${loadTime}ms, URL: ${page.url()}`, `playwright-output/screenshots/${testId.toLowerCase()}/loaded.png`);
     
     return { loadTime, finalUrl };
   },
@@ -284,6 +284,6 @@ export const testPatterns = {
    */
   async setViewport(page, viewport, testId) {
     await page.setViewportSize(viewport);
-    fs.appendFileSync('test-results/test-logs.txt', `${testId} Viewport set to ${viewport.width}x${viewport.height}\n`);
+    fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Viewport set to ${viewport.width}x${viewport.height}\n`);
   }
 };

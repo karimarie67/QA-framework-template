@@ -5,7 +5,7 @@ import { logAndScreenshot } from '../utils.js';
 import { buildURL, testData, urlPatterns } from '../config-helper.js';
 import { testPatterns, findVisibleElement, performSearch, findSearchResults } from '../test-helpers.js';
 
-fs.mkdirSync('test-results', { recursive: true });
+fs.mkdirSync('playwright-output', { recursive: true });
 
 test.describe('Download Tests', () => {
 
@@ -34,7 +34,7 @@ test.describe('Download Tests', () => {
       }
     }
 
-    fs.appendFileSync('test-results/test-logs.txt', `${testId} Found ${downloadLinks.length} download links\n`);
+    fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Found ${downloadLinks.length} download links\n`);
     expect(downloadLinks.length).toBeGreaterThan(0);
 
     // Check status codes for first 5 download links
@@ -46,13 +46,13 @@ test.describe('Download Tests', () => {
         const response = await page.request.head(href, { timeout: 15000 });
         const status = response.status();
 
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Download link: ${href} - Status: ${status}\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Download link: ${href} - Status: ${status}\n`);
 
         // Should return 200 OK or 302 redirect
         expect(status).toBeGreaterThanOrEqual(200);
         expect(status).toBeLessThan(400);
       } catch (error) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Failed to check ${href}: ${error.message}\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Failed to check ${href}: ${error.message}\n`);
       }
     }
   });
@@ -66,7 +66,7 @@ test.describe('Download Tests', () => {
 
     // Find download links
     const downloadLinks = await page.locator('a[href*=".tar.gz"], a[href*=".zip"]').all();
-    fs.appendFileSync('test-results/test-logs.txt', `${testId} Found ${downloadLinks.length} download links\n`);
+    fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Found ${downloadLinks.length} download links\n`);
 
     for (const link of downloadLinks.slice(0, 5)) {
       const href = await link.getAttribute('href');
@@ -77,7 +77,7 @@ test.describe('Download Tests', () => {
       const hasValidFormat = /example[-_]?\S*\.(tar\.gz|zip|7z)/.test(href) ||
                             /\d+\.\d+\.\d+/.test(href);
 
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Link: ${text?.trim()} -> ${href}, Valid format: ${hasValidFormat}\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Link: ${text?.trim()} -> ${href}, Valid format: ${hasValidFormat}\n`);
 
       if (href && testData.downloadFiles.supported.test(href)) {
         expect(hasValidFormat).toBeTruthy();
@@ -118,10 +118,10 @@ test.describe('Download Tests', () => {
       const options = await versionDropdown.locator('option').all();
       const optionTexts = await Promise.all(options.map(opt => opt.textContent()));
 
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Available versions: ${optionTexts.join(', ')}\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Available versions: ${optionTexts.join(', ')}\n`);
       expect(options.length).toBeGreaterThan(0);
     } else {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} No version selector found - versions may be displayed differently\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No version selector found - versions may be displayed differently\n`);
 
       // Look for version numbers in text
       // TODO(Engagement): replace with your site's actual version-number format
@@ -152,7 +152,7 @@ test.describe('Download Tests', () => {
         const isVisible = await firstSize.isVisible().catch(() => false);
         if (isVisible) {
           const text = await firstSize.textContent();
-          fs.appendFileSync('test-results/test-logs.txt', `${testId} Found file size: ${text}\n`);
+          fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Found file size: ${text}\n`);
           fileSizeFound = true;
           break;
         }
@@ -160,9 +160,9 @@ test.describe('Download Tests', () => {
     }
 
     if (fileSizeFound) {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} File sizes displayed on download page\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} File sizes displayed on download page\n`);
     } else {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} No file sizes found - may not be displayed on this page\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No file sizes found - may not be displayed on this page\n`);
     }
   });
 });
@@ -186,14 +186,14 @@ test.describe('Search Tests', () => {
 
       if (searchResults && resultCount > 0) {
         await expect(searchResults).toBeVisible({ timeout: testData.timeouts.medium });
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Search for "${query}" returned ${resultCount} results\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Search for "${query}" returned ${resultCount} results\n`);
 
         // Verify result contains the search term
         const resultText = await searchResults.textContent();
         const isRelevant = resultText?.toLowerCase().includes(query.toLowerCase());
         expect(isRelevant).toBeTruthy();
       } else {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} No results found for "${query}"\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No results found for "${query}"\n`);
       }
 
       // Go back to homepage for next search
@@ -221,18 +221,18 @@ test.describe('Search Tests', () => {
         const hasError = await page.locator('text=/error|500|crash/i').count();
         expect(hasError).toBe(0);
 
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Search with "${query}" handled gracefully\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Search with "${query}" handled gracefully\n`);
 
         // Navigate back for next test
         await page.goto(homepageUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
         await page.waitForTimeout(1000);
       } catch (error) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Search with "${query}" noted: ${error.message}\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Search with "${query}" noted: ${error.message}\n`);
         // Try to recover by going back to homepage
         try {
           await page.goto(homepageUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
         } catch (e) {
-          fs.appendFileSync('test-results/test-logs.txt', `${testId} Could not recover, skipping remaining searches\n`);
+          fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Could not recover, skipping remaining searches\n`);
           break;
         }
       }
@@ -252,13 +252,13 @@ test.describe('Search Tests', () => {
       const searchCount = await searchInput.count();
 
       if (searchCount === 0) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} No search input found, skipping test\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No search input found, skipping test\n`);
         return;
       }
 
       const visibleSearch = await findVisibleElement(searchInput, 'Search input', testId);
       if (!visibleSearch) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Search input not visible, skipping test\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Search input not visible, skipping test\n`);
         return;
       }
 
@@ -278,7 +278,7 @@ test.describe('Search Tests', () => {
       for (const message of messages) {
         const isVisible = await message.isVisible().catch(() => false);
         if (isVisible) {
-          fs.appendFileSync('test-results/test-logs.txt', `${testId} Empty search message displayed\n`);
+          fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Empty search message displayed\n`);
           messageFound = true;
           break;
         }
@@ -286,10 +286,10 @@ test.describe('Search Tests', () => {
 
       // Either shows message or prevents empty search
       if (!messageFound) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Empty search prevented or handled silently\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Empty search prevented or handled silently\n`);
       }
     } catch (error) {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Test skipped: ${error.message}\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Test skipped: ${error.message}\n`);
     }
   });
 
@@ -318,7 +318,7 @@ test.describe('Search Tests', () => {
       if (count > 0) {
         const isVisible = await selector.first().isVisible().catch(() => false);
         if (isVisible) {
-          fs.appendFileSync('test-results/test-logs.txt', `${testId} Pagination controls found\n`);
+          fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Pagination controls found\n`);
           paginationFound = true;
 
           // Try clicking next page if available
@@ -332,7 +332,7 @@ test.describe('Search Tests', () => {
             const urlAfter = page.url();
 
             const urlChanged = urlBefore !== urlAfter;
-            fs.appendFileSync('test-results/test-logs.txt', `${testId} Pagination click: URL changed = ${urlChanged}\n`);
+            fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Pagination click: URL changed = ${urlChanged}\n`);
           }
 
           break;
@@ -341,7 +341,7 @@ test.describe('Search Tests', () => {
     }
 
     if (!paginationFound) {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} No pagination found - results may fit on one page\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No pagination found - results may fit on one page\n`);
     }
   });
 
@@ -358,7 +358,7 @@ test.describe('Search Tests', () => {
       const visibleSearch = await findVisibleElement(searchInput, 'Search input', testId);
 
       if (!visibleSearch) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} No search input found, skipping test\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No search input found, skipping test\n`);
         return;
       }
 
@@ -381,7 +381,7 @@ test.describe('Search Tests', () => {
         if (count > 0) {
           const isVisible = await selector.first().isVisible().catch(() => false);
           if (isVisible) {
-            fs.appendFileSync('test-results/test-logs.txt', `${testId} Search suggestions displayed\n`);
+            fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Search suggestions displayed\n`);
             suggestionsFound = true;
             break;
           }
@@ -389,12 +389,12 @@ test.describe('Search Tests', () => {
       }
 
       if (suggestionsFound) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Search autocomplete working\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Search autocomplete working\n`);
       } else {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} No autocomplete found - may not be implemented\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No autocomplete found - may not be implemented\n`);
       }
     } catch (error) {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Test skipped: ${error.message}\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Test skipped: ${error.message}\n`);
     }
   });
 });

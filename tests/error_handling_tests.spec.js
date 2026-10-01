@@ -5,7 +5,7 @@ import { logAndScreenshot, safeGoto } from '../utils.js';
 import { buildURL, testData, urlPatterns } from '../config-helper.js';
 import { testPatterns, testElementVisibility, findVisibleElement } from '../test-helpers.js';
 
-fs.mkdirSync('test-results', { recursive: true });
+fs.mkdirSync('playwright-output', { recursive: true });
 
 test.describe('Error Handling Tests', () => {
 
@@ -19,7 +19,7 @@ test.describe('Error Handling Tests', () => {
     try {
       await safeGoto(page, testInfo, invalidUrl, { waitUntil: 'networkidle' });
     } catch (error) {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Expected error when navigating to 404 page\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Expected error when navigating to 404 page\n`);
     }
 
     // Check for 404 indicators
@@ -36,21 +36,21 @@ test.describe('Error Handling Tests', () => {
       if (count > 0 && await indicator.isVisible().catch(() => false)) {
         await expect(indicator).toBeVisible({ timeout: testData.timeouts.short });
         errorFound = true;
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} 404 error message displayed correctly\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} 404 error message displayed correctly\n`);
         break;
       }
     }
 
     if (!errorFound) {
-      await logAndScreenshot(page, testInfo, '404 error message not found', 'test-results/screenshots/tc_error_001/no_404.png');
+      await logAndScreenshot(page, testInfo, '404 error message not found', 'playwright-output/screenshots/tc_error_001/no_404.png');
       // Check the page title or URL as fallback
       const title = await page.title();
       const url = page.url();
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Page title: "${title}", URL: "${url}"\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Page title: "${title}", URL: "${url}"\n`);
       
       // If we're on an error page, that's still acceptable
       if (title.toLowerCase().includes('404') || title.toLowerCase().includes('not found')) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} 404 indicated in page title\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} 404 indicated in page title\n`);
         errorFound = true;
       }
     }
@@ -72,7 +72,7 @@ test.describe('Error Handling Tests', () => {
 
     if (response) {
       const status = response.status();
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Response status: ${status}\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Response status: ${status}\n`);
       
       // Accept 404 or any 4xx error as appropriate
       expect(status).toBeGreaterThanOrEqual(400);
@@ -82,7 +82,7 @@ test.describe('Error Handling Tests', () => {
     // Verify error message is displayed
     const errorMessage = page.locator('text=/error|not found|invalid|doesn\'t exist/i').first();
     await expect(errorMessage).toBeVisible({ timeout: testData.timeouts.medium });
-    fs.appendFileSync('test-results/test-logs.txt', `${testId} Error message displayed for broken doc link\n`);
+    fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Error message displayed for broken doc link\n`);
   });
 
   test('Invalid search query handles gracefully', { annotation: { type: 'test_case', description: 'TC_ERROR_003' } }, async ({ page }, testInfo) => {
@@ -98,7 +98,7 @@ test.describe('Error Handling Tests', () => {
       const visibleSearch = await findVisibleElement(searchInput, 'Search input', testId);
       
       if (!visibleSearch) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} No search input found, skipping test\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No search input found, skipping test\n`);
         return;
       }
 
@@ -116,7 +116,7 @@ test.describe('Error Handling Tests', () => {
         const hasError = await page.locator('text=/error|500|internal server|crash/i').count();
         expect(hasError).toBe(0);
         
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Search with "${term}" handled gracefully\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Search with "${term}" handled gracefully\n`);
       }
 
       // Verify we get "no results" or similar message, not an error
@@ -124,12 +124,12 @@ test.describe('Error Handling Tests', () => {
       const isVisible = await noResultsMessage.isVisible().catch(() => false);
       
       if (isVisible) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Appropriate "no results" message shown\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Appropriate "no results" message shown\n`);
       } else {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} No explicit message but search handled without errors\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No explicit message but search handled without errors\n`);
       }
     } catch (error) {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Test completed with note: ${error.message}\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Test completed with note: ${error.message}\n`);
     }
   });
 
@@ -146,7 +146,7 @@ test.describe('Error Handling Tests', () => {
 
     for (const malformedPath of malformedUrls) {
       const malformedUrl = buildURL(testInfo, malformedPath);
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Testing malformed URL: ${malformedUrl}\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Testing malformed URL: ${malformedUrl}\n`);
       
       try {
         const response = await page.goto(malformedUrl, { 
@@ -158,21 +158,21 @@ test.describe('Error Handling Tests', () => {
           const status = response.status();
           const finalUrl = page.url();
           
-          fs.appendFileSync('test-results/test-logs.txt', `${testId} Status: ${status}, Final URL: ${finalUrl}\n`);
+          fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Status: ${status}, Final URL: ${finalUrl}\n`);
           
           // Either redirects to valid page or shows error
           if (status >= 200 && status < 300) {
             // Redirected to valid page
-            fs.appendFileSync('test-results/test-logs.txt', `${testId} Redirected to valid page\n`);
+            fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Redirected to valid page\n`);
           } else if (status >= 400 && status < 500) {
             // Appropriate error shown
-            fs.appendFileSync('test-results/test-logs.txt', `${testId} Appropriate error status\n`);
+            fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Appropriate error status\n`);
             const errorMessage = await page.locator('text=/error|not found|invalid/i').count();
             expect(errorMessage).toBeGreaterThan(0);
           }
         }
       } catch (error) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} Malformed URL handled: ${error.message}\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Malformed URL handled: ${error.message}\n`);
       }
     }
   });
@@ -186,7 +186,7 @@ test.describe('Error Handling Tests', () => {
 
     // Get all external links
     const externalLinks = await page.locator('a[href^="http"]').all();
-    fs.appendFileSync('test-results/test-logs.txt', `${testId} Found ${externalLinks.length} external links\n`);
+    fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Found ${externalLinks.length} external links\n`);
 
     let checkedLinks = 0;
     const maxLinksToCheck = 5; // Limit to avoid long test times
@@ -203,19 +203,19 @@ test.describe('Error Handling Tests', () => {
           
           if (response) {
             const status = response.status();
-            fs.appendFileSync('test-results/test-logs.txt', `${testId} Link ${i}: ${href} - Status: ${status}\n`);
+            fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Link ${i}: ${href} - Status: ${status}\n`);
             
             // Links should return 200-399 status codes
             expect(status).toBeLessThan(400);
             checkedLinks++;
           }
         } catch (error) {
-          fs.appendFileSync('test-results/test-logs.txt', `${testId} Link check failed for: ${href} - ${error.message}\n`);
+          fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Link check failed for: ${href} - ${error.message}\n`);
         }
       }
     }
 
-    fs.appendFileSync('test-results/test-logs.txt', `${testId} Checked ${checkedLinks} external links\n`);
+    fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Checked ${checkedLinks} external links\n`);
     expect(checkedLinks).toBeGreaterThan(0);
   });
 
@@ -228,10 +228,10 @@ test.describe('Error Handling Tests', () => {
 
     // Look for any forms on the page
     const forms = await page.locator('form').all();
-    fs.appendFileSync('test-results/test-logs.txt', `${testId} Found ${forms.length} forms on page\n`);
+    fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Found ${forms.length} forms on page\n`);
 
     if (forms.length === 0) {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} No forms found on homepage, skipping test\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No forms found on homepage, skipping test\n`);
       return;
     }
 
@@ -256,17 +256,17 @@ test.describe('Error Handling Tests', () => {
       for (const message of validationMessages) {
         const count = await message.count();
         if (count > 0 && await message.isVisible().catch(() => false)) {
-          fs.appendFileSync('test-results/test-logs.txt', `${testId} Form validation message displayed\n`);
+          fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Form validation message displayed\n`);
           validationFound = true;
           break;
         }
       }
 
       if (!validationFound) {
-        fs.appendFileSync('test-results/test-logs.txt', `${testId} No validation message found, but form may use HTML5 validation\n`);
+        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} No validation message found, but form may use HTML5 validation\n`);
       }
     } else {
-      fs.appendFileSync('test-results/test-logs.txt', `${testId} Form found but no submit button\n`);
+      fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Form found but no submit button\n`);
     }
   });
 });
