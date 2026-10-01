@@ -134,8 +134,13 @@ inputs, and a place in `scripts/template-check.js`'s spec list. It touches
 
 - **During kickoff** (`/new-engagement` steps 3 and 5), the step's own PR is
   where the human reviews it.
-- **After kickoff**, it needs `/atlas-red-team` review first, as its own
-  change. Never fold it into a batch PR.
+- **After kickoff**, it's its own change, and it's red-teamed *before* it's
+  built. `/atlas-red-team` reviews planning documents, not a finished PR, so
+  first write the plan: a short spec or ticket that says what the new spec
+  covers, which CI, dashboard, and `template-check` edits it needs, and what
+  could go wrong. Give the path of that file to `/atlas-red-team` (for example
+  `/atlas-red-team docs/plans/new-spec.md`), and build only after it passes.
+  Never fold the change into a batch PR.
 
 ## Proof of work
 
