@@ -36,7 +36,7 @@ repository keeps its own base SHA, branch, verification result, and pull request
 - `docs/` — Atlas agent docs and remaining process documentation
 - `dashboards/` — QA metrics dashboard generator and published dashboard, auto-committed by CI after each run
 - `scripts/` — Support scripts, including the `template-check` structural smoke check
-- `test-results/` — Evidence root: Playwright HTML/JSON reports and captured output
+- `test-results/` — Evidence root: committed proof of work, the evidence kept for each test. Playwright's own run output goes to the git-ignored `playwright-output/` instead
 - `examples/` — trimmed, non-live Examples of the Framework from closed Engagements, kept for reference; not discoverable by the tracked `playwright.config.js`
 
 ### Repository-specific rules
