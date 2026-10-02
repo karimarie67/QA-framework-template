@@ -9,6 +9,8 @@
  * 2. Confirms the tracked playwright.config.js can discover every spec in
  *    its testDir (via `playwright test --list --reporter=json`), and that
  *    the five expected top-level specs are all present.
+ * 3. Confirms every `tests/….spec.js` that package.json's scripts or
+ *    .github/workflows/qa-test.yml name exists (scripts/spec-references.js).
  *
  * This is not a syntax linter. `node --check` was considered and rejected:
  * on a `.js` file containing an `import` statement, Node's module-syntax
@@ -21,6 +23,7 @@
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { findMissingSpecReferences } from './spec-references.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -144,10 +147,23 @@ function checkExpectedSpecsPresent(discoveredFileNames) {
   );
 }
 
+function checkSpecReferences() {
+  const missing = findMissingSpecReferences(repoRoot);
+  if (missing.length > 0) {
+    console.error('FAIL: these files name spec files that do not exist (remove or update them):');
+    for (const { file, spec } of missing) {
+      console.error(`  - ${file}: ${spec}`);
+    }
+    process.exit(1);
+  }
+  console.log('OK: every spec named in package.json and qa-test.yml exists.');
+}
+
 async function main() {
   await checkModuleImports();
   const discovered = listDiscoveredSpecs();
   checkExpectedSpecsPresent(discovered);
+  checkSpecReferences();
   console.log('template-check: PASS');
   process.exit(0);
 }

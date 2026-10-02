@@ -151,7 +151,12 @@ function parsePlaywrightJson(filepath) {
                 tests.push({
                   name: spec.title || test.title || 'Unknown Test',
                   status: testStatus(test),
-                  durationSec: test.results.reduce((acc, r) => acc + (r.duration || 0), 0) / 1000,
+                  // The last attempt's time: the one that decided the
+                  // verdict. Adding retries together made a test retried
+                  // once look as if it hit its timeout.
+                  durationSec: (test.results[test.results.length - 1].duration || 0) / 1000,
+                  attempts: test.results.length,
+                  allAttemptsSec: test.results.reduce((acc, r) => acc + (r.duration || 0), 0) / 1000,
                   projectName: test.projectName || 'Default',
                   error: failedAttempt ? failedAttempt.errors[0].message : null
                 });
@@ -182,7 +187,8 @@ function calculateMetrics(results) {
   const skipped = allTests.filter(t => t.status === 'skipped').length;
   const failedTests = allTests.filter(t => t.status === 'failed');
   const ran = allTests.length - skipped;
-  const totalDuration = allTests.reduce((acc, t) => acc + (t.durationSec || 0), 0);
+  // The run's time includes every attempt, retries too.
+  const totalDuration = allTests.reduce((acc, t) => acc + (t.allAttemptsSec ?? t.durationSec ?? 0), 0);
 
   return {
     totalTests: allTests.length,
@@ -308,7 +314,7 @@ ${generateBrowserBreakdown(metrics.allTestObjects)}
 ### 🔥 Smoke Tests
 ${generateTestTable(results.smoke)}
 
-### 🧩 Functional Tests (Errors, Docs, Search)
+### 🧩 Functional Tests
 ${generateTestTable(results.functional)}
 
 ---
@@ -365,7 +371,7 @@ function generateTestTable(tests) {
   let table = '| Test Name | Status | Duration | Project |\n|-----------|--------|----------|---------|\n';
   tests.forEach(test => {
     const statusIcon = icons[test.status] || '❌';
-    const dur = test.durationSec < 1 ? '<1s' : `${test.durationSec.toFixed(1)}s`;
+    const dur = (test.durationSec < 1 ? '<1s' : `${test.durationSec.toFixed(1)}s`) + (test.attempts > 1 ? ` ×${test.attempts}` : '');
     table += `| ${test.name} | ${statusIcon} ${test.status} | ${dur} | ${test.projectName} |\n`;
   });
   return table;
