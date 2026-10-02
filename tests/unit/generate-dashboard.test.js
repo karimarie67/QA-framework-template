@@ -51,9 +51,17 @@ test('parsePlaywrightJson and calculateMetrics', async t => {
     ]);
   });
 
-  await t.test('duration covers every attempt, and the error comes from a failed one', () => {
-    assert.equal(tests[3].durationSec, 6);
+  await t.test("a test's duration is its last attempt's, with its attempts counted; the error comes from a failed one", () => {
+    assert.equal(tests[3].durationSec, 3);
+    assert.equal(tests[3].attempts, 2);
+    assert.equal(tests[3].allAttemptsSec, 6);
+    assert.equal(tests[0].attempts, 1);
     assert.equal(tests[2].error, 'boom');
+  });
+
+  await t.test("the run's total duration counts every attempt", () => {
+    const m = calculateMetrics({ smoke: tests.slice(0, 2), functional: tests.slice(2) });
+    assert.equal(m.totalDuration, 2 + 0 + 2 + 6);
   });
 
   await t.test('skipped tests are left out of the pass rate; flaky counts as a pass', () => {

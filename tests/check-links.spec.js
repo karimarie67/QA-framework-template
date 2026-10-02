@@ -1,7 +1,8 @@
 // check-links.spec.js
-const { test, expect } = require('@playwright/test');
-const fs = require('fs');
-const path = require('path');
+import { test, expect } from '@playwright/test';
+import fs from 'fs';
+import path from 'path';
+import { classifyLinkResult } from '../utils.js';
 
 // Production domains
 // TODO(Engagement): replace with your site's real production domain(s)
@@ -23,6 +24,7 @@ const CONTENT_IDENTIFIERS_TO_SPOT_CHECK = [
 // State tracking
 const visited = new Set();
 const broken = [];
+const blocked = [];
 const redirects = [];
 const malformedPaths = [];
 let skipped = 0;
@@ -115,26 +117,29 @@ async function checkPage(page, url, sourceUrl = 'direct', depth = 0) {
   }
 
   try {
-    // Be respectful to production
-    await page.waitForTimeout(300);
+    const { status, error, verdict } = await visit(page, normalizedUrl);
 
-    const response = await page.goto(normalizedUrl, { 
-      waitUntil: 'domcontentloaded',
-      timeout: 45000 
-    });
-    
-    const status = response?.status || 0;
-
-    if (status >= 400) {
+    if (verdict === 'download') {
+      // A link to a file: it works, and there's nothing to crawl.
+      return;
+    }
+    if (verdict === 'blocked') {
+      // Rate limited or refused by a bot check: not broken, but look at it.
+      blocked.push({ source: normalizeUrl(sourceUrl), url: normalizedUrl, status });
+      console.log(`⊘ [${status}] ${normalizedUrl}`);
+      return;
+    }
+    if (verdict === 'broken') {
+      // A page that fails to load is as broken as a 404.
       broken.push({
         source: normalizeUrl(sourceUrl),
         url: normalizedUrl,
-        status,
+        status: error ? `error: ${error.split('\n')[0]}` : status,
         type: isDoc ? 'doc' : 'site'
       });
-      console.log(`✗ [${status}] ${normalizedUrl}`);
+      console.log(`✗ [${error ? 'error' : status}] ${normalizedUrl}`);
       return;
-    } else if (status >= 300 && status < 400) {
+    } else if (verdict === 'redirect') {
       redirects.push({
         source: normalizeUrl(sourceUrl),
         url: normalizedUrl,
@@ -153,7 +158,7 @@ async function checkPage(page, url, sourceUrl = 'direct', depth = 0) {
     }
 
     // Extract links
-    const links = await page.$$eval('a[href]', anchors => 
+    const links = await page.$$eval('a[href]', anchors =>
       anchors.map(a => a.href)
     );
 
@@ -174,20 +179,44 @@ async function checkPage(page, url, sourceUrl = 'direct', depth = 0) {
     }
 
   } catch (error) {
+    // An error while reading the page's links, after it loaded.
     console.log(`✗ Error on ${normalizedUrl}: ${error.message}`);
     broken.push({
       source: normalizeUrl(sourceUrl),
       url: normalizedUrl,
-      status: 'error',
-      type: error.message
+      status: `error: ${error.message.split('\n')[0]}`,
+      type: isDoc ? 'doc' : 'site'
     });
   }
+}
+
+// Load one page and classify the result (utils.js classifyLinkResult). A
+// timeout or network error gets one more try: one stalled request isn't a
+// broken link, but a 404 or 410 is.
+async function visit(page, url) {
+  let result = {};
+  for (const retried of [false, true]) {
+    // Be respectful to production
+    await page.waitForTimeout(300);
+    try {
+      const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+      // `status` is a method: read without the call, it's a function, and no
+      // link would ever count as broken.
+      result = { status: response ? response.status() : 0 };
+    } catch (error) {
+      result = { error: error.message };
+    }
+    const verdict = classifyLinkResult(result, { retried });
+    if (verdict !== 'retry') return { ...result, verdict };
+    console.log(`… retrying ${url} after: ${result.error.split('\n')[0]}`);
+  }
+  return { ...result, verdict: 'broken' };
 }
 
 function saveReport() {
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
   const reportDir = path.join(process.cwd(), 'playwright-output', 'link-check');
-  
+
   if (!fs.existsSync(reportDir)) {
     fs.mkdirSync(reportDir, { recursive: true });
   }
@@ -201,6 +230,16 @@ function saveReport() {
     ].join('\n');
     fs.writeFileSync(brokenFile, brokenCsv);
     console.log(`\n❌ Broken links saved to: ${brokenFile}`);
+  }
+
+  // Save blocked links (rate limits, bot checks)
+  if (blocked.length > 0) {
+    const blockedFile = path.join(reportDir, `blocked-links-${timestamp}.csv`);
+    fs.writeFileSync(blockedFile, [
+      'source,url,status',
+      ...blocked.map(b => `"${b.source}","${b.url}",${b.status}`)
+    ].join('\n'));
+    console.log(`⊘ Blocked links saved to: ${blockedFile}`);
   }
 
   // Save malformed paths
@@ -230,6 +269,7 @@ function printSummary() {
   console.log(`  - Site pages: ${siteBroken.length}`);
   console.log(`  - Doc pages (libraries): ${docBroken.length}`);
   console.log(`↪ Redirects: ${redirects.length}`);
+  console.log(`⊘ Blocked (rate limited or bot-checked, not counted as broken): ${blocked.length}`);
 
   if (malformedPaths.length > 0) {
     console.log('\n⚠ MALFORMED PATHS (needs a source-code fix):');
@@ -278,13 +318,16 @@ test.describe('Production Link Check', () => {
     // Clear state before each test run
     visited.clear();
     broken.length = 0;
+    blocked.length = 0;
     redirects.length = 0;
     malformedPaths.length = 0;
     skipped = 0;
     docPagesChecked = 0;
   });
 
-  test('should check all main site pages and spot-check documentation', async ({ page }) => {
+  test('TC_LINKS_001 No link between the site\'s pages is broken', {
+    annotation: [{ type: 'test_case', description: 'TC_LINKS_001' }],
+  }, async ({ page }) => {
     console.log('='.repeat(80));
     console.log('🚀 PRODUCTION LINK CHECKER');
     console.log('='.repeat(80));
@@ -334,16 +377,13 @@ test.describe('Production Link Check', () => {
 
     console.log(`\nCompleted at ${new Date().toLocaleString()}`);
 
-    // Fail test if there are broken site links (not doc links)
+    // Fail on any broken link between the site's own pages (doc links are a
+    // spot check, and reported only).
     const siteBroken = broken.filter(b => b.type === 'site');
-    
-    // Always pass the test but report findings
     if (siteBroken.length > 0) {
-      console.log(`\n⚠️  WARNING: Found ${siteBroken.length} broken site links, but test will pass for reporting purposes.`);
+      console.log(`\n⚠️  Found ${siteBroken.length} broken site links.`);
       console.log(`Check the CSV reports in playwright-output/link-check/ for details.`);
     }
-    
-    // Optional: Uncomment the line below if you want the test to actually fail on broken links
-    // expect(siteBroken.length, `Found ${siteBroken.length} broken site links`).toBe(0);
+    expect(siteBroken, `Found ${siteBroken.length} broken site links`).toEqual([]);
   });
 });

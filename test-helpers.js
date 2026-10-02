@@ -67,30 +67,27 @@ export async function testElementVisibility(page, testInfo, primaryLocator, fall
  * @param {string} testId - Test case ID
  */
 export async function handleMobileMenu(page, selectors, testId) {
-  const mobileToggle = selectors.mobileToggle(page);
-  const mobileToggleCount = await mobileToggle.count();
-  
-  if (mobileToggleCount > 0) {
-    const isToggleVisible = await mobileToggle.first().isVisible().catch(() => false);
-    fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Mobile toggle visible: ${isToggleVisible}\n`);
-    
-    if (isToggleVisible) {
-      try {
-        await mobileToggle.first().click();
-        await page.waitForTimeout(500); // Allow menu animation
-        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Mobile menu opened\n`);
-        
-        // Verify mobile menu is visible
-        const mobileMenu = selectors.mobileMenu(page);
-        const menuVisible = await mobileMenu.isVisible().catch(() => false);
-        if (menuVisible) {
-          await expect(mobileMenu).toBeVisible({ timeout: testData.timeouts.short });
-        }
-      } catch (error) {
-        fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Mobile menu interaction failed: ${error.message}\n`);
-      }
-    }
+  const toggle = selectors.mobileToggle(page).first();
+  const isToggleVisible = await toggle.isVisible().catch(() => false);
+  fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Mobile toggle visible: ${isToggleVisible}\n`);
+  if (!isToggleVisible) {
+    return false; // No menu button: the header menu is already showing.
   }
+
+  // Open means on screen. A closed slide-in menu often sits off-screen, where
+  // Playwright still counts it as visible, so check toBeInViewport. Site
+  // builders wire the button up after `load`, so an early tap can do nothing:
+  // tap again until the menu is open, but only while it's still closed, so a
+  // retry can't close a menu that opened late. A menu that never opens fails
+  // the test rather than being logged and skipped.
+  const menu = selectors.mobileMenu(page).first();
+  await expect(async () => {
+    const open = await expect(menu).toBeInViewport({ timeout: 250 }).then(() => true, () => false);
+    if (!open) await toggle.click();
+    await expect(menu).toBeInViewport({ timeout: 1000 });
+  }).toPass({ timeout: testData.timeouts.medium });
+  fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Mobile menu opened\n`);
+  return true;
 }
 
 /**
@@ -287,3 +284,44 @@ export const testPatterns = {
     fs.appendFileSync('playwright-output/test-logs.txt', `${testId} Viewport set to ${viewport.width}x${viewport.height}\n`);
   }
 };
+let lastPoliteRequestAt = 0;
+
+/**
+ * GET a URL politely, for request-only checks (link status, downloads,
+ * sitemaps) on a live site. Requests are spaced at least `gapMs` apart, and a
+ * 429 (Too Many Requests) is retried after its `Retry-After`, up to
+ * `maxRetries` times. A 429 that persists is returned as is: the caller must
+ * treat it as "rate limited", never as the page's status (it would pass a
+ * "below 500" check).
+ * @param {import('@playwright/test').APIRequestContext} request
+ * @param {string} url
+ * @param {{gapMs?: number, maxRetries?: number, maxWaitMs?: number, sleep?: (ms: number) => Promise<void>, now?: () => number}} [options]
+ * @returns {Promise<import('@playwright/test').APIResponse>}
+ */
+export async function politeGet(request, url, options = {}) {
+  const {
+    gapMs = 300,
+    maxRetries = 2,
+    maxWaitMs = 30000,
+    sleep = ms => new Promise(resolve => setTimeout(resolve, ms)),
+    now = () => Date.now(),
+  } = options;
+  for (let attempt = 0; ; attempt++) {
+    const wait = lastPoliteRequestAt + gapMs - now();
+    if (wait > 0) await sleep(wait);
+    lastPoliteRequestAt = now();
+    const response = await request.get(url);
+    if (response.status() !== 429 || attempt >= maxRetries) return response;
+    const retryAfter = Number(response.headers()['retry-after']);
+    await sleep(Math.min(Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : 2000 * (attempt + 1), maxWaitMs));
+  }
+}
+
+/**
+ * Skip a request-only test on the phone projects: its result can't differ by
+ * device, and running it twice doubles the load on the live site.
+ * @param {import('@playwright/test').TestInfo} testInfo
+ */
+export function skipOnPhone(testInfo) {
+  testInfo.skip(testInfo.project.name.endsWith('-mobile'), 'Request-only check: runs once, on the desktop project');
+}

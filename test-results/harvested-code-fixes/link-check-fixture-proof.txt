@@ -1,0 +1,123 @@
+
+Running 1 test using 1 worker
+
+================================================================================
+🚀 PRODUCTION LINK CHECKER
+================================================================================
+⚠️  WARNING: Running against PRODUCTION site
+⚠️  Using respectful delays (0.3s between requests)
+Started at 10/2/2026, 11:41:50 AM
+Strategy: Deep check main site pages, spot-check documentation
+Versions to check: 
+
+Checking main site pages...
+✗ [404] http://127.0.0.1:8765/missing.html
+✗ [404] http://127.0.0.1:8765/libraries/
+✗ [404] http://127.0.0.1:8765/docs/
+✗ [404] http://127.0.0.1:8765/releases/
+✗ [404] http://127.0.0.1:8765/news/
+✗ [404] http://127.0.0.1:8765/community/
+
+Spot-checking library documentation...
+
+❌ Broken links saved to: ~/QA-framework-template/playwright-output/link-check/broken-links-2026-10-02T15-41-53.csv
+
+================================================================================
+SUMMARY - PRODUCTION CHECK
+================================================================================
+✓ Total unique pages checked: 8
+📚 Documentation pages checked: 0
+⊘ Skipped (OAuth, external, etc.): 0
+⚠ Malformed paths (/libs/ instead of /doc/libs/): 0
+✗ Total broken links: 6
+  - Site pages: 6
+  - Doc pages (libraries): 0
+↪ Redirects: 0
+⊘ Blocked (rate limited or bot-checked, not counted as broken): 0
+
+Broken links by status:
+  404: 6
+
+🚨 BROKEN SITE LINKS (Priority):
+  1. [404] http://127.0.0.1:8765/missing.html
+      Found on: http://127.0.0.1:8765/
+  2. [404] http://127.0.0.1:8765/libraries/
+      Found on: direct
+  3. [404] http://127.0.0.1:8765/docs/
+      Found on: direct
+  4. [404] http://127.0.0.1:8765/releases/
+      Found on: direct
+  5. [404] http://127.0.0.1:8765/news/
+      Found on: direct
+  6. [404] http://127.0.0.1:8765/community/
+      Found on: direct
+
+Completed at 10/2/2026, 11:41:53 AM
+
+⚠️  Found 6 broken site links.
+Check the CSV reports in playwright-output/link-check/ for details.
+  ✘  1 [link-checker] › tests/check-links.spec.js:328:7 › Production Link Check › TC_LINKS_001 No link between the site's pages is broken (2.7s)
+
+
+  1) [link-checker] › tests/check-links.spec.js:328:7 › Production Link Check › TC_LINKS_001 No link between the site's pages is broken 
+
+    Error: Found 6 broken site links
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 38
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "source": "http://127.0.0.1:8765/",
+    +     "status": 404,
+    +     "type": "site",
+    +     "url": "http://127.0.0.1:8765/missing.html",
+    +   },
+    +   Object {
+    +     "source": "direct",
+    +     "status": 404,
+    +     "type": "site",
+    +     "url": "http://127.0.0.1:8765/libraries/",
+    +   },
+    +   Object {
+    +     "source": "direct",
+    +     "status": 404,
+    +     "type": "site",
+    +     "url": "http://127.0.0.1:8765/docs/",
+    +   },
+    +   Object {
+    +     "source": "direct",
+    +     "status": 404,
+    +     "type": "site",
+    +     "url": "http://127.0.0.1:8765/releases/",
+    +   },
+    +   Object {
+    +     "source": "direct",
+    +     "status": 404,
+    +     "type": "site",
+    +     "url": "http://127.0.0.1:8765/news/",
+    +   },
+    +   Object {
+    +     "source": "direct",
+    +     "status": 404,
+    +     "type": "site",
+    +     "url": "http://127.0.0.1:8765/community/",
+    +   },
+    + ]
+
+      385 |       console.log(`Check the CSV reports in playwright-output/link-check/ for details.`);
+      386 |     }
+    > 387 |     expect(siteBroken, `Found ${siteBroken.length} broken site links`).toEqual([]);
+          |                                                                        ^
+      388 |   });
+      389 | });
+        at ~/QA-framework-template/tests/check-links.spec.js:387:72
+
+    Error Context: playwright-output/check-links-Production-Lin-d8c74--the-site-s-pages-is-broken-link-checker/error-context.md
+
+  1 failed
+    [link-checker] › tests/check-links.spec.js:328:7 › Production Link Check › TC_LINKS_001 No link between the site's pages is broken 
+check-links.spec.js restored byte for byte
