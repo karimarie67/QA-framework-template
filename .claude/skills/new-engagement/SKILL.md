@@ -48,16 +48,31 @@ On top of merging each PR and approving guardrail-file edits (see
   `.git/config` directly.
 - Adding the project board's Board view (grouped by Status). GitHub's API
   can't create views.
-- Checking an approved edit, after its PR merges, in a Claude Code session
-  started in the Engagement repo: ask for the `setup-atlas` skill's **verify**
-  step, not a setup or refresh. An edited Atlas-managed section (`CLAUDE.md`,
-  `docs/agents/*`, the operators guide) shows as "sanctioned drift (preserved
-  edit)": setup keeps it on reruns, and nothing more is needed. Run
-  `/setup-atlas adopt <file> --approval <PR URL> --approver "<name>"` only for
-  a file verify names as needing it. Adopt covers the installed guard and
-  git-hook files, and refuses the rest, `CLAUDE.md` included. That skill is
-  user-invoked; the agent can't run it.
+- Adopting an approved edit to a guard or git-hook file, when the verify
+  check below names one as needing it:
+  `/setup-atlas adopt <file> --approval <PR URL> --approver "<name>"`. That
+  skill is user-invoked; the agent can't run it. Adopt covers the installed
+  guard and git-hook files, and refuses the rest, `CLAUDE.md` included.
 - Agreeing the brief and the user stories with the client contact.
+
+### Checking an approved edit
+
+After a PR with a `CLAUDE.md` or `.atlas/manifest.json` edit merges, run the
+Atlas **verify** check on the updated `main` of the Engagement repo. It's not a
+hand-off: the check is read-only, so the agent runs it. `setup-atlas` has no
+`verify` command to find, and `/verify` is something else. Verify is the
+script that section 4 ("Verify") of the `setup-atlas` skill runs:
+
+```
+root=$(dirname "$(dirname "$(dirname "$(find ~/.claude/plugins -path '*/skills/setup-atlas/SKILL.md' -not -path '*/.trash/*' | head -1)")")")
+CLAUDE_PLUGIN_ROOT="$root" python3 "$root/scripts/atlas_scaffold" verify --repo .
+```
+
+It prints JSON. Top-level `"passed": true` is the result to log, with the
+number of checks. An edited Atlas-managed section (`CLAUDE.md`,
+`docs/agents/*`, the operators guide) shows as `"sanctioned_drift": true`
+("sanctioned drift (preserved edit)"): setup keeps it on reruns, and nothing
+more is needed. Hand off an adopt (above) only for a file a failed check names.
 
 ## Steps
 
@@ -92,10 +107,11 @@ to the new repo's, and describe it as the Engagement for the site:
 - `scripts/template-check.js`: the name in its header comment.
 
 Keep mentions that say where the repo came from. Hand off the approval of the
-`CLAUDE.md` and manifest edits and, after the PR merges, the verify check (see
-Hand-offs). Verify accepts the rename, the manifest's repository `id`
-included, so there's normally nothing to adopt. The framing's structure and
-rules name the template's specs and projects; step 3 brings them up to date.
+`CLAUDE.md` and manifest edits, and after the PR merges, run the verify check
+(see "Checking an approved edit"). Verify accepts the rename, the manifest's
+repository `id` included, so there's normally nothing to adopt. The framing's
+structure and rules name the template's specs and projects; step 3 brings them
+up to date.
 
 **Clear the template's proof of work.** Whatever the template committed under
 `test-results/` (other than `.gitkeep`) is the template's evidence, not this
@@ -212,6 +228,17 @@ Use the answer logged in step 2.
   log entries are titled `## Import step N`, and its findings follow this
   skill's step 6 rules. If `docs/client-test-cases/cases.json` already exists,
   the import has started: carry on from the step its log says is next.
+
+  **The import alone leaves step 3's tests untraced.** It creates issues only
+  for the client's cases, but the tests written in step 3 still need stories
+  and Test Case issues for this step's "Done when", and a client case matched
+  to one of them is meant to comment on that test's issue. So trace them in
+  the same import: in its step 3, tell the human, and in its step 5 preview,
+  add QA-drafted stories and a Test Case issue for each step 3 test, written
+  by `stories-and-tests.md`'s "Stories and test cases" rules (findings as
+  acceptance criteria, `test-automated` for merged tests). A filed finding no
+  test catches yet becomes a new test case there too. In its first batch,
+  give the step 3 tests their ID-first titles and `issue` annotations.
 - **No client cases.** Follow the "Stories and test cases" section of
   `stories-and-tests.md`.
 
