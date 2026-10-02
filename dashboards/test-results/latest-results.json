@@ -1,489 +1,175 @@
 {
-  "timestamp": "2026-10-01T13:25:12.088Z",
+  "timestamp": "2026-10-02T20:24:08.637Z",
   "metrics": {
-    "totalTests": 31,
-    "passed": 4,
+    "totalTests": 8,
+    "passed": 0,
     "flaky": 0,
     "skipped": 0,
-    "failed": 27,
+    "failed": 8,
     "failedTestNames": [
-      "Homepage loads with key elements",
-      "Navigation menu links work correctly",
-      "a listing page displays expected items and links to detail pages",
-      "Download section works correctly",
-      "Search bar works with basic query",
-      "Homepage is responsive on mobile",
-      "404 page displays appropriate error message",
-      "Broken documentation link returns appropriate error",
-      "Invalid search query handles gracefully",
-      "Broken external links are identified",
-      "Form validation errors display correctly",
-      "Download links return valid HTTP status codes",
-      "Download file names are correct format",
-      "Version selector displays available versions",
-      "Download page displays file sizes",
-      "Search returns relevant results for common queries",
-      "Search with special characters handles gracefully",
-      "Empty search shows appropriate message",
-      "Search result pagination works correctly",
-      "Search autocomplete/suggestions appear",
-      "Documentation page loads with table of contents",
-      "Library documentation links are accessible",
-      "Code examples are properly formatted",
-      "Documentation breadcrumbs navigation works",
-      "Documentation version switcher works",
-      "Documentation search within docs works",
-      "Documentation PDF/print versions are accessible"
+      "TC_A11Y_001 No page has a serious or critical accessibility violation",
+      "TC_ERROR_001 An unknown address shows a not-found page",
+      "TC_ERROR_002 A malformed address never causes a server error",
+      "TC_FORM_001 Every form field has its label, type, and required state"
     ],
-    "passRate": 12.903225806451612,
-    "totalDuration": 167.67000000000004,
-    "smokeCount": 6,
-    "functionalCount": 25,
+    "passRate": 0,
+    "totalDuration": 5.787999999999999,
+    "smokeCount": 0,
+    "functionalCount": 8,
     "allTestObjects": [
       {
-        "name": "Homepage loads with key elements",
+        "name": "TC_A11Y_001 No page has a serious or critical accessibility violation",
         "status": "failed",
-        "durationSec": 5.31,
+        "durationSec": 0.38,
+        "attempts": 2,
+        "allAttemptsSec": 0.756,
         "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860881195\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/smoke_tests.spec.js:27:26"
+        "error": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m\n\n  23 |         response = await page.goto(buildURL(testInfo, p.path), { waitUntil: 'load' });\n  24 |       } catch (err) {\n> 25 |         expect.soft(err.message, `${p.path} failed to load, so it can't be scanned`).toBe('');\n     |                                                                                      ^\n  26 |         continue;\n  27 |       }\n  28 |       // A page that doesn't load would scan clean: it must fail, not pass.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js:25:86"
       },
       {
-        "name": "Navigation menu links work correctly",
+        "name": "TC_A11Y_001 No page has a serious or critical accessibility violation",
         "status": "failed",
-        "durationSec": 5.055,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860887850\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/smoke_tests.spec.js:68:5"
+        "durationSec": 0.725,
+        "attempts": 2,
+        "allAttemptsSec": 1.344,
+        "projectName": "staging-mobile",
+        "error": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m\n\n  23 |         response = await page.goto(buildURL(testInfo, p.path), { waitUntil: 'load' });\n  24 |       } catch (err) {\n> 25 |         expect.soft(err.message, `${p.path} failed to load, so it can't be scanned`).toBe('');\n     |                                                                                      ^\n  26 |         continue;\n  27 |       }\n  28 |       // A page that doesn't load would scan clean: it must fail, not pass.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js:25:86"
       },
       {
-        "name": "a listing page displays expected items and links to detail pages",
+        "name": "TC_ERROR_001 An unknown address shows a not-found page",
         "status": "failed",
-        "durationSec": 5.023,
+        "durationSec": 0.354,
+        "attempts": 2,
+        "allAttemptsSec": 0.664,
         "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/libraries/?cachebust=1790860894192\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/smoke_tests.spec.js:177:5"
+        "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n  12 |     annotation: [{ type: 'test_case', description: 'TC_ERROR_001' }],\n  13 |   }, async ({ page }, testInfo) => {\n> 14 |     const response = await page.goto(buildURL(testInfo, siteConfig.notFoundPath), { waitUntil: 'domcontentloaded' });\n     |                                 ^\n  15 |     expect.soft(response?.status(), `${siteConfig.notFoundPath} answers 404`).toBe(404);\n  16 |     await expect(\n  17 |       page.getByText(new RegExp(siteConfig.notFoundText, 'i')).first(),\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:14:33"
       },
       {
-        "name": "Download section works correctly",
+        "name": "TC_ERROR_002 A malformed address never causes a server error",
         "status": "failed",
-        "durationSec": 5.033,
+        "durationSec": 0.5,
+        "attempts": 2,
+        "allAttemptsSec": 0.705,
         "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/releases/?cachebust=1790860900531\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/smoke_tests.spec.js:235:5"
+        "error": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.7339.186 Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n\n  25 |   }, async ({ page }, testInfo) => {\n  26 |     for (const path of requireEntries('malformedPaths', siteConfig.malformedPaths)) {\n> 27 |       const res = await page.request.get(buildURL(testInfo, path), { failOnStatusCode: false });\n     |                                      ^\n  28 |       expect.soft(res.status(), `${path} answers below 500`).toBeLessThan(500);\n  29 |     }\n  30 |   });\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:27:38"
       },
       {
-        "name": "Search bar works with basic query",
+        "name": "TC_ERROR_001 An unknown address shows a not-found page",
         "status": "failed",
-        "durationSec": 5.037,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860906881\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/smoke_tests.spec.js:296:5"
+        "durationSec": 0.289,
+        "attempts": 2,
+        "allAttemptsSec": 0.561,
+        "projectName": "staging-mobile",
+        "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n  12 |     annotation: [{ type: 'test_case', description: 'TC_ERROR_001' }],\n  13 |   }, async ({ page }, testInfo) => {\n> 14 |     const response = await page.goto(buildURL(testInfo, siteConfig.notFoundPath), { waitUntil: 'domcontentloaded' });\n     |                                 ^\n  15 |     expect.soft(response?.status(), `${siteConfig.notFoundPath} answers 404`).toBe(404);\n  16 |     await expect(\n  17 |       page.getByText(new RegExp(siteConfig.notFoundText, 'i')).first(),\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:14:33"
       },
       {
-        "name": "Homepage is responsive on mobile",
+        "name": "TC_ERROR_002 A malformed address never causes a server error",
         "status": "failed",
-        "durationSec": 5.203,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860913255\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/smoke_tests.spec.js:337:5"
+        "durationSec": 0.314,
+        "attempts": 2,
+        "allAttemptsSec": 0.605,
+        "projectName": "staging-mobile",
+        "error": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.7339.186 Mobile Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n\n  25 |   }, async ({ page }, testInfo) => {\n  26 |     for (const path of requireEntries('malformedPaths', siteConfig.malformedPaths)) {\n> 27 |       const res = await page.request.get(buildURL(testInfo, path), { failOnStatusCode: false });\n     |                                      ^\n  28 |       expect.soft(res.status(), `${path} answers below 500`).toBeLessThan(500);\n  29 |     }\n  30 |   });\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:27:38"
       },
       {
-        "name": "404 page displays appropriate error message",
+        "name": "TC_FORM_001 Every form field has its label, type, and required state",
         "status": "failed",
-        "durationSec": 5.081,
+        "durationSec": 0.357,
+        "attempts": 2,
+        "allAttemptsSec": 0.624,
         "projectName": "staging",
-        "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n  56 |     }\n  57 |\n> 58 |     expect(errorFound).toBeTruthy();\n     |                        ^\n  59 |   });\n  60 |\n  61 |   test('Broken documentation link returns appropriate error', { annotation: { type: 'test_case', description: 'TC_ERROR_002' } }, async ({ page }, testInfo) => {\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:58:24"
+        "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n\n\n  30 |\n  31 |     for (const f of forms) {\n> 32 |       await page.goto(buildURL(testInfo, f.path), { waitUntil: 'load' });\n     |                  ^\n  33 |       await page.waitForLoadState('networkidle');\n  34 |       // By CSS selector, not by role: a <form> only has the form role when it\n  35 |       // has an accessible name, which most real forms lack.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js:32:18"
       },
       {
-        "name": "Broken documentation link returns appropriate error",
+        "name": "TC_FORM_001 Every form field has its label, type, and required state",
         "status": "failed",
-        "durationSec": 30.391,
-        "projectName": "staging",
-        "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('text=/error|not found|invalid|doesn\\'t exist/i').first()\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=/error|not found|invalid|doesn\\'t exist/i').first()\u001b[22m\n\n\n  82 |     // Verify error message is displayed\n  83 |     const errorMessage = page.locator('text=/error|not found|invalid|doesn\\'t exist/i').first();\n> 84 |     await expect(errorMessage).toBeVisible({ timeout: testData.timeouts.medium });\n     |                                ^\n  85 |     fs.appendFileSync('test-results/test-logs.txt', `${testId} Error message displayed for broken doc link\\n`);\n  86 |   });\n  87 |\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:84:32"
-      },
-      {
-        "name": "Invalid search query handles gracefully",
-        "status": "failed",
-        "durationSec": 5.075,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790861026232\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:93:5"
-      },
-      {
-        "name": "Malformed URL redirects or shows error appropriately",
-        "status": "passed",
-        "durationSec": 0.206,
-        "projectName": "staging",
-        "error": null
-      },
-      {
-        "name": "Broken external links are identified",
-        "status": "failed",
-        "durationSec": 4.953,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790861032817\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:185:5"
-      },
-      {
-        "name": "Form validation errors display correctly",
-        "status": "failed",
-        "durationSec": 4.999,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790861039098\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:227:5"
-      },
-      {
-        "name": "Download links return valid HTTP status codes",
-        "status": "failed",
-        "durationSec": 5.102,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/releases/?cachebust=1790860895452\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:17:5"
-      },
-      {
-        "name": "Download file names are correct format",
-        "status": "failed",
-        "durationSec": 4.989,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/releases/?cachebust=1790860901569\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:65:5"
-      },
-      {
-        "name": "Version selector displays available versions",
-        "status": "failed",
-        "durationSec": 4.994,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/releases/?cachebust=1790860907588\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:93:5"
-      },
-      {
-        "name": "Download page displays file sizes",
-        "status": "failed",
-        "durationSec": 5.013,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/releases/?cachebust=1790860913606\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:138:5"
-      },
-      {
-        "name": "Search returns relevant results for common queries",
-        "status": "failed",
-        "durationSec": 4.989,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860919642\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:177:5"
-      },
-      {
-        "name": "Search with special characters handles gracefully",
-        "status": "failed",
-        "durationSec": 5.165,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860925648\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:210:5"
-      },
-      {
-        "name": "Empty search shows appropriate message",
-        "status": "failed",
-        "durationSec": 5.007,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860931848\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:247:5"
-      },
-      {
-        "name": "Search result pagination works correctly",
-        "status": "failed",
-        "durationSec": 5.021,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860937880\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:301:5"
-      },
-      {
-        "name": "Search autocomplete/suggestions appear",
-        "status": "failed",
-        "durationSec": 5.055,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860943930\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:353:5"
-      },
-      {
-        "name": "Documentation page loads with table of contents",
-        "status": "failed",
-        "durationSec": 5.122,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/docs/?cachebust=1790860995071\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/documentation_tests.spec.js:17:5"
-      },
-      {
-        "name": "Library documentation links are accessible",
-        "status": "failed",
-        "durationSec": 5.039,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/libraries/?cachebust=1790861001572\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/documentation_tests.spec.js:57:5"
-      },
-      {
-        "name": "Code examples are properly formatted",
-        "status": "failed",
-        "durationSec": 5.04,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/docs/1_0_0/?cachebust=1790861007928\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/documentation_tests.spec.js:108:7"
-      },
-      {
-        "name": "Documentation breadcrumbs navigation works",
-        "status": "failed",
-        "durationSec": 5.031,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/docs/1_0_0/?cachebust=1790861014296\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/documentation_tests.spec.js:159:5"
-      },
-      {
-        "name": "Documentation version switcher works",
-        "status": "failed",
-        "durationSec": 5.058,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/docs/1_0_0/?cachebust=1790861020656\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/documentation_tests.spec.js:212:5"
-      },
-      {
-        "name": "Documentation search within docs works",
-        "status": "failed",
-        "durationSec": 5.678,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/docs/?cachebust=1790861027706\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/documentation_tests.spec.js:266:5"
-      },
-      {
-        "name": "Documentation anchor links work correctly",
-        "status": "passed",
-        "durationSec": 2.491,
-        "projectName": "staging",
-        "error": null
-      },
-      {
-        "name": "Documentation external links open correctly",
-        "status": "passed",
-        "durationSec": 2.405,
-        "projectName": "staging",
-        "error": null
-      },
-      {
-        "name": "Documentation page titles are descriptive",
-        "status": "passed",
-        "durationSec": 0.133,
-        "projectName": "staging",
-        "error": null
-      },
-      {
-        "name": "Documentation PDF/print versions are accessible",
-        "status": "failed",
-        "durationSec": 4.972,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/docs/?cachebust=1790861039473\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/documentation_tests.spec.js:473:5"
+        "durationSec": 0.241,
+        "attempts": 2,
+        "allAttemptsSec": 0.529,
+        "projectName": "staging-mobile",
+        "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n\n\n  30 |\n  31 |     for (const f of forms) {\n> 32 |       await page.goto(buildURL(testInfo, f.path), { waitUntil: 'load' });\n     |                  ^\n  33 |       await page.waitForLoadState('networkidle');\n  34 |       // By CSS selector, not by role: a <form> only has the form role when it\n  35 |       // has an accessible name, which most real forms lack.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js:32:18"
       }
     ],
-    "timestamp": "2026-10-01T13:25:12.073Z",
+    "timestamp": "2026-10-02T20:24:08.627Z",
     "environment": "staging",
-    "runId": "36867977008",
-    "runNumber": "37",
-    "branch": "main"
+    "runId": "37060210845",
+    "runNumber": "64",
+    "branch": "feat/skeleton-specs"
   },
   "testResults": {
-    "smoke": [
-      {
-        "name": "Homepage loads with key elements",
-        "status": "failed",
-        "durationSec": 5.31,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860881195\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/smoke_tests.spec.js:27:26"
-      },
-      {
-        "name": "Navigation menu links work correctly",
-        "status": "failed",
-        "durationSec": 5.055,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860887850\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/smoke_tests.spec.js:68:5"
-      },
-      {
-        "name": "a listing page displays expected items and links to detail pages",
-        "status": "failed",
-        "durationSec": 5.023,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/libraries/?cachebust=1790860894192\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/smoke_tests.spec.js:177:5"
-      },
-      {
-        "name": "Download section works correctly",
-        "status": "failed",
-        "durationSec": 5.033,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/releases/?cachebust=1790860900531\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/smoke_tests.spec.js:235:5"
-      },
-      {
-        "name": "Search bar works with basic query",
-        "status": "failed",
-        "durationSec": 5.037,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860906881\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/smoke_tests.spec.js:296:5"
-      },
-      {
-        "name": "Homepage is responsive on mobile",
-        "status": "failed",
-        "durationSec": 5.203,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860913255\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/smoke_tests.spec.js:337:5"
-      }
-    ],
+    "smoke": [],
     "functional": [
       {
-        "name": "404 page displays appropriate error message",
+        "name": "TC_A11Y_001 No page has a serious or critical accessibility violation",
         "status": "failed",
-        "durationSec": 5.081,
+        "durationSec": 0.38,
+        "attempts": 2,
+        "allAttemptsSec": 0.756,
         "projectName": "staging",
-        "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n  56 |     }\n  57 |\n> 58 |     expect(errorFound).toBeTruthy();\n     |                        ^\n  59 |   });\n  60 |\n  61 |   test('Broken documentation link returns appropriate error', { annotation: { type: 'test_case', description: 'TC_ERROR_002' } }, async ({ page }, testInfo) => {\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:58:24"
+        "error": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m\n\n  23 |         response = await page.goto(buildURL(testInfo, p.path), { waitUntil: 'load' });\n  24 |       } catch (err) {\n> 25 |         expect.soft(err.message, `${p.path} failed to load, so it can't be scanned`).toBe('');\n     |                                                                                      ^\n  26 |         continue;\n  27 |       }\n  28 |       // A page that doesn't load would scan clean: it must fail, not pass.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js:25:86"
       },
       {
-        "name": "Broken documentation link returns appropriate error",
+        "name": "TC_A11Y_001 No page has a serious or critical accessibility violation",
         "status": "failed",
-        "durationSec": 30.391,
-        "projectName": "staging",
-        "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  locator('text=/error|not found|invalid|doesn\\'t exist/i').first()\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=/error|not found|invalid|doesn\\'t exist/i').first()\u001b[22m\n\n\n  82 |     // Verify error message is displayed\n  83 |     const errorMessage = page.locator('text=/error|not found|invalid|doesn\\'t exist/i').first();\n> 84 |     await expect(errorMessage).toBeVisible({ timeout: testData.timeouts.medium });\n     |                                ^\n  85 |     fs.appendFileSync('test-results/test-logs.txt', `${testId} Error message displayed for broken doc link\\n`);\n  86 |   });\n  87 |\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:84:32"
+        "durationSec": 0.725,
+        "attempts": 2,
+        "allAttemptsSec": 1.344,
+        "projectName": "staging-mobile",
+        "error": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m\n\n  23 |         response = await page.goto(buildURL(testInfo, p.path), { waitUntil: 'load' });\n  24 |       } catch (err) {\n> 25 |         expect.soft(err.message, `${p.path} failed to load, so it can't be scanned`).toBe('');\n     |                                                                                      ^\n  26 |         continue;\n  27 |       }\n  28 |       // A page that doesn't load would scan clean: it must fail, not pass.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js:25:86"
       },
       {
-        "name": "Invalid search query handles gracefully",
+        "name": "TC_ERROR_001 An unknown address shows a not-found page",
         "status": "failed",
-        "durationSec": 5.075,
+        "durationSec": 0.354,
+        "attempts": 2,
+        "allAttemptsSec": 0.664,
         "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790861026232\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:93:5"
+        "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n  12 |     annotation: [{ type: 'test_case', description: 'TC_ERROR_001' }],\n  13 |   }, async ({ page }, testInfo) => {\n> 14 |     const response = await page.goto(buildURL(testInfo, siteConfig.notFoundPath), { waitUntil: 'domcontentloaded' });\n     |                                 ^\n  15 |     expect.soft(response?.status(), `${siteConfig.notFoundPath} answers 404`).toBe(404);\n  16 |     await expect(\n  17 |       page.getByText(new RegExp(siteConfig.notFoundText, 'i')).first(),\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:14:33"
       },
       {
-        "name": "Malformed URL redirects or shows error appropriately",
-        "status": "passed",
-        "durationSec": 0.206,
-        "projectName": "staging",
-        "error": null
-      },
-      {
-        "name": "Broken external links are identified",
+        "name": "TC_ERROR_002 A malformed address never causes a server error",
         "status": "failed",
-        "durationSec": 4.953,
+        "durationSec": 0.5,
+        "attempts": 2,
+        "allAttemptsSec": 0.705,
         "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790861032817\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:185:5"
+        "error": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.7339.186 Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n\n  25 |   }, async ({ page }, testInfo) => {\n  26 |     for (const path of requireEntries('malformedPaths', siteConfig.malformedPaths)) {\n> 27 |       const res = await page.request.get(buildURL(testInfo, path), { failOnStatusCode: false });\n     |                                      ^\n  28 |       expect.soft(res.status(), `${path} answers below 500`).toBeLessThan(500);\n  29 |     }\n  30 |   });\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:27:38"
       },
       {
-        "name": "Form validation errors display correctly",
+        "name": "TC_ERROR_001 An unknown address shows a not-found page",
         "status": "failed",
-        "durationSec": 4.999,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790861039098\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:227:5"
+        "durationSec": 0.289,
+        "attempts": 2,
+        "allAttemptsSec": 0.561,
+        "projectName": "staging-mobile",
+        "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n  12 |     annotation: [{ type: 'test_case', description: 'TC_ERROR_001' }],\n  13 |   }, async ({ page }, testInfo) => {\n> 14 |     const response = await page.goto(buildURL(testInfo, siteConfig.notFoundPath), { waitUntil: 'domcontentloaded' });\n     |                                 ^\n  15 |     expect.soft(response?.status(), `${siteConfig.notFoundPath} answers 404`).toBe(404);\n  16 |     await expect(\n  17 |       page.getByText(new RegExp(siteConfig.notFoundText, 'i')).first(),\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:14:33"
       },
       {
-        "name": "Download links return valid HTTP status codes",
+        "name": "TC_ERROR_002 A malformed address never causes a server error",
         "status": "failed",
-        "durationSec": 5.102,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/releases/?cachebust=1790860895452\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:17:5"
+        "durationSec": 0.314,
+        "attempts": 2,
+        "allAttemptsSec": 0.605,
+        "projectName": "staging-mobile",
+        "error": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.7339.186 Mobile Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n\n  25 |   }, async ({ page }, testInfo) => {\n  26 |     for (const path of requireEntries('malformedPaths', siteConfig.malformedPaths)) {\n> 27 |       const res = await page.request.get(buildURL(testInfo, path), { failOnStatusCode: false });\n     |                                      ^\n  28 |       expect.soft(res.status(), `${path} answers below 500`).toBeLessThan(500);\n  29 |     }\n  30 |   });\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:27:38"
       },
       {
-        "name": "Download file names are correct format",
+        "name": "TC_FORM_001 Every form field has its label, type, and required state",
         "status": "failed",
-        "durationSec": 4.989,
+        "durationSec": 0.357,
+        "attempts": 2,
+        "allAttemptsSec": 0.624,
         "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/releases/?cachebust=1790860901569\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:65:5"
+        "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n\n\n  30 |\n  31 |     for (const f of forms) {\n> 32 |       await page.goto(buildURL(testInfo, f.path), { waitUntil: 'load' });\n     |                  ^\n  33 |       await page.waitForLoadState('networkidle');\n  34 |       // By CSS selector, not by role: a <form> only has the form role when it\n  35 |       // has an accessible name, which most real forms lack.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js:32:18"
       },
       {
-        "name": "Version selector displays available versions",
+        "name": "TC_FORM_001 Every form field has its label, type, and required state",
         "status": "failed",
-        "durationSec": 4.994,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/releases/?cachebust=1790860907588\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:93:5"
-      },
-      {
-        "name": "Download page displays file sizes",
-        "status": "failed",
-        "durationSec": 5.013,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/releases/?cachebust=1790860913606\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:138:5"
-      },
-      {
-        "name": "Search returns relevant results for common queries",
-        "status": "failed",
-        "durationSec": 4.989,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860919642\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:177:5"
-      },
-      {
-        "name": "Search with special characters handles gracefully",
-        "status": "failed",
-        "durationSec": 5.165,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860925648\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:210:5"
-      },
-      {
-        "name": "Empty search shows appropriate message",
-        "status": "failed",
-        "durationSec": 5.007,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860931848\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:247:5"
-      },
-      {
-        "name": "Search result pagination works correctly",
-        "status": "failed",
-        "durationSec": 5.021,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860937880\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:301:5"
-      },
-      {
-        "name": "Search autocomplete/suggestions appear",
-        "status": "failed",
-        "durationSec": 5.055,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/?cachebust=1790860943930\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/download_search_tests.spec.js:353:5"
-      },
-      {
-        "name": "Documentation page loads with table of contents",
-        "status": "failed",
-        "durationSec": 5.122,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/docs/?cachebust=1790860995071\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/documentation_tests.spec.js:17:5"
-      },
-      {
-        "name": "Library documentation links are accessible",
-        "status": "failed",
-        "durationSec": 5.039,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/libraries/?cachebust=1790861001572\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/documentation_tests.spec.js:57:5"
-      },
-      {
-        "name": "Code examples are properly formatted",
-        "status": "failed",
-        "durationSec": 5.04,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/docs/1_0_0/?cachebust=1790861007928\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/documentation_tests.spec.js:108:7"
-      },
-      {
-        "name": "Documentation breadcrumbs navigation works",
-        "status": "failed",
-        "durationSec": 5.031,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/docs/1_0_0/?cachebust=1790861014296\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/documentation_tests.spec.js:159:5"
-      },
-      {
-        "name": "Documentation version switcher works",
-        "status": "failed",
-        "durationSec": 5.058,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/docs/1_0_0/?cachebust=1790861020656\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/documentation_tests.spec.js:212:5"
-      },
-      {
-        "name": "Documentation search within docs works",
-        "status": "failed",
-        "durationSec": 5.678,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/docs/?cachebust=1790861027706\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/documentation_tests.spec.js:266:5"
-      },
-      {
-        "name": "Documentation anchor links work correctly",
-        "status": "passed",
-        "durationSec": 2.491,
-        "projectName": "staging",
-        "error": null
-      },
-      {
-        "name": "Documentation external links open correctly",
-        "status": "passed",
-        "durationSec": 2.405,
-        "projectName": "staging",
-        "error": null
-      },
-      {
-        "name": "Documentation page titles are descriptive",
-        "status": "passed",
-        "durationSec": 0.133,
-        "projectName": "staging",
-        "error": null
-      },
-      {
-        "name": "Documentation PDF/print versions are accessible",
-        "status": "failed",
-        "durationSec": 4.972,
-        "projectName": "staging",
-        "error": "Error: Page load failed: https://staging.example.com/docs/?cachebust=1790861039473\n\n   at ../test-helpers.js:273\n\n  271 |     if (!success) {\n  272 |       await logAndScreenshot(page, testInfo, `Page load failed: ${finalUrl}`, `test-results/screenshots/${testId.toLowerCase()}/load_failed.png`);\n> 273 |       throw new Error(`Page load failed: ${finalUrl}`);\n      |             ^\n  274 |     }\n  275 |\n  276 |     const loadTime = Date.now() - startTime;\n    at Object.loadAndValidatePage (/home/runner/work/QA-framework-template/QA-framework-template/test-helpers.js:273:13)\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/documentation_tests.spec.js:473:5"
+        "durationSec": 0.241,
+        "attempts": 2,
+        "allAttemptsSec": 0.529,
+        "projectName": "staging-mobile",
+        "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n\n\n  30 |\n  31 |     for (const f of forms) {\n> 32 |       await page.goto(buildURL(testInfo, f.path), { waitUntil: 'load' });\n     |                  ^\n  33 |       await page.waitForLoadState('networkidle');\n  34 |       // By CSS selector, not by role: a <form> only has the form role when it\n  35 |       // has an accessible name, which most real forms lack.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js:32:18"
       }
     ]
   }
