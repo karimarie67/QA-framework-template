@@ -100,6 +100,13 @@ exploratory sessions, visual review, accessibility with assistive technology,
 and one-off checks. Each lasting manual check is still a test case, labeled
 `test-manual`.
 
+**A suite that catches real defects.** Some practice sites offer accounts or
+variants that are broken on purpose (Sauce Demo's `problem_user`, say). Running
+the suite as one of those, or giving a test case of its own to the broken
+variant, shows the tests fail when the site is wrong, which no green run can.
+Its failures are expected, so keep it off the dashboard and out of the push
+and PR gate.
+
 ### Recording a manual run
 
 Comment on the test case issue:
@@ -151,7 +158,8 @@ A suggestion ("this could be faster", "this could look better", "add X") is an
 
 On the cadence the brief sets (weekly by default), review open bugs, failed
 runs, and dashboard trends. Confirm severity, close bugs verified fixed in
-staging, and raise anything urgent with the development team.
+the environment where the fix lands (production, when there's no staging), and
+raise anything urgent with the development team.
 
 ### When an automated test fails
 
@@ -291,6 +299,9 @@ A flaky test passes and fails without any change. Common causes:
 | Animation or transition | Assert the end state; Playwright's actionability checks wait for stable elements |
 | Hidden duplicate of an element | Filter to what a user sees: `locator.filter({ visible: true })` |
 | Bandwidth-heavy steps in parallel (large downloads) | Run those tests serially, or give them their own timeout |
+| A control a site builder wires up after `load` (Wix, Squarespace) | A click before then does nothing. Retry the action until its result shows: `expect(async () => { … }).toPass()` |
+| A closed slide-in menu that's off-screen | Playwright counts it as visible. Check `toBeInViewport` for "open" |
+| A live site rate-limiting the run (HTTP 429) | Lower `workers`, space requests with `politeGet`, and run request-only checks once, on desktop |
 
 The test runner retries a failed test once (`retries: 1` in
 `playwright.config.js`). A test that passes only on retry is reported as flaky

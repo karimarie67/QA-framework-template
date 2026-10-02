@@ -10,22 +10,68 @@ directory), and read what's actually there: titles, the header menu, headings,
 the footer, form fields and their `type`, `name`, `placeholder`, and
 `required` attributes, image alt text, and the 404 page. Every expected value
 in config comes from a probe, never from what the site "should" say. Probes
-are read-only, like the tests.
+are read-only, like the tests, or do no more than the brief's "What we may do
+there" allows.
 
 Wait for the page to finish loading before interacting. A site builder (Wix,
 Squarespace, and so on) wires up its controls after `load`, so an early click
 or tap can do nothing and look like a defect. Before logging anything as a
-defect, probe it again, with a screenshot.
+defect, probe it again, with a screenshot. A screenshot taken before the page
+settles can show missing images or menus that aren't missing: wait for the
+network to go quiet (`waitForLoadState('networkidle')`) before trusting one.
+
+Also look for:
+
+- **The accessibility tree, not just the DOM.** Read
+  `locator.ariaSnapshot()` for each page. It shows the names and roles the
+  tests will hook, and what a role lookup can't see: entries of a closed menu
+  are often not in the page at all, or are `aria-hidden`, and a link styled as
+  a button may be `<a role="button">`, which `getByRole('link')` won't find.
+- **Single-page apps.** If the URL changes before the page renders (a React or
+  Vue app), wait for the new page's content, not for the URL.
+- **Embedded forms and iframes.** Check that each `<iframe>` has a `title`
+  (a missing one is a WCAG 4.1.2 finding). A hidden spam-trap field can share a
+  visible field's label: filter it out (`filter({ visible: true })`).
+- **Third-party responses.** A vendor's embed or link can answer an automated
+  request with a bot check (401, 403, 999, a challenge page). Confirm with the
+  vendor's API or a real browser before calling it a defect.
 
 ## Selectors
 
 Site builders generate class names and IDs that change on every publish. Hook
 elements by role, accessible name, and placeholder (`getByRole`,
 `getByPlaceholder`), and put them in one site-named block in `selectors.js`
-(`selectors.<site>.*`), as the
-[QA-example](https://github.com/karimarie67/QA-example) Engagement's
-`selectors.shop.*` block does (a private repo). Rewrite `config-helper.js` for
-the site's pages, titles, and test data, and update `tests/unit/` to match.
+(`selectors.<site>.*`), for example:
+
+```javascript
+shop: {
+  username: page => page.getByPlaceholder('Username'),
+  loginButton: page => page.getByRole('button', { name: 'Login' }),
+  cartLink: page => page.getByRole('link', { name: /cart/i }),
+},
+```
+
+Rewrite `config-helper.js` for the site's pages, titles, and test data, and
+update `tests/unit/` to match. Two exceptions:
+
+- **A site that ships its own test hooks.** Some sites (often apps, not
+  builder sites) put a stable attribute such as `data-test` on their controls
+  for test automation. It doesn't change between releases, so use it for
+  elements with no role or name of their own (an error message, a badge, a
+  card), and set `use.testIdAttribute` in `playwright.config.js` if you use
+  `getByTestId`.
+- **A control with no accessible name.** It can't be found by role, so hook it
+  by a stable data attribute, file the missing name as an accessibility
+  finding, and say so in the log.
+
+## Logins and test data
+
+The brief says which accounts the tests may use. Never write a password into
+the repo: the Atlas guard blocks any file write that holds one, and a pushed
+secret can only be removed by rewriting history. A real account's password
+goes in a CI secret, named in the brief. A demo site that prints its password
+on the page (a practice store, say) is read from the page when the test runs,
+so it's never in the repo at all.
 
 ## Phones
 
@@ -37,16 +83,42 @@ If a project still sets `viewport: { width: 800, height: 600 }`, replace it with
 the emulation. The brief's "Browsers and devices" names the device.
 
 Tests that navigate need to open the phone menu first, and should retry the tap
-until the menu is open, for the reason above. Click only while the menu is
-still closed, so a retry can't close a menu that opened late:
+until the menu is open, for the reason above. "Open" means on screen: a closed
+slide-in menu often sits off-screen, where Playwright still counts it as
+visible, so check `toBeInViewport`, not `toBeVisible`. Click only while the
+menu is still closed, so a retry can't close a menu that opened late.
+`test-helpers.js`'s `handleMobileMenu` does this; the pattern is:
 
 ```javascript
 const menu = page.getByRole('navigation');
 await expect(async () => {
-  if (!(await menu.isVisible())) await page.getByRole('button', { name: /menu/i }).click();
-  await expect(menu).toBeVisible({ timeout: 1000 });
+  const open = await expect(menu).toBeInViewport({ timeout: 250 }).then(() => true, () => false);
+  if (!open) await page.getByRole('button', { name: /menu/i }).click();
+  await expect(menu).toBeInViewport({ timeout: 1000 });
 }).toPass();
 ```
+
+## A live site
+
+When the tests run against the live site, keep the load gentle:
+
+- **No staging copy:** point the `staging` and `staging-mobile` projects at
+  the live site too, under the same rules, and say so in the brief. CI's
+  default target and manual runs use `staging`, so they then test the real
+  site. (The dashboard's "Env" then reads STAGING; the brief explains it.)
+- **Request rate:** set `workers` in `playwright.config.js` when the site asks
+  for a gentle rate, or rate-limits (Cloudflare answers 429). `workers: 1` is
+  the safe default for a small site.
+- **Request-only checks** (link status, downloads, sitemaps) use
+  `test-helpers.js`'s `politeGet`, which spaces requests and retries a 429
+  after its `Retry-After`. A 429 that persists is "rate limited", never the
+  page's status: it would pass a "below 500" check. Their result can't differ
+  by device, so run them once, with `skipOnPhone(testInfo)`.
+- **Forms on a read-only site:** check what the markup says (`type`,
+  `required`, `name`, `placeholder`, the label) and stop. Never type into a
+  field or click submit, not even with the form empty. Say in the finding what
+  is inferred from markup, such as the phone keyboard a field's type would
+  bring up.
 
 ## Skeleton specs
 
@@ -54,14 +126,32 @@ The template's specs come from a documentation site (docs, downloads,
 search). For each one, keep what fits the site, rewrite it with the site's
 selectors, or remove it, and log which and why. Update
 `scripts/template-check.js`'s spec list, the npm scripts, and the CI jobs to
-match (step 5 finishes the CI side). `TC_ERROR_006` clicks submit on the first
-form it finds: on a read-only site, remove it.
+match (step 5 finishes the CI side). `template-check` fails while
+`package.json` or `qa-test.yml` still names a removed spec. `TC_ERROR_006`
+clicks submit on the first form it finds: on a read-only site, remove it.
+
+`check-links.spec.js` crawls from `/` along `<a href>` links. Set its domains
+and start pages for the site. If the crawl can't reach the pages (a login
+wall, or a single-page app whose links are buttons), rewrite it to check what
+the site does link to instead, such as its images and outbound links.
 
 ## Proving the tests
 
 Run every spec against the site, on desktop and phone, twice. A test that
 passes must be able to fail, and a test that fails must fail on a real defect,
-which the log names. The procedure for the first is in
+which the log names. The procedure for both is in
 [`shared-rules.md`](shared-rules.md) ("Prove a test can fail"). Use
 `expect.soft` where one test checks several things, so one defect doesn't hide
-the others.
+the others. In a loop over pages, make a failed page load soft too, so one page
+can't stop the rest being checked.
+
+Two things that look like flaky tests but aren't:
+
+- **A page that times out only after a very long page.** A full-page
+  screenshot of a tall page used to stall the browser; `utils.js` now takes a
+  screen-sized shot over 20,000 px. Load the page on its own before filing it.
+- **A test that's slow only while it's red.** A web-first assertion
+  (`toHaveAttribute`, `toHaveURL`) retries until its timeout, 5 s each, before
+  failing, so a test with many failing soft checks takes minutes. Where a value
+  is fixed once the page has settled, wait for the page, then read the value
+  once and compare it (`expect.soft(await el.getAttribute('src')).toMatch(…)`).
