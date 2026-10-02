@@ -54,7 +54,7 @@ user story ──► test case(s) ──► automated test ──► CI run ─�
 ### Test case IDs
 
 ```
-TC_<AREA>_<NNN>     e.g. TC_SMOKE_001, TC_SEARCH_004, TC_CART_002
+TC_<AREA>_<NNN>     e.g. TC_SMOKE_001, TC_A11Y_001, TC_CART_002
 ```
 
 `<AREA>` is a short, stable name for the feature or suite; `<NNN>` is the next
@@ -187,7 +187,7 @@ Decide which of these it is before doing anything else:
 
 | What | Where |
 |---|---|
-| URLs, paths, and test data | `config-helper.js` (`buildURL`, `urlPatterns`, `testData`) |
+| URLs, the site's pages, menu, and forms, and test data | `config-helper.js` (`buildURL`, `siteConfig`, `testData`) |
 | Element selectors | `selectors.js` (`selectors.<name>(page)`) |
 | Reusable flows | `test-helpers.js` (`testPatterns`, `testElementVisibility`, …) |
 | Base URLs per environment | `playwright.config.js` projects (`staging`, `production`, …) |
@@ -198,32 +198,29 @@ Decide which of these it is before doing anything else:
 ```javascript
 import { test, expect } from '@playwright/test';
 import { selectors } from '../selectors.js';
-import { buildURL, urlPatterns, testData } from '../config-helper.js';
-import { testPatterns } from '../test-helpers.js';
+import { buildURL } from '../config-helper.js';
 
-test.describe('Search Tests', () => {
-  test('TC_SEARCH_006 Search returns results for a known term', {
+test.describe('Pricing Tests', () => {
+  test('TC_PRICING_001 The pricing page lists the three plans', {
     tag: '@smoke',                      // only if it's a smoke test
     annotation: [
-      { type: 'test_case', description: 'TC_SEARCH_006' },
+      { type: 'test_case', description: 'TC_PRICING_001' },
       { type: 'issue', description: 'https://github.com/<org>/<repo>/issues/42' },
     ],
   }, async ({ page }, testInfo) => {
     // Arrange: build the URL from the project's baseURL, never hard-code it
-    const url = buildURL(testInfo, urlPatterns.search, {
-      params: { q: testData.searchTerms.working },
-    });
-    await testPatterns.loadAndValidatePage(page, testInfo, url, 'TC_SEARCH_006');
+    await page.goto(buildURL(testInfo, '/pricing'));
 
     // Assert: web-first assertions wait for the condition by themselves
-    await expect(selectors.searchResults(page).first()).toBeVisible();
+    await expect(selectors.site.mainHeading(page)).toHaveText('Pricing');
+    await expect(page.getByRole('heading', { level: 2 })).toHaveCount(3);
   });
 });
 ```
 
 Conventions:
 
-- **Put the ID first in the title.** It makes `-g TC_SEARCH_006` work and
+- **Put the ID first in the title.** It makes `-g TC_PRICING_001` work and
   puts the ID on the dashboard, which shows test titles.
 - **Declare annotations in the test's details object**, as above. Annotations
   pushed at runtime (`testInfo.annotations.push`) are invisible to
@@ -244,9 +241,9 @@ Conventions:
 3. **Write the test** in the right spec, following the anatomy above.
 4. **Run it**:
    ```bash
-   npx playwright test -g "TC_SEARCH_006" --project=staging
-   npx playwright test -g "TC_SEARCH_006" --project=staging --headed   # watch it
-   npx playwright test -g "TC_SEARCH_006" --project=staging --debug    # step through it
+   npx playwright test -g "TC_PRICING_001" --project=staging
+   npx playwright test -g "TC_PRICING_001" --project=staging --headed   # watch it
+   npx playwright test -g "TC_PRICING_001" --project=staging --debug    # step through it
    ```
 5. **Check that it can fail.** Break the expectation briefly and confirm the
    test goes red, then restore it.

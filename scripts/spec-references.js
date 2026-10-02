@@ -4,7 +4,8 @@
  * Finds spec paths that `package.json`'s scripts or the CI workflow name but
  * that don't exist. When an Engagement removes a skeleton spec (step 3 of
  * new-engagement), the npm script and CI job for it are easy to leave behind:
- * every Engagement so far did. `scripts/template-check.js` runs this and fails
+ * every Engagement so far did. `scripts/test-skeleton.js` names the skeleton
+ * specs too. `scripts/template-check.js` runs this and fails
  * on any it finds.
  */
 
@@ -23,7 +24,7 @@ export function specPathsIn(text) {
  * @param {string[]} [files] - repo-relative files to read; missing ones are skipped
  * @returns {{file: string, spec: string}[]} the references to specs that don't exist
  */
-export function findMissingSpecReferences(repoRoot, files = ['package.json', '.github/workflows/qa-test.yml']) {
+export function findMissingSpecReferences(repoRoot, files = ['package.json', '.github/workflows/qa-test.yml', 'scripts/test-skeleton.js']) {
   const missing = [];
   for (const file of files) {
     const full = path.join(repoRoot, file);

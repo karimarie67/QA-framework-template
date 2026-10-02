@@ -32,7 +32,7 @@ repository keeps its own base SHA, branch, verification result, and pull request
 
 ### Structure
 
-- `tests/` — Playwright spec files (smoke, regression, error handling, documentation, download/search, link-checker tests) plus `tests/unit/` unit tests
+- `tests/` — Playwright spec files: the site-agnostic skeleton (smoke, error handling, read-only forms, accessibility) and the link checker, plus `tests/unit/` unit tests and `tests/fixtures/site/` (the fixture site `npm run test:skeleton` runs the skeleton against)
 - `docs/` — Atlas agent docs and remaining process documentation
 - `dashboards/` — QA metrics dashboard generator and published dashboard, auto-committed by CI after each run
 - `scripts/` — Support scripts, including the `template-check` structural smoke check

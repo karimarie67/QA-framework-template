@@ -1,4 +1,5 @@
-import { test, devices } from '@playwright/test';
+import fs from 'fs';
+import { devices } from '@playwright/test';
 
 /**
  * Get the base URL from the current project configuration
@@ -13,7 +14,7 @@ export function getBaseURL(testInfo) {
 
 /**
  * Build a URL relative to the current project's base URL
- * @param {import('@playwright/test').TestInfo} testInfo - Test info object  
+ * @param {import('@playwright/test').TestInfo} testInfo - Test info object
  * @param {string} path - The path to append to base URL
  * @param {Object} options - URL options
  * @param {boolean} options.cachebust - Add cachebust parameter
@@ -23,71 +24,120 @@ export function getBaseURL(testInfo) {
 export function buildURL(testInfo, path = '/', options = {}) {
   const baseURL = getBaseURL(testInfo);
   const url = new URL(path, baseURL);
-  
+
   if (options.cachebust) {
     url.searchParams.set('cachebust', Date.now().toString());
   }
-  
+
   if (options.params) {
     Object.entries(options.params).forEach(([key, value]) => {
       url.searchParams.set(key, value);
     });
   }
-  
+
   return url.toString();
 }
 
 /**
- * Common URL patterns used in tests
+ * The site under test: what the skeleton specs check. Fill it in from a probe
+ * of the site (.claude/skills/new-engagement/site-config.md). Every value
+ * below is a placeholder.
+ *
+ * - pages: each page's path and title. A title in slashes ("/Shop|Store/i")
+ *   is a pattern; anything else must match exactly.
+ * - nav: the header menu's links, by accessible name, and where each goes.
+ * - footer.links: the footer's links, by accessible name.
+ * - notFoundPath / notFoundText: an address that isn't a page, and the text
+ *   its not-found page shows.
+ * - malformedPaths: addresses that must never cause a server error (5xx).
+ * - forms: each form's page, a CSS selector for it (default "form"), and its
+ *   fields by their exact label, with the input type and whether it's
+ *   required. The forms spec only reads them; it never types or submits.
+ * - a11y.exclude: CSS selectors the accessibility scan skips (third-party
+ *   embeds the client doesn't control).
  */
-export const urlPatterns = {
-  homepage: '/',
-  libraries: '/libraries/',
-  releases: '/releases/',
-  // TODO(Engagement): placeholder - align with docLibsVersion's path scheme below.
-  documentation: '/docs/',
-  community: '/community/',
-  search: '/search/',
-  // Version-specific URLs
-  // TODO(Engagement): this path scheme and default version are placeholders -
-  // update them to match the Engagement's actual versioned-docs URL structure.
-  docLibsVersion: (version = '1_0_0') => `/docs/${version}/`,
-  releaseNotes: (version = '1_0_0') => `/docs/${version}/release_notes/`,
+export const defaultSiteConfig = {
+  // TODO(Engagement): every page to check, from the probe.
+  pages: [
+    { path: '/', title: 'Example Domain' },
+  ],
+  // TODO(Engagement): the header menu's links.
+  nav: [
+    { name: 'Home', path: '/' },
+  ],
+  // TODO(Engagement): the footer's links.
+  footer: { links: ['Privacy'] },
+  // TODO(Engagement): an address that isn't a page, and what its 404 page says.
+  notFoundPath: '/this-page-does-not-exist',
+  notFoundText: 'not found',
+  malformedPaths: ['/%ZZ', '/..%2f..%2f', '/<script>'],
+  // TODO(Engagement): each form, and its fields by their exact label.
+  forms: [
+    {
+      path: '/contact',
+      selector: 'form',
+      fields: [
+        { label: 'Email', type: 'email', required: true },
+      ],
+    },
+  ],
+  a11y: { exclude: [] },
 };
 
 /**
- * Expected URL patterns for navigation validation
+ * The Site config the specs use: the JSON file named by QA_SITE_CONFIG when
+ * it's set (for testing the template against its fixture site, or a site's
+ * config kept outside the code), otherwise defaultSiteConfig.
+ * @param {Record<string, string | undefined>} env
  */
-export const expectedUrlPatterns = {
-  afterCTAClick: /libraries|releases|docs|learn|download/i,
-  afterSearch: /search|results|q=/i,
-  afterLogoClick: /\/?$/,
-  // TODO(Engagement): replace with the Engagement's actual GitHub org/repo pattern.
-  githubBoost: /github\.com\/<your-org>/,
-  // TODO(Engagement): replace with the Engagement's actual download host/site pattern.
-  downloadSite: /downloads?\.example\.com|download|release/i,
-  // TODO(Engagement): replace with the Engagement's actual community-link pattern.
-  communityLinks: /github.com.*issues|discourse|community\.example\.com/i,
-};
+export function loadSiteConfig(env = process.env) {
+  const file = env.QA_SITE_CONFIG;
+  if (!file) return defaultSiteConfig;
+  let text;
+  try {
+    text = fs.readFileSync(file, 'utf8');
+  } catch (err) {
+    throw new Error(`QA_SITE_CONFIG names a file that can't be read: ${file} (${err.code || err.message})`);
+  }
+  try {
+    return JSON.parse(text);
+  } catch (err) {
+    throw new Error(`QA_SITE_CONFIG names a file that isn't valid JSON: ${file} (${err.message})`);
+  }
+}
+
+export const siteConfig = loadSiteConfig();
+
+/**
+ * A page title from siteConfig as Playwright expects it: "/pattern/flags" is a
+ * RegExp, anything else an exact string.
+ * @param {string} title
+ */
+export function titleMatcher(title) {
+  const m = /^\/(.+)\/([a-z]*)$/.exec(title);
+  return m ? new RegExp(m[1], m[2]) : title;
+}
+
+/**
+ * A siteConfig list that must not be empty: a test looping over an empty list
+ * would pass while checking nothing.
+ * @param {string} name - e.g. "pages", "footer.links"
+ * @param {unknown[]} list
+ */
+export function requireEntries(name, list) {
+  if (!Array.isArray(list) || list.length === 0) {
+    throw new Error(`siteConfig.${name} is empty: configure it (see .claude/skills/new-engagement/site-config.md)`);
+  }
+  return list;
+}
 
 /**
  * Test data constants
  */
 export const testData = {
-  searchTerms: {
-    // TODO(Engagement): replace with search terms known to return results on the target site.
-    working: 'example-search-term', // Known to work
-    alternative: 'example-alternative-term',
-  },
-  downloadFiles: {
-    // TODO(Engagement): replace with the Engagement's actual downloadable filename patterns.
-    tarGz: /example[-_]?\S*\.tar\.gz$/,
-    zip: /example[-_]?\S*\.zip$/,
-    supported: /\.(zip|tar\.gz|tar\.bz2|7z|exe)$/,
-  },
   timeouts: {
     short: 5000,
-    medium: 15000, 
+    medium: 15000,
     long: 30000,
     download: 60000,
   },

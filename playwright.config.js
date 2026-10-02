@@ -1,5 +1,16 @@
 import { defineConfig, devices } from '@playwright/test';
 
+// QA_BASE_URL points every staging and production project at one address, for
+// testing the template against its fixture site (npm run test:skeleton) or a
+// preview deploy. Namespaced, since many machines export BASE_URL for other
+// projects; logged, so a run never silently tests another site.
+const QA_BASE_URL = process.env.QA_BASE_URL;
+if (QA_BASE_URL) console.log(`QA_BASE_URL in use: ${QA_BASE_URL}`);
+const site = placeholder => QA_BASE_URL || placeholder;
+
+// The link checker crawls the whole site: it runs only on its own project.
+const notTheLinkChecker = /check-links\.spec\.js$/;
+
 export default defineConfig({
   // Playwright empties its output directory at the start of every run. Keep it
   // away from `test-results/`, which holds committed proof of work
@@ -12,6 +23,7 @@ export default defineConfig({
   projects: [
     {
       name: 'local',
+      testIgnore: notTheLinkChecker,
       use: {
         baseURL: 'http://localhost:8000',
         browserName: 'chromium',
@@ -23,9 +35,10 @@ export default defineConfig({
     
     {
       name: 'staging',
+      testIgnore: notTheLinkChecker,
       use: {
         // TODO(Engagement): replace with your actual staging URL
-        baseURL: 'https://staging.example.com',
+        baseURL: site('https://staging.example.com'),
         browserName: 'chromium',
         headless: true,
         viewport: { width: 1280, height: 720 },
@@ -34,9 +47,10 @@ export default defineConfig({
     },
     {
       name: 'production',
+      testIgnore: notTheLinkChecker,
       use: {
         // TODO(Engagement): replace with your actual production URL
-        baseURL: 'https://www.example.com',
+        baseURL: site('https://www.example.com'),
         browserName: 'chromium',
         headless: true,
         viewport: { width: 1280, height: 720 },
@@ -45,12 +59,13 @@ export default defineConfig({
     },
     {
       name: 'staging-mobile',
+      testIgnore: notTheLinkChecker,
       use: {
         // A phone emulation, not a narrow desktop window: many sites send phones
         // a separate layout (for example a menu button instead of the header menu).
         ...devices['Pixel 5'],
         // TODO(Engagement): replace with your actual staging URL
-        baseURL: 'https://staging.example.com',
+        baseURL: site('https://staging.example.com'),
         browserName: 'chromium',
         headless: true,
         trace: 'on-first-retry',
@@ -58,12 +73,13 @@ export default defineConfig({
     },
     {
       name: 'production-mobile',
+      testIgnore: notTheLinkChecker,
       use: {
         // A phone emulation, not a narrow desktop window: many sites send phones
         // a separate layout (for example a menu button instead of the header menu).
         ...devices['Pixel 5'],
         // TODO(Engagement): replace with your actual production URL
-        baseURL: 'https://www.example.com',
+        baseURL: site('https://www.example.com'),
         browserName: 'chromium',
         headless: true,
         trace: 'on-first-retry',
