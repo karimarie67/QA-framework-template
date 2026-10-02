@@ -1,0 +1,46 @@
+fixture site on http://127.0.0.1:8765 (BREAK=img-no-alt)
+QA_BASE_URL in use: http://127.0.0.1:8765
+
+Running 1 test using 1 worker
+
+QA_BASE_URL in use: http://127.0.0.1:8765
+/: critical image-alt (1 node), first: ["img"]
+  ✘  1 [production] › tests/accessibility_tests.spec.js:14:3 › Accessibility Tests › TC_A11Y_001 No page has a serious or critical accessibility violation (817ms)
+
+
+  1) [production] › tests/accessibility_tests.spec.js:14:3 › Accessibility Tests › TC_A11Y_001 No page has a serious or critical accessibility violation 
+
+    Error: serious or critical accessibility violations
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "/: critical image-alt (1)",
+    + ]
+
+      52 |     }
+      53 |     await captureEvidence(page, testInfo);
+    > 54 |     expect(blocking, 'serious or critical accessibility violations').toEqual([]);
+         |                                                                      ^
+      55 |   });
+      56 | });
+      57 |
+        at ~/QA-framework-template/tests/accessibility_tests.spec.js:54:70
+
+    attachment #4: screenshot (image/png) ──────────────────────────────────────────────────────────
+    playwright-output/accessibility_tests-Access-88ce1-cal-accessibility-violation-production/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: playwright-output/accessibility_tests-Access-88ce1-cal-accessibility-violation-production/error-context.md
+
+  1 failed
+    [production] › tests/accessibility_tests.spec.js:14:3 › Accessibility Tests › TC_A11Y_001 No page has a serious or critical accessibility violation 
+
+To open last HTML report run:
+
+  npx playwright show-report
+

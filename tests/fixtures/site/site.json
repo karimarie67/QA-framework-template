@@ -1,0 +1,27 @@
+{
+  "pages": [
+    { "path": "/", "title": "Home | Fixture" },
+    { "path": "/about", "title": "About | Fixture" },
+    { "path": "/contact", "title": "Contact | Fixture" }
+  ],
+  "nav": [
+    { "name": "Home", "path": "/" },
+    { "name": "About", "path": "/about" },
+    { "name": "Contact", "path": "/contact" }
+  ],
+  "footer": { "links": ["Privacy", "Terms"] },
+  "notFoundPath": "/this-page-does-not-exist",
+  "notFoundText": "Page not found",
+  "malformedPaths": ["/%ZZ", "/..%2f..%2f", "/<script>"],
+  "forms": [
+    {
+      "path": "/contact",
+      "selector": "form",
+      "fields": [
+        { "label": "Name", "type": "text", "required": true },
+        { "label": "Email", "type": "email", "required": true }
+      ]
+    }
+  ],
+  "a11y": { "exclude": [] }
+}

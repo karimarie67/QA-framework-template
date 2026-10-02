@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { testStatus, parsePlaywrightJson, calculateMetrics, slackPayload } from '../../dashboards/scripts/generate-dashboard.js';
+import { testStatus, parsePlaywrightJson, calculateMetrics, slackPayload, collectTestResults } from '../../dashboards/scripts/generate-dashboard.js';
 
 const attempt = (status, duration = 1000) => ({ status, duration, errors: status === 'failed' ? [{ message: 'boom' }] : [] });
 
@@ -107,5 +107,30 @@ test('slackPayload', async t => {
   await t.test("uses Slack's bold (single asterisks), not Markdown's", () => {
     const p = slackPayload({ ...base, failed: 1, flaky: 2 }, env);
     assert.doesNotMatch(JSON.stringify(p), /\*\*/);
+  });
+});
+
+test('collectTestResults', async t => {
+  // The same artifact names and files the workflow uploads (qa-test.yml).
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'artifacts-'));
+  const write = (rel, specs) => {
+    fs.mkdirSync(path.dirname(path.join(dir, rel)), { recursive: true });
+    fs.writeFileSync(path.join(dir, rel), JSON.stringify({ suites: [{ specs }] }));
+  };
+  const spec = (title, status) => ({ title, tests: [{ projectName: 'staging', status, results: [attempt(status === 'expected' ? 'passed' : 'failed')] }] });
+  write('smoke-test-results/smoke-results.json', [spec('TC_SMOKE_001 a', 'expected')]);
+  write('functional-test-results/functional-results.json', [spec('TC_ERROR_001 b', 'expected'), spec('TC_FORM_001 c', 'unexpected'), spec('TC_A11Y_001 d', 'expected')]);
+
+  await t.test('reads the smoke and the functional artifact, with their test counts', () => {
+    const results = collectTestResults(dir);
+    assert.equal(results.smoke.length, 1);
+    assert.equal(results.functional.length, 3);
+    assert.deepEqual(results.functional.map(x => x.name), ['TC_ERROR_001 b', 'TC_FORM_001 c', 'TC_A11Y_001 d']);
+  });
+
+  await t.test('finds nothing where no artifacts were downloaded', () => {
+    const empty = fs.mkdtempSync(path.join(os.tmpdir(), 'artifacts-'));
+    const results = collectTestResults(empty);
+    assert.equal(results.smoke.length + results.functional.length, 0);
   });
 });

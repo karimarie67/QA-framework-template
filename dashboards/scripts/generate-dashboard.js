@@ -64,17 +64,21 @@ function main() {
   console.log('✅ Dashboard generated successfully!');
 }
 
-function collectTestResults() {
+/**
+ * Read the CI artifacts: the smoke suite's results, and the functional
+ * suite's (error handling, forms, and accessibility, in one file). The paths
+ * match the artifact names and files in .github/workflows/qa-test.yml.
+ * @param {string} artifactsDir
+ */
+function collectTestResults(artifactsDir = ARTIFACTS_DIR) {
   const results = { smoke: [], functional: [] };
 
   const files = {
-    smoke: path.join(ARTIFACTS_DIR, 'smoke-test-results/smoke-results.json')
+    smoke: path.join(artifactsDir, 'smoke-test-results/smoke-results.json')
   };
 
   const functionalFiles = [
-    path.join(ARTIFACTS_DIR, 'error-handling-test-results/error-handling-results.json'),
-    path.join(ARTIFACTS_DIR, 'download-search-test-results/download-search-results.json'),
-    path.join(ARTIFACTS_DIR, 'documentation-test-results/documentation-results.json')
+    path.join(artifactsDir, 'functional-test-results/functional-results.json')
   ];
 
   // Process Standard Files
@@ -391,4 +395,4 @@ if (process.argv[1] && fs.realpathSync(process.argv[1]) === fs.realpathSync(file
   main();
 }
 
-export { testStatus, parsePlaywrightJson, calculateMetrics, slackPayload };
+export { testStatus, parsePlaywrightJson, calculateMetrics, slackPayload, collectTestResults };

@@ -122,13 +122,38 @@ When the tests run against the live site, keep the load gentle:
 
 ## Skeleton specs
 
-The template's specs come from a documentation site (docs, downloads,
-search). For each one, keep what fits the site, rewrite it with the site's
-selectors, or remove it, and log which and why. Update
-`scripts/template-check.js`'s spec list, the npm scripts, and the CI jobs to
-match (step 5 finishes the CI side). `template-check` fails while
-`package.json` or `qa-test.yml` still names a removed spec. `TC_ERROR_006`
-clicks submit on the first form it finds: on a read-only site, remove it.
+The template ships four site-agnostic specs, driven by one `siteConfig` block
+in `config-helper.js`:
+
+| Spec | Checks |
+|---|---|
+| `smoke_tests.spec.js` | Every page loads with its title and one `<h1>`; the header menu's links reach their pages (on a phone, through its menu button); the footer and its links |
+| `error_handling_tests.spec.js` | An unknown address gets a 404 with a not-found message; a malformed address never causes a 5xx |
+| `forms_tests.spec.js` | Each form's fields have their label, type, and required state. **Read-only**: it never types or submits, and fails if a request other than GET or HEAD goes to the site's own origin |
+| `accessibility_tests.spec.js` | An axe-core scan of every page against WCAG 2.1 A and AA: fails on serious and critical violations, and lists the rest |
+
+Fill in `siteConfig` from the probe: `pages` (path and title; a title in
+slashes is a pattern), `nav` and `footer.links` (by accessible name),
+`notFoundPath` and `notFoundText`, `malformedPaths`, `forms` (path, a CSS
+`selector`, and fields by exact label), and `a11y.exclude` (third-party
+embeds). An empty list fails its test on purpose, so a test can't pass
+checking nothing. Then extend the specs with the site's own checks, or add
+specs, by its areas.
+
+Keep what fits, and remove what doesn't, and log which and why. **A site with
+no forms**: remove `forms_tests.spec.js`, and drop it from the
+`functional-tests` CI job, `test:regression`, and
+`scripts/test-skeleton.js`. Update `scripts/template-check.js`'s spec list
+too: `template-check` fails while `package.json`, `qa-test.yml`, or
+`test-skeleton.js` still names a removed spec.
+
+**Two overrides** let the same specs run against another address without
+editing the config: `QA_BASE_URL` (the staging and production projects'
+base URL) and `QA_SITE_CONFIG` (a JSON Site config). The template uses them
+for its own self-test: `npm run test:skeleton` runs the four specs against a
+small committed fixture site (`tests/fixtures/site/`), and CI's
+`skeleton-self-test` job runs that on every push and PR. An Engagement may
+keep the fixture and job as a check of its specs' plumbing, or remove them.
 
 `check-links.spec.js` crawls from `/` along `<a href>` links. Set its domains
 and start pages for the site. If the crawl can't reach the pages (a login

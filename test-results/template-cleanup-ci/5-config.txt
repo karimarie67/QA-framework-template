@@ -1,2 +1,0 @@
-== 5. ES-module config loads
-Total: 161 tests in 5 files

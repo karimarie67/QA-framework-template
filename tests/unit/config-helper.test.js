@@ -1,10 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import {
   getBaseURL,
   buildURL,
-  urlPatterns,
-  expectedUrlPatterns,
+  defaultSiteConfig,
+  loadSiteConfig,
+  siteConfig,
+  titleMatcher,
+  requireEntries,
   testData,
 } from '../../config-helper.js';
 
@@ -71,106 +77,88 @@ test('buildURL', async t => {
   });
 });
 
-test('urlPatterns', async t => {
-  const expectedKeys = [
-    'homepage',
-    'libraries',
-    'releases',
-    'documentation',
-    'community',
-    'search',
-    'docLibsVersion',
-    'releaseNotes',
-  ];
-
-  await t.test('is an object with exactly the expected keys', () => {
-    assert.equal(typeof urlPatterns, 'object');
-    assert.deepEqual(Object.keys(urlPatterns).sort(), [...expectedKeys].sort());
+test('siteConfig', async t => {
+  await t.test('has every section the skeleton specs read', () => {
+    for (const key of ['pages', 'nav', 'footer', 'notFoundPath', 'notFoundText', 'malformedPaths', 'forms', 'a11y']) {
+      assert.ok(key in defaultSiteConfig, key);
+    }
+    assert.ok(Array.isArray(defaultSiteConfig.footer.links));
+    assert.ok(Array.isArray(defaultSiteConfig.a11y.exclude));
   });
 
-  await t.test('docLibsVersion is a function returning a string containing the version arg', () => {
-    assert.equal(typeof urlPatterns.docLibsVersion, 'function');
-    const result = urlPatterns.docLibsVersion('2_3_4');
-    assert.equal(typeof result, 'string');
-    assert.ok(result.includes('2_3_4'));
-  });
-
-  await t.test('releaseNotes is a function returning a string containing the version arg', () => {
-    assert.equal(typeof urlPatterns.releaseNotes, 'function');
-    const result = urlPatterns.releaseNotes('9_9_9');
-    assert.equal(typeof result, 'string');
-    assert.ok(result.includes('9_9_9'));
-  });
-});
-
-test('expectedUrlPatterns', async t => {
-  const expectedKeys = [
-    'afterCTAClick',
-    'afterSearch',
-    'afterLogoClick',
-    'githubBoost',
-    'downloadSite',
-    'communityLinks',
-  ];
-
-  await t.test('is an object with exactly the expected keys', () => {
-    assert.equal(typeof expectedUrlPatterns, 'object');
-    assert.deepEqual(Object.keys(expectedUrlPatterns).sort(), [...expectedKeys].sort());
-  });
-
-  await t.test('every value is a RegExp', () => {
-    for (const key of expectedKeys) {
-      assert.ok(
-        expectedUrlPatterns[key] instanceof RegExp,
-        `expected expectedUrlPatterns.${key} to be a RegExp`
-      );
+  await t.test('each page has a path and a title', () => {
+    for (const page of defaultSiteConfig.pages) {
+      assert.match(page.path, /^\//);
+      assert.equal(typeof page.title, 'string');
     }
   });
 
-  await t.test('afterCTAClick matches a post-CTA-click URL and rejects an unrelated one', () => {
-    assert.match('https://www.example.com/libraries/', expectedUrlPatterns.afterCTAClick);
-    assert.doesNotMatch('https://www.example.com/about/', expectedUrlPatterns.afterCTAClick);
+  await t.test('each form has a path and labelled fields', () => {
+    for (const form of defaultSiteConfig.forms) {
+      assert.match(form.path, /^\//);
+      for (const f of form.fields) {
+        assert.equal(typeof f.label, 'string');
+        assert.equal(typeof f.required, 'boolean');
+      }
+    }
   });
 
-  await t.test('afterSearch matches a search results URL and rejects an unrelated one', () => {
-    assert.match('https://www.example.com/search/?q=widgets', expectedUrlPatterns.afterSearch);
-    assert.doesNotMatch('https://www.example.com/about/', expectedUrlPatterns.afterSearch);
+  await t.test('without QA_SITE_CONFIG, the specs get the committed defaults', () => {
+    // The unit tests run without QA_SITE_CONFIG set.
+    assert.equal(process.env.QA_SITE_CONFIG, undefined);
+    assert.deepEqual(siteConfig, defaultSiteConfig);
+  });
+});
+
+test('loadSiteConfig (the QA_SITE_CONFIG override)', async t => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'siteconfig-'));
+
+  await t.test('unset gives the defaults', () => {
+    assert.equal(loadSiteConfig({}), defaultSiteConfig);
   });
 
-  await t.test('afterLogoClick matches the homepage root', () => {
-    assert.match('https://www.example.com/', expectedUrlPatterns.afterLogoClick);
+  await t.test('set gives the named file\'s values', () => {
+    const file = path.join(dir, 'site.json');
+    fs.writeFileSync(file, JSON.stringify({ pages: [{ path: '/x', title: 'X' }] }));
+    assert.deepEqual(loadSiteConfig({ QA_SITE_CONFIG: file }), { pages: [{ path: '/x', title: 'X' }] });
   });
 
-  await t.test('githubBoost matches the placeholder github org pattern and rejects an unrelated URL', () => {
-    assert.match('https://github.com/<your-org>/example-repo', expectedUrlPatterns.githubBoost);
-    assert.doesNotMatch('https://gitlab.com/other-org/example-repo', expectedUrlPatterns.githubBoost);
+  await t.test('a missing file throws, naming the path', () => {
+    const file = path.join(dir, 'missing.json');
+    assert.throws(() => loadSiteConfig({ QA_SITE_CONFIG: file }), new RegExp(`can't be read: ${file.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`));
   });
 
-  await t.test('downloadSite matches a download URL and rejects an unrelated one', () => {
-    assert.match('https://downloads.example.com/latest', expectedUrlPatterns.downloadSite);
-    assert.doesNotMatch('https://www.example.com/about/', expectedUrlPatterns.downloadSite);
+  await t.test('an invalid file throws, naming the path', () => {
+    const file = path.join(dir, 'bad.json');
+    fs.writeFileSync(file, '{ not json');
+    assert.throws(() => loadSiteConfig({ QA_SITE_CONFIG: file }), /isn't valid JSON/);
+  });
+});
+
+test('titleMatcher', async t => {
+  await t.test('a plain title is matched exactly', () => {
+    assert.equal(titleMatcher('Home | Shop'), 'Home | Shop');
   });
 
-  await t.test('communityLinks matches a github issues URL and rejects an unrelated one', () => {
-    assert.match('https://github.com/example-org/example-repo/issues', expectedUrlPatterns.communityLinks);
-    assert.doesNotMatch('https://www.example.com/about/', expectedUrlPatterns.communityLinks);
+  await t.test('a /pattern/flags title becomes a RegExp', () => {
+    const m = titleMatcher('/shop|store/i');
+    assert.ok(m instanceof RegExp);
+    assert.ok(m.test('The STORE'));
+  });
+});
+
+test('requireEntries', async t => {
+  await t.test('returns a non-empty list', () => {
+    assert.deepEqual(requireEntries('pages', [1]), [1]);
+  });
+
+  await t.test('throws on an empty or missing list, naming it', () => {
+    assert.throws(() => requireEntries('pages', []), /siteConfig\.pages is empty/);
+    assert.throws(() => requireEntries('footer.links', undefined), /siteConfig\.footer\.links is empty/);
   });
 });
 
 test('testData', async t => {
-  await t.test('searchTerms.working and .alternative are non-empty strings', () => {
-    assert.equal(typeof testData.searchTerms.working, 'string');
-    assert.ok(testData.searchTerms.working.length > 0);
-    assert.equal(typeof testData.searchTerms.alternative, 'string');
-    assert.ok(testData.searchTerms.alternative.length > 0);
-  });
-
-  await t.test('downloadFiles.tarGz/.zip/.supported are RegExps', () => {
-    assert.ok(testData.downloadFiles.tarGz instanceof RegExp);
-    assert.ok(testData.downloadFiles.zip instanceof RegExp);
-    assert.ok(testData.downloadFiles.supported instanceof RegExp);
-  });
-
   await t.test('timeouts.short/medium/long/download are numbers', () => {
     assert.equal(typeof testData.timeouts.short, 'number');
     assert.equal(typeof testData.timeouts.medium, 'number');
@@ -183,5 +171,9 @@ test('testData', async t => {
       assert.equal(typeof testData.viewport[key].width, 'number');
       assert.equal(typeof testData.viewport[key].height, 'number');
     }
+  });
+
+  await t.test('holds only timeouts and viewport (site data lives in siteConfig)', () => {
+    assert.deepEqual(Object.keys(testData).sort(), ['timeouts', 'viewport']);
   });
 });

@@ -54,7 +54,9 @@ npm install
 npx playwright install chromium
 
 npm run test:smoke           # smoke tests, desktop and phone (staging projects)
-npm run test:regression      # regression suite (documentation, download/search, error handling), desktop and phone
+npm run test:regression      # regression suite (error handling, forms, accessibility), desktop and phone
+npm run test:a11y            # the accessibility scan only, desktop and phone
+npm run test:skeleton        # the four skeleton specs against the committed fixture site
 npm run test:links           # link checker
 npm run test:unit            # unit tests for the Site config, helpers, scripts, and dashboard
 npm run test:template-check  # structural check: the config imports, the specs are found, and every spec CI names exists
@@ -85,9 +87,11 @@ sites, logins, proving each test can fail) is in
 
 - `unit-tests` and `template-check` run on every push and PR to
   `main`/`develop`, with no configuration needed.
-- The browser e2e jobs (`smoke-tests`, `error-handling-tests`,
-  `download-search-tests`, `documentation-tests`) run the desktop and phone
-  projects, but only via manual `workflow_dispatch` until the Site config is
+- `skeleton-self-test` runs the four skeleton specs against the committed
+  fixture site (`tests/fixtures/site/`) on every push and PR, so a change that
+  breaks a spec is caught before an Engagement meets it.
+- The browser e2e jobs (`smoke-tests`, and `functional-tests` for error
+  handling, forms, and accessibility) run the desktop and phone projects, but only via manual `workflow_dispatch` until the Site config is
   real. The workflow's comments give the conditions an Engagement switches on
   to run them on every push and PR (`/new-engagement` step 5).
 - The `link-check` job runs only on manual dispatch, with `links` or `all`.

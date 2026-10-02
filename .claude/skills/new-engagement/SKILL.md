@@ -203,8 +203,10 @@ In `.github/workflows/qa-test.yml`:
 - Run the e2e jobs on push and PR (not only on dispatch). Each job already runs
   the desktop and `-mobile` projects. Change each job's `if:` to the
   expression in the comment above `smoke-tests`.
-- Drop the jobs for specs removed in step 3, **and** take them out of the
-  `needs` list of `update-dashboard`; `template-check` fails while the workflow
+- The template's e2e jobs are `smoke-tests` (the smoke spec) and
+  `functional-tests` (error handling, forms, and accessibility in one job and
+  one JSON file). Drop the specs removed in step 3 from them, and any job left
+  with no spec, **and** take it out of the `needs` list of `update-dashboard`; `template-check` fails while the workflow
   still names a removed spec. The dashboard job runs only on dispatch, so
   without a change it never updates from a push to `main`. Change its `if:`
   to the expression in its comment: on dispatch (except a links-only run) and

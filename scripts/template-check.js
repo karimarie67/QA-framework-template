@@ -9,8 +9,9 @@
  * 2. Confirms the tracked playwright.config.js can discover every spec in
  *    its testDir (via `playwright test --list --reporter=json`), and that
  *    the five expected top-level specs are all present.
- * 3. Confirms every `tests/….spec.js` that package.json's scripts or
- *    .github/workflows/qa-test.yml name exists (scripts/spec-references.js).
+ * 3. Confirms every `tests/….spec.js` that package.json's scripts,
+ *    .github/workflows/qa-test.yml, or scripts/test-skeleton.js name exists
+ *    (scripts/spec-references.js).
  *
  * This is not a syntax linter. `node --check` was considered and rejected:
  * on a `.js` file containing an `import` statement, Node's module-syntax
@@ -31,9 +32,9 @@ const repoRoot = path.resolve(__dirname, '..');
 
 const EXPECTED_SPECS = [
   'smoke_tests.spec.js',
-  'documentation_tests.spec.js',
-  'download_search_tests.spec.js',
   'error_handling_tests.spec.js',
+  'forms_tests.spec.js',
+  'accessibility_tests.spec.js',
   'check-links.spec.js',
 ];
 
@@ -156,7 +157,7 @@ function checkSpecReferences() {
     }
     process.exit(1);
   }
-  console.log('OK: every spec named in package.json and qa-test.yml exists.');
+  console.log('OK: every spec named in package.json, qa-test.yml, and test-skeleton.js exists.');
 }
 
 async function main() {

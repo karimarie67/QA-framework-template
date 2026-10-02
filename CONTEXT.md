@@ -13,7 +13,7 @@ The site-agnostic core of this repo: helpers, generic spec patterns, and config 
 _Avoid_: Core, template code
 
 **Site config**:
-The engagement-specific values an engagement fills in to point the framework at its actual site: base URLs, selectors, search terms, download-file patterns. Split across `config-helper.js` (URLs and test data) and `selectors.js` (element selectors), by edit cadence rather than merged into one file.
+The engagement-specific values an engagement fills in to point the framework at its actual site: base URLs, selectors, and `siteConfig` (its pages, menu, footer, not-found page, forms, and accessibility exclusions). Split across `config-helper.js` (URLs and test data) and `selectors.js` (element selectors), by edit cadence rather than merged into one file.
 _Avoid_: Site profile, site settings
 
 **Example**:
