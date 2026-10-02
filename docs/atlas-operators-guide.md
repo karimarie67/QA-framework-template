@@ -43,9 +43,9 @@ Atlas runs these commands to prove that a change works.
 | test | `npm run test` | Full Playwright suite under tests/ | Before PR and after implementation | inferred |
 | unit | `npm run test:unit` | Unit tests for Site config (config-helper, selectors), coverage map, dashboard generator, board/label setup, and import-test-cases scripts | On every push/PR to main/develop, as part of the automatic gate | verified |
 | template-check | `npm run test:template-check` | Structural smoke check that the template's config/spec files are intact | On every push/PR to main/develop, as part of the automatic gate | verified |
-| smoke | `npm run test:smoke` | Critical-path validation (tests/smoke_tests.spec.js) | Manual dispatch only, pending real Site config (playwright.config.js's placeholder baseURLs) | inferred |
-| regression | `npm run test:regression` | documentation, download/search, and error-handling suites | Manual dispatch only, pending real Site config (playwright.config.js's placeholder baseURLs) | inferred |
-| links | `npm run test:links` | Link-checker suite | Local only (no CI job) | inferred |
+| smoke | `npm run test:smoke` | Critical-path validation (tests/smoke_tests.spec.js), desktop and phone (`staging`, `staging-mobile`) | Manual dispatch only, pending real Site config (playwright.config.js's placeholder baseURLs) | inferred |
+| regression | `npm run test:regression` | documentation, download/search, and error-handling suites, desktop and phone (`staging`, `staging-mobile`) | Manual dispatch only, pending real Site config (playwright.config.js's placeholder baseURLs) | inferred |
+| links | `npm run test:links` | Link-checker suite | Manual dispatch only (`links` or `all`), and locally | inferred |
 
 `verified` means setup ran the command here and it worked. `inferred` means the
 repository names the command, but setup did not run it. `unavailable` means the
