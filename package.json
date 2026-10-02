@@ -1,7 +1,10 @@
 {
-  "name": "qa-documentation",
+  "name": "qa-framework-template",
   "version": "1.0.0",
-  "description": "Generic Playwright QA automation framework template",
+  "description": "Playwright QA automation Framework template, instantiated per client Engagement",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "test": "playwright test tests/",
     "test:smoke": "playwright test tests/smoke_tests.spec.js --project=staging --project=staging-mobile",
