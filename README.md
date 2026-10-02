@@ -25,23 +25,27 @@ only you can do. See
 
 ## Where we started, and where we are now
 
-This Framework was extracted from a real Engagement, and a new Engagement has
-since been built from it. The three repos show the path:
+This Framework was extracted from a real Engagement, and Engagements built from
+it since have fed their lessons back into it. These repos show the path:
 
 | | Repo | What it is |
 |---|---|---|
-| **Where we started** | [`karimarie67/QA-boost`](https://github.com/karimarie67/QA-boost) | The original Boost.org Engagement, with its real history: 7 Boost-specific specs (47 tests) run against stage and production boost.org, and a CI dashboard with 170 runs through July 2026. Restored from [`QA-documentation@boost-final`](https://github.com/karimarie67/QA-documentation/tree/boost-final). |
-| **The Framework** | this repo | That Engagement generalized: the Boost content is removed, Site config is isolated in `config-helper.js` and `selectors.js` behind `TODO(Engagement)` markers, self-checks are added, and Atlas guardrails are on. |
-| **Where we are now** | [`karimarie67/QA-example`](https://github.com/karimarie67/QA-example) (private) | A new Engagement created from this template against [Sauce Demo](https://www.saucedemo.com). It traces every user story to its manual test cases (as GitHub sub-issues) and every test case to one automated Playwright test. |
+| **Where we started** | [`karimarie67/QA-boost`](https://github.com/karimarie67/QA-boost) (archived) | The original Boost.org Engagement, with its real history: 7 Boost-specific specs (47 tests) run against stage and production boost.org, and a CI dashboard with 170 runs through July 2026. Restored from [`QA-documentation@boost-final`](https://github.com/karimarie67/QA-documentation/tree/boost-final) (archived). |
+| **The Framework** | this repo | That Engagement generalized: Site config isolated in `config-helper.js` and `selectors.js` behind `TODO(Engagement)` markers, self-checks, Atlas guardrails, the `/new-engagement` and `/import-test-cases` skills, and every later Engagement's fixes and lessons. |
+| **Where we are now** | [`karimarie67/QA-jahnelgroup`](https://github.com/karimarie67/QA-jahnelgroup) | A read-only Engagement for a live company site (jahnelgroup.com), built with `/new-engagement` end to end: every user story traced to its test cases (GitHub sub-issues), every test case to one Playwright test, on desktop and phone. |
+| **The import route** | `karimarie67/saucedemo-pilot` (private) | A pilot against [Sauce Demo](https://www.saucedemo.com) that ran `/new-engagement` with the client's own manual test cases, through `/import-test-cases`: full flows with the published demo users, the demo password never in the repo, and a stale client case brought back once the client answered. |
 
-| | Started (QA-boost) | Framework (this repo) | Now (QA-example) |
+| | Started (QA-boost) | Framework (this repo) | Now (QA-jahnelgroup / saucedemo-pilot) |
 |---|---|---|---|
-| Site config | Boost URLs, selectors, and content in both the config files and the specs | Isolated in `config-helper.js` / `selectors.js`, marked `TODO(Engagement)` | Filled in for Sauce Demo; element hooks in `selectors.shop.*` |
-| Test cases | Spreadsheets ([functional](./examples/boost/Functional-Table%201.csv), [regression](./examples/boost/Regression-Table%201.csv)) | A Test Case issue design ([`docs/github_test_management.md`](./docs/github_test_management.md)) | 9 Test Case issues, each a sub-issue of its user story |
-| Traceability | `TC_*` IDs as test annotations | — | Story → test case → test (named by ID, linked to its issue) → CI → dashboard |
-| CI e2e | On every push and PR, against staging | Manual dispatch only, until Site config is real | Smoke and functional jobs on every push and PR |
-| Self-checks | None | Unit tests and `template-check` | 94 unit tests and `template-check` |
+| Site config | Boost URLs, selectors, and content in both the config files and the specs | Isolated in `config-helper.js` / `selectors.js`, marked `TODO(Engagement)` | Filled in for the site; element hooks in `selectors.jg.*` / `selectors.sauce.*` |
+| Test cases | Spreadsheets ([functional](./examples/boost/Functional-Table%201.csv), [regression](./examples/boost/Regression-Table%201.csv)) | A Test Case issue design ([`docs/github_test_management.md`](./docs/github_test_management.md)), and an importer for a client's own | 19 / 16 Test Case issues, each a sub-issue of its user story (6 / 5 stories) |
+| Traceability | `TC_*` IDs as test annotations | `npm run coverage` builds the map | Story → test case → test (named by ID, linked to its issue and client case) → CI → dashboard |
+| CI e2e | On every push and PR, against staging | Manual dispatch only, until Site config is real; desktop and phone; link check on demand | Smoke and functional jobs on every push and PR, desktop and phone |
+| Self-checks | None | Unit tests and `template-check` | 292 / 324 unit tests and `template-check` |
 | Guardrails | None | Atlas | Atlas |
+
+Earlier Engagements built from the Framework (QA-kcs, QA-example, QArevology)
+are archived. Their lessons are in the Framework and its skills.
 
 ## Worked example
 
@@ -59,11 +63,11 @@ Engagement.
 npm install
 
 npm test                     # run the full test suite
-npm run test:smoke           # smoke tests only
-npm run test:regression      # regression suite (documentation, download/search, error handling)
+npm run test:smoke           # smoke tests, desktop and phone (staging projects)
+npm run test:regression      # regression suite (documentation, download/search, error handling), desktop and phone
 npm run test:links           # link checker
-npm run test:unit            # unit tests for config-helper.js/selectors.js
-npm run test:template-check  # structural smoke check that the template itself is intact
+npm run test:unit            # unit tests for the Site config, helpers, scripts, and dashboard
+npm run test:template-check  # structural check: the config imports, the specs are found, and every spec CI names exists
 npm run coverage             # regenerate docs/coverage-map.md from the specs' test_case annotations
 npm run labels:setup -- owner/repo  # create the labels the issue forms and triage need
 npm run board:setup -- owner/repo   # create the project board, with Status from docs/agents/issue-tracker.md
@@ -88,9 +92,12 @@ A new Engagement edits Site config across a few files, all marked with
 - `unit-tests` and `template-check` run automatically on every push and PR to
   `main`/`develop` — no configuration needed.
 - The real browser e2e jobs (`smoke-tests`, `error-handling-tests`,
-  `download-search-tests`, `documentation-tests`) only run via manual
-  `workflow_dispatch`, until the placeholders in `playwright.config.js`,
-  `config-helper.js`, and `selectors.js` are replaced with real Site config.
+  `download-search-tests`, `documentation-tests`) run the desktop and phone
+  projects, but only via manual `workflow_dispatch`, until the placeholders in
+  `playwright.config.js`, `config-helper.js`, and `selectors.js` are replaced
+  with real Site config. The workflow's comments give the conditions an
+  Engagement switches on (`/new-engagement` step 5).
+- The `link-check` job runs only on manual dispatch, with `links` or `all`.
 
 <!-- atlas-v3:readme:start -->
 ## Atlas
