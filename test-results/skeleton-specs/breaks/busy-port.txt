@@ -1,0 +1,3 @@
+test-skeleton: something already answers on port 8765; stop it, or set FIXTURE_PORT.
+
+exit=1

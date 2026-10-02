@@ -1,0 +1,50 @@
+fixture site on http://127.0.0.1:8765 (BREAK=no-footer)
+QA_BASE_URL in use: http://127.0.0.1:8765
+
+Running 3 tests using 1 worker
+
+QA_BASE_URL in use: http://127.0.0.1:8765
+  ✓  1 [production] › tests/smoke_tests.spec.js:13:3 › Smoke Tests › TC_SMOKE_001 Every page loads with its title and one main heading @smoke (228ms)
+  ✓  2 [production] › tests/smoke_tests.spec.js:39:3 › Smoke Tests › TC_SMOKE_002 The header menu links reach their pages @smoke (210ms)
+  ✘  3 [production] › tests/smoke_tests.spec.js:66:3 › Smoke Tests › TC_SMOKE_003 The footer is there, with its links @smoke (5.1s)
+
+
+  1) [production] › tests/smoke_tests.spec.js:66:3 › Smoke Tests › TC_SMOKE_003 The footer is there, with its links @smoke 
+
+    Error: the page has a footer (a contentinfo landmark)
+
+    expect(locator).toBeVisible() failed
+
+    Locator:  getByRole('contentinfo')
+    Expected: visible
+    Received: <element(s) not found>
+    Timeout:  5000ms
+
+    Call log:
+      - the page has a footer (a contentinfo landmark) with timeout 5000ms
+      - waiting for getByRole('contentinfo')
+
+
+      60 |     const links = requireEntries('footer.links', siteConfig.footer?.links);
+      61 |     await page.goto(buildURL(testInfo, requireEntries('pages', siteConfig.pages)[0].path), { waitUntil: 'domcontentloaded' });
+    > 62 |     await expect(s.footer(page), 'the page has a footer (a contentinfo landmark)').toBeVisible();
+         |                                                                                    ^
+      63 |     for (const name of links) {
+      64 |       await expect.soft(s.footerLink(page, name), `the footer has a "${name}" link`).toBeVisible();
+      65 |     }
+        at ~/QA-framework-template/tests/smoke_tests.spec.js:62:84
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    playwright-output/smoke_tests-Smoke-Tests-TC-6f9ed-ter-is-there-with-its-links-production/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: playwright-output/smoke_tests-Smoke-Tests-TC-6f9ed-ter-is-there-with-its-links-production/error-context.md
+
+  1 failed
+    [production] › tests/smoke_tests.spec.js:66:3 › Smoke Tests › TC_SMOKE_003 The footer is there, with its links @smoke 
+  2 passed (6.1s)
+
+To open last HTML report run:
+
+  npx playwright show-report
+

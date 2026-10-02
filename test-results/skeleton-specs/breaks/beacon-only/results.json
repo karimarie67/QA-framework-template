@@ -1,0 +1,234 @@
+{
+  "config": {
+    "configFile": "/Users/kskinner/QA-framework-template/playwright.config.js",
+    "rootDir": "/Users/kskinner/QA-framework-template/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ],
+      [
+        "html"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "local",
+        "name": "local",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging",
+        "name": "staging",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production",
+        "name": "production",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-mobile",
+        "name": "staging-mobile",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-mobile",
+        "name": "production-mobile",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "link-checker",
+        "name": "link-checker",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "timeout": 1800000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.1",
+    "workers": 5,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "forms_tests.spec.js",
+      "file": "forms_tests.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Forms Tests",
+          "file": "forms_tests.spec.js",
+          "line": 15,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC_FORM_001 Every form field has its label, type, and required state",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_FORM_001",
+                      "location": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/forms_tests.spec.js",
+                        "line": 17,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production",
+                  "projectName": "production",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 735,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Third-party request (not failed): POST http://127.0.0.1:8766/collect\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-02T20:22:23.426Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_FORM_001",
+                          "location": {
+                            "file": "/Users/kskinner/QA-framework-template/tests/forms_tests.spec.js",
+                            "line": 17,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7210258585fd2f2b0ef5-dcf0927687559d27b63a",
+              "file": "forms_tests.spec.js",
+              "line": 16,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-02T20:22:23.023Z",
+    "duration": 1278.406,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

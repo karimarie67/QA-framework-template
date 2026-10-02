@@ -1,0 +1,2 @@
+grep -nE "\.(click|dblclick|tap|fill|type|press|pressSequentially|check|uncheck|setChecked|selectOption|setInputFiles|dispatchEvent|dragTo|submit|requestSubmit|evaluate)\(|request\.(post|put|patch|delete)\(|from ['\"]\.\./test-helpers" tests/forms_tests.spec.js
+--- matches (none expected):

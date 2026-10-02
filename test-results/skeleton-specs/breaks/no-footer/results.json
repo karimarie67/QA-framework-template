@@ -1,0 +1,379 @@
+{
+  "config": {
+    "configFile": "/Users/kskinner/QA-framework-template/playwright.config.js",
+    "rootDir": "/Users/kskinner/QA-framework-template/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ],
+      [
+        "html"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "local",
+        "name": "local",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging",
+        "name": "staging",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production",
+        "name": "production",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-mobile",
+        "name": "staging-mobile",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-mobile",
+        "name": "production-mobile",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "link-checker",
+        "name": "link-checker",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "timeout": 1800000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.1",
+    "workers": 5,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "smoke_tests.spec.js",
+      "file": "smoke_tests.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Smoke Tests",
+          "file": "smoke_tests.spec.js",
+          "line": 12,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC_SMOKE_001 Every page loads with its title and one main heading",
+              "ok": true,
+              "tags": [
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_SMOKE_001",
+                      "location": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/smoke_tests.spec.js",
+                        "line": 15,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production",
+                  "projectName": "production",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 228,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-02T20:21:45.494Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_SMOKE_001",
+                          "location": {
+                            "file": "/Users/kskinner/QA-framework-template/tests/smoke_tests.spec.js",
+                            "line": 15,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0dd4ca234e5177e0dd80-e9857c5ade9ac8042a36",
+              "file": "smoke_tests.spec.js",
+              "line": 13,
+              "column": 3
+            },
+            {
+              "title": "TC_SMOKE_002 The header menu links reach their pages",
+              "ok": true,
+              "tags": [
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_SMOKE_002",
+                      "location": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/smoke_tests.spec.js",
+                        "line": 35,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production",
+                  "projectName": "production",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 210,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-02T20:21:45.828Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_SMOKE_002",
+                          "location": {
+                            "file": "/Users/kskinner/QA-framework-template/tests/smoke_tests.spec.js",
+                            "line": 35,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0dd4ca234e5177e0dd80-01f61a6b42348717e82a",
+              "file": "smoke_tests.spec.js",
+              "line": 39,
+              "column": 3
+            },
+            {
+              "title": "TC_SMOKE_003 The footer is there, with its links",
+              "ok": false,
+              "tags": [
+                "smoke"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_SMOKE_003",
+                      "location": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/smoke_tests.spec.js",
+                        "line": 56,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production",
+                  "projectName": "production",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 5103,
+                      "error": {
+                        "message": "Error: the page has a footer (a contentinfo landmark)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  getByRole('contentinfo')\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - the page has a footer (a contentinfo landmark) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('contentinfo')\u001b[22m\n",
+                        "stack": "Error: the page has a footer (a contentinfo landmark)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  getByRole('contentinfo')\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - the page has a footer (a contentinfo landmark) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('contentinfo')\u001b[22m\n\n    at /Users/kskinner/QA-framework-template/tests/smoke_tests.spec.js:62:84",
+                        "location": {
+                          "file": "/Users/kskinner/QA-framework-template/tests/smoke_tests.spec.js",
+                          "column": 84,
+                          "line": 62
+                        },
+                        "snippet": "  60 |     const links = requireEntries('footer.links', siteConfig.footer?.links);\n  61 |     await page.goto(buildURL(testInfo, requireEntries('pages', siteConfig.pages)[0].path), { waitUntil: 'domcontentloaded' });\n> 62 |     await expect(s.footer(page), 'the page has a footer (a contentinfo landmark)').toBeVisible();\n     |                                                                                    ^\n  63 |     for (const name of links) {\n  64 |       await expect.soft(s.footerLink(page, name), `the footer has a \"${name}\" link`).toBeVisible();\n  65 |     }"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/kskinner/QA-framework-template/tests/smoke_tests.spec.js",
+                            "column": 84,
+                            "line": 62
+                          },
+                          "message": "Error: the page has a footer (a contentinfo landmark)\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  getByRole('contentinfo')\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - the page has a footer (a contentinfo landmark) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('contentinfo')\u001b[22m\n\n\n  60 |     const links = requireEntries('footer.links', siteConfig.footer?.links);\n  61 |     await page.goto(buildURL(testInfo, requireEntries('pages', siteConfig.pages)[0].path), { waitUntil: 'domcontentloaded' });\n> 62 |     await expect(s.footer(page), 'the page has a footer (a contentinfo landmark)').toBeVisible();\n     |                                                                                    ^\n  63 |     for (const name of links) {\n  64 |       await expect.soft(s.footerLink(page, name), `the footer has a \"${name}\" link`).toBeVisible();\n  65 |     }\n    at /Users/kskinner/QA-framework-template/tests/smoke_tests.spec.js:62:84"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-02T20:21:46.044Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_SMOKE_003",
+                          "location": {
+                            "file": "/Users/kskinner/QA-framework-template/tests/smoke_tests.spec.js",
+                            "line": 56,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/kskinner/QA-framework-template/playwright-output/smoke_tests-Smoke-Tests-TC-6f9ed-ter-is-there-with-its-links-production/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/kskinner/QA-framework-template/playwright-output/smoke_tests-Smoke-Tests-TC-6f9ed-ter-is-there-with-its-links-production/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/smoke_tests.spec.js",
+                        "column": 84,
+                        "line": 62
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "0dd4ca234e5177e0dd80-5343c5d265d2e837a144",
+              "file": "smoke_tests.spec.js",
+              "line": 66,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-02T20:21:45.085Z",
+    "duration": 6094.364,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

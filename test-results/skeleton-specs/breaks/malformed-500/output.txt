@@ -1,0 +1,40 @@
+fixture site on http://127.0.0.1:8765 (BREAK=malformed-500)
+QA_BASE_URL in use: http://127.0.0.1:8765
+
+Running 2 tests using 1 worker
+
+QA_BASE_URL in use: http://127.0.0.1:8765
+  ✓  1 [production] › tests/error_handling_tests.spec.js:10:3 › Error Handling Tests › TC_ERROR_001 An unknown address shows a not-found page (189ms)
+  ✘  2 [production] › tests/error_handling_tests.spec.js:25:3 › Error Handling Tests › TC_ERROR_002 A malformed address never causes a server error (120ms)
+
+
+  1) [production] › tests/error_handling_tests.spec.js:25:3 › Error Handling Tests › TC_ERROR_002 A malformed address never causes a server error 
+
+    Error: /%ZZ answers below 500
+
+    expect(received).toBeLessThan(expected)
+
+    Expected: < 500
+    Received:   500
+
+      26 |     for (const path of requireEntries('malformedPaths', siteConfig.malformedPaths)) {
+      27 |       const res = await page.request.get(buildURL(testInfo, path), { failOnStatusCode: false });
+    > 28 |       expect.soft(res.status(), `${path} answers below 500`).toBeLessThan(500);
+         |                                                              ^
+      29 |     }
+      30 |   });
+      31 | });
+        at ~/QA-framework-template/tests/error_handling_tests.spec.js:28:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    playwright-output/error_handling_tests-Error-312ec-never-causes-a-server-error-production/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [production] › tests/error_handling_tests.spec.js:25:3 › Error Handling Tests › TC_ERROR_002 A malformed address never causes a server error 
+  1 passed (859ms)
+
+To open last HTML report run:
+
+  npx playwright show-report
+
