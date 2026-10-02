@@ -17,6 +17,8 @@
  *   production-mobile. Spec paths given replace the default specs, and
  *   --project given replaces the default projects; other arguments (such as
  *   --reporter) pass through. BREAK=<id> passes through to the server.
+ * - Never opens the HTML report (Playwright would serve it after a failure
+ *   and wait), unless PLAYWRIGHT_HTML_OPEN says to.
  * - Stops the server on exit, failure, or Ctrl-C, and exits with Playwright's
  *   code; killed by a signal (no code) counts as a failure.
  *
@@ -129,6 +131,10 @@ async function main() {
 
   const env = {
     ...process.env,
+    // Outside CI, Playwright's HTML reporter serves the report after a failure
+    // and waits for Ctrl-C, so the run would never end. Never open it here,
+    // unless the caller asks (the report is still written to playwright-report/).
+    PLAYWRIGHT_HTML_OPEN: process.env.PLAYWRIGHT_HTML_OPEN || 'never',
     QA_BASE_URL: BASE,
     QA_SITE_CONFIG: process.env.QA_SITE_CONFIG || path.join(repoRoot, 'tests/fixtures/site/site.json'),
   };

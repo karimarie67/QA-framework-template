@@ -1,4 +1,0 @@
-OK: config-helper.js and selectors.js both import cleanly.
-OK: all 5 expected specs were discovered (check-links.spec.js, documentation_tests.spec.js, download_search_tests.spec.js, error_handling_tests.spec.js, smoke_tests.spec.js).
-OK: every spec named in package.json and qa-test.yml exists.
-template-check: PASS

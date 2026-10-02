@@ -1,7 +1,0 @@
-== 3. module warnings and CommonJS left
-npm run test:unit                  MODULE_TYPELESS count: 0
-npm run test:template-check        MODULE_TYPELESS count: 0
-npm run coverage -- --stdout       MODULE_TYPELESS count: 0
-npx playwright test --list         MODULE_TYPELESS count: 0
-CommonJS .js files (outside node_modules, examples): []
-require(/module.exports in docs/github_test_management.md: 0
