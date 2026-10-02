@@ -303,9 +303,10 @@ A flaky test passes and fails without any change. Common causes:
 | A closed slide-in menu that's off-screen | Playwright counts it as visible. Check `toBeInViewport` for "open" |
 | A live site rate-limiting the run (HTTP 429) | Lower `workers`, space requests with `politeGet`, and run request-only checks once, on desktop |
 
-The test runner retries a failed test once (`retries: 1` in
-`playwright.config.js`). A test that passes only on retry is reported as flaky
-on the run's HTML report; fix it rather than relying on the retry.
+In CI, the test runner retries a failed test once (`retries` in
+`playwright.config.js`); locally it doesn't, so a flaky test shows up while
+you're writing it. A test that passes only on retry is reported as flaky on the
+run's HTML report and the dashboard; fix it rather than relying on the retry.
 
 ### Troubleshooting
 

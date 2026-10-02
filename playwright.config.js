@@ -86,11 +86,15 @@ module.exports = defineConfig({
     },
   ],
   use: {
-    screenshot: 'on',
+    // A screenshot of every failure. Evidence for a passing test is taken on
+    // purpose, with utils.js's captureEvidence (docs/agents/testing.md).
+    screenshot: 'only-on-failure',
     video: 'off',
   },
   testDir: './tests',
   testMatch: ['**/*.spec.js'],
   timeout: 90000,
-  retries: 1,
+  // Retry once in CI, where a one-off network blip shouldn't fail the run.
+  // Never locally: a retry there hides a flaky test while you're writing it.
+  retries: process.env.CI ? 1 : 0,
 });
