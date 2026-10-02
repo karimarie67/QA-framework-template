@@ -1,68 +1,58 @@
 # QA Automation Framework
 
-A generic, site-agnostic Playwright QA automation **Framework** — a template
-you instantiate per Engagement, not a finished product built for one site.
+A Playwright QA automation **Framework** for testing a website: a template you
+create a repo from for each client Engagement, then fill in for that site.
 
-## Instantiating this for a new Engagement
+What an Engagement gets:
 
-Pick one:
+- **Playwright suites** (smoke, regression, error handling, and a link
+  checker), run on a desktop browser and an emulated phone.
+- **CI** that runs them on every push and PR, and publishes a **QA metrics
+  dashboard** from each run on `main`.
+- **Test management in GitHub:** user stories and Test Case issues on a
+  project board, each test case automated by one test, and a **coverage map**
+  that traces story → test case → test.
+- **Claude Code skills** that set up an Engagement step by step, and import a
+  client's existing manual test cases.
+- **Atlas guardrails** that keep agent-driven work safe: no force-pushes, no
+  secrets in the repo, and changes that land through reviewed PRs.
 
-- **Click "Use this template" on GitHub.** This creates a new repo with a
-  clean history.
-- **Clone the repo.**
+## Starting an Engagement
 
-Then copy [`docs/engagement-brief-template.md`](./docs/engagement-brief-template.md)
-to `docs/engagement-brief.md` and fill it in with the client. It's the only
-per-Engagement document to write, and its kickoff checklist covers the rest of
-the setup. The process itself is in the shared
-[QA Handbook](./docs/qa-handbook.md).
-
-**Or let Claude Code do it.** From a clone of this template, run
-**`/new-engagement <site URL>`**. It creates the repo and works through the
-kickoff checklist, one logged, reviewed PR per step, and hands you the steps
-only you can do. See
+**With Claude Code (recommended).** From a clone of this template, run
+**`/new-engagement <site URL>`**. It creates the Engagement's repo and works
+through the kickoff, one logged, reviewed PR per step, and hands you the steps
+only you can do. If the client already has manual test cases, it runs
+**`/import-test-cases <file>`** as part of the kickoff. See
 [`.claude/skills/new-engagement/`](./.claude/skills/new-engagement/SKILL.md).
 
-## Where we started, and where we are now
+**By hand.** Click **"Use this template"** on GitHub to create a repo with a
+clean history. Copy
+[`docs/engagement-brief-template.md`](./docs/engagement-brief-template.md) to
+`docs/engagement-brief.md` and fill it in with the client: it's the only
+per-Engagement document to write, and its kickoff checklist covers the rest of
+the setup. The process itself is in the [QA Handbook](./docs/qa-handbook.md).
 
-This Framework was extracted from a real Engagement, and Engagements built from
-it since have fed their lessons back into it. These repos show the path:
+## What's in the repo
 
-| | Repo | What it is |
-|---|---|---|
-| **Where we started** | [`karimarie67/QA-boost`](https://github.com/karimarie67/QA-boost) (archived) | The original Boost.org Engagement, with its real history: 7 Boost-specific specs (47 tests) run against stage and production boost.org, and a CI dashboard with 170 runs through July 2026. Restored from [`QA-documentation@boost-final`](https://github.com/karimarie67/QA-documentation/tree/boost-final) (archived). |
-| **The Framework** | this repo | That Engagement generalized: Site config isolated in `config-helper.js` and `selectors.js` behind `TODO(Engagement)` markers, self-checks, Atlas guardrails, the `/new-engagement` and `/import-test-cases` skills, and every later Engagement's fixes and lessons. |
-| **Where we are now** | [`karimarie67/QA-jahnelgroup`](https://github.com/karimarie67/QA-jahnelgroup) | A read-only Engagement for a live company site (jahnelgroup.com), built with `/new-engagement` end to end: every user story traced to its test cases (GitHub sub-issues), every test case to one Playwright test, on desktop and phone. |
-| **The import route** | `karimarie67/saucedemo-pilot` (private) | A pilot against [Sauce Demo](https://www.saucedemo.com) that ran `/new-engagement` with the client's own manual test cases, through `/import-test-cases`: full flows with the published demo users, the demo password never in the repo, and a stale client case brought back once the client answered. |
-
-| | Started (QA-boost) | Framework (this repo) | Now (QA-jahnelgroup / saucedemo-pilot) |
-|---|---|---|---|
-| Site config | Boost URLs, selectors, and content in both the config files and the specs | Isolated in `config-helper.js` / `selectors.js`, marked `TODO(Engagement)` | Filled in for the site; element hooks in `selectors.jg.*` / `selectors.sauce.*` |
-| Test cases | Spreadsheets ([functional](./examples/boost/Functional-Table%201.csv), [regression](./examples/boost/Regression-Table%201.csv)) | A Test Case issue design ([`docs/github_test_management.md`](./docs/github_test_management.md)), and an importer for a client's own | 19 / 16 Test Case issues, each a sub-issue of its user story (6 / 5 stories) |
-| Traceability | `TC_*` IDs as test annotations | `npm run coverage` builds the map | Story → test case → test (named by ID, linked to its issue and client case) → CI → dashboard |
-| CI e2e | On every push and PR, against staging | Manual dispatch only, until Site config is real; desktop and phone; link check on demand | Smoke and functional jobs on every push and PR, desktop and phone |
-| Self-checks | None | Unit tests and `template-check` | 292 / 324 unit tests and `template-check` |
-| Guardrails | None | Atlas | Atlas |
-
-Earlier Engagements built from the Framework (QA-kcs, QA-example, QArevology)
-are archived. Their lessons are in the Framework and its skills.
-
-## Worked example
-
-[`examples/boost/README.md`](./examples/boost/README.md) is a complete, real
-(though non-live/historical) instance of this Framework wired up for a past
-Engagement (Boost.org). It's a useful reference for seeing the shape of a
-working configuration, including the [QA Handbook](./examples/boost/QA_handbook.md),
-[functional test cases](./examples/boost/Functional-Table%201.csv), and
-[regression test cases](./examples/boost/Regression-Table%201.csv) from that
-Engagement.
+| Path | What it is |
+|---|---|
+| `tests/` | The Playwright specs, and `tests/unit/` for the Framework's own unit tests |
+| `playwright.config.js`, `config-helper.js`, `selectors.js` | The **Site config**: base URLs, test data, and element hooks for the site under test |
+| `test-helpers.js`, `utils.js` | Shared helpers: page loads, phone menus, polite requests, evidence screenshots, link-check verdicts |
+| `docs/` | The QA Handbook, the brief template, test management, and the coverage map |
+| `dashboards/` | The dashboard generator, and the dashboard CI publishes |
+| `scripts/` | Label and board setup, the coverage map, and the `template-check` structural check |
+| `test-results/` | Committed proof of work, one folder per test. Playwright's own run output goes to `playwright-output/`, which isn't committed |
+| `.claude/skills/` | The `/new-engagement` and `/import-test-cases` skills |
+| `examples/` | A past Engagement's documents and test case spreadsheets, for reference |
 
 ## Quick start
 
 ```bash
 npm install
+npx playwright install chromium
 
-npm test                     # run the full test suite
 npm run test:smoke           # smoke tests, desktop and phone (staging projects)
 npm run test:regression      # regression suite (documentation, download/search, error handling), desktop and phone
 npm run test:links           # link checker
@@ -75,29 +65,41 @@ npm run board:setup -- owner/repo   # create the project board, with Status from
 
 ## Configuring a new site
 
-A new Engagement edits Site config across a few files, all marked with
+A new Engagement edits the Site config across a few files, all marked with
 `TODO(Engagement)` comments:
 
 - [`config-helper.js`](./config-helper.js) and
-  [`playwright.config.js`](./playwright.config.js) — base URLs, download-file
-  patterns, and other placeholder values.
-- [`selectors.js`](./selectors.js) — the fallback CSS selectors and element
-  IDs each `selectors.X` function tries; not every entry is `TODO`-marked, so
-  read through the fallback arrays too, not just the comments.
-- The skeleton specs under `tests/` and `tests/check-links.spec.js` — each has
-  `TODO(Engagement)` markers at the assertions that need real content.
+  [`playwright.config.js`](./playwright.config.js): base URLs, test data, and
+  other placeholder values.
+- [`selectors.js`](./selectors.js): the element hooks. Add one site-named block
+  (`selectors.<site>.*`), hooked by role and accessible name.
+- The skeleton specs under `tests/`: keep what fits the site, rewrite it, or
+  remove it. Each has `TODO(Engagement)` markers at the assertions that need
+  real content.
+
+How to probe the site and fill these in so the tests hold up (phones, live
+sites, logins, proving each test can fail) is in
+[`site-config.md`](./.claude/skills/new-engagement/site-config.md).
 
 ## CI
 
-- `unit-tests` and `template-check` run automatically on every push and PR to
-  `main`/`develop` — no configuration needed.
-- The real browser e2e jobs (`smoke-tests`, `error-handling-tests`,
+- `unit-tests` and `template-check` run on every push and PR to
+  `main`/`develop`, with no configuration needed.
+- The browser e2e jobs (`smoke-tests`, `error-handling-tests`,
   `download-search-tests`, `documentation-tests`) run the desktop and phone
-  projects, but only via manual `workflow_dispatch`, until the placeholders in
-  `playwright.config.js`, `config-helper.js`, and `selectors.js` are replaced
-  with real Site config. The workflow's comments give the conditions an
-  Engagement switches on (`/new-engagement` step 5).
+  projects, but only via manual `workflow_dispatch` until the Site config is
+  real. The workflow's comments give the conditions an Engagement switches on
+  to run them on every push and PR (`/new-engagement` step 5).
 - The `link-check` job runs only on manual dispatch, with `links` or `all`.
+
+## Learn more
+
+- [QA Handbook](./docs/qa-handbook.md): the QA process, testing strategy,
+  bugs and severity, and writing and maintaining automated tests.
+- [Test management](./docs/github_test_management.md): stories, Test Case
+  issues, labels, and the board.
+- [`QA-jahnelgroup`](https://github.com/karimarie67/QA-jahnelgroup): a
+  finished Engagement built with `/new-engagement`, to see the end result.
 
 <!-- atlas-v3:readme:start -->
 ## Atlas
