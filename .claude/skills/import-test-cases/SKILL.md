@@ -260,6 +260,15 @@ the existing Test Case issue instead, starting with the line `Client case
 <client id> (from <source file>)`, then the client's ID, wording, steps,
 expected results, and the `cases.json` link.
 
+**A matched test with no Test Case issue.** Tests written before the import,
+such as the ones `/new-engagement` step 3 writes, may have none yet. Then
+add them to this preview: a QA-drafted story and a Test Case issue for each
+such test (labelled `test-automated` if its test is merged), written by
+`stories-and-tests.md`'s "Stories and test cases" rules. Create them before
+the comments, so each comment has its issue. Their tests get `issue`
+annotations in the first batch. `reconcile` doesn't check these issues, since
+they aren't client cases; `/new-engagement` step 7's "Done when" does.
+
 **Hand-off:** approve the preview (titles, labels, priority mapping, parents)
 before creating anything.
 
