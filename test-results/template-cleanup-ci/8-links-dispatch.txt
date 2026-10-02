@@ -1,0 +1,10 @@
+✗ [404] https://www.example.com/libraries/
+✗ [404] https://www.example.com/docs/
+✗ [404] https://www.example.com/releases/
+✗ [404] https://www.example.com/news/
+✗ [404] https://www.example.com/community/
+✗ Total broken links: 5
+⚠️  Found 5 broken site links.
+    Error: Found 5 broken site links
+  1 failed
+RUN=37053419524

@@ -2,6 +2,7 @@
   "name": "qa-framework-template",
   "version": "1.0.0",
   "description": "Playwright QA automation Framework template, instantiated per client Engagement",
+  "type": "module",
   "engines": {
     "node": ">=20"
   },

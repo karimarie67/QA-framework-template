@@ -3,10 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { createRequire } from 'node:module';
-
-const require = createRequire(import.meta.url);
-const { testStatus, parsePlaywrightJson, calculateMetrics } = require('../../dashboards/scripts/generate-dashboard.js');
+import { testStatus, parsePlaywrightJson, calculateMetrics, slackPayload } from '../../dashboards/scripts/generate-dashboard.js';
 
 const attempt = (status, duration = 1000) => ({ status, duration, errors: status === 'failed' ? [{ message: 'boom' }] : [] });
 
@@ -73,5 +70,42 @@ test('parsePlaywrightJson and calculateMetrics', async t => {
     assert.equal(m.failed, 1);
     assert.deepEqual(m.failedTestNames, ['TC_D fails']);
     assert.ok(Math.abs(m.passRate - (2 / 3) * 100) < 1e-9);
+  });
+});
+
+test('failedTestNames', async t => {
+  await t.test('a test failing on desktop and phone is listed once', () => {
+    const fail = project => ({ name: 'TC_X fails', status: 'failed', projectName: project, durationSec: 1 });
+    const m = calculateMetrics({ smoke: [fail('staging'), fail('staging-mobile')], functional: [] });
+    assert.equal(m.failed, 2);
+    assert.deepEqual(m.failedTestNames, ['TC_X fails']);
+  });
+});
+
+test('slackPayload', async t => {
+  const base = { failed: 0, flaky: 0, branch: 'main', runId: '42' };
+  const env = { GITHUB_REPOSITORY: 'o/r' };
+
+  await t.test('a clean run has nothing to report', () => {
+    assert.equal(slackPayload(base, env), null);
+  });
+
+  await t.test('a failing run names its failures and links the run', () => {
+    const p = slackPayload({ ...base, failed: 3 }, env);
+    assert.equal(p.text, 'QA alert: 3 failed, 0 flaky on main');
+    assert.match(p.blocks[0].text.text, /\*3 failed\*/);
+    assert.doesNotMatch(p.blocks[0].text.text, /flaky/);
+    assert.match(p.blocks[0].text.text, /<https:\/\/github\.com\/o\/r\/actions\/runs\/42\|View the run>/);
+  });
+
+  await t.test('a flaky-only run is reported as flaky, not as failed', () => {
+    const p = slackPayload({ ...base, flaky: 1 }, env);
+    assert.match(p.blocks[0].text.text, /\*1 flaky\*/);
+    assert.doesNotMatch(p.blocks[0].text.text, /failed/);
+  });
+
+  await t.test("uses Slack's bold (single asterisks), not Markdown's", () => {
+    const p = slackPayload({ ...base, failed: 1, flaky: 2 }, env);
+    assert.doesNotMatch(JSON.stringify(p), /\*\*/);
   });
 });

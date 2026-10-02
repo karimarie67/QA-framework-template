@@ -1,0 +1,5 @@
+== 6. merge workflow gone
+workflows: .github/workflows/qa-test.yml 
+./docs/agents/planning.md:18:| confirmed team policy | Change to .github/workflows/, dashb
+./docs/agents/planning.md:42:Red-team policy: Required for changes to CI/CD workflows (.gi
+Binary file ./Archive.zip matches

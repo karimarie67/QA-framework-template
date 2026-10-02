@@ -1,8 +1,0 @@
-<!doctype html><html><head><title>Fixture</title><style>
-#menu{position:fixed;top:0;left:100vw;width:200px;transition:left .3s}#menu.open{left:0}
-</style></head><body>
-<button id="toggle" aria-label="Open menu">☰</button>
-<nav id="menu" class="mobile-menu"><a href="/good.html">Good</a></nav>
-<a href="/good.html">good</a> <a href="/missing.html">broken</a>
-<script>setTimeout(() => document.getElementById('toggle').addEventListener('click', () => document.getElementById('menu').classList.toggle('open')), 1500);</script>
-</body></html>

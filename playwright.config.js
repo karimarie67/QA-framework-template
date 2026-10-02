@@ -1,6 +1,6 @@
-const { defineConfig, devices } = require('@playwright/test');
+import { defineConfig, devices } from '@playwright/test';
 
-module.exports = defineConfig({
+export default defineConfig({
   // Playwright empties its output directory at the start of every run. Keep it
   // away from `test-results/`, which holds committed proof of work
   // (docs/agents/testing.md): with the default, a run deleted that evidence.

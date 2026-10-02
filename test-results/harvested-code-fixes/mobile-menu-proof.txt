@@ -1,8 +1,0 @@
-
-Running 3 tests using 1 worker
-
-  ✓  1 [production] › tests/zz-menu-proof.spec.js:9:5 › opens a late-wired, off-screen menu, and leaves it open (2.0s)
-  ✓  2 [production] › tests/zz-menu-proof.spec.js:19:5 › a menu that never opens fails instead of being logged and skipped (17.1s)
-  ✓  3 [production] › tests/zz-menu-proof.spec.js:26:5 › no menu button: returns false and does nothing (117ms)
-
-  3 passed (19.9s)
