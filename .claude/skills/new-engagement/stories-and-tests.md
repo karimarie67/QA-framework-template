@@ -10,12 +10,17 @@ tracker" there first.
 
 1. **Re-check** each defect named in the log, on desktop and phone, before
    filing. Sharpen what the re-check shows, and drop what it doesn't confirm.
-   Log each drop and its reason.
+   Log each drop and its reason. Wait for the page to settle before a
+   screenshot: one taken too early shows missing images that aren't missing.
+   For a third-party embed or link, confirm with the vendor's API or a real
+   browser first; a bot check isn't the site's defect.
 2. File each with the **QA Finding** form's sections, filling every required
    one, with the labels `qa` and `needs-triage`, plus `bug` or `accessibility`.
    The body states what was observed (the exact attribute, text, or status), and
    names anything inferred and not confirmed. For example, the effect of a form
    field's type on a phone keyboard is inferred when nothing was typed.
+   Link screenshots and logs at the commit that holds them (see "Proof of
+   work" in `shared-rules.md`), so the links outlive later steps.
 3. Take severity examples from the brief. They are proposals: triage confirms
    them, and removes `needs-triage`.
 4. Add each to the board in `Backlog`.

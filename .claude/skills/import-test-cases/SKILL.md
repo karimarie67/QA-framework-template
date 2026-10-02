@@ -105,6 +105,15 @@ On top of merging each PR and approving guardrail-file edits:
 customer data, and a pushed file can't be taken back (`shared-rules.md`). Check
 `gh repo view --json isPrivate`, and have the human skim the file.
 
+If the file holds a password, even a public demo one, don't commit it: the
+Atlas guard blocks any file that holds a password, and `cases.json` would copy
+it into the repo too. Don't edit or re-save the client's file either, since
+that changes its `sha256`. Ask the client, or the human standing in for them,
+for a fresh file with the password replaced (for example "the password shown
+on the login page"), under a new name such as `<name>-v2.csv`. Check it with
+`grep` that nothing secret is left, and `diff` it against the original to see
+that only those lines changed. Then import the fresh file, and log why.
+
 Commit the file, unchanged, to `docs/client-test-cases/<original file name>`,
 in its own commit. Then:
 
@@ -185,6 +194,16 @@ open question in the log and in the PR, so they go to the client. A finding:
 file it with the QA Finding form (`shared-rules.md`), put it on the board in
 `Backlog`, then `set <client id> stale.outcome finding` and `set <client id>
 stale.finding_issue <number>`.
+
+**When the client answers.** If the client says the site should do what a
+stale case describes (a missing feature, not an out-of-date case), the case
+comes back in, as a correction: with the human's confirmation, `set <client
+id> bucket automatable`, clear its `stale.*` fields (`set <client id>
+stale.outcome null`, and the same for `stale.finding_issue` and
+`stale.missing`), run step 4's `assign-ids` on fresh data, and carry on from
+step 5 for that case. Its test fails until the site meets it. If the feature
+doesn't exist yet, the test's control names are guesses: say so in the test
+and its Test Case issue, and pin them once the feature can be probed.
 
 **Done when:** `validate --stage triage` exits 0, every match is confirmed or
 rejected, the confirmed table is logged, and every finding from a stale case is

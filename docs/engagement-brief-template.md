@@ -27,6 +27,11 @@ opening table.
 | Staging | <url> | `staging` | <e.g. full suite, any time> |
 | Production | <url> | `production` | <e.g. read-only smoke tests after a release; no test data> |
 
+**No staging copy?** Say so in the Staging row, and point the `staging`
+projects at the live site under Production's rules (CI's default target is
+`staging`). **Request rate:** <e.g. one worker, requests spaced; what the site
+does when rate-limited>.
+
 **Test accounts and data:** <which accounts, who owns them, where credentials live (a CI secret name, never a value), and what gets cleaned up>
 
 ## When the tests run

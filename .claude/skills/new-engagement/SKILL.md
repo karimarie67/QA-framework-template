@@ -48,6 +48,10 @@ On top of merging each PR and approving guardrail-file edits (see
   `.git/config` directly.
 - Adding the project board's Board view (grouped by Status). GitHub's API
   can't create views.
+- Turning on auto-delete of merged branches for the new repo:
+  `gh repo edit <owner/repo> --delete-branch-on-merge`. Repo settings are the
+  human's. Without it, a stacked PR whose parent merged first lands on the
+  parent's branch, not on `main`, and has to be re-landed.
 - Adopting an approved edit to a guard or git-hook file, when the verify
   check below names one as needing it:
   `/setup-atlas adopt <file> --approval <PR URL> --approver "<name>"`. That
@@ -116,7 +120,10 @@ up to date.
 **Clear the template's proof of work.** Whatever the template committed under
 `test-results/` (other than `.gitkeep`) is the template's evidence, not this
 Engagement's. List it with `git ls-files test-results`, and remove it with
-`git rm -r`.
+`git rm -r`. Empty the template's dashboard history too: write `[]` to
+`dashboards/test-results/history.json`, or the template's own runs show up as
+this Engagement's first rows on its dashboard. CI owns `dashboards/` from here
+on.
 
 Then run `npm run test:unit` and `npm run test:template-check`, hand off the
 git hooks, and start the log.
@@ -134,7 +141,10 @@ It may list only files whose mention says where the repo came from.
 ### 2. Draft the brief
 
 **Probe** the site: load every page, and list its forms, outbound links, and
-downloads. Ask the human what the tests may do there. For a live site with no
+downloads. Follow the links from the home page, then load the sitemap's pages
+(`/sitemap.xml`) that the links didn't reach, and check each download with a
+`HEAD` request rather than fetching it. Space the requests (a second or so
+apart) on a live site. Ask the human what the tests may do there. For a live site with no
 staging copy, the answer is **read-only**: load and look, and never submit a
 form, not even an empty one, since a form with no required fields sends a real
 submission. Copy the brief template to `docs/engagement-brief.md` and fill in
@@ -190,15 +200,21 @@ the log; and no `example.com` URL is left in `config.yml`.
 
 In `.github/workflows/qa-test.yml`:
 
-- Run the e2e jobs on push and PR (not only on dispatch), for both the desktop
-  and `-mobile` projects.
+- Run the e2e jobs on push and PR (not only on dispatch). Each job already runs
+  the desktop and `-mobile` projects. Change each job's `if:` to the
+  expression in the comment above `smoke-tests`.
 - Drop the jobs for specs removed in step 3, **and** take them out of the
-  `needs` list of `update-dashboard`. That job also runs only on
-  `workflow_dispatch` (its `if:`), so without a change it never updates the
-  dashboard from a push to `main`. Change its `if:` to match.
+  `needs` list of `update-dashboard`; `template-check` fails while the workflow
+  still names a removed spec. The dashboard job runs only on dispatch, so
+  without a change it never updates from a push to `main`. Change its `if:`
+  to the expression in its comment: on dispatch (except a links-only run) and
+  on a push to `main`, and **never** on a PR, because it commits to the branch
+  that ran.
 - Match the dashboard generator's inputs in
-  `dashboards/scripts/generate-dashboard.js`.
-- Keep the link checker on demand.
+  `dashboards/scripts/generate-dashboard.js`, and name the functional section
+  for the suites that remain.
+- Keep the link checker on demand: its `link-check` job runs only on
+  dispatch, with `links` or `all`.
 
 Ask the human how to treat a test that fails on a known site defect: leave it
 **red** (honest, and the default), or mark it as a known failure linked to its
@@ -256,7 +272,11 @@ After the step 7 PR merges:
   Case issue set Automation Status to `Automated` and fill in Automation File
   Path. When the import ran, its step 7 already did this, so skip it.
 - **Watch the first runs on `main`,** read the dashboard they publish, and
-  check that its counts match the runs'.
+  check that its counts match the runs'. Check against the run's own results,
+  not by eye: download each suite's JSON artifact, and add up its `expected`
+  (passed), `unexpected` (failed), `flaky`, and `skipped` stats. The pass rate
+  leaves skipped tests out (passed ÷ (total − skipped)), and a test's time is
+  its last attempt's, marked "×2" when CI retried it.
 - **Rewrite `README.md`** as the Engagement's front door. It still describes
   the template: how to create an Engagement, and the Framework's history.
   Replace that with:
@@ -282,3 +302,21 @@ After the step 7 PR merges:
 and skip counts match the latest run; the README describes the Engagement, not
 the template, and its Atlas block is unchanged; and every box in the Kickoff
 checklist is ticked except the client agreement.
+
+### After the client agrees
+
+When the human reports the agreement (from the client contact, or standing in
+for one), log who agreed and when, then:
+
+- Set the brief's status to "Agreed on <date> with <who>", its "Last
+  reviewed" date, and tick its last Kickoff box. A `TBD` the client leaves
+  open is agreed as open: say so in the log.
+- In each story, replace "pending agreement" with the agreement.
+- Record the client's answers to open questions (a stale case, a finding's
+  scope) in the log. A stale case the client says the site should meet comes
+  back into the import: see the import skill's step 3.
+- Triage is the human's: they confirm each finding's severity and remove
+  `needs-triage` (`docs/agents/triage-labels.md`). The board's `In QA` and
+  `Done` stay human-only. Afterwards, bring the README's known-defects list in
+  line with what triage decided (a `wontfix` drops its test and acceptance
+  criterion too).

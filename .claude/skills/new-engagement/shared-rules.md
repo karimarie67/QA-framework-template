@@ -151,6 +151,15 @@ from anything you commit. `BLOCKED`, `SKIPPED`, and your own say-so are never a
 `PASS`. Clear `test-results/` of the previous work package's evidence before
 capturing new evidence, and leave `.gitkeep`.
 
+`utils.js`'s `captureEvidence(page, testInfo)` saves a screenshot to
+`test-results/<test case ID>/<project>.png`, so evidence is found by test case,
+not by Playwright's hashed output folders.
+
+Because each work package clears `test-results/`, a link to evidence from an
+issue or a later log entry breaks once the next package lands. Link to it at
+the commit that added it (`…/tree/<sha>/test-results/…`), and when a log entry
+clears earlier evidence, name the commit that still has it.
+
 ### Prove a test can fail
 
 This is the one place the procedure is written down. Do it for every test you
@@ -171,3 +180,15 @@ write or change, because a test that has never failed proves nothing.
    a phone-menu problem in the test.
 5. A failure that holds in every run and isn't the test's fault is a real
    defect. File it as a finding (`stories-and-tests.md`).
+
+A test that **fails today on a real defect** can't be broken to prove it can
+fail. Prove the other side instead: run it where the site is right, and see it
+pass. For example, point it at a page or a user without the defect, then put
+it back as in step 3. That shows the failure is the site's, not the test's.
+For a feature that doesn't exist yet, there's nowhere it can pass: show it
+fails on the assertion under test, with everything before it passing, and log
+that its pass-proof waits for the feature.
+
+A run in which nearly every test fails with a network error
+(`net::ERR_INTERNET_DISCONNECTED`, or the like) says the machine lost its
+connection, not that the site broke. Discard it and run again.
