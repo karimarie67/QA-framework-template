@@ -253,7 +253,9 @@ Conventions:
    catches a missing `await` on an assertion, a stray `test.only`, and unused
    or undefined names; it doesn't catch a missing `await` on an action such
    as `page.goto`.
-8. **Open a PR** that references the test case issue. Once it merges, label
+8. **Open a PR** that references the test case issue, and fill in the PR
+   template (`.github/pull_request_template.md`): what and why, the test
+   cases, the evidence path, and its checklist. Once it merges, label
    the case `test-automated` and fill in *Automation File Path*.
 
 ### Best practices
