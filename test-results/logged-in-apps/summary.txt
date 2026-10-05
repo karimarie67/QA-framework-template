@@ -73,3 +73,7 @@ scanned 191 files/entries in test-results/logged-in-apps/no-leak/login-rejects, 
 git grep: nothing
 git ls-files playwright/.auth: []
 no-leak overall: PASS
+== Step 10: regression dispatch on feat/logged-in-apps (run 37314075829)
+functional-tests: 8 failed (the public specs against the placeholder staging.example.com, as on #31's dispatch), 5 skipped: TC_AUTH_001 on staging-setup, TC_AUTH_002 and 003 on staging-auth and staging-auth-mobile (no siteConfig.auth in the template)
+update-dashboard: success, committed to the branch
+== Step 11: PR CI (run 37314067917): Unit Tests, Template Structural Check, Skeleton Self-Test all success
