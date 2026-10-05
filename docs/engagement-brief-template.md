@@ -32,7 +32,7 @@ projects at the live site under Production's rules (CI's default target is
 `staging`). **Request rate:** <e.g. one worker, requests spaced; what the site
 does when rate-limited>.
 
-**Test accounts and data:** <which accounts, who owns them, where credentials live (a CI secret name, never a value), and what gets cleaned up>
+**Test accounts and data:** <which accounts, who owns them, where credentials live (a CI secret name, never a value), and what gets cleaned up>. A site with a login: the test account is `QA_USERNAME` and `QA_PASSWORD` (repo secrets, set by a human), and it holds no real personal data, since a logged-in page's failure output can show what's on it.
 
 ## When the tests run
 

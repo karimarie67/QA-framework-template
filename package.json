@@ -9,7 +9,7 @@
   "scripts": {
     "test": "playwright test tests/",
     "test:smoke": "playwright test tests/smoke_tests.spec.js --project=staging --project=staging-mobile",
-    "test:regression": "playwright test tests/error_handling_tests.spec.js tests/forms_tests.spec.js tests/accessibility_tests.spec.js --project=staging --project=staging-mobile",
+    "test:regression": "playwright test tests/error_handling_tests.spec.js tests/forms_tests.spec.js tests/accessibility_tests.spec.js tests/account.auth.spec.js --project=staging --project=staging-mobile --project=staging-auth --project=staging-auth-mobile",
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
     "coverage": "node scripts/coverage-map.js",

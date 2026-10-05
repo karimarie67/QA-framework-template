@@ -22,13 +22,28 @@ checks (see the plan, template issue #30):
   img-no-alt     / has an image with no alt text          TC_A11Y_001
   page-404       /about answers 404                       TC_A11Y_001
   lang-mismatch  <html lang="en" xml:lang="fr">           TC_A11Y_001 still passes
+  login-rejects  every login fails                        TC_AUTH_001
+  no-submit      /login has no "Log in" button            TC_AUTH_001 (with the field filled)
+  account-public /account opens without the session       TC_AUTH_003
+  session-ignored /account ignores the session (the login still works) TC_AUTH_002
+
+The login (/login) accepts FIXTURE_USERNAME (default qa-fixture) and
+FIXTURE_PASSWORD from the environment; with no FIXTURE_PASSWORD, every login
+is rejected. test-skeleton.js gives it a random one per run. A login sets a
+session cookie and goes to /welcome, which doesn't need it; /account does.
 """
 
+import hmac
 import os
+import secrets
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import parse_qs
 
 BREAK = os.environ.get("BREAK", "")
 PORT = int(os.environ.get("PORT", "8765"))
+LOGIN_NAME = os.environ.get("FIXTURE_USERNAME", "qa-fixture")
+LOGIN_SECRET = os.environ.get("FIXTURE_PASSWORD", "")
+SESSION = secrets.token_hex(16)  # this server run's one session
 # Somewhere that isn't this site's origin, standing in for an analytics beacon.
 THIRD_PARTY = f"http://127.0.0.1:{PORT + 1}/collect"
 
@@ -127,7 +142,37 @@ def not_found():
     return page("Not found", "Page not found", "<p>There's no page at this address.</p>")
 
 
-ROUTES = {"/": home, "/about": about, "/contact": contact}
+def login(error=""):
+    message = f'<p role="alert">{error}</p>' if error else ""
+    button = "" if BREAK == "no-submit" else '<p><button type="submit">Log in</button></p>'
+    form = f"""
+{message}
+<form method="post" action="/login">
+  <p><label for="username">Username</label> <input id="username" name="username" type="text" autocomplete="username"></p>
+  <p><label for="secret">Password</label> <input id="secret" name="password" type="password" autocomplete="current-password"></p>
+  {button}
+</form>
+"""
+    return page("Log in", "Log in", form)
+
+
+def welcome():
+    return page("Welcome", "You're logged in", "<p>Welcome back.</p>")
+
+
+def account():
+    return page("Account", "Your account", "<p>Your account's details.</p>")
+
+
+def login_matches(fields):
+    if BREAK == "login-rejects" or not LOGIN_SECRET:
+        return False
+    name = fields.get("username", [""])[0]
+    given = fields.get("password", [""])[0]
+    return hmac.compare_digest(name, LOGIN_NAME) and hmac.compare_digest(given, LOGIN_SECRET)
+
+
+ROUTES = {"/": home, "/about": about, "/contact": contact, "/login": login, "/welcome": welcome}
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -148,6 +193,11 @@ class Handler(BaseHTTPRequestHandler):
             return self.send_html(400, page("Bad request", "Bad request", ""))
         if path == "/about" and BREAK == "page-404":
             return self.send_html(404, not_found())
+        if path == "/account":
+            logged_in = f"session={SESSION}" in (self.headers.get("Cookie") or "")
+            if BREAK == "account-public" or (logged_in and BREAK != "session-ignored"):
+                return self.send_html(200, account())
+            return self.redirect("/login")
         route = ROUTES.get(path)
         if route:
             return self.send_html(200, route())
@@ -155,9 +205,21 @@ class Handler(BaseHTTPRequestHandler):
 
     do_HEAD = do_GET
 
+    def redirect(self, location, cookie=None):
+        self.send_response(303)
+        self.send_header("Location", location)
+        if cookie:
+            self.send_header("Set-Cookie", cookie)
+        self.send_header("Content-Length", "0")
+        self.end_headers()
+
     def do_POST(self):
         length = int(self.headers.get("Content-Length") or 0)
-        self.rfile.read(length)
+        body = self.rfile.read(length)
+        if self.path.split("?", 1)[0] == "/login":
+            if login_matches(parse_qs(body.decode("utf-8"))):
+                return self.redirect("/welcome", f"session={SESSION}; HttpOnly; Path=/; SameSite=Lax")
+            return self.send_html(200, login("Wrong username or password"))
         self.send_response(204)
         self.end_headers()
 

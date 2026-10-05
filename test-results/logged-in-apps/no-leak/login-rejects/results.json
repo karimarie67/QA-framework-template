@@ -1,0 +1,524 @@
+{
+  "config": {
+    "configFile": "/Users/kskinner/QA-framework-template/playwright.config.js",
+    "rootDir": "/Users/kskinner/QA-framework-template/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ],
+      [
+        "html"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "local",
+        "name": "local",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging",
+        "name": "staging",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production",
+        "name": "production",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-mobile",
+        "name": "staging-mobile",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-mobile",
+        "name": "production-mobile",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-setup",
+        "name": "staging-setup",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/auth\\.setup\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-auth",
+        "name": "staging-auth",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "staging-auth-mobile",
+        "name": "staging-auth-mobile",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-setup",
+        "name": "production-setup",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/auth\\.setup\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-auth",
+        "name": "production-auth",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "production-auth-mobile",
+        "name": "production-auth-mobile",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "link-checker",
+        "name": "link-checker",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "timeout": 1800000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.1",
+    "workers": 5,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "auth.setup.js",
+      "file": "auth.setup.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC_AUTH_001 Logs in and saves the session",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [
+                {
+                  "type": "test_case",
+                  "description": "TC_AUTH_001",
+                  "location": {
+                    "file": "/Users/kskinner/QA-framework-template/tests/auth.setup.js",
+                    "line": 40,
+                    "column": 1
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "production-setup",
+              "projectName": "production-setup",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 15092,
+                  "error": {
+                    "message": "Error: the login page (/login) is left after logging in\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"/login\"\u001b[39m\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate",
+                    "stack": "Error: the login page (/login) is left after logging in\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"/login\"\u001b[39m\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n    at /Users/kskinner/QA-framework-template/tests/auth.setup.js:68:5",
+                    "location": {
+                      "file": "/Users/kskinner/QA-framework-template/tests/auth.setup.js",
+                      "column": 5,
+                      "line": 68
+                    },
+                    "snippet": "\u001b[0m \u001b[90m 66 |\u001b[39m     \u001b[36mawait\u001b[39m enterValue(secretField\u001b[33m,\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mQA_PASSWORD\u001b[39m\u001b[33m,\u001b[39m \u001b[35m10000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 67 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'button'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m auth\u001b[33m.\u001b[39msubmitName\u001b[33m,\u001b[39m exact\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m })\u001b[33m.\u001b[39mclick({ timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 68 |\u001b[39m     \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39mpoll(() \u001b[33m=>\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mURL\u001b[39m(page\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mpathname\u001b[33m,\u001b[39m {\n \u001b[90m    |\u001b[39m     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 69 |\u001b[39m       message\u001b[33m:\u001b[39m \u001b[32m`the login page (${auth.loginPath}) is left after logging in`\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 70 |\u001b[39m       timeout\u001b[33m:\u001b[39m \u001b[35m15000\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 71 |\u001b[39m     })\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBe(auth\u001b[33m.\u001b[39mloginPath)\u001b[33m;\u001b[39m\u001b[0m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/auth.setup.js",
+                        "column": 5,
+                        "line": 68
+                      },
+                      "message": "Error: the login page (/login) is left after logging in\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"/login\"\u001b[39m\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n\n  66 |     await enterValue(secretField, process.env.QA_PASSWORD, 10000);\n  67 |     await page.getByRole('button', { name: auth.submitName, exact: true }).click({ timeout: 10000 });\n> 68 |     await expect.poll(() => new URL(page.url()).pathname, {\n     |     ^\n  69 |       message: `the login page (${auth.loginPath}) is left after logging in`,\n  70 |       timeout: 15000,\n  71 |     }).not.toBe(auth.loginPath);\n    at /Users/kskinner/QA-framework-template/tests/auth.setup.js:68:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "the login page (/login) is left after logging in",
+                      "duration": 14907,
+                      "error": {
+                        "message": "Error: the login page (/login) is left after logging in\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"/login\"\u001b[39m\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate",
+                        "stack": "Error: the login page (/login) is left after logging in\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"/login\"\u001b[39m\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n    at /Users/kskinner/QA-framework-template/tests/auth.setup.js:68:5",
+                        "location": {
+                          "file": "/Users/kskinner/QA-framework-template/tests/auth.setup.js",
+                          "column": 5,
+                          "line": 68
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 66 |\u001b[39m     \u001b[36mawait\u001b[39m enterValue(secretField\u001b[33m,\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mQA_PASSWORD\u001b[39m\u001b[33m,\u001b[39m \u001b[35m10000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 67 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'button'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m auth\u001b[33m.\u001b[39msubmitName\u001b[33m,\u001b[39m exact\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m })\u001b[33m.\u001b[39mclick({ timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 68 |\u001b[39m     \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39mpoll(() \u001b[33m=>\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mURL\u001b[39m(page\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mpathname\u001b[33m,\u001b[39m {\n \u001b[90m    |\u001b[39m     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 69 |\u001b[39m       message\u001b[33m:\u001b[39m \u001b[32m`the login page (${auth.loginPath}) is left after logging in`\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 70 |\u001b[39m       timeout\u001b[33m:\u001b[39m \u001b[35m15000\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 71 |\u001b[39m     })\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBe(auth\u001b[33m.\u001b[39mloginPath)\u001b[33m;\u001b[39m\u001b[0m"
+                      }
+                    }
+                  ],
+                  "startTime": "2026-10-05T13:03:17.137Z",
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_AUTH_001",
+                      "location": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/auth.setup.js",
+                        "line": 40,
+                        "column": 1
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/kskinner/QA-framework-template/playwright-output/auth.setup.js-TC-AUTH-001-Logs-in-and-saves-the-session-production-setup/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/kskinner/QA-framework-template/tests/auth.setup.js",
+                    "column": 5,
+                    "line": 68
+                  }
+                },
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 15154,
+                  "error": {
+                    "message": "Error: the login page (/login) is left after logging in\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"/login\"\u001b[39m\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate",
+                    "stack": "Error: the login page (/login) is left after logging in\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"/login\"\u001b[39m\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n    at /Users/kskinner/QA-framework-template/tests/auth.setup.js:68:5",
+                    "location": {
+                      "file": "/Users/kskinner/QA-framework-template/tests/auth.setup.js",
+                      "column": 5,
+                      "line": 68
+                    },
+                    "snippet": "\u001b[0m \u001b[90m 66 |\u001b[39m     \u001b[36mawait\u001b[39m enterValue(secretField\u001b[33m,\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mQA_PASSWORD\u001b[39m\u001b[33m,\u001b[39m \u001b[35m10000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 67 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'button'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m auth\u001b[33m.\u001b[39msubmitName\u001b[33m,\u001b[39m exact\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m })\u001b[33m.\u001b[39mclick({ timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 68 |\u001b[39m     \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39mpoll(() \u001b[33m=>\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mURL\u001b[39m(page\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mpathname\u001b[33m,\u001b[39m {\n \u001b[90m    |\u001b[39m     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 69 |\u001b[39m       message\u001b[33m:\u001b[39m \u001b[32m`the login page (${auth.loginPath}) is left after logging in`\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 70 |\u001b[39m       timeout\u001b[33m:\u001b[39m \u001b[35m15000\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 71 |\u001b[39m     })\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBe(auth\u001b[33m.\u001b[39mloginPath)\u001b[33m;\u001b[39m\u001b[0m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/auth.setup.js",
+                        "column": 5,
+                        "line": 68
+                      },
+                      "message": "Error: the login page (/login) is left after logging in\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"/login\"\u001b[39m\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n\n  66 |     await enterValue(secretField, process.env.QA_PASSWORD, 10000);\n  67 |     await page.getByRole('button', { name: auth.submitName, exact: true }).click({ timeout: 10000 });\n> 68 |     await expect.poll(() => new URL(page.url()).pathname, {\n     |     ^\n  69 |       message: `the login page (${auth.loginPath}) is left after logging in`,\n  70 |       timeout: 15000,\n  71 |     }).not.toBe(auth.loginPath);\n    at /Users/kskinner/QA-framework-template/tests/auth.setup.js:68:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 1,
+                  "steps": [
+                    {
+                      "title": "the login page (/login) is left after logging in",
+                      "duration": 14903,
+                      "error": {
+                        "message": "Error: the login page (/login) is left after logging in\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"/login\"\u001b[39m\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate",
+                        "stack": "Error: the login page (/login) is left after logging in\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"/login\"\u001b[39m\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate\n    at /Users/kskinner/QA-framework-template/tests/auth.setup.js:68:5",
+                        "location": {
+                          "file": "/Users/kskinner/QA-framework-template/tests/auth.setup.js",
+                          "column": 5,
+                          "line": 68
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 66 |\u001b[39m     \u001b[36mawait\u001b[39m enterValue(secretField\u001b[33m,\u001b[39m process\u001b[33m.\u001b[39menv\u001b[33m.\u001b[39m\u001b[33mQA_PASSWORD\u001b[39m\u001b[33m,\u001b[39m \u001b[35m10000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 67 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'button'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m auth\u001b[33m.\u001b[39msubmitName\u001b[33m,\u001b[39m exact\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m })\u001b[33m.\u001b[39mclick({ timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 68 |\u001b[39m     \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39mpoll(() \u001b[33m=>\u001b[39m \u001b[36mnew\u001b[39m \u001b[33mURL\u001b[39m(page\u001b[33m.\u001b[39murl())\u001b[33m.\u001b[39mpathname\u001b[33m,\u001b[39m {\n \u001b[90m    |\u001b[39m     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 69 |\u001b[39m       message\u001b[33m:\u001b[39m \u001b[32m`the login page (${auth.loginPath}) is left after logging in`\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 70 |\u001b[39m       timeout\u001b[33m:\u001b[39m \u001b[35m15000\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 71 |\u001b[39m     })\u001b[33m.\u001b[39mnot\u001b[33m.\u001b[39mtoBe(auth\u001b[33m.\u001b[39mloginPath)\u001b[33m;\u001b[39m\u001b[0m"
+                      }
+                    }
+                  ],
+                  "startTime": "2026-10-05T13:03:32.788Z",
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_AUTH_001",
+                      "location": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/auth.setup.js",
+                        "line": 40,
+                        "column": 1
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/kskinner/QA-framework-template/playwright-output/auth.setup.js-TC-AUTH-001-Logs-in-and-saves-the-session-production-setup-retry1/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/kskinner/QA-framework-template/tests/auth.setup.js",
+                    "column": 5,
+                    "line": 68
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f376efe52c54b1a876fd-6fc439f1272a2ad0bc5c",
+          "file": "auth.setup.js",
+          "line": 49,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "account.auth.spec.js",
+      "file": "account.auth.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Logged-in pages",
+          "file": "account.auth.spec.js",
+          "line": 11,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC_AUTH_002 A page that needs a login opens with the saved session",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_AUTH_002",
+                      "location": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/account.auth.spec.js",
+                        "line": 16,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production-auth",
+                  "projectName": "production-auth",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "0330f9a98ce36c115ec6-1d1be3e4eec4c92600a6",
+              "file": "account.auth.spec.js",
+              "line": 16,
+              "column": 3
+            }
+          ],
+          "suites": [
+            {
+              "title": "without a session",
+              "file": "account.auth.spec.js",
+              "line": 32,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "TC_AUTH_003 Without a session, that page sends you to the login page",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 90000,
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_AUTH_003",
+                          "location": {
+                            "file": "/Users/kskinner/QA-framework-template/tests/account.auth.spec.js",
+                            "line": 39,
+                            "column": 5
+                          }
+                        }
+                      ],
+                      "expectedStatus": "passed",
+                      "projectId": "production-auth",
+                      "projectName": "production-auth",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0330f9a98ce36c115ec6-ea24a593103e1d06986e",
+                  "file": "account.auth.spec.js",
+                  "line": 39,
+                  "column": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-05T13:03:16.739Z",
+    "duration": 31369.177,
+    "expected": 0,
+    "skipped": 2,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,79 @@
+== Step 4: breaks
+-- BREAK=login-rejects: exit 1
+production-auth | TC_AUTH_002 | none (0 attempts)
+production-auth | TC_AUTH_003 | none (0 attempts)
+production-setup | TC_AUTH_001 | failed (1 attempt)
+expected 0, unexpected 1, skipped 2, flaky 0
+-- BREAK=account-public: exit 1
+production-auth | TC_AUTH_002 | passed (1 attempt)
+production-auth | TC_AUTH_003 | failed (1 attempt)
+production-setup | TC_AUTH_001 | passed (1 attempt)
+expected 2, unexpected 1, skipped 0, flaky 0
+-- BREAK=session-ignored: exit 1
+production-auth | TC_AUTH_002 | failed (1 attempt)
+production-auth | TC_AUTH_003 | passed (1 attempt)
+production-setup | TC_AUTH_001 | passed (1 attempt)
+expected 2, unexpected 1, skipped 0, flaky 0
+-- missing-password: exit 1
+production-setup | TC_AUTH_001 | failed (1 attempt)
+expected 0, unexpected 1, skipped 0, flaky 0
+   log:     Error: Not set: QA_PASSWORD. Set them in the environment (repo secrets in CI): see .claude/skills/new-engagement/site-config.md
+   log:     > 57 |     throw new Error(`Not set: ${missing.join(', ')}. Set them in the environment (repo secrets in CI): see .claude/skills/new-engagement/site-config.md`);
+   log:       60 |   // 3. Log in.
+-- pr-without-secrets: exit 0
+production-setup | TC_AUTH_001 | skipped (1 attempt)
+expected 0, unexpected 0, skipped 1, flaky 0
+   log:   1 skipped
+-- same-repo-pr: exit 1
+production-setup | TC_AUTH_001 | failed (1 attempt)
+expected 0, unexpected 1, skipped 0, flaky 0
+   log:     Error: Not set: QA_USERNAME, QA_PASSWORD. Set them in the environment (repo secrets in CI): see .claude/skills/new-engagement/site-config.md
+   log:     > 57 |     throw new Error(`Not set: ${missing.join(', ')}. Set them in the environment (repo secrets in CI): see .claude/skills/new-engagement/site-config.md`);
+   log:       60 |   // 3. Log in.
+-- no-submit: exit 1
+production-setup | TC_AUTH_001 | failed (1 attempt)
+expected 0, unexpected 1, skipped 0, flaky 0
+   log:     [2m  - waiting for getByRole('button', { name: 'Log in', exact: true })[22m
+== Step 5: intact, twice
+-- run 1: exit 0
+expected 19, unexpected 0, skipped 0, flaky 0
+-- run 2: exit 0
+expected 19, unexpected 0, skipped 0, flaky 0
+runs agree
+git diff of code: empty
+== Step 6: no login configured
+-- exit 0
+production-auth | TC_AUTH_002 | skipped (1 attempt)
+production-auth | TC_AUTH_003 | skipped (1 attempt)
+production-auth-mobile | TC_AUTH_002 | skipped (1 attempt)
+production-auth-mobile | TC_AUTH_003 | skipped (1 attempt)
+production-setup | TC_AUTH_001 | skipped (1 attempt)
+expected 14, unexpected 0, skipped 5, flaky 0
+== Step 7: no credential anywhere
+-- passing: exit 0
+production-auth | TC_AUTH_002 | passed (1 attempt)
+production-auth | TC_AUTH_003 | passed (1 attempt)
+production-setup | TC_AUTH_001 | passed (1 attempt)
+expected 3, unexpected 0, skipped 0, flaky 0
+scanned 182 files/entries in test-results/logged-in-apps/no-leak/passing, test-results, playwright-output, playwright-report: 0 hits
+-- no-submit: exit 1
+production-auth | TC_AUTH_002 | none (0 attempts)
+production-auth | TC_AUTH_003 | none (0 attempts)
+production-setup | TC_AUTH_001 | failed (2 attempts)
+expected 0, unexpected 1, skipped 2, flaky 0
+scanned 188 files/entries in test-results/logged-in-apps/no-leak/no-submit, test-results, playwright-output, playwright-report: 0 hits
+   report data: 0c948d7ebb3a71f5fad54eeb679264766de14810.md
+-- login-rejects: exit 1
+production-auth | TC_AUTH_002 | none (0 attempts)
+production-auth | TC_AUTH_003 | none (0 attempts)
+production-setup | TC_AUTH_001 | failed (2 attempts)
+expected 0, unexpected 1, skipped 2, flaky 0
+scanned 191 files/entries in test-results/logged-in-apps/no-leak/login-rejects, test-results, playwright-output, playwright-report: 0 hits
+   report data: acc474ad9cbaa7435b8453bf22f366e1b25b1214.md
+git grep: nothing
+git ls-files playwright/.auth: []
+no-leak overall: PASS
+== Step 10: regression dispatch on feat/logged-in-apps (run 37314075829)
+functional-tests: 8 failed (the public specs against the placeholder staging.example.com, as on #31's dispatch), 5 skipped: TC_AUTH_001 on staging-setup, TC_AUTH_002 and 003 on staging-auth and staging-auth-mobile (no siteConfig.auth in the template)
+update-dashboard: success, committed to the branch
+== Step 11: PR CI (run 37314067917): Unit Tests, Template Structural Check, Skeleton Self-Test all success

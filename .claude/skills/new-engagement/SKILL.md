@@ -152,6 +152,12 @@ everything the site shows. Mark the people and contacts `TBD`, and the status
 Draft. Under "Browsers and devices", name the phone emulation the tests will
 use (step 3 sets it up), not a window width.
 
+Ask the human whether the site has a login the tests need, and if so which
+test account: one account, holding nothing about a real person. Name it in the
+brief's "Test accounts and data" by its secret names, `QA_USERNAME` and
+`QA_PASSWORD`, never its values (step 3 fills in `siteConfig.auth`; step 5
+sets the secrets).
+
 Ask the human whether the client has manual test cases already written, and
 log the answer, since steps 7 and 8 depend on it. If so, run
 `node .claude/skills/import-test-cases/import.js normalise <file> --preview`
@@ -217,6 +223,12 @@ In `.github/workflows/qa-test.yml`:
   for the suites that remain.
 - Keep the link checker on demand: its `link-check` job runs only on
   dispatch, with `links` or `all`.
+
+**A site with a login:** hand off setting the repo secrets `QA_USERNAME` and
+`QA_PASSWORD` (Settings → Secrets and variables → Actions); the human sets
+them, and never pastes the values into the session. The first `regression`
+run checks they reach the tests: TC_AUTH_001 (the login) passes, and
+TC_AUTH_002 and TC_AUTH_003 run rather than skip.
 
 Ask the human how to treat a test that fails on a known site defect: leave it
 **red** (honest, and the default), or mark it as a known failure linked to its

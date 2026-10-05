@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-10-02T20:24:08.637Z",
+  "timestamp": "2026-10-05T13:06:11.388Z",
   "metrics": {
-    "totalTests": 8,
+    "totalTests": 13,
     "passed": 0,
     "flaky": 0,
-    "skipped": 0,
+    "skipped": 5,
     "failed": 8,
     "failedTestNames": [
       "TC_A11Y_001 No page has a serious or critical accessibility violation",
@@ -13,163 +13,253 @@
       "TC_FORM_001 Every form field has its label, type, and required state"
     ],
     "passRate": 0,
-    "totalDuration": 5.787999999999999,
+    "totalDuration": 6.031000000000001,
     "smokeCount": 0,
-    "functionalCount": 8,
+    "functionalCount": 13,
     "allTestObjects": [
+      {
+        "name": "TC_AUTH_001 Logs in and saves the session",
+        "status": "skipped",
+        "durationSec": 0.112,
+        "attempts": 1,
+        "allAttemptsSec": 0.112,
+        "projectName": "staging-setup",
+        "error": null
+      },
       {
         "name": "TC_A11Y_001 No page has a serious or critical accessibility violation",
         "status": "failed",
-        "durationSec": 0.38,
+        "durationSec": 0.42,
         "attempts": 2,
-        "allAttemptsSec": 0.756,
+        "allAttemptsSec": 0.78,
         "projectName": "staging",
         "error": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m\n\n  23 |         response = await page.goto(buildURL(testInfo, p.path), { waitUntil: 'load' });\n  24 |       } catch (err) {\n> 25 |         expect.soft(err.message, `${p.path} failed to load, so it can't be scanned`).toBe('');\n     |                                                                                      ^\n  26 |         continue;\n  27 |       }\n  28 |       // A page that doesn't load would scan clean: it must fail, not pass.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js:25:86"
       },
       {
         "name": "TC_A11Y_001 No page has a serious or critical accessibility violation",
         "status": "failed",
-        "durationSec": 0.725,
+        "durationSec": 0.809,
         "attempts": 2,
-        "allAttemptsSec": 1.344,
+        "allAttemptsSec": 1.491,
         "projectName": "staging-mobile",
         "error": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m\n\n  23 |         response = await page.goto(buildURL(testInfo, p.path), { waitUntil: 'load' });\n  24 |       } catch (err) {\n> 25 |         expect.soft(err.message, `${p.path} failed to load, so it can't be scanned`).toBe('');\n     |                                                                                      ^\n  26 |         continue;\n  27 |       }\n  28 |       // A page that doesn't load would scan clean: it must fail, not pass.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js:25:86"
       },
       {
         "name": "TC_ERROR_001 An unknown address shows a not-found page",
         "status": "failed",
-        "durationSec": 0.354,
+        "durationSec": 0.334,
         "attempts": 2,
-        "allAttemptsSec": 0.664,
+        "allAttemptsSec": 0.602,
         "projectName": "staging",
         "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n  12 |     annotation: [{ type: 'test_case', description: 'TC_ERROR_001' }],\n  13 |   }, async ({ page }, testInfo) => {\n> 14 |     const response = await page.goto(buildURL(testInfo, siteConfig.notFoundPath), { waitUntil: 'domcontentloaded' });\n     |                                 ^\n  15 |     expect.soft(response?.status(), `${siteConfig.notFoundPath} answers 404`).toBe(404);\n  16 |     await expect(\n  17 |       page.getByText(new RegExp(siteConfig.notFoundText, 'i')).first(),\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:14:33"
       },
       {
         "name": "TC_ERROR_002 A malformed address never causes a server error",
         "status": "failed",
-        "durationSec": 0.5,
+        "durationSec": 0.267,
         "attempts": 2,
-        "allAttemptsSec": 0.705,
+        "allAttemptsSec": 0.526,
         "projectName": "staging",
         "error": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.7339.186 Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n\n  25 |   }, async ({ page }, testInfo) => {\n  26 |     for (const path of requireEntries('malformedPaths', siteConfig.malformedPaths)) {\n> 27 |       const res = await page.request.get(buildURL(testInfo, path), { failOnStatusCode: false });\n     |                                      ^\n  28 |       expect.soft(res.status(), `${path} answers below 500`).toBeLessThan(500);\n  29 |     }\n  30 |   });\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:27:38"
       },
       {
         "name": "TC_ERROR_001 An unknown address shows a not-found page",
         "status": "failed",
-        "durationSec": 0.289,
+        "durationSec": 0.377,
         "attempts": 2,
-        "allAttemptsSec": 0.561,
+        "allAttemptsSec": 0.688,
         "projectName": "staging-mobile",
         "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n  12 |     annotation: [{ type: 'test_case', description: 'TC_ERROR_001' }],\n  13 |   }, async ({ page }, testInfo) => {\n> 14 |     const response = await page.goto(buildURL(testInfo, siteConfig.notFoundPath), { waitUntil: 'domcontentloaded' });\n     |                                 ^\n  15 |     expect.soft(response?.status(), `${siteConfig.notFoundPath} answers 404`).toBe(404);\n  16 |     await expect(\n  17 |       page.getByText(new RegExp(siteConfig.notFoundText, 'i')).first(),\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:14:33"
       },
       {
         "name": "TC_ERROR_002 A malformed address never causes a server error",
         "status": "failed",
-        "durationSec": 0.314,
+        "durationSec": 0.319,
         "attempts": 2,
-        "allAttemptsSec": 0.605,
+        "allAttemptsSec": 0.591,
         "projectName": "staging-mobile",
         "error": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.7339.186 Mobile Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n\n  25 |   }, async ({ page }, testInfo) => {\n  26 |     for (const path of requireEntries('malformedPaths', siteConfig.malformedPaths)) {\n> 27 |       const res = await page.request.get(buildURL(testInfo, path), { failOnStatusCode: false });\n     |                                      ^\n  28 |       expect.soft(res.status(), `${path} answers below 500`).toBeLessThan(500);\n  29 |     }\n  30 |   });\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:27:38"
       },
       {
         "name": "TC_FORM_001 Every form field has its label, type, and required state",
         "status": "failed",
-        "durationSec": 0.357,
+        "durationSec": 0.338,
         "attempts": 2,
-        "allAttemptsSec": 0.624,
+        "allAttemptsSec": 0.61,
         "projectName": "staging",
         "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n\n\n  30 |\n  31 |     for (const f of forms) {\n> 32 |       await page.goto(buildURL(testInfo, f.path), { waitUntil: 'load' });\n     |                  ^\n  33 |       await page.waitForLoadState('networkidle');\n  34 |       // By CSS selector, not by role: a <form> only has the form role when it\n  35 |       // has an accessible name, which most real forms lack.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js:32:18"
       },
       {
         "name": "TC_FORM_001 Every form field has its label, type, and required state",
         "status": "failed",
-        "durationSec": 0.241,
+        "durationSec": 0.321,
         "attempts": 2,
-        "allAttemptsSec": 0.529,
+        "allAttemptsSec": 0.631,
         "projectName": "staging-mobile",
         "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n\n\n  30 |\n  31 |     for (const f of forms) {\n> 32 |       await page.goto(buildURL(testInfo, f.path), { waitUntil: 'load' });\n     |                  ^\n  33 |       await page.waitForLoadState('networkidle');\n  34 |       // By CSS selector, not by role: a <form> only has the form role when it\n  35 |       // has an accessible name, which most real forms lack.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js:32:18"
+      },
+      {
+        "name": "TC_AUTH_002 A page that needs a login opens with the saved session",
+        "status": "skipped",
+        "durationSec": 0,
+        "attempts": 1,
+        "allAttemptsSec": 0,
+        "projectName": "staging-auth",
+        "error": null
+      },
+      {
+        "name": "TC_AUTH_002 A page that needs a login opens with the saved session",
+        "status": "skipped",
+        "durationSec": 0,
+        "attempts": 1,
+        "allAttemptsSec": 0,
+        "projectName": "staging-auth-mobile",
+        "error": null
+      },
+      {
+        "name": "TC_AUTH_003 Without a session, that page sends you to the login page",
+        "status": "skipped",
+        "durationSec": 0,
+        "attempts": 1,
+        "allAttemptsSec": 0,
+        "projectName": "staging-auth",
+        "error": null
+      },
+      {
+        "name": "TC_AUTH_003 Without a session, that page sends you to the login page",
+        "status": "skipped",
+        "durationSec": 0,
+        "attempts": 1,
+        "allAttemptsSec": 0,
+        "projectName": "staging-auth-mobile",
+        "error": null
       }
     ],
-    "timestamp": "2026-10-02T20:24:08.627Z",
+    "timestamp": "2026-10-05T13:06:11.372Z",
     "environment": "staging",
-    "runId": "37060210845",
-    "runNumber": "64",
-    "branch": "feat/skeleton-specs"
+    "runId": "37314075829",
+    "runNumber": "68",
+    "branch": "feat/logged-in-apps"
   },
   "testResults": {
     "smoke": [],
     "functional": [
       {
+        "name": "TC_AUTH_001 Logs in and saves the session",
+        "status": "skipped",
+        "durationSec": 0.112,
+        "attempts": 1,
+        "allAttemptsSec": 0.112,
+        "projectName": "staging-setup",
+        "error": null
+      },
+      {
         "name": "TC_A11Y_001 No page has a serious or critical accessibility violation",
         "status": "failed",
-        "durationSec": 0.38,
+        "durationSec": 0.42,
         "attempts": 2,
-        "allAttemptsSec": 0.756,
+        "allAttemptsSec": 0.78,
         "projectName": "staging",
         "error": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m\n\n  23 |         response = await page.goto(buildURL(testInfo, p.path), { waitUntil: 'load' });\n  24 |       } catch (err) {\n> 25 |         expect.soft(err.message, `${p.path} failed to load, so it can't be scanned`).toBe('');\n     |                                                                                      ^\n  26 |         continue;\n  27 |       }\n  28 |       // A page that doesn't load would scan clean: it must fail, not pass.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js:25:86"
       },
       {
         "name": "TC_A11Y_001 No page has a serious or critical accessibility violation",
         "status": "failed",
-        "durationSec": 0.725,
+        "durationSec": 0.809,
         "attempts": 2,
-        "allAttemptsSec": 1.344,
+        "allAttemptsSec": 1.491,
         "projectName": "staging-mobile",
         "error": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m\n\n  23 |         response = await page.goto(buildURL(testInfo, p.path), { waitUntil: 'load' });\n  24 |       } catch (err) {\n> 25 |         expect.soft(err.message, `${p.path} failed to load, so it can't be scanned`).toBe('');\n     |                                                                                      ^\n  26 |         continue;\n  27 |       }\n  28 |       // A page that doesn't load would scan clean: it must fail, not pass.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js:25:86"
       },
       {
         "name": "TC_ERROR_001 An unknown address shows a not-found page",
         "status": "failed",
-        "durationSec": 0.354,
+        "durationSec": 0.334,
         "attempts": 2,
-        "allAttemptsSec": 0.664,
+        "allAttemptsSec": 0.602,
         "projectName": "staging",
         "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n  12 |     annotation: [{ type: 'test_case', description: 'TC_ERROR_001' }],\n  13 |   }, async ({ page }, testInfo) => {\n> 14 |     const response = await page.goto(buildURL(testInfo, siteConfig.notFoundPath), { waitUntil: 'domcontentloaded' });\n     |                                 ^\n  15 |     expect.soft(response?.status(), `${siteConfig.notFoundPath} answers 404`).toBe(404);\n  16 |     await expect(\n  17 |       page.getByText(new RegExp(siteConfig.notFoundText, 'i')).first(),\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:14:33"
       },
       {
         "name": "TC_ERROR_002 A malformed address never causes a server error",
         "status": "failed",
-        "durationSec": 0.5,
+        "durationSec": 0.267,
         "attempts": 2,
-        "allAttemptsSec": 0.705,
+        "allAttemptsSec": 0.526,
         "projectName": "staging",
         "error": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.7339.186 Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n\n  25 |   }, async ({ page }, testInfo) => {\n  26 |     for (const path of requireEntries('malformedPaths', siteConfig.malformedPaths)) {\n> 27 |       const res = await page.request.get(buildURL(testInfo, path), { failOnStatusCode: false });\n     |                                      ^\n  28 |       expect.soft(res.status(), `${path} answers below 500`).toBeLessThan(500);\n  29 |     }\n  30 |   });\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:27:38"
       },
       {
         "name": "TC_ERROR_001 An unknown address shows a not-found page",
         "status": "failed",
-        "durationSec": 0.289,
+        "durationSec": 0.377,
         "attempts": 2,
-        "allAttemptsSec": 0.561,
+        "allAttemptsSec": 0.688,
         "projectName": "staging-mobile",
         "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n  12 |     annotation: [{ type: 'test_case', description: 'TC_ERROR_001' }],\n  13 |   }, async ({ page }, testInfo) => {\n> 14 |     const response = await page.goto(buildURL(testInfo, siteConfig.notFoundPath), { waitUntil: 'domcontentloaded' });\n     |                                 ^\n  15 |     expect.soft(response?.status(), `${siteConfig.notFoundPath} answers 404`).toBe(404);\n  16 |     await expect(\n  17 |       page.getByText(new RegExp(siteConfig.notFoundText, 'i')).first(),\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:14:33"
       },
       {
         "name": "TC_ERROR_002 A malformed address never causes a server error",
         "status": "failed",
-        "durationSec": 0.314,
+        "durationSec": 0.319,
         "attempts": 2,
-        "allAttemptsSec": 0.605,
+        "allAttemptsSec": 0.591,
         "projectName": "staging-mobile",
         "error": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.7339.186 Mobile Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n\n  25 |   }, async ({ page }, testInfo) => {\n  26 |     for (const path of requireEntries('malformedPaths', siteConfig.malformedPaths)) {\n> 27 |       const res = await page.request.get(buildURL(testInfo, path), { failOnStatusCode: false });\n     |                                      ^\n  28 |       expect.soft(res.status(), `${path} answers below 500`).toBeLessThan(500);\n  29 |     }\n  30 |   });\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:27:38"
       },
       {
         "name": "TC_FORM_001 Every form field has its label, type, and required state",
         "status": "failed",
-        "durationSec": 0.357,
+        "durationSec": 0.338,
         "attempts": 2,
-        "allAttemptsSec": 0.624,
+        "allAttemptsSec": 0.61,
         "projectName": "staging",
         "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n\n\n  30 |\n  31 |     for (const f of forms) {\n> 32 |       await page.goto(buildURL(testInfo, f.path), { waitUntil: 'load' });\n     |                  ^\n  33 |       await page.waitForLoadState('networkidle');\n  34 |       // By CSS selector, not by role: a <form> only has the form role when it\n  35 |       // has an accessible name, which most real forms lack.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js:32:18"
       },
       {
         "name": "TC_FORM_001 Every form field has its label, type, and required state",
         "status": "failed",
-        "durationSec": 0.241,
+        "durationSec": 0.321,
         "attempts": 2,
-        "allAttemptsSec": 0.529,
+        "allAttemptsSec": 0.631,
         "projectName": "staging-mobile",
         "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n\n\n  30 |\n  31 |     for (const f of forms) {\n> 32 |       await page.goto(buildURL(testInfo, f.path), { waitUntil: 'load' });\n     |                  ^\n  33 |       await page.waitForLoadState('networkidle');\n  34 |       // By CSS selector, not by role: a <form> only has the form role when it\n  35 |       // has an accessible name, which most real forms lack.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js:32:18"
+      },
+      {
+        "name": "TC_AUTH_002 A page that needs a login opens with the saved session",
+        "status": "skipped",
+        "durationSec": 0,
+        "attempts": 1,
+        "allAttemptsSec": 0,
+        "projectName": "staging-auth",
+        "error": null
+      },
+      {
+        "name": "TC_AUTH_002 A page that needs a login opens with the saved session",
+        "status": "skipped",
+        "durationSec": 0,
+        "attempts": 1,
+        "allAttemptsSec": 0,
+        "projectName": "staging-auth-mobile",
+        "error": null
+      },
+      {
+        "name": "TC_AUTH_003 Without a session, that page sends you to the login page",
+        "status": "skipped",
+        "durationSec": 0,
+        "attempts": 1,
+        "allAttemptsSec": 0,
+        "projectName": "staging-auth",
+        "error": null
+      },
+      {
+        "name": "TC_AUTH_003 Without a session, that page sends you to the login page",
+        "status": "skipped",
+        "durationSec": 0,
+        "attempts": 1,
+        "allAttemptsSec": 0,
+        "projectName": "staging-auth-mobile",
+        "error": null
       }
     ]
   }

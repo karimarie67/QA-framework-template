@@ -1,0 +1,2046 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/QA-framework-template/QA-framework-template/playwright.config.js",
+    "rootDir": "/home/runner/work/QA-framework-template/QA-framework-template/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/karimarie67/QA-framework-template/commit/4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+        "commitHash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+        "buildHref": "https://github.com/karimarie67/QA-framework-template/actions/runs/37314075829"
+      },
+      "gitCommit": {
+        "shortHash": "4c8ce98",
+        "hash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+        "subject": "test(evidence): verification steps 4-7 for #32",
+        "body": "test(evidence): verification steps 4-7 for #32\n\nBreaks (login-rejects, account-public, session-ignored, no-submit, missing\nor absent credentials), the intact fixture twice (19 passed both runs), no\nlogin configured (the five login results skip), and the no-leak search under\nCI=true --retries=1 (passing run, no-submit, login-rejects): 0 hits for the\nrun's random password. summary.txt has the results.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n",
+        "author": {
+          "name": "Kari Skinner",
+          "email": "kskinner@jahnelgroup.com",
+          "time": 1791205466000
+        },
+        "committer": {
+          "name": "Kari Skinner",
+          "email": "kskinner@jahnelgroup.com",
+          "time": 1791205466000
+        },
+        "branch": "feat/logged-in-apps"
+      },
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/karimarie67/QA-framework-template/commit/4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "commitHash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "buildHref": "https://github.com/karimarie67/QA-framework-template/actions/runs/37314075829"
+          },
+          "gitCommit": {
+            "shortHash": "4c8ce98",
+            "hash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "subject": "test(evidence): verification steps 4-7 for #32",
+            "body": "test(evidence): verification steps 4-7 for #32\n\nBreaks (login-rejects, account-public, session-ignored, no-submit, missing\nor absent credentials), the intact fixture twice (19 passed both runs), no\nlogin configured (the five login results skip), and the no-leak search under\nCI=true --retries=1 (passing run, no-submit, login-rejects): 0 hits for the\nrun's random password. summary.txt has the results.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n",
+            "author": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "committer": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "branch": "feat/logged-in-apps"
+          },
+          "actualWorkers": 2
+        },
+        "id": "local",
+        "name": "local",
+        "testDir": "/home/runner/work/QA-framework-template/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/karimarie67/QA-framework-template/commit/4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "commitHash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "buildHref": "https://github.com/karimarie67/QA-framework-template/actions/runs/37314075829"
+          },
+          "gitCommit": {
+            "shortHash": "4c8ce98",
+            "hash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "subject": "test(evidence): verification steps 4-7 for #32",
+            "body": "test(evidence): verification steps 4-7 for #32\n\nBreaks (login-rejects, account-public, session-ignored, no-submit, missing\nor absent credentials), the intact fixture twice (19 passed both runs), no\nlogin configured (the five login results skip), and the no-leak search under\nCI=true --retries=1 (passing run, no-submit, login-rejects): 0 hits for the\nrun's random password. summary.txt has the results.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n",
+            "author": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "committer": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "branch": "feat/logged-in-apps"
+          },
+          "actualWorkers": 2
+        },
+        "id": "staging",
+        "name": "staging",
+        "testDir": "/home/runner/work/QA-framework-template/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/karimarie67/QA-framework-template/commit/4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "commitHash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "buildHref": "https://github.com/karimarie67/QA-framework-template/actions/runs/37314075829"
+          },
+          "gitCommit": {
+            "shortHash": "4c8ce98",
+            "hash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "subject": "test(evidence): verification steps 4-7 for #32",
+            "body": "test(evidence): verification steps 4-7 for #32\n\nBreaks (login-rejects, account-public, session-ignored, no-submit, missing\nor absent credentials), the intact fixture twice (19 passed both runs), no\nlogin configured (the five login results skip), and the no-leak search under\nCI=true --retries=1 (passing run, no-submit, login-rejects): 0 hits for the\nrun's random password. summary.txt has the results.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n",
+            "author": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "committer": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "branch": "feat/logged-in-apps"
+          },
+          "actualWorkers": 2
+        },
+        "id": "production",
+        "name": "production",
+        "testDir": "/home/runner/work/QA-framework-template/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/karimarie67/QA-framework-template/commit/4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "commitHash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "buildHref": "https://github.com/karimarie67/QA-framework-template/actions/runs/37314075829"
+          },
+          "gitCommit": {
+            "shortHash": "4c8ce98",
+            "hash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "subject": "test(evidence): verification steps 4-7 for #32",
+            "body": "test(evidence): verification steps 4-7 for #32\n\nBreaks (login-rejects, account-public, session-ignored, no-submit, missing\nor absent credentials), the intact fixture twice (19 passed both runs), no\nlogin configured (the five login results skip), and the no-leak search under\nCI=true --retries=1 (passing run, no-submit, login-rejects): 0 hits for the\nrun's random password. summary.txt has the results.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n",
+            "author": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "committer": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "branch": "feat/logged-in-apps"
+          },
+          "actualWorkers": 2
+        },
+        "id": "staging-mobile",
+        "name": "staging-mobile",
+        "testDir": "/home/runner/work/QA-framework-template/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/karimarie67/QA-framework-template/commit/4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "commitHash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "buildHref": "https://github.com/karimarie67/QA-framework-template/actions/runs/37314075829"
+          },
+          "gitCommit": {
+            "shortHash": "4c8ce98",
+            "hash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "subject": "test(evidence): verification steps 4-7 for #32",
+            "body": "test(evidence): verification steps 4-7 for #32\n\nBreaks (login-rejects, account-public, session-ignored, no-submit, missing\nor absent credentials), the intact fixture twice (19 passed both runs), no\nlogin configured (the five login results skip), and the no-leak search under\nCI=true --retries=1 (passing run, no-submit, login-rejects): 0 hits for the\nrun's random password. summary.txt has the results.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n",
+            "author": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "committer": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "branch": "feat/logged-in-apps"
+          },
+          "actualWorkers": 2
+        },
+        "id": "production-mobile",
+        "name": "production-mobile",
+        "testDir": "/home/runner/work/QA-framework-template/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/karimarie67/QA-framework-template/commit/4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "commitHash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "buildHref": "https://github.com/karimarie67/QA-framework-template/actions/runs/37314075829"
+          },
+          "gitCommit": {
+            "shortHash": "4c8ce98",
+            "hash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "subject": "test(evidence): verification steps 4-7 for #32",
+            "body": "test(evidence): verification steps 4-7 for #32\n\nBreaks (login-rejects, account-public, session-ignored, no-submit, missing\nor absent credentials), the intact fixture twice (19 passed both runs), no\nlogin configured (the five login results skip), and the no-leak search under\nCI=true --retries=1 (passing run, no-submit, login-rejects): 0 hits for the\nrun's random password. summary.txt has the results.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n",
+            "author": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "committer": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "branch": "feat/logged-in-apps"
+          },
+          "actualWorkers": 2
+        },
+        "id": "staging-setup",
+        "name": "staging-setup",
+        "testDir": "/home/runner/work/QA-framework-template/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/auth\\.setup\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/karimarie67/QA-framework-template/commit/4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "commitHash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "buildHref": "https://github.com/karimarie67/QA-framework-template/actions/runs/37314075829"
+          },
+          "gitCommit": {
+            "shortHash": "4c8ce98",
+            "hash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "subject": "test(evidence): verification steps 4-7 for #32",
+            "body": "test(evidence): verification steps 4-7 for #32\n\nBreaks (login-rejects, account-public, session-ignored, no-submit, missing\nor absent credentials), the intact fixture twice (19 passed both runs), no\nlogin configured (the five login results skip), and the no-leak search under\nCI=true --retries=1 (passing run, no-submit, login-rejects): 0 hits for the\nrun's random password. summary.txt has the results.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n",
+            "author": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "committer": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "branch": "feat/logged-in-apps"
+          },
+          "actualWorkers": 2
+        },
+        "id": "staging-auth",
+        "name": "staging-auth",
+        "testDir": "/home/runner/work/QA-framework-template/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/karimarie67/QA-framework-template/commit/4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "commitHash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "buildHref": "https://github.com/karimarie67/QA-framework-template/actions/runs/37314075829"
+          },
+          "gitCommit": {
+            "shortHash": "4c8ce98",
+            "hash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "subject": "test(evidence): verification steps 4-7 for #32",
+            "body": "test(evidence): verification steps 4-7 for #32\n\nBreaks (login-rejects, account-public, session-ignored, no-submit, missing\nor absent credentials), the intact fixture twice (19 passed both runs), no\nlogin configured (the five login results skip), and the no-leak search under\nCI=true --retries=1 (passing run, no-submit, login-rejects): 0 hits for the\nrun's random password. summary.txt has the results.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n",
+            "author": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "committer": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "branch": "feat/logged-in-apps"
+          },
+          "actualWorkers": 2
+        },
+        "id": "staging-auth-mobile",
+        "name": "staging-auth-mobile",
+        "testDir": "/home/runner/work/QA-framework-template/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/karimarie67/QA-framework-template/commit/4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "commitHash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "buildHref": "https://github.com/karimarie67/QA-framework-template/actions/runs/37314075829"
+          },
+          "gitCommit": {
+            "shortHash": "4c8ce98",
+            "hash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "subject": "test(evidence): verification steps 4-7 for #32",
+            "body": "test(evidence): verification steps 4-7 for #32\n\nBreaks (login-rejects, account-public, session-ignored, no-submit, missing\nor absent credentials), the intact fixture twice (19 passed both runs), no\nlogin configured (the five login results skip), and the no-leak search under\nCI=true --retries=1 (passing run, no-submit, login-rejects): 0 hits for the\nrun's random password. summary.txt has the results.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n",
+            "author": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "committer": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "branch": "feat/logged-in-apps"
+          },
+          "actualWorkers": 2
+        },
+        "id": "production-setup",
+        "name": "production-setup",
+        "testDir": "/home/runner/work/QA-framework-template/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/auth\\.setup\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/karimarie67/QA-framework-template/commit/4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "commitHash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "buildHref": "https://github.com/karimarie67/QA-framework-template/actions/runs/37314075829"
+          },
+          "gitCommit": {
+            "shortHash": "4c8ce98",
+            "hash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "subject": "test(evidence): verification steps 4-7 for #32",
+            "body": "test(evidence): verification steps 4-7 for #32\n\nBreaks (login-rejects, account-public, session-ignored, no-submit, missing\nor absent credentials), the intact fixture twice (19 passed both runs), no\nlogin configured (the five login results skip), and the no-leak search under\nCI=true --retries=1 (passing run, no-submit, login-rejects): 0 hits for the\nrun's random password. summary.txt has the results.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n",
+            "author": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "committer": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "branch": "feat/logged-in-apps"
+          },
+          "actualWorkers": 2
+        },
+        "id": "production-auth",
+        "name": "production-auth",
+        "testDir": "/home/runner/work/QA-framework-template/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/karimarie67/QA-framework-template/commit/4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "commitHash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "buildHref": "https://github.com/karimarie67/QA-framework-template/actions/runs/37314075829"
+          },
+          "gitCommit": {
+            "shortHash": "4c8ce98",
+            "hash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "subject": "test(evidence): verification steps 4-7 for #32",
+            "body": "test(evidence): verification steps 4-7 for #32\n\nBreaks (login-rejects, account-public, session-ignored, no-submit, missing\nor absent credentials), the intact fixture twice (19 passed both runs), no\nlogin configured (the five login results skip), and the no-leak search under\nCI=true --retries=1 (passing run, no-submit, login-rejects): 0 hits for the\nrun's random password. summary.txt has the results.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n",
+            "author": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "committer": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "branch": "feat/logged-in-apps"
+          },
+          "actualWorkers": 2
+        },
+        "id": "production-auth-mobile",
+        "name": "production-auth-mobile",
+        "testDir": "/home/runner/work/QA-framework-template/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/karimarie67/QA-framework-template/commit/4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "commitHash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "buildHref": "https://github.com/karimarie67/QA-framework-template/actions/runs/37314075829"
+          },
+          "gitCommit": {
+            "shortHash": "4c8ce98",
+            "hash": "4c8ce98d0411e763f860cddc4bd77ffd6281a216",
+            "subject": "test(evidence): verification steps 4-7 for #32",
+            "body": "test(evidence): verification steps 4-7 for #32\n\nBreaks (login-rejects, account-public, session-ignored, no-submit, missing\nor absent credentials), the intact fixture twice (19 passed both runs), no\nlogin configured (the five login results skip), and the no-leak search under\nCI=true --retries=1 (passing run, no-submit, login-rejects): 0 hits for the\nrun's random password. summary.txt has the results.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n",
+            "author": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "committer": {
+              "name": "Kari Skinner",
+              "email": "kskinner@jahnelgroup.com",
+              "time": 1791205466000
+            },
+            "branch": "feat/logged-in-apps"
+          },
+          "actualWorkers": 2
+        },
+        "id": "link-checker",
+        "name": "link-checker",
+        "testDir": "/home/runner/work/QA-framework-template/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "timeout": 1800000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.1",
+    "workers": 2,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "auth.setup.js",
+      "file": "auth.setup.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TC_AUTH_001 Logs in and saves the session",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [
+                {
+                  "type": "test_case",
+                  "description": "TC_AUTH_001",
+                  "location": {
+                    "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/auth.setup.js",
+                    "line": 40,
+                    "column": 1
+                  }
+                },
+                {
+                  "type": "skip",
+                  "description": "no login configured (siteConfig.auth is not set)",
+                  "location": {
+                    "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/auth.setup.js",
+                    "line": 50,
+                    "column": 11
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "staging-setup",
+              "projectName": "staging-setup",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 112,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T13:05:37.300Z",
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_AUTH_001",
+                      "location": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/auth.setup.js",
+                        "line": 40,
+                        "column": 1
+                      }
+                    },
+                    {
+                      "type": "skip",
+                      "description": "no login configured (siteConfig.auth is not set)",
+                      "location": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/auth.setup.js",
+                        "line": 50,
+                        "column": 11
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "f376efe52c54b1a876fd-0f7a245f99bf7069cd69",
+          "file": "auth.setup.js",
+          "line": 40,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "accessibility_tests.spec.js",
+      "file": "accessibility_tests.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Accessibility Tests",
+          "file": "accessibility_tests.spec.js",
+          "line": 14,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC_A11Y_001 No page has a serious or critical accessibility violation",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_A11Y_001",
+                      "location": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                        "line": 16,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "staging",
+                  "projectName": "staging",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 360,
+                      "error": {
+                        "message": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m",
+                        "stack": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js:25:86",
+                        "location": {
+                          "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                          "column": 86,
+                          "line": 25
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 23 |\u001b[39m         response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(buildURL(testInfo\u001b[33m,\u001b[39m p\u001b[33m.\u001b[39mpath)\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'load'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 24 |\u001b[39m       } \u001b[36mcatch\u001b[39m (err) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 25 |\u001b[39m         expect\u001b[33m.\u001b[39msoft(err\u001b[33m.\u001b[39mmessage\u001b[33m,\u001b[39m \u001b[32m`${p.path} failed to load, so it can't be scanned`\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[32m''\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 26 |\u001b[39m         \u001b[36mcontinue\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 27 |\u001b[39m       }\n \u001b[90m 28 |\u001b[39m       \u001b[90m// A page that doesn't load would scan clean: it must fail, not pass.\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                            "column": 86,
+                            "line": 25
+                          },
+                          "message": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m\n\n  23 |         response = await page.goto(buildURL(testInfo, p.path), { waitUntil: 'load' });\n  24 |       } catch (err) {\n> 25 |         expect.soft(err.message, `${p.path} failed to load, so it can't be scanned`).toBe('');\n     |                                                                                      ^\n  26 |         continue;\n  27 |       }\n  28 |       // A page that doesn't load would scan clean: it must fail, not pass.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js:25:86"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T13:05:37.529Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_A11Y_001",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                            "line": 16,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/accessibility_tests-Access-88ce1-cal-accessibility-violation-staging/test-failed-1.png"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                        "column": 86,
+                        "line": 25
+                      }
+                    },
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 420,
+                      "error": {
+                        "message": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m",
+                        "stack": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js:25:86",
+                        "location": {
+                          "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                          "column": 86,
+                          "line": 25
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 23 |\u001b[39m         response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(buildURL(testInfo\u001b[33m,\u001b[39m p\u001b[33m.\u001b[39mpath)\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'load'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 24 |\u001b[39m       } \u001b[36mcatch\u001b[39m (err) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 25 |\u001b[39m         expect\u001b[33m.\u001b[39msoft(err\u001b[33m.\u001b[39mmessage\u001b[33m,\u001b[39m \u001b[32m`${p.path} failed to load, so it can't be scanned`\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[32m''\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 26 |\u001b[39m         \u001b[36mcontinue\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 27 |\u001b[39m       }\n \u001b[90m 28 |\u001b[39m       \u001b[90m// A page that doesn't load would scan clean: it must fail, not pass.\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                            "column": 86,
+                            "line": 25
+                          },
+                          "message": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m\n\n  23 |         response = await page.goto(buildURL(testInfo, p.path), { waitUntil: 'load' });\n  24 |       } catch (err) {\n> 25 |         expect.soft(err.message, `${p.path} failed to load, so it can't be scanned`).toBe('');\n     |                                                                                      ^\n  26 |         continue;\n  27 |       }\n  28 |       // A page that doesn't load would scan clean: it must fail, not pass.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js:25:86"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-10-05T13:05:38.934Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_A11Y_001",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                            "line": 16,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/accessibility_tests-Access-88ce1-cal-accessibility-violation-staging-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/accessibility_tests-Access-88ce1-cal-accessibility-violation-staging-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                        "column": 86,
+                        "line": 25
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "627ac7c2a532768c0306-e6bef24fdf1a2db0b95c",
+              "file": "accessibility_tests.spec.js",
+              "line": 16,
+              "column": 3
+            },
+            {
+              "title": "TC_A11Y_001 No page has a serious or critical accessibility violation",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_A11Y_001",
+                      "location": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                        "line": 16,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "staging-mobile",
+                  "projectName": "staging-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 682,
+                      "error": {
+                        "message": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m",
+                        "stack": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js:25:86",
+                        "location": {
+                          "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                          "column": 86,
+                          "line": 25
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 23 |\u001b[39m         response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(buildURL(testInfo\u001b[33m,\u001b[39m p\u001b[33m.\u001b[39mpath)\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'load'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 24 |\u001b[39m       } \u001b[36mcatch\u001b[39m (err) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 25 |\u001b[39m         expect\u001b[33m.\u001b[39msoft(err\u001b[33m.\u001b[39mmessage\u001b[33m,\u001b[39m \u001b[32m`${p.path} failed to load, so it can't be scanned`\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[32m''\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 26 |\u001b[39m         \u001b[36mcontinue\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 27 |\u001b[39m       }\n \u001b[90m 28 |\u001b[39m       \u001b[90m// A page that doesn't load would scan clean: it must fail, not pass.\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                            "column": 86,
+                            "line": 25
+                          },
+                          "message": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m\n\n  23 |         response = await page.goto(buildURL(testInfo, p.path), { waitUntil: 'load' });\n  24 |       } catch (err) {\n> 25 |         expect.soft(err.message, `${p.path} failed to load, so it can't be scanned`).toBe('');\n     |                                                                                      ^\n  26 |         continue;\n  27 |       }\n  28 |       // A page that doesn't load would scan clean: it must fail, not pass.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js:25:86"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T13:05:42.904Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_A11Y_001",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                            "line": 16,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/accessibility_tests-Access-88ce1-cal-accessibility-violation-staging-mobile/test-failed-1.png"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                        "column": 86,
+                        "line": 25
+                      }
+                    },
+                    {
+                      "workerIndex": 12,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 809,
+                      "error": {
+                        "message": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m",
+                        "stack": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js:25:86",
+                        "location": {
+                          "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                          "column": 86,
+                          "line": 25
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 23 |\u001b[39m         response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(buildURL(testInfo\u001b[33m,\u001b[39m p\u001b[33m.\u001b[39mpath)\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'load'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 24 |\u001b[39m       } \u001b[36mcatch\u001b[39m (err) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 25 |\u001b[39m         expect\u001b[33m.\u001b[39msoft(err\u001b[33m.\u001b[39mmessage\u001b[33m,\u001b[39m \u001b[32m`${p.path} failed to load, so it can't be scanned`\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[32m''\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 26 |\u001b[39m         \u001b[36mcontinue\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 27 |\u001b[39m       }\n \u001b[90m 28 |\u001b[39m       \u001b[90m// A page that doesn't load would scan clean: it must fail, not pass.\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                            "column": 86,
+                            "line": 25
+                          },
+                          "message": "Error: / failed to load, so it can't be scanned\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/\u001b[39m\n\u001b[31mCall log:\u001b[39m\n\u001b[31m\u001b[2m  - navigating to \\\"https://staging.example.com/\\\", waiting until \\\"load\\\"\u001b[22m\u001b[39m\n\u001b[31m\"\u001b[39m\n\n  23 |         response = await page.goto(buildURL(testInfo, p.path), { waitUntil: 'load' });\n  24 |       } catch (err) {\n> 25 |         expect.soft(err.message, `${p.path} failed to load, so it can't be scanned`).toBe('');\n     |                                                                                      ^\n  26 |         continue;\n  27 |       }\n  28 |       // A page that doesn't load would scan clean: it must fail, not pass.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js:25:86"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-10-05T13:05:44.659Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_A11Y_001",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                            "line": 16,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/accessibility_tests-Access-88ce1-cal-accessibility-violation-staging-mobile-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/accessibility_tests-Access-88ce1-cal-accessibility-violation-staging-mobile-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/accessibility_tests.spec.js",
+                        "column": 86,
+                        "line": 25
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "627ac7c2a532768c0306-71b6570745e311b1ee3d",
+              "file": "accessibility_tests.spec.js",
+              "line": 16,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "error_handling_tests.spec.js",
+      "file": "error_handling_tests.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Error Handling Tests",
+          "file": "error_handling_tests.spec.js",
+          "line": 9,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC_ERROR_001 An unknown address shows a not-found page",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_ERROR_001",
+                      "location": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                        "line": 11,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "staging",
+                  "projectName": "staging",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 268,
+                      "error": {
+                        "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n",
+                        "stack": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:14:33",
+                        "location": {
+                          "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                          "column": 33,
+                          "line": 14
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 12 |\u001b[39m     annotation\u001b[33m:\u001b[39m [{ type\u001b[33m:\u001b[39m \u001b[32m'test_case'\u001b[39m\u001b[33m,\u001b[39m description\u001b[33m:\u001b[39m \u001b[32m'TC_ERROR_001'\u001b[39m }]\u001b[33m,\u001b[39m\n \u001b[90m 13 |\u001b[39m   }\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }\u001b[33m,\u001b[39m testInfo) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 14 |\u001b[39m     \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(buildURL(testInfo\u001b[33m,\u001b[39m siteConfig\u001b[33m.\u001b[39mnotFoundPath)\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'domcontentloaded'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 15 |\u001b[39m     expect\u001b[33m.\u001b[39msoft(response\u001b[33m?\u001b[39m\u001b[33m.\u001b[39mstatus()\u001b[33m,\u001b[39m \u001b[32m`${siteConfig.notFoundPath} answers 404`\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[35m404\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 16 |\u001b[39m     \u001b[36mawait\u001b[39m expect(\n \u001b[90m 17 |\u001b[39m       page\u001b[33m.\u001b[39mgetByText(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(siteConfig\u001b[33m.\u001b[39mnotFoundText\u001b[33m,\u001b[39m \u001b[32m'i'\u001b[39m))\u001b[33m.\u001b[39mfirst()\u001b[33m,\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                            "column": 33,
+                            "line": 14
+                          },
+                          "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n  12 |     annotation: [{ type: 'test_case', description: 'TC_ERROR_001' }],\n  13 |   }, async ({ page }, testInfo) => {\n> 14 |     const response = await page.goto(buildURL(testInfo, siteConfig.notFoundPath), { waitUntil: 'domcontentloaded' });\n     |                                 ^\n  15 |     expect.soft(response?.status(), `${siteConfig.notFoundPath} answers 404`).toBe(404);\n  16 |     await expect(\n  17 |       page.getByText(new RegExp(siteConfig.notFoundText, 'i')).first(),\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:14:33"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T13:05:38.427Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_ERROR_001",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                            "line": 11,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/error_handling_tests-Error-95a6a-ress-shows-a-not-found-page-staging/test-failed-1.png"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                        "column": 33,
+                        "line": 14
+                      }
+                    },
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 334,
+                      "error": {
+                        "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n",
+                        "stack": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:14:33",
+                        "location": {
+                          "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                          "column": 33,
+                          "line": 14
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 12 |\u001b[39m     annotation\u001b[33m:\u001b[39m [{ type\u001b[33m:\u001b[39m \u001b[32m'test_case'\u001b[39m\u001b[33m,\u001b[39m description\u001b[33m:\u001b[39m \u001b[32m'TC_ERROR_001'\u001b[39m }]\u001b[33m,\u001b[39m\n \u001b[90m 13 |\u001b[39m   }\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }\u001b[33m,\u001b[39m testInfo) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 14 |\u001b[39m     \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(buildURL(testInfo\u001b[33m,\u001b[39m siteConfig\u001b[33m.\u001b[39mnotFoundPath)\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'domcontentloaded'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 15 |\u001b[39m     expect\u001b[33m.\u001b[39msoft(response\u001b[33m?\u001b[39m\u001b[33m.\u001b[39mstatus()\u001b[33m,\u001b[39m \u001b[32m`${siteConfig.notFoundPath} answers 404`\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[35m404\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 16 |\u001b[39m     \u001b[36mawait\u001b[39m expect(\n \u001b[90m 17 |\u001b[39m       page\u001b[33m.\u001b[39mgetByText(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(siteConfig\u001b[33m.\u001b[39mnotFoundText\u001b[33m,\u001b[39m \u001b[32m'i'\u001b[39m))\u001b[33m.\u001b[39mfirst()\u001b[33m,\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                            "column": 33,
+                            "line": 14
+                          },
+                          "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n  12 |     annotation: [{ type: 'test_case', description: 'TC_ERROR_001' }],\n  13 |   }, async ({ page }, testInfo) => {\n> 14 |     const response = await page.goto(buildURL(testInfo, siteConfig.notFoundPath), { waitUntil: 'domcontentloaded' });\n     |                                 ^\n  15 |     expect.soft(response?.status(), `${siteConfig.notFoundPath} answers 404`).toBe(404);\n  16 |     await expect(\n  17 |       page.getByText(new RegExp(siteConfig.notFoundText, 'i')).first(),\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:14:33"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-10-05T13:05:39.631Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_ERROR_001",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                            "line": 11,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/error_handling_tests-Error-95a6a-ress-shows-a-not-found-page-staging-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/error_handling_tests-Error-95a6a-ress-shows-a-not-found-page-staging-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                        "column": 33,
+                        "line": 14
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "774b7ddbbbaf5644fea5-54349e6fa0090d6ef875",
+              "file": "error_handling_tests.spec.js",
+              "line": 11,
+              "column": 3
+            },
+            {
+              "title": "TC_ERROR_002 A malformed address never causes a server error",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_ERROR_002",
+                      "location": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                        "line": 23,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "staging",
+                  "projectName": "staging",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 259,
+                      "error": {
+                        "message": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.7339.186 Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n",
+                        "stack": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.7339.186 Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:27:38",
+                        "location": {
+                          "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                          "column": 38,
+                          "line": 27
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 25 |\u001b[39m   }\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }\u001b[33m,\u001b[39m testInfo) \u001b[33m=>\u001b[39m {\n \u001b[90m 26 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m path \u001b[36mof\u001b[39m requireEntries(\u001b[32m'malformedPaths'\u001b[39m\u001b[33m,\u001b[39m siteConfig\u001b[33m.\u001b[39mmalformedPaths)) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 27 |\u001b[39m       \u001b[36mconst\u001b[39m res \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mrequest\u001b[33m.\u001b[39m\u001b[36mget\u001b[39m(buildURL(testInfo\u001b[33m,\u001b[39m path)\u001b[33m,\u001b[39m { failOnStatusCode\u001b[33m:\u001b[39m \u001b[36mfalse\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 28 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(res\u001b[33m.\u001b[39mstatus()\u001b[33m,\u001b[39m \u001b[32m`${path} answers below 500`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(\u001b[35m500\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 29 |\u001b[39m     }\n \u001b[90m 30 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                            "column": 38,
+                            "line": 27
+                          },
+                          "message": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.7339.186 Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n\n  25 |   }, async ({ page }, testInfo) => {\n  26 |     for (const path of requireEntries('malformedPaths', siteConfig.malformedPaths)) {\n> 27 |       const res = await page.request.get(buildURL(testInfo, path), { failOnStatusCode: false });\n     |                                      ^\n  28 |       expect.soft(res.status(), `${path} answers below 500`).toBeLessThan(500);\n  29 |     }\n  30 |   });\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:27:38"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T13:05:40.903Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_ERROR_002",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                            "line": 23,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/error_handling_tests-Error-312ec-never-causes-a-server-error-staging/test-failed-1.png"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                        "column": 38,
+                        "line": 27
+                      }
+                    },
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 267,
+                      "error": {
+                        "message": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.7339.186 Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n",
+                        "stack": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.7339.186 Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:27:38",
+                        "location": {
+                          "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                          "column": 38,
+                          "line": 27
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 25 |\u001b[39m   }\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }\u001b[33m,\u001b[39m testInfo) \u001b[33m=>\u001b[39m {\n \u001b[90m 26 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m path \u001b[36mof\u001b[39m requireEntries(\u001b[32m'malformedPaths'\u001b[39m\u001b[33m,\u001b[39m siteConfig\u001b[33m.\u001b[39mmalformedPaths)) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 27 |\u001b[39m       \u001b[36mconst\u001b[39m res \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mrequest\u001b[33m.\u001b[39m\u001b[36mget\u001b[39m(buildURL(testInfo\u001b[33m,\u001b[39m path)\u001b[33m,\u001b[39m { failOnStatusCode\u001b[33m:\u001b[39m \u001b[36mfalse\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 28 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(res\u001b[33m.\u001b[39mstatus()\u001b[33m,\u001b[39m \u001b[32m`${path} answers below 500`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(\u001b[35m500\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 29 |\u001b[39m     }\n \u001b[90m 30 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                            "column": 38,
+                            "line": 27
+                          },
+                          "message": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.7339.186 Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n\n  25 |   }, async ({ page }, testInfo) => {\n  26 |     for (const path of requireEntries('malformedPaths', siteConfig.malformedPaths)) {\n> 27 |       const res = await page.request.get(buildURL(testInfo, path), { failOnStatusCode: false });\n     |                                      ^\n  28 |       expect.soft(res.status(), `${path} answers below 500`).toBeLessThan(500);\n  29 |     }\n  30 |   });\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:27:38"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-10-05T13:05:42.039Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_ERROR_002",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                            "line": 23,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/error_handling_tests-Error-312ec-never-causes-a-server-error-staging-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/error_handling_tests-Error-312ec-never-causes-a-server-error-staging-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                        "column": 38,
+                        "line": 27
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "774b7ddbbbaf5644fea5-54119f8765b24423fbfb",
+              "file": "error_handling_tests.spec.js",
+              "line": 23,
+              "column": 3
+            },
+            {
+              "title": "TC_ERROR_001 An unknown address shows a not-found page",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_ERROR_001",
+                      "location": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                        "line": 11,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "staging-mobile",
+                  "projectName": "staging-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 311,
+                      "error": {
+                        "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n",
+                        "stack": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:14:33",
+                        "location": {
+                          "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                          "column": 33,
+                          "line": 14
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 12 |\u001b[39m     annotation\u001b[33m:\u001b[39m [{ type\u001b[33m:\u001b[39m \u001b[32m'test_case'\u001b[39m\u001b[33m,\u001b[39m description\u001b[33m:\u001b[39m \u001b[32m'TC_ERROR_001'\u001b[39m }]\u001b[33m,\u001b[39m\n \u001b[90m 13 |\u001b[39m   }\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }\u001b[33m,\u001b[39m testInfo) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 14 |\u001b[39m     \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(buildURL(testInfo\u001b[33m,\u001b[39m siteConfig\u001b[33m.\u001b[39mnotFoundPath)\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'domcontentloaded'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 15 |\u001b[39m     expect\u001b[33m.\u001b[39msoft(response\u001b[33m?\u001b[39m\u001b[33m.\u001b[39mstatus()\u001b[33m,\u001b[39m \u001b[32m`${siteConfig.notFoundPath} answers 404`\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[35m404\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 16 |\u001b[39m     \u001b[36mawait\u001b[39m expect(\n \u001b[90m 17 |\u001b[39m       page\u001b[33m.\u001b[39mgetByText(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(siteConfig\u001b[33m.\u001b[39mnotFoundText\u001b[33m,\u001b[39m \u001b[32m'i'\u001b[39m))\u001b[33m.\u001b[39mfirst()\u001b[33m,\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                            "column": 33,
+                            "line": 14
+                          },
+                          "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n  12 |     annotation: [{ type: 'test_case', description: 'TC_ERROR_001' }],\n  13 |   }, async ({ page }, testInfo) => {\n> 14 |     const response = await page.goto(buildURL(testInfo, siteConfig.notFoundPath), { waitUntil: 'domcontentloaded' });\n     |                                 ^\n  15 |     expect.soft(response?.status(), `${siteConfig.notFoundPath} answers 404`).toBe(404);\n  16 |     await expect(\n  17 |       page.getByText(new RegExp(siteConfig.notFoundText, 'i')).first(),\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:14:33"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T13:05:43.182Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_ERROR_001",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                            "line": 11,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/error_handling_tests-Error-95a6a-ress-shows-a-not-found-page-staging-mobile/test-failed-1.png"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                        "column": 33,
+                        "line": 14
+                      }
+                    },
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 377,
+                      "error": {
+                        "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n",
+                        "stack": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:14:33",
+                        "location": {
+                          "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                          "column": 33,
+                          "line": 14
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 12 |\u001b[39m     annotation\u001b[33m:\u001b[39m [{ type\u001b[33m:\u001b[39m \u001b[32m'test_case'\u001b[39m\u001b[33m,\u001b[39m description\u001b[33m:\u001b[39m \u001b[32m'TC_ERROR_001'\u001b[39m }]\u001b[33m,\u001b[39m\n \u001b[90m 13 |\u001b[39m   }\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }\u001b[33m,\u001b[39m testInfo) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 14 |\u001b[39m     \u001b[36mconst\u001b[39m response \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(buildURL(testInfo\u001b[33m,\u001b[39m siteConfig\u001b[33m.\u001b[39mnotFoundPath)\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'domcontentloaded'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 15 |\u001b[39m     expect\u001b[33m.\u001b[39msoft(response\u001b[33m?\u001b[39m\u001b[33m.\u001b[39mstatus()\u001b[33m,\u001b[39m \u001b[32m`${siteConfig.notFoundPath} answers 404`\u001b[39m)\u001b[33m.\u001b[39mtoBe(\u001b[35m404\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 16 |\u001b[39m     \u001b[36mawait\u001b[39m expect(\n \u001b[90m 17 |\u001b[39m       page\u001b[33m.\u001b[39mgetByText(\u001b[36mnew\u001b[39m \u001b[33mRegExp\u001b[39m(siteConfig\u001b[33m.\u001b[39mnotFoundText\u001b[33m,\u001b[39m \u001b[32m'i'\u001b[39m))\u001b[33m.\u001b[39mfirst()\u001b[33m,\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                            "column": 33,
+                            "line": 14
+                          },
+                          "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/this-page-does-not-exist\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/this-page-does-not-exist\", waiting until \"domcontentloaded\"\u001b[22m\n\n\n  12 |     annotation: [{ type: 'test_case', description: 'TC_ERROR_001' }],\n  13 |   }, async ({ page }, testInfo) => {\n> 14 |     const response = await page.goto(buildURL(testInfo, siteConfig.notFoundPath), { waitUntil: 'domcontentloaded' });\n     |                                 ^\n  15 |     expect.soft(response?.status(), `${siteConfig.notFoundPath} answers 404`).toBe(404);\n  16 |     await expect(\n  17 |       page.getByText(new RegExp(siteConfig.notFoundText, 'i')).first(),\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:14:33"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-10-05T13:05:44.274Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_ERROR_001",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                            "line": 11,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/error_handling_tests-Error-95a6a-ress-shows-a-not-found-page-staging-mobile-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/error_handling_tests-Error-95a6a-ress-shows-a-not-found-page-staging-mobile-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                        "column": 33,
+                        "line": 14
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "774b7ddbbbaf5644fea5-ffd24cda40a4b48c3724",
+              "file": "error_handling_tests.spec.js",
+              "line": 11,
+              "column": 3
+            },
+            {
+              "title": "TC_ERROR_002 A malformed address never causes a server error",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_ERROR_002",
+                      "location": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                        "line": 23,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "staging-mobile",
+                  "projectName": "staging-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 13,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 272,
+                      "error": {
+                        "message": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.7339.186 Mobile Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n",
+                        "stack": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.7339.186 Mobile Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:27:38",
+                        "location": {
+                          "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                          "column": 38,
+                          "line": 27
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 25 |\u001b[39m   }\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }\u001b[33m,\u001b[39m testInfo) \u001b[33m=>\u001b[39m {\n \u001b[90m 26 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m path \u001b[36mof\u001b[39m requireEntries(\u001b[32m'malformedPaths'\u001b[39m\u001b[33m,\u001b[39m siteConfig\u001b[33m.\u001b[39mmalformedPaths)) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 27 |\u001b[39m       \u001b[36mconst\u001b[39m res \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mrequest\u001b[33m.\u001b[39m\u001b[36mget\u001b[39m(buildURL(testInfo\u001b[33m,\u001b[39m path)\u001b[33m,\u001b[39m { failOnStatusCode\u001b[33m:\u001b[39m \u001b[36mfalse\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 28 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(res\u001b[33m.\u001b[39mstatus()\u001b[33m,\u001b[39m \u001b[32m`${path} answers below 500`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(\u001b[35m500\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 29 |\u001b[39m     }\n \u001b[90m 30 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                            "column": 38,
+                            "line": 27
+                          },
+                          "message": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.7339.186 Mobile Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n\n  25 |   }, async ({ page }, testInfo) => {\n  26 |     for (const path of requireEntries('malformedPaths', siteConfig.malformedPaths)) {\n> 27 |       const res = await page.request.get(buildURL(testInfo, path), { failOnStatusCode: false });\n     |                                      ^\n  28 |       expect.soft(res.status(), `${path} answers below 500`).toBeLessThan(500);\n  29 |     }\n  30 |   });\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:27:38"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T13:05:45.659Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_ERROR_002",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                            "line": 23,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/error_handling_tests-Error-312ec-never-causes-a-server-error-staging-mobile/test-failed-1.png"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                        "column": 38,
+                        "line": 27
+                      }
+                    },
+                    {
+                      "workerIndex": 15,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 319,
+                      "error": {
+                        "message": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.7339.186 Mobile Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n",
+                        "stack": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.7339.186 Mobile Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:27:38",
+                        "location": {
+                          "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                          "column": 38,
+                          "line": 27
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 25 |\u001b[39m   }\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }\u001b[33m,\u001b[39m testInfo) \u001b[33m=>\u001b[39m {\n \u001b[90m 26 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m path \u001b[36mof\u001b[39m requireEntries(\u001b[32m'malformedPaths'\u001b[39m\u001b[33m,\u001b[39m siteConfig\u001b[33m.\u001b[39mmalformedPaths)) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 27 |\u001b[39m       \u001b[36mconst\u001b[39m res \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mrequest\u001b[33m.\u001b[39m\u001b[36mget\u001b[39m(buildURL(testInfo\u001b[33m,\u001b[39m path)\u001b[33m,\u001b[39m { failOnStatusCode\u001b[33m:\u001b[39m \u001b[36mfalse\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 28 |\u001b[39m       expect\u001b[33m.\u001b[39msoft(res\u001b[33m.\u001b[39mstatus()\u001b[33m,\u001b[39m \u001b[32m`${path} answers below 500`\u001b[39m)\u001b[33m.\u001b[39mtoBeLessThan(\u001b[35m500\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 29 |\u001b[39m     }\n \u001b[90m 30 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                            "column": 38,
+                            "line": 27
+                          },
+                          "message": "Error: apiRequestContext.get: getaddrinfo ENOTFOUND staging.example.com\nCall log:\n\u001b[2m  - → GET https://staging.example.com/%ZZ\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.7339.186 Mobile Safari/537.36\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n\n  25 |   }, async ({ page }, testInfo) => {\n  26 |     for (const path of requireEntries('malformedPaths', siteConfig.malformedPaths)) {\n> 27 |       const res = await page.request.get(buildURL(testInfo, path), { failOnStatusCode: false });\n     |                                      ^\n  28 |       expect.soft(res.status(), `${path} answers below 500`).toBeLessThan(500);\n  29 |     }\n  30 |   });\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js:27:38"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-10-05T13:05:46.862Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_ERROR_002",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                            "line": 23,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/error_handling_tests-Error-312ec-never-causes-a-server-error-staging-mobile-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/error_handling_tests-Error-312ec-never-causes-a-server-error-staging-mobile-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/error_handling_tests.spec.js",
+                        "column": 38,
+                        "line": 27
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "774b7ddbbbaf5644fea5-d35a6c9f5f4505cec632",
+              "file": "error_handling_tests.spec.js",
+              "line": 23,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "forms_tests.spec.js",
+      "file": "forms_tests.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Forms Tests",
+          "file": "forms_tests.spec.js",
+          "line": 15,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC_FORM_001 Every form field has its label, type, and required state",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_FORM_001",
+                      "location": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                        "line": 17,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "staging",
+                  "projectName": "staging",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 272,
+                      "error": {
+                        "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n",
+                        "stack": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js:32:18",
+                        "location": {
+                          "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                          "column": 18,
+                          "line": 32
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 30 |\u001b[39m\n \u001b[90m 31 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m f \u001b[36mof\u001b[39m forms) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 32 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(buildURL(testInfo\u001b[33m,\u001b[39m f\u001b[33m.\u001b[39mpath)\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'load'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 33 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m'networkidle'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 34 |\u001b[39m       \u001b[90m// By CSS selector, not by role: a <form> only has the form role when it\u001b[39m\n \u001b[90m 35 |\u001b[39m       \u001b[90m// has an accessible name, which most real forms lack.\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                            "column": 18,
+                            "line": 32
+                          },
+                          "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n\n\n  30 |\n  31 |     for (const f of forms) {\n> 32 |       await page.goto(buildURL(testInfo, f.path), { waitUntil: 'load' });\n     |                  ^\n  33 |       await page.waitForLoadState('networkidle');\n  34 |       // By CSS selector, not by role: a <form> only has the form role when it\n  35 |       // has an accessible name, which most real forms lack.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js:32:18"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T13:05:40.325Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_FORM_001",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                            "line": 17,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/forms_tests-Forms-Tests-TC-93e38-bel-type-and-required-state-staging/test-failed-1.png"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                        "column": 18,
+                        "line": 32
+                      }
+                    },
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 338,
+                      "error": {
+                        "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n",
+                        "stack": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js:32:18",
+                        "location": {
+                          "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                          "column": 18,
+                          "line": 32
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 30 |\u001b[39m\n \u001b[90m 31 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m f \u001b[36mof\u001b[39m forms) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 32 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(buildURL(testInfo\u001b[33m,\u001b[39m f\u001b[33m.\u001b[39mpath)\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'load'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 33 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m'networkidle'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 34 |\u001b[39m       \u001b[90m// By CSS selector, not by role: a <form> only has the form role when it\u001b[39m\n \u001b[90m 35 |\u001b[39m       \u001b[90m// has an accessible name, which most real forms lack.\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                            "column": 18,
+                            "line": 32
+                          },
+                          "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n\n\n  30 |\n  31 |     for (const f of forms) {\n> 32 |       await page.goto(buildURL(testInfo, f.path), { waitUntil: 'load' });\n     |                  ^\n  33 |       await page.waitForLoadState('networkidle');\n  34 |       // By CSS selector, not by role: a <form> only has the form role when it\n  35 |       // has an accessible name, which most real forms lack.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js:32:18"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-10-05T13:05:41.492Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_FORM_001",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                            "line": 17,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/forms_tests-Forms-Tests-TC-93e38-bel-type-and-required-state-staging-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/forms_tests-Forms-Tests-TC-93e38-bel-type-and-required-state-staging-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                        "column": 18,
+                        "line": 32
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "7210258585fd2f2b0ef5-5bc4199bca6ddb9ca962",
+              "file": "forms_tests.spec.js",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "TC_FORM_001 Every form field has its label, type, and required state",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_FORM_001",
+                      "location": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                        "line": 17,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "staging-mobile",
+                  "projectName": "staging-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 310,
+                      "error": {
+                        "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n",
+                        "stack": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js:32:18",
+                        "location": {
+                          "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                          "column": 18,
+                          "line": 32
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 30 |\u001b[39m\n \u001b[90m 31 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m f \u001b[36mof\u001b[39m forms) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 32 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(buildURL(testInfo\u001b[33m,\u001b[39m f\u001b[33m.\u001b[39mpath)\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'load'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 33 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m'networkidle'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 34 |\u001b[39m       \u001b[90m// By CSS selector, not by role: a <form> only has the form role when it\u001b[39m\n \u001b[90m 35 |\u001b[39m       \u001b[90m// has an accessible name, which most real forms lack.\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                            "column": 18,
+                            "line": 32
+                          },
+                          "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n\n\n  30 |\n  31 |     for (const f of forms) {\n> 32 |       await page.goto(buildURL(testInfo, f.path), { waitUntil: 'load' });\n     |                  ^\n  33 |       await page.waitForLoadState('networkidle');\n  34 |       // By CSS selector, not by role: a <form> only has the form role when it\n  35 |       // has an accessible name, which most real forms lack.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js:32:18"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T13:05:46.394Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_FORM_001",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                            "line": 17,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/forms_tests-Forms-Tests-TC-93e38-bel-type-and-required-state-staging-mobile/test-failed-1.png"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                        "column": 18,
+                        "line": 32
+                      }
+                    },
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 321,
+                      "error": {
+                        "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n",
+                        "stack": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js:32:18",
+                        "location": {
+                          "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                          "column": 18,
+                          "line": 32
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 30 |\u001b[39m\n \u001b[90m 31 |\u001b[39m     \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m f \u001b[36mof\u001b[39m forms) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 32 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(buildURL(testInfo\u001b[33m,\u001b[39m f\u001b[33m.\u001b[39mpath)\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'load'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 33 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m'networkidle'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 34 |\u001b[39m       \u001b[90m// By CSS selector, not by role: a <form> only has the form role when it\u001b[39m\n \u001b[90m 35 |\u001b[39m       \u001b[90m// has an accessible name, which most real forms lack.\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                            "column": 18,
+                            "line": 32
+                          },
+                          "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://staging.example.com/contact\nCall log:\n\u001b[2m  - navigating to \"https://staging.example.com/contact\", waiting until \"load\"\u001b[22m\n\n\n  30 |\n  31 |     for (const f of forms) {\n> 32 |       await page.goto(buildURL(testInfo, f.path), { waitUntil: 'load' });\n     |                  ^\n  33 |       await page.waitForLoadState('networkidle');\n  34 |       // By CSS selector, not by role: a <form> only has the form role when it\n  35 |       // has an accessible name, which most real forms lack.\n    at /home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js:32:18"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-10-05T13:05:47.571Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_FORM_001",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                            "line": 17,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/forms_tests-Forms-Tests-TC-93e38-bel-type-and-required-state-staging-mobile-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/home/runner/work/QA-framework-template/QA-framework-template/playwright-output/forms_tests-Forms-Tests-TC-93e38-bel-type-and-required-state-staging-mobile-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/forms_tests.spec.js",
+                        "column": 18,
+                        "line": 32
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "7210258585fd2f2b0ef5-eaee1cdb4b6f0dac563e",
+              "file": "forms_tests.spec.js",
+              "line": 17,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "account.auth.spec.js",
+      "file": "account.auth.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Logged-in pages",
+          "file": "account.auth.spec.js",
+          "line": 11,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC_AUTH_002 A page that needs a login opens with the saved session",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "no login configured (siteConfig.auth is not set)",
+                      "location": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/account.auth.spec.js",
+                        "line": 15,
+                        "column": 8
+                      }
+                    },
+                    {
+                      "type": "test_case",
+                      "description": "TC_AUTH_002",
+                      "location": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/account.auth.spec.js",
+                        "line": 17,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "staging-auth",
+                  "projectName": "staging-auth",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T13:05:48.055Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "0330f9a98ce36c115ec6-456cd537bb462d988554",
+              "file": "account.auth.spec.js",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "TC_AUTH_002 A page that needs a login opens with the saved session",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "no login configured (siteConfig.auth is not set)",
+                      "location": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/account.auth.spec.js",
+                        "line": 15,
+                        "column": 8
+                      }
+                    },
+                    {
+                      "type": "test_case",
+                      "description": "TC_AUTH_002",
+                      "location": {
+                        "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/account.auth.spec.js",
+                        "line": 17,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "staging-auth-mobile",
+                  "projectName": "staging-auth-mobile",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T13:05:48.055Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "0330f9a98ce36c115ec6-a23d29bc229fb239bbef",
+              "file": "account.auth.spec.js",
+              "line": 17,
+              "column": 3
+            }
+          ],
+          "suites": [
+            {
+              "title": "without a session",
+              "file": "account.auth.spec.js",
+              "line": 27,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "TC_AUTH_003 Without a session, that page sends you to the login page",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 90000,
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "no login configured (siteConfig.auth is not set)",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/account.auth.spec.js",
+                            "line": 15,
+                            "column": 8
+                          }
+                        },
+                        {
+                          "type": "test_case",
+                          "description": "TC_AUTH_003",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/account.auth.spec.js",
+                            "line": 30,
+                            "column": 5
+                          }
+                        }
+                      ],
+                      "expectedStatus": "skipped",
+                      "projectId": "staging-auth",
+                      "projectName": "staging-auth",
+                      "results": [
+                        {
+                          "workerIndex": -1,
+                          "parallelIndex": -1,
+                          "status": "skipped",
+                          "duration": 0,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-10-05T13:05:48.055Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0330f9a98ce36c115ec6-5563ed7add1aeec79a8e",
+                  "file": "account.auth.spec.js",
+                  "line": 30,
+                  "column": 5
+                },
+                {
+                  "title": "TC_AUTH_003 Without a session, that page sends you to the login page",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 90000,
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "no login configured (siteConfig.auth is not set)",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/account.auth.spec.js",
+                            "line": 15,
+                            "column": 8
+                          }
+                        },
+                        {
+                          "type": "test_case",
+                          "description": "TC_AUTH_003",
+                          "location": {
+                            "file": "/home/runner/work/QA-framework-template/QA-framework-template/tests/account.auth.spec.js",
+                            "line": 30,
+                            "column": 5
+                          }
+                        }
+                      ],
+                      "expectedStatus": "skipped",
+                      "projectId": "staging-auth-mobile",
+                      "projectName": "staging-auth-mobile",
+                      "results": [
+                        {
+                          "workerIndex": -1,
+                          "parallelIndex": -1,
+                          "status": "skipped",
+                          "duration": 0,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-10-05T13:05:48.055Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0330f9a98ce36c115ec6-c88072c88e53b38f49f7",
+                  "file": "account.auth.spec.js",
+                  "line": 30,
+                  "column": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-05T13:05:36.429Z",
+    "duration": 11626.863000000001,
+    "expected": 0,
+    "skipped": 5,
+    "unexpected": 8,
+    "flaky": 0
+  }
+}

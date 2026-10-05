@@ -98,7 +98,7 @@ jobs:
   functional-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    name: Functional Tests (Error Handling, Forms, Accessibility)
+    name: Functional Tests (Error Handling, Forms, Accessibility, Logged-in)
     if: github.event_name == 'workflow_dispatch' && (github.event.inputs.test_suite == 'regression' || github.event.inputs.test_suite == 'all')
 
     steps:
@@ -117,9 +117,18 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
 
-      # Desktop and phone, into one JSON file for the dashboard.
+      # Desktop and phone, into one JSON file for the dashboard. The logged-in
+      # spec runs on the -auth projects, after the login (<env>-setup). The
+      # login secrets are passed to this step only. A PR from a fork or
+      # Dependabot gets no secrets, so its login skips; a same-repo run
+      # without them fails. Never add a retries flag here: it would override the
+      # login's no-retry rule and could lock a real account out.
       - name: Run Functional Tests
-        run: PLAYWRIGHT_JSON_OUTPUT_NAME=test-results.json npx playwright test tests/error_handling_tests.spec.js tests/forms_tests.spec.js tests/accessibility_tests.spec.js --project=${{ env.TEST_ENV }} --project=${{ env.TEST_ENV }}-mobile --reporter=json
+        env:
+          QA_USERNAME: ${{ secrets.QA_USERNAME }}
+          QA_PASSWORD: ${{ secrets.QA_PASSWORD }}
+          QA_PR_WITHOUT_SECRETS: ${{ github.event.pull_request.head.repo.fork == true || github.actor == 'dependabot[bot]' }}
+        run: PLAYWRIGHT_JSON_OUTPUT_NAME=test-results.json npx playwright test tests/error_handling_tests.spec.js tests/forms_tests.spec.js tests/accessibility_tests.spec.js tests/account.auth.spec.js --project=${{ env.TEST_ENV }} --project=${{ env.TEST_ENV }}-mobile --project=${{ env.TEST_ENV }}-auth --project=${{ env.TEST_ENV }}-auth-mobile --reporter=json
 
       - name: Organize results for dashboard
         if: always()

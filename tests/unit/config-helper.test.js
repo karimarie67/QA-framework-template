@@ -12,6 +12,9 @@ import {
   titleMatcher,
   requireEntries,
   testData,
+  authConfig,
+  missingCredentials,
+  authSkipReason,
 } from '../../config-helper.js';
 
 // Minimal fake TestInfo shape - these functions only ever read
@@ -79,7 +82,7 @@ test('buildURL', async t => {
 
 test('siteConfig', async t => {
   await t.test('has every section the skeleton specs read', () => {
-    for (const key of ['pages', 'nav', 'footer', 'notFoundPath', 'notFoundText', 'malformedPaths', 'forms', 'a11y']) {
+    for (const key of ['pages', 'nav', 'footer', 'notFoundPath', 'notFoundText', 'malformedPaths', 'forms', 'a11y', 'auth']) {
       assert.ok(key in defaultSiteConfig, key);
     }
     assert.ok(Array.isArray(defaultSiteConfig.footer.links));
@@ -132,6 +135,52 @@ test('loadSiteConfig (the QA_SITE_CONFIG override)', async t => {
     const file = path.join(dir, 'bad.json');
     fs.writeFileSync(file, '{ not json');
     assert.throws(() => loadSiteConfig({ QA_SITE_CONFIG: file }), /isn't valid JSON/);
+  });
+});
+
+test('authConfig, missingCredentials, authSkipReason (the login)', async t => {
+  const login = { auth: { loginPath: '/login' } };
+  // An environment with the named variables set (to a placeholder).
+  const withVars = (...names) => Object.fromEntries(names.map(n => [n, 'x']));
+
+  await t.test('no login by default', () => {
+    assert.equal(defaultSiteConfig.auth, null);
+    assert.equal(authConfig(defaultSiteConfig), null);
+  });
+
+  await t.test('a QA_SITE_CONFIG file with no auth key means no login', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'siteconfig-'));
+    const file = path.join(dir, 'site.json');
+    fs.writeFileSync(file, JSON.stringify({ pages: [] }));
+    assert.equal(authConfig(loadSiteConfig({ QA_SITE_CONFIG: file })), null);
+    assert.match(authSkipReason(loadSiteConfig({ QA_SITE_CONFIG: file }), {}), /no login configured/);
+  });
+
+  await t.test('a configured login is returned as is', () => {
+    assert.deepEqual(authConfig(login), login.auth);
+  });
+
+  await t.test('missingCredentials names the unset variables, never values', () => {
+    assert.deepEqual(missingCredentials({}), ['QA_USERNAME', 'QA_PASSWORD']);
+    assert.deepEqual(missingCredentials(withVars('QA_USERNAME')), ['QA_PASSWORD']);
+    assert.deepEqual(missingCredentials(withVars('QA_USERNAME', 'QA_PASSWORD')), []);
+  });
+
+  await t.test('with a login and both variables set, nothing skips', () => {
+    assert.equal(authSkipReason(login, withVars('QA_USERNAME', 'QA_PASSWORD')), null);
+  });
+
+  await t.test('no variables on a PR without secrets (fork or Dependabot) skips', () => {
+    assert.match(authSkipReason(login, { QA_PR_WITHOUT_SECRETS: 'true' }), /aren't available to this pull request/);
+  });
+
+  await t.test('no variables anywhere else is not a skip (the setup fails instead)', () => {
+    assert.equal(authSkipReason(login, {}), null);
+    assert.equal(authSkipReason(login, { QA_PR_WITHOUT_SECRETS: 'false', GITHUB_EVENT_NAME: 'pull_request' }), null);
+  });
+
+  await t.test('one variable missing on a PR without secrets is not a skip', () => {
+    assert.equal(authSkipReason(login, { ...withVars('QA_USERNAME'), QA_PR_WITHOUT_SECRETS: 'true' }), null);
   });
 });
 
