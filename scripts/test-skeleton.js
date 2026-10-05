@@ -22,6 +22,8 @@
  *   given replace the default specs, and
  *   --project given replaces the default projects; other arguments (such as
  *   --reporter) pass through. BREAK=<id> passes through to the server.
+ * - Saves no evidence screenshots (QA_EVIDENCE=off): the committed evidence
+ *   under test-results/ is from the real site, not the fixture.
  * - Never opens the HTML report (Playwright would serve it after a failure
  *   and wait), unless PLAYWRIGHT_HTML_OPEN says to.
  * - Stops the server on exit, failure, or Ctrl-C, and exits with Playwright's
@@ -161,6 +163,9 @@ async function main() {
     // and waits for Ctrl-C, so the run would never end. Never open it here,
     // unless the caller asks (the report is still written to playwright-report/).
     PLAYWRIGHT_HTML_OPEN: process.env.PLAYWRIGHT_HTML_OPEN || 'never',
+    // No evidence screenshots: a fixture run isn't proof of work on the real
+    // site, and would overwrite the committed ones (utils.js captureEvidence).
+    QA_EVIDENCE: 'off',
     QA_BASE_URL: BASE,
     QA_SITE_CONFIG: process.env.QA_SITE_CONFIG || path.join(repoRoot, 'tests/fixtures/site/site.json'),
   };

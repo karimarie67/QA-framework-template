@@ -1,2 +1,0 @@
-git grep -inE 'documentation_tests|download_search|download-search|download & search|download/search|documentation-tests|documentation tests|performSearch|findSearchResults|searchTerms|downloadFiles|urlPatterns|TC_ERROR_006' -- . ':!examples' ':!test-results' ':!dashboards/test-results' ':!package-lock.json'
---- matches (none expected):

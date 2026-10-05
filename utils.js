@@ -109,8 +109,13 @@ export function evidencePath(testInfo, root = 'test-results') {
  * Save a screenshot of the page as the test's evidence (see evidencePath).
  * Call it after the last assertion, or from an afterEach hook. It never fails
  * the test: a missing screenshot is logged instead.
+ *
+ * QA_EVIDENCE=off skips it (returns null). `npm run test:skeleton` sets it:
+ * a run against the fixture site isn't proof of work on the real one, and
+ * would overwrite the committed screenshots.
  */
-export async function captureEvidence(page, testInfo, root = 'test-results') {
+export async function captureEvidence(page, testInfo, root = 'test-results', env = process.env) {
+  if (env.QA_EVIDENCE === 'off') return null;
   const path = evidencePath(testInfo, root);
   try {
     fs.mkdirSync(nodePath.dirname(path), { recursive: true });
