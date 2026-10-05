@@ -18,7 +18,7 @@ opening table.
 - **Product:** <name, one-line description>
 - **In scope:** <user journeys and features under test>
 - **Out of scope:** <what we deliberately don't test, and why>
-- **Browsers and devices:** <e.g. Chromium desktop and Pixel 5 phone emulation>. Must match the `playwright.config.js` projects.
+- **Browsers and devices:** <e.g. Chromium desktop and Pixel 5 phone emulation; add Firefox, WebKit (Safari), or an iPhone if the client's users need them (`QA_BROWSERS`), and say how often they run>. Must match the `playwright.config.js` projects.
 
 ## Environments
 
@@ -80,6 +80,7 @@ for this product:
 
 - **Chat:** <channel>
 - **Access needed:** <repos, environments, dashboards; who grants it>
+- **Tracker:** <GitHub Issues and this repo's project board (the default), or the client's Jira: the site and project key, the issue types for stories, test cases and bugs, how automation status is recorded, and the status mapping (see `docs/jira.md`)>
 
 ## Kickoff checklist
 
