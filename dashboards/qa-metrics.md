@@ -2,8 +2,8 @@
 
 > **Automated Quality Gate Report**
 
-**Last Updated:** Monday, October 5, 2026 at 6:16 PM | **Env:** STAGING | **Branch:** fix/dashboard-single-artifact
-**Run:** [#112](https://github.com/karimarie67/QA-framework-template/actions/runs/37381291437)
+**Last Updated:** Monday, October 5, 2026 at 11:27 AM | **Env:** STAGING | **Branch:** feat/tags-and-schedule
+**Run:** [#93](https://github.com/karimarie67/QA-framework-template/actions/runs/37332798372)
 
 ---
 
@@ -12,9 +12,9 @@
 | Metric | Current Value | Status |
 |--------|---------------|----------------|
 | **Pass Rate** | **0.0%** | 🔴 Attention |
-| **Duration** | **6.1s** | ✅ Good |
-| **Total Tests** | 21 | 0 Pass (0 flaky) / 8 Fail / 13 Skipped |
-| **Functional** | 21 Tests | ✅ Active |
+| **Duration** | **10.3s** | ✅ Good |
+| **Total Tests** | 19 | 0 Pass (0 flaky) / 14 Fail / 5 Skipped |
+| **Functional** | 13 Tests | ✅ Active |
 
 ---
 
@@ -34,7 +34,14 @@
 ## 🔍 Detailed Test Results
 
 ### 🔥 Smoke Tests
-> *No tests found in this category* 
+| Test Name | Status | Duration | Project |
+|-----------|--------|----------|---------|
+| TC_SMOKE_001 Every page loads with its title and one main heading | ❌ failed | <1s ×2 | staging |
+| TC_SMOKE_002 The header menu links reach their pages | ❌ failed | <1s ×2 | staging |
+| TC_SMOKE_003 The footer is there, with its links | ❌ failed | <1s ×2 | staging |
+| TC_SMOKE_001 Every page loads with its title and one main heading | ❌ failed | <1s ×2 | staging-mobile |
+| TC_SMOKE_002 The header menu links reach their pages | ❌ failed | <1s ×2 | staging-mobile |
+| TC_SMOKE_003 The footer is there, with its links | ❌ failed | <1s ×2 | staging-mobile |
 
 
 ### 🧩 Functional Tests
@@ -42,20 +49,12 @@
 |-----------|--------|----------|---------|
 | TC_A11Y_001 No page has a serious or critical accessibility violation | ❌ failed | <1s ×2 | staging |
 | TC_A11Y_001 No page has a serious or critical accessibility violation | ❌ failed | <1s ×2 | staging-mobile |
-| TC_API_001 Every endpoint answers with its expected status and content type | ⏭️ skipped | <1s | staging |
-| TC_API_002 Every JSON endpoint returns the fields it promises | ⏭️ skipped | <1s | staging |
-| TC_API_001 Every endpoint answers with its expected status and content type | ⏭️ skipped | <1s | staging-mobile |
-| TC_API_002 Every JSON endpoint returns the fields it promises | ⏭️ skipped | <1s | staging-mobile |
 | TC_ERROR_001 An unknown address shows a not-found page | ❌ failed | <1s ×2 | staging |
 | TC_ERROR_002 A malformed address never causes a server error | ❌ failed | <1s ×2 | staging |
 | TC_ERROR_001 An unknown address shows a not-found page | ❌ failed | <1s ×2 | staging-mobile |
 | TC_ERROR_002 A malformed address never causes a server error | ❌ failed | <1s ×2 | staging-mobile |
 | TC_FORM_001 Every form field has its label, type, and required state | ❌ failed | <1s ×2 | staging |
 | TC_FORM_001 Every form field has its label, type, and required state | ❌ failed | <1s ×2 | staging-mobile |
-| TC_PERF_001 Every page loads within its performance budgets | ⏭️ skipped | <1s | staging |
-| TC_PERF_001 Every page loads within its performance budgets | ⏭️ skipped | <1s | staging-mobile |
-| TC_VISUAL_001 Every page looks like its baseline | ⏭️ skipped | <1s | staging |
-| TC_VISUAL_001 Every page looks like its baseline | ⏭️ skipped | <1s | staging-mobile |
 | TC_AUTH_001 Logs in and saves the session | ⏭️ skipped | <1s | staging-setup |
 | TC_AUTH_002 A page that needs a login opens with the saved session | ⏭️ skipped | <1s | staging-auth |
 | TC_AUTH_002 A page that needs a login opens with the saved session | ⏭️ skipped | <1s | staging-auth-mobile |
@@ -68,7 +67,6 @@
 ## 📈 History (Last 10 Runs)
 | Date | Pass Rate | Duration | Failures |
 |------|-----------|----------|----------|
-| Oct 5 | 0.0% | 6.1s | 8 |
 | Oct 5 | 0.0% | 10.3s | 14 |
 | Oct 5 | 0.0% | 10.7s | 14 |
 | Oct 5 | 0.0% | 6.0s | 8 |
