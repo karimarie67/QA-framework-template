@@ -186,6 +186,9 @@ named in the log.
 
 ### 4. Set up the GitHub side
 
+**A client that tracks work in Jira:** follow [`docs/jira.md`](../../../docs/jira.md)
+instead of the labels and the board, and do the contact links as it says.
+
 Three small, independent pieces in one step and one PR:
 
 1. **Labels:** `npm run labels:setup -- <owner/repo> --dry-run`, read it, then
