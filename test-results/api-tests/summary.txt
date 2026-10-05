@@ -5,3 +5,4 @@
 -- full self-test: expected 21, unexpected 0, skipped 2
 -- CI's functional selection (--grep @regression, four staging projects): 4, of Total: 17 tests in 6 files
 -- api: null: exit 0; expected 0, unexpected 0, skipped 2; no API configured (siteConfig.api is not set)
+-- QA_BROWSERS=all, the API spec on production, -firefox, -webkit, -iphone (after merging #46, with the skipOnPhone fix): runs on production only; the six others skip ('runs once, on the desktop Chromium project')
