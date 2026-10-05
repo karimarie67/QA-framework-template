@@ -1,0 +1,100 @@
+fixture site on http://127.0.0.1:8765 (BREAK=slow-page)
+QA_BASE_URL in use: http://127.0.0.1:8765
+
+Running 2 tests using 2 workers
+
+QA_BASE_URL in use: http://127.0.0.1:8765
+QA_BASE_URL in use: http://127.0.0.1:8765
+/: LCP 28 ms, CLS 0.000, TTFB 6 ms, load 11 ms
+/about: LCP 1524 ms, CLS 0.000, TTFB 1511 ms, load 1522 ms
+/contact: LCP 12 ms, CLS 0.000, TTFB 2 ms, load 9 ms
+/: LCP 24 ms, CLS 0.000, TTFB 11 ms, load 20 ms
+/about: LCP 1528 ms, CLS 0.000, TTFB 1510 ms, load 1523 ms
+/contact: LCP 16 ms, CLS 0.000, TTFB 3 ms, load 11 ms
+  ✘  2 [production] › tests/performance_tests.spec.js:49:3 › Performance Tests › TC_PERF_001 Every page loads within its performance budgets @regression @perf (4.7s)
+  ✘  1 [production-mobile] › tests/performance_tests.spec.js:49:3 › Performance Tests › TC_PERF_001 Every page loads within its performance budgets @regression @perf (4.8s)
+
+
+  1) [production] › tests/performance_tests.spec.js:49:3 › Performance Tests › TC_PERF_001 Every page loads within its performance budgets @regression @perf 
+
+    Error: /about: LCP 1528 ms, budget 500 ms
+
+    expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 500
+    Received:    1528
+
+      60 |       for (const [budgetKey, metric, label, show] of BUDGETS) {
+      61 |         if (budgets[budgetKey] === undefined) continue;
+    > 62 |         expect.soft(m[metric], `${path}: ${label} ${show(m[metric])}, budget ${show(budgets[budgetKey])}`).toBeLessThanOrEqual(budgets[budgetKey]);
+         |                                                                                                            ^
+      63 |       }
+      64 |     }
+      65 |     // The measurements, for the report and the evidence.
+        at /Users/kskinner/QA-framework-template/tests/performance_tests.spec.js:62:108
+
+    Error: /about: TTFB 1510 ms, budget 500 ms
+
+    expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 500
+    Received:    1510.2000000178814
+
+      60 |       for (const [budgetKey, metric, label, show] of BUDGETS) {
+      61 |         if (budgets[budgetKey] === undefined) continue;
+    > 62 |         expect.soft(m[metric], `${path}: ${label} ${show(m[metric])}, budget ${show(budgets[budgetKey])}`).toBeLessThanOrEqual(budgets[budgetKey]);
+         |                                                                                                            ^
+      63 |       }
+      64 |     }
+      65 |     // The measurements, for the report and the evidence.
+        at /Users/kskinner/QA-framework-template/tests/performance_tests.spec.js:62:108
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    playwright-output/performance_tests-Performa-40113-hin-its-performance-budgets-production/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: playwright-output/performance_tests-Performa-40113-hin-its-performance-budgets-production/error-context.md
+
+  2) [production-mobile] › tests/performance_tests.spec.js:49:3 › Performance Tests › TC_PERF_001 Every page loads within its performance budgets @regression @perf 
+
+    Error: /about: LCP 1524 ms, budget 500 ms
+
+    expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 500
+    Received:    1524
+
+      60 |       for (const [budgetKey, metric, label, show] of BUDGETS) {
+      61 |         if (budgets[budgetKey] === undefined) continue;
+    > 62 |         expect.soft(m[metric], `${path}: ${label} ${show(m[metric])}, budget ${show(budgets[budgetKey])}`).toBeLessThanOrEqual(budgets[budgetKey]);
+         |                                                                                                            ^
+      63 |       }
+      64 |     }
+      65 |     // The measurements, for the report and the evidence.
+        at /Users/kskinner/QA-framework-template/tests/performance_tests.spec.js:62:108
+
+    Error: /about: TTFB 1511 ms, budget 500 ms
+
+    expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 500
+    Received:    1510.8999999761581
+
+      60 |       for (const [budgetKey, metric, label, show] of BUDGETS) {
+      61 |         if (budgets[budgetKey] === undefined) continue;
+    > 62 |         expect.soft(m[metric], `${path}: ${label} ${show(m[metric])}, budget ${show(budgets[budgetKey])}`).toBeLessThanOrEqual(budgets[budgetKey]);
+         |                                                                                                            ^
+      63 |       }
+      64 |     }
+      65 |     // The measurements, for the report and the evidence.
+        at /Users/kskinner/QA-framework-template/tests/performance_tests.spec.js:62:108
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    playwright-output/performance_tests-Performa-40113-hin-its-performance-budgets-production-mobile/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: playwright-output/performance_tests-Performa-40113-hin-its-performance-budgets-production-mobile/error-context.md
+
+  2 failed
+    [production] › tests/performance_tests.spec.js:49:3 › Performance Tests › TC_PERF_001 Every page loads within its performance budgets @regression @perf 
+    [production-mobile] › tests/performance_tests.spec.js:49:3 › Performance Tests › TC_PERF_001 Every page loads within its performance budgets @regression @perf 

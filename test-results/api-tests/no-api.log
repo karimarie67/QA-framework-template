@@ -1,9 +1,0 @@
-fixture site on http://127.0.0.1:8765
-QA_BASE_URL in use: http://127.0.0.1:8765
-
-Running 2 tests using 1 worker
-
-  -  1 [production] › tests/api_tests.spec.js:28:3 › API Tests › TC_API_001 Every endpoint answers with its expected status and content type @regression @api
-  -  2 [production] › tests/api_tests.spec.js:41:3 › API Tests › TC_API_002 Every JSON endpoint returns the fields it promises @regression @api
-
-  2 skipped
