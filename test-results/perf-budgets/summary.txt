@@ -39,3 +39,4 @@
 -- exit 0; production skipped; no performance budgets configured (siteConfig.perf is not set)
 == CI's functional selection (--grep @regression, four staging projects): Total: 19 tests in 7 files, of which performance: 2
 == The full self-test: expected 23, unexpected 0, skipped 2
+-- QA_BROWSERS=all, the perf spec on production, -firefox, -webkit, -iphone (after merging #46): runs on production only; the three others skip (Chromium metrics)
