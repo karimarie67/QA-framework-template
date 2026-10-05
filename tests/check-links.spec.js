@@ -102,7 +102,7 @@ async function checkPage(page, url, sourceUrl = 'direct', depth = 0) {
       console.log(`⚠ Malformed path: ${normalizedUrl}`);
       return;
     }
-  } catch (e) {
+  } catch {
     // Invalid URL, skip it
     return;
   }
@@ -158,6 +158,7 @@ async function checkPage(page, url, sourceUrl = 'direct', depth = 0) {
     }
 
     // Extract links
+    // eslint-disable-next-line playwright/no-eval -- unchanged: no automatic check runs the link checker to prove a rewrite
     const links = await page.$$eval('a[href]', anchors =>
       anchors.map(a => a.href)
     );
@@ -197,6 +198,7 @@ async function visit(page, url) {
   let result = {};
   for (const retried of [false, true]) {
     // Be respectful to production
+    // eslint-disable-next-line playwright/no-wait-for-timeout -- deliberate spacing between requests to a live site
     await page.waitForTimeout(300);
     try {
       const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });

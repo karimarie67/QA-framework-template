@@ -30,6 +30,7 @@ test.describe('Forms Tests', () => {
 
     for (const f of forms) {
       await page.goto(buildURL(testInfo, f.path), { waitUntil: 'load' });
+      // eslint-disable-next-line playwright/no-networkidle -- waits for the page's own requests, so the test can fail on a write
       await page.waitForLoadState('networkidle');
       // By CSS selector, not by role: a <form> only has the form role when it
       // has an accessible name, which most real forms lack.

@@ -177,7 +177,9 @@ slashes is a pattern), `nav` and `footer.links` (by accessible name),
 `selector`, and fields by exact label), and `a11y.exclude` (third-party
 embeds). An empty list fails its test on purpose, so a test can't pass
 checking nothing. Then extend the specs with the site's own checks, or add
-specs, by its areas.
+specs, by its areas. `npm run lint` must pass on them: a line that really
+needs a rule off says why, inline (`// eslint-disable-next-line <rule> --
+<reason>`), rather than turning the rule off for every spec.
 
 Keep what fits, and remove what doesn't, and log which and why. **A site with
 no forms**: remove `forms_tests.spec.js`, and drop it from the

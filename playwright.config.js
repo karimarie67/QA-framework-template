@@ -150,4 +150,6 @@ export default defineConfig({
   // Retry once in CI, where a one-off network blip shouldn't fail the run.
   // Never locally: a retry there hides a flaky test while you're writing it.
   retries: process.env.CI ? 1 : 0,
+  // A test.only that reaches CI fails the run, rather than running one test.
+  forbidOnly: !!process.env.CI,
 });

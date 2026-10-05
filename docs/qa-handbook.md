@@ -80,7 +80,7 @@ before anything reaches production.
 
 | Stage | What runs | Why |
 |---|---|---|
-| Pull request | Smoke tests, unit tests, `template-check` | A fast gate before code merges |
+| Pull request | Smoke tests, unit tests, `template-check`, lint | A fast gate before code merges |
 | After merge | The full suite | Validates the integrated change |
 | Before a release | The full suite against the release candidate environment | Release gate (the brief sets the threshold) |
 | After a release | Smoke tests against production | Confirms the release, within the limits the brief allows for production |
@@ -249,7 +249,11 @@ Conventions:
 5. **Check that it can fail.** Break the expectation briefly and confirm the
    test goes red, then restore it.
 6. **Regenerate the coverage map**: `npm run coverage`.
-7. **Open a PR** that references the test case issue. Once it merges, label
+7. **Lint it**: `npm run lint` (`npx eslint --fix` fixes what it can). It
+   catches a missing `await` on an assertion, a stray `test.only`, and unused
+   or undefined names; it doesn't catch a missing `await` on an action such
+   as `page.goto`.
+8. **Open a PR** that references the test case issue. Once it merges, label
    the case `test-automated` and fill in *Automation File Path*.
 
 ### Best practices

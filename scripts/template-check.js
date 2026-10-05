@@ -89,7 +89,7 @@ function listDiscoveredSpecs() {
   let parsed;
   try {
     parsed = JSON.parse(stdout);
-  } catch (err) {
+  } catch {
     console.error('FAIL: `playwright test --list --reporter=json` did not produce parseable JSON.');
     console.error('--- raw stdout ---');
     console.error(stdout);
