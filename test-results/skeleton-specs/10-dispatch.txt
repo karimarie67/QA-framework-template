@@ -1,5 +1,0 @@
-run 37060210845 (regression dispatch on feat/skeleton-specs)
-artifact functional-test-results/functional-results.json: 8 test results (parsePlaywrightJson, skipped included): {"failed":8}
-dashboard commit 524f537 latest-results.json: functionalCount=8, functional tests listed=8
-match: true
-tests: TC_A11Y_001 No page has a serious or critical accessibility violation | TC_ERROR_001 An unknown address shows a not-found page | TC_ERROR_002 A malformed address never causes a server error | TC_FORM_001 Every form field has its label, type, and required state
