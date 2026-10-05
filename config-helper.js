@@ -103,12 +103,12 @@ export function loadSiteConfig(env = process.env) {
   try {
     text = fs.readFileSync(file, 'utf8');
   } catch (err) {
-    throw new Error(`QA_SITE_CONFIG names a file that can't be read: ${file} (${err.code || err.message})`);
+    throw new Error(`QA_SITE_CONFIG names a file that can't be read: ${file} (${err.code || err.message})`, { cause: err });
   }
   try {
     return JSON.parse(text);
   } catch (err) {
-    throw new Error(`QA_SITE_CONFIG names a file that isn't valid JSON: ${file} (${err.message})`);
+    throw new Error(`QA_SITE_CONFIG names a file that isn't valid JSON: ${file} (${err.message})`, { cause: err });
   }
 }
 

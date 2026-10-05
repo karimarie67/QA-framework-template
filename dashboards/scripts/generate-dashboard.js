@@ -216,7 +216,7 @@ function updateHistory(metrics) {
   if (fs.existsSync(HISTORY_FILE)) {
     try {
       history = JSON.parse(fs.readFileSync(HISTORY_FILE, 'utf8'));
-    } catch (e) {
+    } catch {
       console.warn('⚠️ Could not parse history file, starting fresh.');
     }
   }

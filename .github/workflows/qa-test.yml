@@ -212,6 +212,30 @@ jobs:
       - name: Run Unit Tests
         run: npm run test:unit
 
+  # ESLint (eslint.config.js) over the template's JavaScript, on every push and
+  # PR: fails on any error or warning. Not a test result, so not part of the
+  # dashboard.
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    name: Lint
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
   # The template's own check of its skeleton specs: they run against the
   # committed fixture site (tests/fixtures/site/), on every push and PR, so a
   # change that breaks a spec is caught here. It tests the template, not a

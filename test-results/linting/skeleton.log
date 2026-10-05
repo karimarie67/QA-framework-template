@@ -1,0 +1,39 @@
+fixture site on http://127.0.0.1:8765
+QA_BASE_URL in use: http://127.0.0.1:8765
+
+Running 19 tests using 5 workers
+
+QA_BASE_URL in use: http://127.0.0.1:8765
+QA_BASE_URL in use: http://127.0.0.1:8765
+QA_BASE_URL in use: http://127.0.0.1:8765
+QA_BASE_URL in use: http://127.0.0.1:8765
+QA_BASE_URL in use: http://127.0.0.1:8765
+  ✓   3 [production] › tests/error_handling_tests.spec.js:10:3 › Error Handling Tests › TC_ERROR_001 An unknown address shows a not-found page (325ms)
+  ✓   4 [production] › tests/smoke_tests.spec.js:13:3 › Smoke Tests › TC_SMOKE_001 Every page loads with its title and one main heading @smoke (382ms)
+  ✓   1 [production-setup] › tests/auth.setup.js:49:1 › TC_AUTH_001 Logs in and saves the session (417ms)
+  ✓   6 [production] › tests/error_handling_tests.spec.js:25:3 › Error Handling Tests › TC_ERROR_002 A malformed address never causes a server error (121ms)
+  ✓   7 [production] › tests/smoke_tests.spec.js:39:3 › Smoke Tests › TC_SMOKE_002 The header menu links reach their pages @smoke (180ms)
+  ✓   8 [production] › tests/smoke_tests.spec.js:66:3 › Smoke Tests › TC_SMOKE_003 The footer is there, with its links @smoke (113ms)
+Third-party request (not failed): POST http://127.0.0.1:8766/collect
+  ✓   2 [production] › tests/forms_tests.spec.js:16:3 › Forms Tests › TC_FORM_001 Every form field has its label, type, and required state (854ms)
+QA_BASE_URL in use: http://127.0.0.1:8765
+QA_BASE_URL in use: http://127.0.0.1:8765
+  ✓   5 [production] › tests/accessibility_tests.spec.js:14:3 › Accessibility Tests › TC_A11Y_001 No page has a serious or critical accessibility violation (1.0s)
+QA_BASE_URL in use: http://127.0.0.1:8765
+  ✓   9 [production-mobile] › tests/error_handling_tests.spec.js:10:3 › Error Handling Tests › TC_ERROR_001 An unknown address shows a not-found page (224ms)
+QA_BASE_URL in use: http://127.0.0.1:8765
+  ✓  12 [production-mobile] › tests/error_handling_tests.spec.js:25:3 › Error Handling Tests › TC_ERROR_002 A malformed address never causes a server error (147ms)
+  ✓  13 [production-mobile] › tests/smoke_tests.spec.js:13:3 › Smoke Tests › TC_SMOKE_001 Every page loads with its title and one main heading @smoke (209ms)
+  ✓  10 [production-mobile] › tests/accessibility_tests.spec.js:14:3 › Accessibility Tests › TC_A11Y_001 No page has a serious or critical accessibility violation (867ms)
+Third-party request (not failed): POST http://127.0.0.1:8766/collect
+  ✓  11 [production-mobile] › tests/forms_tests.spec.js:16:3 › Forms Tests › TC_FORM_001 Every form field has its label, type, and required state (703ms)
+  ✓  14 [production-mobile] › tests/smoke_tests.spec.js:39:3 › Smoke Tests › TC_SMOKE_002 The header menu links reach their pages @smoke (1.1s)
+  ✓  15 [production-mobile] › tests/smoke_tests.spec.js:66:3 › Smoke Tests › TC_SMOKE_003 The footer is there, with its links @smoke (161ms)
+QA_BASE_URL in use: http://127.0.0.1:8765
+QA_BASE_URL in use: http://127.0.0.1:8765
+  ✓  16 [production-auth] › tests/account.auth.spec.js:16:3 › Logged-in pages › TC_AUTH_002 A page that needs a login opens with the saved session (123ms)
+  ✓  17 [production-auth-mobile] › tests/account.auth.spec.js:16:3 › Logged-in pages › TC_AUTH_002 A page that needs a login opens with the saved session (127ms)
+  ✓  18 [production-auth] › tests/account.auth.spec.js:39:5 › Logged-in pages › without a session › TC_AUTH_003 Without a session, that page sends you to the login page (73ms)
+  ✓  19 [production-auth-mobile] › tests/account.auth.spec.js:39:5 › Logged-in pages › without a session › TC_AUTH_003 Without a session, that page sends you to the login page (70ms)
+
+  19 passed (4.6s)

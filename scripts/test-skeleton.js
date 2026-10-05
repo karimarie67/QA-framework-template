@@ -99,7 +99,7 @@ export function playwrightArgs(args) {
 }
 
 /** The exit code to report for a child that ended with `code` or `signal`. */
-export function exitCodeFor(code, signal) {
+export function exitCodeFor(code, _signal) {
   // Playwright's own code; killed by a signal (code null) is a failure.
   return typeof code === 'number' ? code : 1;
 }

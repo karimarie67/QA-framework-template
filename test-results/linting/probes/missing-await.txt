@@ -1,0 +1,8 @@
+
+/Users/kskinner/QA-framework-template/tests/probe.spec.js
+  1:50  warning  Expected blank line before this statement  playwright/consistent-spacing-between-blocks
+  1:82  error    'toHaveTitle' must be awaited or returned  playwright/missing-playwright-await
+
+✖ 2 problems (1 error, 1 warning)
+  1 error and 1 warning potentially fixable with the `--fix` option.
+

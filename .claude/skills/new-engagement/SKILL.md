@@ -125,10 +125,10 @@ Engagement's. List it with `git ls-files test-results`, and remove it with
 this Engagement's first rows on its dashboard. CI owns `dashboards/` from here
 on.
 
-Then run `npm run test:unit` and `npm run test:template-check`, hand off the
-git hooks, and start the log.
+Then run `npm run test:unit`, `npm run test:template-check`, and `npm run
+lint`, hand off the git hooks, and start the log.
 
-**Done when:** the new repo exists, both self-checks pass, the hooks are
+**Done when:** the new repo exists, the three self-checks pass, the hooks are
 active, the framing names the new repo, and step 1's log entry records the
 count of `TODO(Engagement)` markers left. The framing check is:
 

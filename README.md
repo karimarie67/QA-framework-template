@@ -60,6 +60,7 @@ npm run test:skeleton        # the four skeleton specs, and the login, against t
 npm run test:links           # link checker
 npm run test:unit            # unit tests for the Site config, helpers, scripts, and dashboard
 npm run test:template-check  # structural check: the config imports, the specs are found, and every spec CI names exists
+npm run lint                 # ESLint, with the Playwright plugin for the specs
 npm run coverage             # regenerate docs/coverage-map.md from the specs' test_case annotations
 npm run labels:setup -- owner/repo  # create the labels the issue forms and triage need
 npm run board:setup -- owner/repo   # create the project board, with Status from docs/agents/issue-tracker.md
@@ -100,6 +101,10 @@ sites, logins, proving each test can fail) is in
   real. The workflow's comments give the conditions an Engagement switches on
   to run them on every push and PR (`/new-engagement` step 5).
 - The `link-check` job runs only on manual dispatch, with `links` or `all`.
+- `lint` runs ESLint on every push and PR and fails on any error or warning:
+  a missing `await` on an assertion, a stray `test.only`, unused or undefined
+  names (`eslint.config.js`). In CI a `test.only` also fails the test run
+  (`forbidOnly`).
 - Dependabot ([`.github/dependabot.yml`](./.github/dependabot.yml)) opens a
   weekly PR for npm updates (minor and patch grouped, each major on its own)
   and one for GitHub Actions, a week after each release. They run the same
