@@ -99,6 +99,11 @@ are identified either by file (`tests/smoke_tests.spec.js` in the template)
 or by the `@smoke` tag (`npx playwright test --grep @smoke`). Keep the set
 small enough to finish in minutes.
 
+**Other browsers**: the projects run Chromium on desktop and a Pixel 5
+emulation. When the brief asks, `QA_BROWSERS` adds Firefox, WebKit (Safari's
+engine), and an iPhone emulation for the public specs (see
+`site-config.md`, "Phones").
+
 **Manual testing** stays manual when a script can't judge it well:
 exploratory sessions, visual review, accessibility with assistive technology,
 and one-off checks. Each lasting manual check is still a test case, labeled

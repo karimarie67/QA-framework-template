@@ -121,6 +121,17 @@ in place of the header menu, which a desktop browser never sees at any width.
 If a project still sets `viewport: { width: 800, height: 600 }`, replace it with
 the emulation. The brief's "Browsers and devices" names the device.
 
+**Other browsers, when the brief asks:** `QA_BROWSERS=firefox,webkit,iphone`
+(or `all`) adds `<env>-firefox`, `<env>-webkit` (Safari's engine), and
+`<env>-iphone` (an iPhone 13, also WebKit), running the public specs. They're
+off by default, so a plain run needs only Chromium. Install them once with
+`npx playwright install firefox webkit`, then, for example,
+`QA_BROWSERS=all npx playwright test --project=staging-firefox
+--project=staging-webkit --project=staging-iphone`. To run them in CI too,
+the job installs them and names the projects: a workflow change, so it gets
+its red-team review. Request-only tests (`skipOnPhone`) still run once, on
+desktop Chromium.
+
 Tests that navigate need to open the phone menu first, and should retry the tap
 until the menu is open, for the reason above. "Open" means on screen: a closed
 slide-in menu often sits off-screen, where Playwright still counts it as
