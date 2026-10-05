@@ -43,6 +43,7 @@ const EXPECTED_SPECS = [
   'account.auth.spec.js',
   'auth.setup.js',
   'api_tests.spec.js',
+  'performance_tests.spec.js',
 ];
 
 async function checkModuleImports() {

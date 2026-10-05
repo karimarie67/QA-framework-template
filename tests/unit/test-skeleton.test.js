@@ -3,12 +3,13 @@ import assert from 'node:assert/strict';
 import { playwrightArgs, exitCodeFor, fixtureLogin, DEFAULT_SPECS, DEFAULT_PROJECTS, FIXTURE_USERNAME } from '../../scripts/test-skeleton.js';
 
 test('playwrightArgs', async t => {
-  await t.test('no arguments: the skeleton, logged-in, and API specs on the production projects, no retries', () => {
+  await t.test('no arguments: the skeleton, logged-in, API, and performance specs on the production projects, no retries', () => {
     assert.deepEqual(playwrightArgs([]), [
       'test', ...DEFAULT_SPECS, ...DEFAULT_PROJECTS.map(p => `--project=${p}`), '--retries=0',
     ]);
-    assert.equal(DEFAULT_SPECS.length, 6);
+    assert.equal(DEFAULT_SPECS.length, 7);
     assert.ok(DEFAULT_SPECS.includes('tests/api_tests.spec.js'));
+    assert.ok(DEFAULT_SPECS.includes('tests/performance_tests.spec.js'));
     assert.ok(DEFAULT_SPECS.includes('tests/account.auth.spec.js'));
     assert.deepEqual(DEFAULT_PROJECTS, ['production', 'production-mobile', 'production-auth', 'production-auth-mobile']);
   });

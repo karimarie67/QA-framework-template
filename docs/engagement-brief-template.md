@@ -68,6 +68,7 @@ for this product:
 | Full-suite pass rate | <e.g. ≥ 95%> |
 | Open Critical bugs | <e.g. 0> |
 | Triage cadence | <e.g. weekly, Mondays> |
+| Performance budgets (optional) | <e.g. LCP ≤ 2.5 s, CLS ≤ 0.1, TTFB ≤ 0.8 s, load ≤ 4 s, on the key pages; `siteConfig.perf`> |
 
 ## People and access
 

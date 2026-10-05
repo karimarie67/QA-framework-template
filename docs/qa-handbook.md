@@ -99,6 +99,11 @@ small enough to finish in minutes.
 and checks its status, content type, and the JSON fields it promises. Tagged
 `@regression` and `@api`.
 
+**Performance budgets**: `tests/performance_tests.spec.js` measures each
+page's Web Vitals (LCP, CLS, TTFB, load time) in Chromium during a normal load
+and fails a page over the budgets the brief sets (`siteConfig.perf`). The
+numbers are attached to each run's report. Tagged `@regression` and `@perf`.
+
 **Manual testing** stays manual when a script can't judge it well:
 exploratory sessions, visual review, accessibility with assistive technology,
 and one-off checks. Each lasting manual check is still a test case, labeled

@@ -161,7 +161,7 @@ When the tests run against the live site, keep the load gentle:
 
 ## Skeleton specs
 
-The template ships five site-agnostic specs, driven by one `siteConfig` block
+The template ships six site-agnostic specs, driven by one `siteConfig` block
 in `config-helper.js`:
 
 | Spec | Checks |
@@ -171,6 +171,7 @@ in `config-helper.js`:
 | `forms_tests.spec.js` | Each form's fields have their label, type, and required state. **Read-only**: it never types or submits, and fails if a request other than GET or HEAD goes to the site's own origin |
 | `accessibility_tests.spec.js` | An axe-core scan of every page against WCAG 2.1 A and AA: fails on serious and critical violations, and lists the rest |
 | `api_tests.spec.js` | Each API endpoint in `siteConfig.api` answers with its status and content type, and each JSON one returns the fields it promises. **Read-only** (GET, spaced out), on the desktop project only. Skips when `siteConfig.api` is `null` |
+| `performance_tests.spec.js` | Each page's Web Vitals (LCP, CLS, TTFB, load time) during a normal load, against the budgets in `siteConfig.perf`; the measurements are attached to the report. Chromium projects only. Skips when `siteConfig.perf` is `null` |
 
 Fill in `siteConfig` from the probe: `pages` (path and title; a title in
 slashes is a pattern), `nav` and `footer.links` (by accessible name),
@@ -181,7 +182,12 @@ endpoint's path, status, content type, and the JSON fields it promises:
 `jsonKeys` for an object, `itemKeys` and `minItems` for a list). Find the
 endpoints in the browser's network panel while using the site, or in the
 client's API docs; test only what the brief allows, and never an endpoint
-that changes data. An empty list fails its test on purpose, so a test can't pass
+that changes data. And `perf` if the brief sets performance budgets
+(`budgets`: any of `lcpMs`, `cls`, `ttfbMs`, `loadMs`; `pages`, if not every
+page). There's no CPU or network throttling and a CI machine's speed varies,
+so give the budgets headroom: start from Google's "good" thresholds (LCP
+2.5 s, CLS 0.1), or a few runs' measurements plus a margin, and treat a
+failure as a reason to look before calling it a defect. An empty list fails its test on purpose, so a test can't pass
 checking nothing. Then extend the specs with the site's own checks, or add
 specs, by its areas. Give each one suite tag (`@smoke` or `@regression`,
 usually on its `describe`), since CI selects tests by it; see the handbook's
@@ -198,7 +204,7 @@ the npm scripts select by tag, so they need no edit.
 **Two overrides** let the same specs run against another address without
 editing the config: `QA_BASE_URL` (the staging and production projects'
 base URL) and `QA_SITE_CONFIG` (a JSON Site config). The template uses them
-for its own self-test: `npm run test:skeleton` runs the five specs, and the
+for its own self-test: `npm run test:skeleton` runs the six specs, and the
 login with the logged-in spec, against a small committed fixture site
 (`tests/fixtures/site/`, with a random password per run), and CI's
 `skeleton-self-test` job runs that on every push and PR. An Engagement may

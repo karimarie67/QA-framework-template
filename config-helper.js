@@ -65,6 +65,11 @@ export function buildURL(testInfo, path = '/', options = {}) {
  *   `jsonKeys` for an object's top-level fields, or `itemKeys` (with
  *   `minItems`) for each item of an array. The API spec only reads (GET); it
  *   never sends data.
+ * - perf: performance budgets for tests/performance_tests.spec.js, or null for
+ *   none. `budgets` sets any of lcpMs, cls, ttfbMs, loadMs (from the brief's
+ *   targets); `pages` lists the paths to measure (default: every page above);
+ *   `settleMs` is how long to wait after load for late paints and shifts
+ *   (default 1000).
  */
 export const defaultSiteConfig = {
   // TODO(Engagement): every page to check, from the probe.
@@ -97,6 +102,9 @@ export const defaultSiteConfig = {
   // TODO(Engagement): the API's GET endpoints, if the site has an API, e.g.
   //   { endpoints: [{ path: '/api/health', status: 200, contentType: 'application/json', jsonKeys: ['status'] }] }
   api: null,
+  // TODO(Engagement): performance budgets from the brief's targets, e.g.
+  //   { budgets: { lcpMs: 2500, cls: 0.1, ttfbMs: 800, loadMs: 4000 } }
+  perf: null,
 };
 
 /**
