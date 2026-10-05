@@ -86,5 +86,21 @@
       "TC_FORM_001 Every form field has its label, type, and required state"
     ],
     "runNumber": "64"
+  },
+  {
+    "date": "2026-10-05",
+    "time": "2026-10-05T13:06:11.372Z",
+    "total": 13,
+    "passed": 0,
+    "failed": 8,
+    "passRate": 0,
+    "duration": 6.031000000000001,
+    "failedTestNames": [
+      "TC_A11Y_001 No page has a serious or critical accessibility violation",
+      "TC_ERROR_001 An unknown address shows a not-found page",
+      "TC_ERROR_002 A malformed address never causes a server error",
+      "TC_FORM_001 Every form field has its label, type, and required state"
+    ],
+    "runNumber": "68"
   }
 ]
