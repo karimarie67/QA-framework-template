@@ -1,8 +1,0 @@
-fixture site on http://127.0.0.1:8765
-QA_BASE_URL in use: http://127.0.0.1:8765
-
-Running 1 test using 1 worker
-
-  -  1 [production] › tests/performance_tests.spec.js:49:3 › Performance Tests › TC_PERF_001 Every page loads within its performance budgets @regression @perf
-
-  1 skipped

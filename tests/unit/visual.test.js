@@ -42,4 +42,9 @@ test('dockerArgs', async t => {
     assert.ok(a.includes('QA_BASE_URL=http://host.docker.internal:8765'));
     assert.ok(a.includes('QA_SITE_CONFIG=/work/tests/fixtures/site/site.json'));
   });
+
+  await t.test('a JSON output path passes through, repo-relative under /work', () => {
+    const a = dockerArgs({ ...base, args: [], env: { PLAYWRIGHT_JSON_OUTPUT_NAME: 'test-results/x/run.json' } });
+    assert.ok(a.includes('PLAYWRIGHT_JSON_OUTPUT_NAME=/work/test-results/x/run.json'));
+  });
 });

@@ -9,7 +9,8 @@
  * - `--update` makes or refreshes the baselines (--update-snapshots).
  * - Other arguments pass through to Playwright (default projects:
  *   staging and staging-mobile).
- * - QA_BASE_URL and QA_SITE_CONFIG pass through. A URL on this machine
+ * - QA_BASE_URL, QA_SITE_CONFIG and PLAYWRIGHT_JSON_OUTPUT_NAME pass
+ *   through (a repo-relative path as /work/...). A URL on this machine
  *   (localhost, 127.0.0.1) is rewritten to host.docker.internal, so the
  *   container can reach it.
  * - The repo is mounted at /work; node_modules is the host's (Playwright and
@@ -42,7 +43,10 @@ export function dockerArgs({ version, args, env, root }) {
   const rest = args.filter(a => a !== '--update');
   const projects = rest.some(a => a.startsWith('--project')) ? [] : ['--project=staging', '--project=staging-mobile'];
   const pass = { QA_VISUAL: '1', CI: env.CI, QA_BASE_URL: forContainer(env.QA_BASE_URL) };
-  if (env.QA_SITE_CONFIG) pass.QA_SITE_CONFIG = path.isAbsolute(env.QA_SITE_CONFIG) ? env.QA_SITE_CONFIG : path.posix.join('/work', env.QA_SITE_CONFIG);
+  // Repo-relative paths, as the container sees them.
+  const inWork = file => (path.isAbsolute(file) ? file : path.posix.join('/work', file));
+  if (env.QA_SITE_CONFIG) pass.QA_SITE_CONFIG = inWork(env.QA_SITE_CONFIG);
+  if (env.PLAYWRIGHT_JSON_OUTPUT_NAME) pass.PLAYWRIGHT_JSON_OUTPUT_NAME = inWork(env.PLAYWRIGHT_JSON_OUTPUT_NAME);
   const envFlags = Object.entries(pass).filter(([, v]) => v).flatMap(([k, v]) => ['-e', `${k}=${v}`]);
   return [
     'run', '--rm', '--ipc=host', '--add-host=host.docker.internal:host-gateway',
