@@ -1,0 +1,45 @@
+# Dependabot version updates: one PR a week per group, never merged
+# automatically. Each PR runs the usual checks (unit tests, template-check, the
+# skeleton self-test); a human reviews and merges it.
+#
+# - A Dependabot PR gets no repo secrets, so the login (tests/auth.setup.js)
+#   skips on it rather than failing.
+# - An @playwright/test upgrade can change what the HTML report records: before
+#   merging one, re-run the logged-in no-leak check (plan issue #32,
+#   verification step 7) against the fixture site.
+# - A github-actions PR changes .github/workflows/: review it as a workflow
+#   change.
+# - The cooldown waits a few days after a release before proposing it, so a
+#   bad or compromised release is usually pulled before it reaches a PR.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 5
+    labels: [dependencies]
+    commit-message:
+      prefix: chore(deps)
+    groups:
+      # Minor and patch updates together; a major update gets its own PR.
+      npm-minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 5
+    labels: [dependencies]
+    commit-message:
+      prefix: chore(ci)
+    groups:
+      actions:
+        patterns: ['*']
