@@ -10,10 +10,9 @@ import { captureEvidence } from '../utils.js';
 
 const s = selectors.site;
 
-test.describe('Smoke Tests', () => {
+test.describe('Smoke Tests', { tag: '@smoke' }, () => {
 
   test('TC_SMOKE_001 Every page loads with its title and one main heading', {
-    tag: '@smoke',
     annotation: [{ type: 'test_case', description: 'TC_SMOKE_001' }],
   }, async ({ page }, testInfo) => {
     for (const p of requireEntries('pages', siteConfig.pages)) {
@@ -33,7 +32,6 @@ test.describe('Smoke Tests', () => {
   });
 
   test('TC_SMOKE_002 The header menu links reach their pages', {
-    tag: '@smoke',
     annotation: [{ type: 'test_case', description: 'TC_SMOKE_002' }],
   }, async ({ page }, testInfo) => {
     const start = buildURL(testInfo, requireEntries('pages', siteConfig.pages)[0].path);
@@ -54,7 +52,6 @@ test.describe('Smoke Tests', () => {
   });
 
   test('TC_SMOKE_003 The footer is there, with its links', {
-    tag: '@smoke',
     annotation: [{ type: 'test_case', description: 'TC_SMOKE_003' }],
   }, async ({ page }, testInfo) => {
     const links = requireEntries('footer.links', siteConfig.footer?.links);

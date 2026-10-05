@@ -177,16 +177,17 @@ slashes is a pattern), `nav` and `footer.links` (by accessible name),
 `selector`, and fields by exact label), and `a11y.exclude` (third-party
 embeds). An empty list fails its test on purpose, so a test can't pass
 checking nothing. Then extend the specs with the site's own checks, or add
-specs, by its areas. `npm run lint` must pass on them: a line that really
+specs, by its areas. Give each one suite tag (`@smoke` or `@regression`,
+usually on its `describe`), since CI selects tests by it; see the handbook's
+"Anatomy". `npm run lint` must pass on them: a line that really
 needs a rule off says why, inline (`// eslint-disable-next-line <rule> --
 <reason>`), rather than turning the rule off for every spec.
 
 Keep what fits, and remove what doesn't, and log which and why. **A site with
-no forms**: remove `forms_tests.spec.js`, and drop it from the
-`functional-tests` CI job, `test:regression`, and
-`scripts/test-skeleton.js`. Update `scripts/template-check.js`'s spec list
-too: `template-check` fails while `package.json`, `qa-test.yml`, or
-`test-skeleton.js` still names a removed spec.
+no forms**: remove `forms_tests.spec.js`, and drop it from
+`scripts/test-skeleton.js` and `scripts/template-check.js`'s spec list
+(`template-check` fails while a script still names a removed spec). CI and
+the npm scripts select by tag, so they need no edit.
 
 **Two overrides** let the same specs run against another address without
 editing the config: `QA_BASE_URL` (the staging and production projects'

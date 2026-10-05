@@ -209,11 +209,12 @@ In `.github/workflows/qa-test.yml`:
 - Run the e2e jobs on push and PR (not only on dispatch). Each job already runs
   the desktop and `-mobile` projects. Change each job's `if:` to the
   expression in the comment above `smoke-tests`.
-- The template's e2e jobs are `smoke-tests` (the smoke spec) and
-  `functional-tests` (error handling, forms, and accessibility in one job and
-  one JSON file). Drop the specs removed in step 3 from them, and any job left
-  with no spec, **and** take it out of the `needs` list of `update-dashboard`; `template-check` fails while the workflow
-  still names a removed spec. The dashboard job runs only on dispatch, so
+- The template's e2e jobs are `smoke-tests` (every `@smoke` test) and
+  `functional-tests` (every `@regression` test, in one job and one JSON
+  file). They select by tag, so a spec removed in step 3 needs no edit here.
+  But a job whose tag no longer matches any test fails ("No tests found"):
+  drop that job, **and** take it out of the `needs` list of
+  `update-dashboard`. The dashboard job runs only on dispatch, so
   without a change it never updates from a push to `main`. Change its `if:`
   to the expression in its comment: on dispatch (except a links-only run) and
   on a push to `main`, and **never** on a PR, because it commits to the branch
@@ -223,6 +224,13 @@ In `.github/workflows/qa-test.yml`:
   for the suites that remain.
 - Keep the link checker on demand: its `link-check` job runs only on
   dispatch, with `links` or `all`.
+- **The nightly schedule** (to monitor the live site): ask the human whether
+  to turn it on and at what time; it's their call. If so, uncomment the
+  `schedule:` block under `on:` (set the cron time), use the
+  `update-dashboard` `if:` with `schedule` from its comment, and pick the
+  environment (`TEST_ENV`'s comment shows production). Optionally add the
+  link checker to it. Record it in the brief's "When the tests run". After
+  the first night, check the run and the dashboard.
 
 **A site with a login:** hand off setting the repo secrets `QA_USERNAME` and
 `QA_PASSWORD` (Settings → Secrets and variables → Actions); the human sets

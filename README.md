@@ -53,9 +53,10 @@ the setup. The process itself is in the [QA Handbook](./docs/qa-handbook.md).
 npm install
 npx playwright install chromium
 
-npm run test:smoke           # smoke tests, desktop and phone (staging projects)
-npm run test:regression      # regression suite (error handling, forms, accessibility, logged-in pages), desktop and phone
-npm run test:a11y            # the accessibility scan only, desktop and phone
+npm run test:smoke           # tests tagged @smoke, desktop and phone (staging projects)
+npm run test:regression      # tests tagged @regression (error handling, forms, accessibility, logged-in pages), desktop and phone
+npm run test:a11y            # tests tagged @a11y, desktop and phone
+npx playwright test --grep @forms --project=staging   # any tag
 npm run test:skeleton        # the four skeleton specs, and the login, against the committed fixture site
 npm run test:links           # link checker
 npm run test:unit            # unit tests for the Site config, helpers, scripts, and dashboard
@@ -101,6 +102,11 @@ sites, logins, proving each test can fail) is in
   real. The workflow's comments give the conditions an Engagement switches on
   to run them on every push and PR (`/new-engagement` step 5).
 - The `link-check` job runs only on manual dispatch, with `links` or `all`.
+- The e2e jobs select tests by suite tag (`@smoke`, `@regression`), so a new
+  spec runs in CI with no workflow edit; `template-check` fails a test with
+  no suite tag, or one that doesn't fit its file.
+- A nightly scheduled run is ready in the workflow, commented out, for
+  monitoring a live site; `/new-engagement` step 5 turns it on.
 - `lint` runs ESLint on every push and PR and fails on any error or warning:
   a missing `await` on an assertion, a stray `test.only`, unused or undefined
   names (`eslint.config.js`). In CI a `test.only` also fails the test run

@@ -6,7 +6,7 @@ import { captureEvidence } from '../utils.js';
 // not-found page, and a malformed address never causes a server error. They
 // read siteConfig (config-helper.js).
 
-test.describe('Error Handling Tests', () => {
+test.describe('Error Handling Tests', { tag: ['@regression', '@errors'] }, () => {
 
   test('TC_ERROR_001 An unknown address shows a not-found page', {
     annotation: [{ type: 'test_case', description: 'TC_ERROR_001' }],

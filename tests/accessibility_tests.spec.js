@@ -11,7 +11,7 @@ import { captureEvidence } from '../utils.js';
 const WCAG_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'];
 const BLOCKING = ['serious', 'critical'];
 
-test.describe('Accessibility Tests', () => {
+test.describe('Accessibility Tests', { tag: ['@regression', '@a11y'] }, () => {
 
   test('TC_A11Y_001 No page has a serious or critical accessibility violation', {
     annotation: [{ type: 'test_case', description: 'TC_A11Y_001' }],

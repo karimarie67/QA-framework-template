@@ -12,7 +12,7 @@ import { captureEvidence } from '../utils.js';
 // A site with no forms: remove this spec, and drop it from the
 // functional-tests CI job, `test:regression`, and scripts/test-skeleton.js.
 
-test.describe('Forms Tests', () => {
+test.describe('Forms Tests', { tag: ['@regression', '@forms'] }, () => {
 
   test('TC_FORM_001 Every form field has its label, type, and required state', {
     annotation: [{ type: 'test_case', description: 'TC_FORM_001' }],

@@ -8,7 +8,7 @@ import { buildURL, authConfig, authSkipReason } from '../config-helper.js';
 // No screenshots or evidence captures: a logged-in page can show the
 // account's data. The evidence is the run's JSON and log.
 
-test.describe('Logged-in pages', () => {
+test.describe('Logged-in pages', { tag: ['@regression', '@auth'] }, () => {
   // Skips for the same reasons the login does (no login configured, or a PR
   // without the secrets), so it never runs on the empty session.
   const skipReason = authSkipReason();

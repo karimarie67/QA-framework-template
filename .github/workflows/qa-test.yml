@@ -5,6 +5,14 @@ on:
     branches: [ main, develop ]
   push:
     branches: [ main, develop ]
+  # A nightly run, for monitoring a live site. Off in the template (its sites
+  # are placeholders); /new-engagement step 5 turns it on, together with the
+  # e2e jobs' and update-dashboard's `if:` (see their comments). GitHub runs a
+  # schedule from the default branch only, emails the person who last changed
+  # the cron when a run fails, and disables it after 60 days with no activity
+  # in a public repo.
+  # schedule:
+  #   - cron: '0 6 * * *'  # 06:00 UTC daily
   workflow_dispatch:
     inputs:
       environment:
@@ -26,6 +34,9 @@ on:
           - links
           - all
 
+# A dispatch picks the environment; a push, a PR, or a scheduled run uses
+# staging. To monitor production on the schedule instead:
+#   TEST_ENV: ${{ github.event.inputs.environment || (github.event_name == 'schedule' && 'production') || 'staging' }}
 env:
   TEST_ENV: ${{ github.event.inputs.environment || 'staging' }}
 
@@ -35,7 +46,12 @@ jobs:
   # every push and PR in /new-engagement step 5 by changing each job's `if:`
   # to:
   #   github.event_name != 'workflow_dispatch' || github.event.inputs.test_suite == '<suite>' || github.event.inputs.test_suite == 'all'
-  # Each job runs the desktop and phone projects together.
+  # That expression also covers a scheduled run, once the schedule is on.
+  # Each job runs the desktop and phone projects together, and selects its
+  # tests by suite tag (@smoke, @regression), so a new spec needs no edit
+  # here; scripts/tag-check.js (in template-check) holds the tag rules. A job
+  # whose tag matches no test fails ("No tests found"): drop the job with its
+  # last test.
   smoke-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -62,7 +78,7 @@ jobs:
       # The steps after this one still run (if: always()) and collect the
       # results for the dashboard.
       - name: Run Smoke Tests
-        run: npx playwright test tests/smoke_tests.spec.js --project=${{ env.TEST_ENV }} --project=${{ env.TEST_ENV }}-mobile
+        run: npx playwright test --grep @smoke --project=${{ env.TEST_ENV }} --project=${{ env.TEST_ENV }}-mobile
 
       - name: Organize results for dashboard
         if: always()
@@ -98,7 +114,7 @@ jobs:
   functional-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    name: Functional Tests (Error Handling, Forms, Accessibility, Logged-in)
+    name: Functional Tests (@regression)
     if: github.event_name == 'workflow_dispatch' && (github.event.inputs.test_suite == 'regression' || github.event.inputs.test_suite == 'all')
 
     steps:
@@ -117,8 +133,9 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
 
-      # Desktop and phone, into one JSON file for the dashboard. The logged-in
-      # spec runs on the -auth projects, after the login (<env>-setup). The
+      # Every @regression test, desktop and phone, into one JSON file for the
+      # dashboard. The logged-in specs run on the -auth projects, after the
+      # login (<env>-setup), which runs whatever the grep. The
       # login secrets are passed to this step only. A PR from a fork or
       # Dependabot gets no secrets, so its login skips; a same-repo run
       # without them fails. Never add a retries flag here: it would override the
@@ -128,7 +145,7 @@ jobs:
           QA_USERNAME: ${{ secrets.QA_USERNAME }}
           QA_PASSWORD: ${{ secrets.QA_PASSWORD }}
           QA_PR_WITHOUT_SECRETS: ${{ github.event.pull_request.head.repo.fork == true || github.actor == 'dependabot[bot]' }}
-        run: PLAYWRIGHT_JSON_OUTPUT_NAME=test-results.json npx playwright test tests/error_handling_tests.spec.js tests/forms_tests.spec.js tests/accessibility_tests.spec.js tests/account.auth.spec.js --project=${{ env.TEST_ENV }} --project=${{ env.TEST_ENV }}-mobile --project=${{ env.TEST_ENV }}-auth --project=${{ env.TEST_ENV }}-auth-mobile --reporter=json
+        run: PLAYWRIGHT_JSON_OUTPUT_NAME=test-results.json npx playwright test --grep @regression --project=${{ env.TEST_ENV }} --project=${{ env.TEST_ENV }}-mobile --project=${{ env.TEST_ENV }}-auth --project=${{ env.TEST_ENV }}-auth-mobile --reporter=json
 
       - name: Organize results for dashboard
         if: always()
@@ -157,7 +174,9 @@ jobs:
           if-no-files-found: warn
 
   # On demand only: the link checker isn't part of the push and PR gate, and
-  # its results don't go to the dashboard.
+  # its results don't go to the dashboard. To crawl on the schedule too (a
+  # crawl is long; weekly may suit better than nightly), add
+  # `|| github.event_name == 'schedule'` to its `if:`.
   link-check:
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -309,6 +328,9 @@ jobs:
     # Once an Engagement's e2e jobs run on push (step 5), it also updates
     # from pushes to main:
     #   always() && ((github.event_name == 'workflow_dispatch' && github.event.inputs.test_suite != 'links') || (github.event_name == 'push' && github.ref == 'refs/heads/main'))
+    # With the schedule on, also from the nightly run (always() stays outside,
+    # so a night with failing tests still updates the dashboard):
+    #   always() && ((github.event_name == 'workflow_dispatch' && github.event.inputs.test_suite != 'links') || (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'schedule')
     if: always() && github.event_name == 'workflow_dispatch' && github.event.inputs.test_suite != 'links'
     name: Update QA Dashboard
     permissions:

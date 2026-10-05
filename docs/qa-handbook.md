@@ -90,9 +90,8 @@ manual dispatch only, until an Engagement replaces the placeholder Site
 config, and the Engagement then enables them on push and PR. The brief records
 the Engagement's actual choice, including any scheduled monitoring.
 
-**Smoke tests** are the few tests that prove the critical paths work. They
-are identified either by file (`tests/smoke_tests.spec.js` in the template)
-or by the `@smoke` tag (`npx playwright test --grep @smoke`). Keep the set
+**Smoke tests** are the few tests that prove the critical paths work: the
+ones tagged `@smoke` (`npx playwright test --grep @smoke`). Keep the set
 small enough to finish in minutes.
 
 **Manual testing** stays manual when a script can't judge it well:
@@ -201,9 +200,8 @@ import { test, expect } from '@playwright/test';
 import { selectors } from '../selectors.js';
 import { buildURL } from '../config-helper.js';
 
-test.describe('Pricing Tests', () => {
+test.describe('Pricing Tests', { tag: ['@regression', '@pricing'] }, () => {
   test('TC_PRICING_001 The pricing page lists the three plans', {
-    tag: '@smoke',                      // only if it's a smoke test
     annotation: [
       { type: 'test_case', description: 'TC_PRICING_001' },
       { type: 'issue', description: 'https://github.com/<org>/<repo>/issues/42' },
@@ -223,6 +221,16 @@ Conventions:
 
 - **Put the ID first in the title.** It makes `-g TC_PRICING_001` work and
   puts the ID on the dashboard, which shows test titles.
+- **Give every test one suite tag**, usually on its `describe`: `@smoke`
+  (the few critical-path checks), `@regression` (everything else that runs in
+  CI), or `@links` (the link checker only). CI selects by suite tag, so a new
+  spec runs with no workflow edit. Add area tags as useful (`@a11y`,
+  `@forms`, `@pricing`), never one that starts with a suite tag's name
+  (`@smoke-visual`), and never put a suite tag in a title or file name:
+  `--grep` would match it. A logged-in spec (`*.auth.spec.js`) is
+  `@regression`. `template-check` enforces all of this.
+- **Run by tag**: `npx playwright test --grep @a11y --project=staging`, or
+  `--grep-invert @smoke` for everything but.
 - **Declare annotations in the test's details object**, as above. Annotations
   pushed at runtime (`testInfo.annotations.push`) are invisible to
   `playwright test --list`, so the coverage map can't see them.
@@ -338,7 +346,8 @@ needed, scrubbing sensitive data) are in
 
 **Daily** (about 10 minutes)
 
-- Check the latest workflow runs for failures.
+- Check the latest workflow runs for failures, including the nightly
+  scheduled run once the Engagement has turned it on.
 - Check the dashboard for new failures or a falling pass rate.
 - Check open Critical and High bugs.
 
@@ -350,8 +359,8 @@ needed, scrubbing sensitive data) are in
 
 **Monthly**
 
-- Update Playwright (`npm install -D @playwright/test@latest`, then
-  `npx playwright install`) and run the full suite.
+- Review Dependabot's update PRs, Playwright's above all (run the full suite,
+  and the logged-in no-leak check its comments describe, before merging).
 - Review the slowest tests.
 - Reread the engagement brief with the client contact and update anything
   that changed.

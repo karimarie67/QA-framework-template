@@ -30,7 +30,7 @@ the log only, never the HTML report or playwright-output/.
 ## Checklist
 
 - [ ] `npm run lint`, `npm run test:unit`, and `npm run test:template-check` pass
-- [ ] Each new or changed test ran on desktop and phone, twice, with the same result
+- [ ] Each new or changed test has its suite tag, and ran on desktop and phone, twice, with the same result
 - [ ] Each new test was broken once to see it fail on the check it makes, then restored
 - [ ] `npm run coverage` re-run, and `docs/coverage-map.md` committed if it changed
 - [ ] `test-results/` holds only this change's evidence
