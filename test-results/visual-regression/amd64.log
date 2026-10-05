@@ -1,0 +1,15 @@
+QA_BASE_URL in use: http://host.docker.internal:8765
+
+Running 2 tests using 2 workers
+
+QA_BASE_URL in use: http://host.docker.internal:8765
+QA_BASE_URL in use: http://host.docker.internal:8765
+  ✓  2 [production-mobile] › tests/visual_tests.spec.js:22:3 › Visual Tests › TC_VISUAL_001 Every page looks like its baseline @regression @visual (2.3s)
+  ✓  1 [production] › tests/visual_tests.spec.js:22:3 › Visual Tests › TC_VISUAL_001 Every page looks like its baseline @regression @visual (2.4s)
+
+  2 passed (5.2s)
+npm notice
+npm notice New major version of npm available! 11.19.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
