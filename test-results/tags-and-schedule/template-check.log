@@ -1,4 +1,5 @@
 OK: config-helper.js and selectors.js both import cleanly.
 OK: all 7 expected specs were discovered (accessibility_tests.spec.js, account.auth.spec.js, auth.setup.js, check-links.spec.js, error_handling_tests.spec.js, forms_tests.spec.js, smoke_tests.spec.js).
 OK: every spec named in package.json, qa-test.yml, and test-skeleton.js exists.
+OK: every test has exactly one suite tag that fits its file, and nothing would fool --grep.
 template-check: PASS

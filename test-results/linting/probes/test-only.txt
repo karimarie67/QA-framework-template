@@ -1,9 +1,0 @@
-
-/Users/kskinner/QA-framework-template/tests/probe.spec.js
-  1:42  warning  Expected blank line before this statement  playwright/consistent-spacing-between-blocks
-  1:42  warning  Test has no assertions                     playwright/expect-expect
-  1:47  error    Unexpected focused test                    playwright/no-focused-test
-
-✖ 3 problems (1 error, 2 warnings)
-  0 errors and 1 warning potentially fixable with the `--fix` option.
-
