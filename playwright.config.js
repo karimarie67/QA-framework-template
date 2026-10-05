@@ -1,12 +1,13 @@
 import { defineConfig, devices } from '@playwright/test';
-import { authStatePath } from './config-helper.js';
+import { authStatePath, EXTRA_BROWSERS, parseBrowsers } from './config-helper.js';
 
 // QA_BASE_URL points every staging and production project at one address, for
 // testing the template against its fixture site (npm run test:skeleton) or a
 // preview deploy. Namespaced, since many machines export BASE_URL for other
-// projects; logged, so a run never silently tests another site.
+// projects; logged (to stderr, so JSON output stays clean), so a run never
+// silently tests another site.
 const QA_BASE_URL = process.env.QA_BASE_URL;
-if (QA_BASE_URL) console.log(`QA_BASE_URL in use: ${QA_BASE_URL}`);
+if (QA_BASE_URL) console.warn(`QA_BASE_URL in use: ${QA_BASE_URL}`);
 const site = placeholder => QA_BASE_URL || placeholder;
 
 // The link checker crawls the whole site: it runs only on its own project.
@@ -14,6 +15,21 @@ const site = placeholder => QA_BASE_URL || placeholder;
 const notTheLinkChecker = /check-links\.spec\.js$/;
 const loggedIn = /\.auth\.spec\.js$/;
 const publicOnly = [notTheLinkChecker, loggedIn];
+
+// Opt-in browsers beyond Chromium and the Pixel 5: QA_BROWSERS=firefox,webkit,
+// iphone (or all) adds <env>-firefox, <env>-webkit, and <env>-iphone, running
+// the public specs (not the link checker or the logged-in specs). Off by
+// default, so a plain run needs only Chromium; the brief says when to use
+// them. Install them first: npx playwright install firefox webkit.
+const extraBrowsers = parseBrowsers(process.env.QA_BROWSERS);
+if (extraBrowsers.length) console.warn(`QA_BROWSERS in use: ${extraBrowsers.join(', ')}`);
+function browserProjects(env, baseURL) {
+  return extraBrowsers.map(b => ({
+    name: `${env}-${b}`,
+    testIgnore: publicOnly,
+    use: { ...EXTRA_BROWSERS[b], baseURL, headless: true, trace: 'on-first-retry' },
+  }));
+}
 
 // The login and the logged-in projects for one environment. They record no
 // trace, screenshot, or video: a trace holds what was typed and the session
@@ -122,6 +138,8 @@ export default defineConfig({
     // TODO(Engagement): the same staging and production URLs as above.
     ...loginProjects('staging', site('https://staging.example.com')),
     ...loginProjects('production', site('https://www.example.com')),
+    ...browserProjects('staging', site('https://staging.example.com')),
+    ...browserProjects('production', site('https://www.example.com')),
     // Special project for link checking - no traces/screenshots to avoid thousands of files
     {
       name: 'link-checker',

@@ -58,10 +58,32 @@ test('politeGet', async t => {
 });
 
 test('skipOnPhone', async t => {
-  const info = name => {
+  const info = (name, use = {}) => {
     const calls = [];
-    return { project: { name }, skip: (cond, reason) => calls.push([cond, reason]), calls };
+    return { project: { name, use }, skip: (cond, reason) => calls.push([cond, reason]), calls };
   };
+
+  await t.test('skips on another browser or a phone emulation, whatever the name', () => {
+    for (const [name, use] of [['production-firefox', { browserName: 'firefox' }], ['production-webkit', { browserName: 'webkit' }], ['production-iphone', { browserName: 'webkit', isMobile: true }], ['x', { isMobile: true }]]) {
+      const i = info(name, use);
+      skipOnPhone(i);
+      assert.equal(i.calls[0][0], true, name);
+    }
+  });
+
+  await t.test("skips on a device preset's browser (defaultBrowserType), as the QA_BROWSERS projects use", () => {
+    for (const [name, use] of [['production-firefox', { defaultBrowserType: 'firefox' }], ['production-webkit', { defaultBrowserType: 'webkit' }]]) {
+      const i = info(name, use);
+      skipOnPhone(i);
+      assert.equal(i.calls[0][0], true, name);
+    }
+  });
+
+  await t.test('runs on desktop Chromium, named or by default', () => {
+    const i = info('production', { browserName: 'chromium' });
+    skipOnPhone(i);
+    assert.equal(i.calls[0][0], false);
+  });
 
   await t.test('skips on a -mobile project', () => {
     const i = info('production-mobile');

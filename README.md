@@ -45,7 +45,7 @@ the setup. The process itself is in the [QA Handbook](./docs/qa-handbook.md).
 | `scripts/` | Label and board setup, the coverage map, and the `template-check` structural check |
 | `test-results/` | Committed proof of work, one folder per test. Playwright's own run output goes to `playwright-output/`, which isn't committed |
 | `.claude/skills/` | The `/new-engagement` and `/import-test-cases` skills |
-| `examples/` | A past Engagement's documents and test case spreadsheets, for reference |
+| `examples/` | Sample test case spreadsheets from a past Engagement, for trying `/import-test-cases` |
 
 ## Quick start
 
@@ -61,6 +61,7 @@ npx playwright test --grep @perf --project=staging   # the performance budgets (
 npm run test:visual          # visual checks against the baselines, in Playwright's Docker image (siteConfig.visual)
 npm run test:visual:update   # make or refresh the baselines, then review and commit them
 npx playwright test --grep @forms --project=staging   # any tag
+QA_BROWSERS=all npx playwright test --project=staging-firefox --project=staging-webkit --project=staging-iphone  # other browsers, opt-in
 npm run test:skeleton        # the skeleton specs, the login, and the API tests against the committed fixture site
 npm run test:links           # link checker
 npm run test:unit            # unit tests for the Site config, helpers, scripts, and dashboard
@@ -127,6 +128,8 @@ sites, logins, proving each test can fail) is in
   bugs and severity, and writing and maintaining automated tests.
 - [Test management](./docs/github_test_management.md): stories, Test Case
   issues, labels, and the board.
+- [Running an Engagement with Jira](./docs/jira.md): for a client who tracks
+  work in Jira instead of GitHub Issues.
 - [`QA-jahnelgroup`](https://github.com/karimarie67/QA-jahnelgroup): a
   finished Engagement built with `/new-engagement`, to see the end result.
 
