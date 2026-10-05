@@ -57,6 +57,7 @@ npm run test:smoke           # tests tagged @smoke, desktop and phone (staging p
 npm run test:regression      # tests tagged @regression (error handling, forms, accessibility, logged-in pages), desktop and phone
 npm run test:a11y            # tests tagged @a11y, desktop and phone
 npx playwright test --grep @api --project=staging  # the API tests (siteConfig.api)
+npx playwright test --grep @perf --project=staging   # the performance budgets (siteConfig.perf)
 npx playwright test --grep @forms --project=staging   # any tag
 QA_BROWSERS=all npx playwright test --project=staging-firefox --project=staging-webkit --project=staging-iphone  # other browsers, opt-in
 npm run test:skeleton        # the skeleton specs, the login, and the API tests against the committed fixture site

@@ -103,6 +103,11 @@ small enough to finish in minutes.
 and checks its status, content type, and the JSON fields it promises. Tagged
 `@regression` and `@api`.
 
+**Performance budgets**: `tests/performance_tests.spec.js` measures each
+page's Web Vitals (LCP, CLS, TTFB, load time) in Chromium during a normal load
+and fails a page over the budgets the brief sets (`siteConfig.perf`). The
+numbers are attached to each run's report. Tagged `@regression` and `@perf`.
+
 **Other browsers**: the projects run Chromium on desktop and a Pixel 5
 emulation. When the brief asks, `QA_BROWSERS` adds Firefox, WebKit (Safari's
 engine), and an iPhone emulation for the public specs (see

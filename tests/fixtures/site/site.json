@@ -92,5 +92,14 @@
         "minItems": 1
       }
     ]
+  },
+  "perf": {
+    "budgets": {
+      "lcpMs": 500,
+      "cls": 0.1,
+      "ttfbMs": 500,
+      "loadMs": 2000
+    },
+    "settleMs": 1000
   }
 }

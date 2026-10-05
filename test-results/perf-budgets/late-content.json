@@ -1,0 +1,488 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/25.7.0/bin/node",
+      "/Users/kskinner/QA-framework-template/node_modules/@playwright/test/cli.js",
+      "test",
+      "tests/performance_tests.spec.js",
+      "--project=production",
+      "--project=production-mobile",
+      "--retries=0",
+      "--reporter=list,json"
+    ],
+    "configFile": "/Users/kskinner/QA-framework-template/playwright.config.js",
+    "rootDir": "/Users/kskinner/QA-framework-template/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "local",
+        "name": "local",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "staging",
+        "name": "staging",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "production",
+        "name": "production",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "staging-mobile",
+        "name": "staging-mobile",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "production-mobile",
+        "name": "production-mobile",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "staging-setup",
+        "name": "staging-setup",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/auth\\.setup\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "staging-auth",
+        "name": "staging-auth",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "staging-auth-mobile",
+        "name": "staging-auth-mobile",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "production-setup",
+        "name": "production-setup",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/auth\\.setup\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "production-auth",
+        "name": "production-auth",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "production-auth-mobile",
+        "name": "production-auth-mobile",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "link-checker",
+        "name": "link-checker",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "timeout": 1800000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 5,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "performance_tests.spec.js",
+      "file": "performance_tests.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Performance Tests",
+          "file": "performance_tests.spec.js",
+          "line": 46,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC_PERF_001 Every page loads within its performance budgets",
+              "ok": false,
+              "tags": [
+                "regression",
+                "perf"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_PERF_001",
+                      "location": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
+                        "line": 49,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production",
+                  "projectName": "production",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 3202,
+                      "error": {
+                        "message": "Error: /: LCP 712 ms, budget 500 ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m500\u001b[39m\nReceived:    \u001b[31m712\u001b[39m",
+                        "stack": "Error: /: LCP 712 ms, budget 500 ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m500\u001b[39m\nReceived:    \u001b[31m712\u001b[39m\n    at /Users/kskinner/QA-framework-template/tests/performance_tests.spec.js:62:108",
+                        "location": {
+                          "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
+                          "column": 108,
+                          "line": 62
+                        },
+                        "snippet": "  60 |       for (const [budgetKey, metric, label, show] of BUDGETS) {\n  61 |         if (budgets[budgetKey] === undefined) continue;\n> 62 |         expect.soft(m[metric], `${path}: ${label} ${show(m[metric])}, budget ${show(budgets[budgetKey])}`).toBeLessThanOrEqual(budgets[budgetKey]);\n     |                                                                                                            ^\n  63 |       }\n  64 |     }\n  65 |     // The measurements, for the report and the evidence."
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
+                            "column": 108,
+                            "line": 62
+                          },
+                          "message": "Error: /: LCP 712 ms, budget 500 ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m500\u001b[39m\nReceived:    \u001b[31m712\u001b[39m\n\n  60 |       for (const [budgetKey, metric, label, show] of BUDGETS) {\n  61 |         if (budgets[budgetKey] === undefined) continue;\n> 62 |         expect.soft(m[metric], `${path}: ${label} ${show(m[metric])}, budget ${show(budgets[budgetKey])}`).toBeLessThanOrEqual(budgets[budgetKey]);\n     |                                                                                                            ^\n  63 |       }\n  64 |     }\n  65 |     // The measurements, for the report and the evidence.\n    at /Users/kskinner/QA-framework-template/tests/performance_tests.spec.js:62:108"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "/: LCP 712 ms, CLS 0.020, TTFB 3 ms, load 12 ms\n/about: LCP 16 ms, CLS 0.000, TTFB 2 ms, load 7 ms\n/contact: LCP 16 ms, CLS 0.000, TTFB 2 ms, load 11 ms\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T16:43:43.507Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_PERF_001",
+                          "location": {
+                            "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
+                            "line": 49,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "web-vitals.json",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJwYXRoIjogIi8iLAogICAgImxjcCI6IDcxMiwKICAgICJjbHMiOiAwLjAyMDE4MjI5MTY2NjY2NjY2OCwKICAgICJ0dGZiIjogMy4zMDAwMDAwMTE5MjA5MjksCiAgICAibG9hZCI6IDEyLjIwMDAwMDAxNzg4MTM5MwogIH0sCiAgewogICAgInBhdGgiOiAiL2Fib3V0IiwKICAgICJsY3AiOiAxNiwKICAgICJjbHMiOiAwLAogICAgInR0ZmIiOiAyLAogICAgImxvYWQiOiA3LjE5OTk5OTk4ODA3OTA3MQogIH0sCiAgewogICAgInBhdGgiOiAiL2NvbnRhY3QiLAogICAgImxjcCI6IDE2LAogICAgImNscyI6IDAsCiAgICAidHRmYiI6IDEuNzAwMDAwMDE3ODgxMzkzNCwKICAgICJsb2FkIjogMTAuNzAwMDAwMDE3ODgxMzkzCiAgfQpd"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/kskinner/QA-framework-template/playwright-output/performance_tests-Performa-40113-hin-its-performance-budgets-production/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/kskinner/QA-framework-template/playwright-output/performance_tests-Performa-40113-hin-its-performance-budgets-production/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
+                        "column": 108,
+                        "line": 62
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "db5b0d4268a782a438b9-1f6eb32520440a4a930a",
+              "file": "performance_tests.spec.js",
+              "line": 49,
+              "column": 3
+            },
+            {
+              "title": "TC_PERF_001 Every page loads within its performance budgets",
+              "ok": false,
+              "tags": [
+                "regression",
+                "perf"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_PERF_001",
+                      "location": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
+                        "line": 49,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production-mobile",
+                  "projectName": "production-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 3237,
+                      "error": {
+                        "message": "Error: /: LCP 712 ms, budget 500 ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m500\u001b[39m\nReceived:    \u001b[31m712\u001b[39m",
+                        "stack": "Error: /: LCP 712 ms, budget 500 ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m500\u001b[39m\nReceived:    \u001b[31m712\u001b[39m\n    at /Users/kskinner/QA-framework-template/tests/performance_tests.spec.js:62:108",
+                        "location": {
+                          "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
+                          "column": 108,
+                          "line": 62
+                        },
+                        "snippet": "  60 |       for (const [budgetKey, metric, label, show] of BUDGETS) {\n  61 |         if (budgets[budgetKey] === undefined) continue;\n> 62 |         expect.soft(m[metric], `${path}: ${label} ${show(m[metric])}, budget ${show(budgets[budgetKey])}`).toBeLessThanOrEqual(budgets[budgetKey]);\n     |                                                                                                            ^\n  63 |       }\n  64 |     }\n  65 |     // The measurements, for the report and the evidence."
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
+                            "column": 108,
+                            "line": 62
+                          },
+                          "message": "Error: /: LCP 712 ms, budget 500 ms\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m500\u001b[39m\nReceived:    \u001b[31m712\u001b[39m\n\n  60 |       for (const [budgetKey, metric, label, show] of BUDGETS) {\n  61 |         if (budgets[budgetKey] === undefined) continue;\n> 62 |         expect.soft(m[metric], `${path}: ${label} ${show(m[metric])}, budget ${show(budgets[budgetKey])}`).toBeLessThanOrEqual(budgets[budgetKey]);\n     |                                                                                                            ^\n  63 |       }\n  64 |     }\n  65 |     // The measurements, for the report and the evidence.\n    at /Users/kskinner/QA-framework-template/tests/performance_tests.spec.js:62:108"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "/: LCP 712 ms, CLS 0.077, TTFB 2 ms, load 8 ms\n/about: LCP 12 ms, CLS 0.000, TTFB 2 ms, load 7 ms\n/contact: LCP 12 ms, CLS 0.000, TTFB 2 ms, load 9 ms\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T16:43:43.502Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_PERF_001",
+                          "location": {
+                            "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
+                            "line": 49,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "web-vitals.json",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJwYXRoIjogIi8iLAogICAgImxjcCI6IDcxMiwKICAgICJjbHMiOiAwLjA3NzE5NTM4NTY4MzY2MTYzLAogICAgInR0ZmIiOiAyLjQwMDAwMDAwNTk2MDQ2NDUsCiAgICAibG9hZCI6IDcuNTk5OTk5OTk0MDM5NTM1NQogIH0sCiAgewogICAgInBhdGgiOiAiL2Fib3V0IiwKICAgICJsY3AiOiAxMiwKICAgICJjbHMiOiAwLAogICAgInR0ZmIiOiAxLjgwMDAwMDAxMTkyMDkyOSwKICAgICJsb2FkIjogNy4yMDAwMDAwMTc4ODEzOTMKICB9LAogIHsKICAgICJwYXRoIjogIi9jb250YWN0IiwKICAgICJsY3AiOiAxMiwKICAgICJjbHMiOiAwLAogICAgInR0ZmIiOiAyLjE5OTk5OTk4ODA3OTA3MSwKICAgICJsb2FkIjogOS4xOTk5OTk5ODgwNzkwNzEKICB9Cl0="
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/kskinner/QA-framework-template/playwright-output/performance_tests-Performa-40113-hin-its-performance-budgets-production-mobile/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/kskinner/QA-framework-template/playwright-output/performance_tests-Performa-40113-hin-its-performance-budgets-production-mobile/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
+                        "column": 108,
+                        "line": 62
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "db5b0d4268a782a438b9-089648f04039cabb708a",
+              "file": "performance_tests.spec.js",
+              "line": 49,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-05T16:43:43.134Z",
+    "duration": 3820.6119999999996,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

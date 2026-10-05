@@ -29,6 +29,9 @@ checks (see the plan, template issue #30):
   api-500        /api/health answers 500                  TC_API_001
   api-html       /api/items answers HTML, not JSON        TC_API_001 (and TC_API_002: not JSON)
   api-missing-key /api/items' items lack "name"           TC_API_002 (TC_API_001 still passes)
+  slow-page      /about takes 1.5 s to answer             TC_PERF_001 (TTFB, and LCP)
+  layout-shift   / pushes its content down after loading  TC_PERF_001 (CLS)
+  late-content   /'s main content appears after 0.7 s     TC_PERF_001 (LCP)
 
 The login (/login) accepts FIXTURE_USERNAME (default qa-fixture) and
 FIXTURE_PASSWORD from the environment; with no FIXTURE_PASSWORD, every login
@@ -40,6 +43,7 @@ import hmac
 import json
 import os
 import secrets
+import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs
 
@@ -114,10 +118,25 @@ def page(title, h1, body, extra_head=""):
 
 def home():
     img = '<img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="1" height="1">' if BREAK == "img-no-alt" else ""
-    return page("Home", "Welcome", f"<p>The fixture site's home page.</p>{img}")
+    extra = ""
+    if BREAK == "layout-shift":
+        # Tall content, then a banner inserted above it after load: what's on
+        # screen jumps down by 250 px.
+        extra = ('<div style="height: 600px; background: #eee">Tall content</div>'
+                 "<script>setTimeout(() => { const b = document.createElement('div');"
+                 " b.style.height = '250px'; b.textContent = 'Banner';"
+                 " document.querySelector('main').prepend(b); }, 300);</script>")
+    if BREAK == "late-content":
+        # The largest content shows up 0.7 s after load (the fixture's LCP budget is 0.5 s).
+        extra = ("<script>setTimeout(() => { const p = document.createElement('p');"
+                 " p.style.fontSize = '64px'; p.textContent = 'The real content, much later than the rest';"
+                 " document.querySelector('main').append(p); }, 700);</script>")
+    return page("Home", "Welcome", f"<p>The fixture site's home page.</p>{img}{extra}")
 
 
 def about():
+    if BREAK == "slow-page":
+        time.sleep(1.5)
     return page("About", "About us", "<p>About the fixture site.</p>")
 
 

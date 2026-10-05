@@ -84,7 +84,7 @@ test('buildURL', async t => {
 
 test('siteConfig', async t => {
   await t.test('has every section the skeleton specs read', () => {
-    for (const key of ['pages', 'nav', 'footer', 'notFoundPath', 'notFoundText', 'malformedPaths', 'forms', 'a11y', 'auth', 'api']) {
+    for (const key of ['pages', 'nav', 'footer', 'notFoundPath', 'notFoundText', 'malformedPaths', 'forms', 'a11y', 'auth', 'api', 'perf']) {
       assert.ok(key in defaultSiteConfig, key);
     }
     assert.ok(Array.isArray(defaultSiteConfig.footer.links));

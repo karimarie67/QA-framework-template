@@ -4,7 +4,7 @@
       "/opt/homebrew/Cellar/node/25.7.0/bin/node",
       "/Users/kskinner/QA-framework-template/node_modules/@playwright/test/cli.js",
       "test",
-      "tests/api_tests.spec.js",
+      "tests/performance_tests.spec.js",
       "--project=production",
       "--project=production-mobile",
       "--retries=0",
@@ -257,24 +257,24 @@
   },
   "suites": [
     {
-      "title": "api_tests.spec.js",
-      "file": "api_tests.spec.js",
+      "title": "performance_tests.spec.js",
+      "file": "performance_tests.spec.js",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "API Tests",
-          "file": "api_tests.spec.js",
-          "line": 25,
+          "title": "Performance Tests",
+          "file": "performance_tests.spec.js",
+          "line": 46,
           "column": 6,
           "specs": [
             {
-              "title": "TC_API_001 Every endpoint answers with its expected status and content type",
+              "title": "TC_PERF_001 Every page loads within its performance budgets",
               "ok": true,
               "tags": [
                 "regression",
-                "api"
+                "perf"
               ],
               "tests": [
                 {
@@ -282,10 +282,10 @@
                   "annotations": [
                     {
                       "type": "test_case",
-                      "description": "TC_API_001",
+                      "description": "TC_PERF_001",
                       "location": {
-                        "file": "/Users/kskinner/QA-framework-template/tests/api_tests.spec.js",
-                        "line": 28,
+                        "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
+                        "line": 49,
                         "column": 3
                       }
                     }
@@ -298,40 +298,50 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 368,
+                      "duration": 3189,
                       "errors": [],
-                      "stdout": [],
+                      "stdout": [
+                        {
+                          "text": "/: LCP 28 ms, CLS 0.000, TTFB 13 ms, load 18 ms\n/about: LCP 16 ms, CLS 0.000, TTFB 3 ms, load 10 ms\n/contact: LCP 20 ms, CLS 0.000, TTFB 4 ms, load 15 ms\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-05T15:37:36.852Z",
+                      "startTime": "2026-10-05T16:43:22.875Z",
                       "annotations": [
                         {
                           "type": "test_case",
-                          "description": "TC_API_001",
+                          "description": "TC_PERF_001",
                           "location": {
-                            "file": "/Users/kskinner/QA-framework-template/tests/api_tests.spec.js",
-                            "line": 28,
+                            "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
+                            "line": 49,
                             "column": 3
                           }
                         }
                       ],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "web-vitals.json",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJwYXRoIjogIi8iLAogICAgImxjcCI6IDI4LAogICAgImNscyI6IDAsCiAgICAidHRmYiI6IDEzLjA5OTk5OTk5NDAzOTUzNiwKICAgICJsb2FkIjogMTcuNzk5OTk5OTgyMTE4NjA3CiAgfSwKICB7CiAgICAicGF0aCI6ICIvYWJvdXQiLAogICAgImxjcCI6IDE2LAogICAgImNscyI6IDAsCiAgICAidHRmYiI6IDMuMzAwMDAwMDExOTIwOTI5LAogICAgImxvYWQiOiAxMC4wOTk5OTk5OTQwMzk1MzYKICB9LAogIHsKICAgICJwYXRoIjogIi9jb250YWN0IiwKICAgICJsY3AiOiAyMCwKICAgICJjbHMiOiAwLAogICAgInR0ZmIiOiAzLjY5OTk5OTk4ODA3OTA3MSwKICAgICJsb2FkIjogMTUuMjk5OTk5OTgyMTE4NjA3CiAgfQpd"
+                        }
+                      ]
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "4ce67832ff20e3d0634f-3b37cbdcd2224d66f148",
-              "file": "api_tests.spec.js",
-              "line": 28,
+              "id": "db5b0d4268a782a438b9-1f6eb32520440a4a930a",
+              "file": "performance_tests.spec.js",
+              "line": 49,
               "column": 3
             },
             {
-              "title": "TC_API_002 Every JSON endpoint returns the fields it promises",
+              "title": "TC_PERF_001 Every page loads within its performance budgets",
               "ok": true,
               "tags": [
                 "regression",
-                "api"
+                "perf"
               ],
               "tests": [
                 {
@@ -339,198 +349,58 @@
                   "annotations": [
                     {
                       "type": "test_case",
-                      "description": "TC_API_002",
+                      "description": "TC_PERF_001",
                       "location": {
-                        "file": "/Users/kskinner/QA-framework-template/tests/api_tests.spec.js",
-                        "line": 41,
+                        "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
+                        "line": 49,
                         "column": 3
                       }
                     }
                   ],
                   "expectedStatus": "passed",
-                  "projectId": "production",
-                  "projectName": "production",
+                  "projectId": "production-mobile",
+                  "projectName": "production-mobile",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 600,
+                      "duration": 3212,
                       "errors": [],
-                      "stdout": [],
+                      "stdout": [
+                        {
+                          "text": "/: LCP 36 ms, CLS 0.000, TTFB 14 ms, load 19 ms\n/about: LCP 12 ms, CLS 0.000, TTFB 2 ms, load 9 ms\n/contact: LCP 20 ms, CLS 0.000, TTFB 4 ms, load 13 ms\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-05T15:37:37.241Z",
+                      "startTime": "2026-10-05T16:43:22.870Z",
                       "annotations": [
                         {
                           "type": "test_case",
-                          "description": "TC_API_002",
+                          "description": "TC_PERF_001",
                           "location": {
-                            "file": "/Users/kskinner/QA-framework-template/tests/api_tests.spec.js",
-                            "line": 41,
+                            "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
+                            "line": 49,
                             "column": 3
                           }
                         }
                       ],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "web-vitals.json",
+                          "contentType": "application/json",
+                          "body": "WwogIHsKICAgICJwYXRoIjogIi8iLAogICAgImxjcCI6IDM2LAogICAgImNscyI6IDAsCiAgICAidHRmYiI6IDEzLjY5OTk5OTk4ODA3OTA3MSwKICAgICJsb2FkIjogMTguNjk5OTk5OTg4MDc5MDcKICB9LAogIHsKICAgICJwYXRoIjogIi9hYm91dCIsCiAgICAibGNwIjogMTIsCiAgICAiY2xzIjogMCwKICAgICJ0dGZiIjogMi4wOTk5OTk5OTQwMzk1MzU1LAogICAgImxvYWQiOiA4LjU5OTk5OTk5NDAzOTUzNgogIH0sCiAgewogICAgInBhdGgiOiAiL2NvbnRhY3QiLAogICAgImxjcCI6IDIwLAogICAgImNscyI6IDAsCiAgICAidHRmYiI6IDQuMjk5OTk5OTgyMTE4NjA3LAogICAgImxvYWQiOiAxMy4yOTk5OTk5ODIxMTg2MDcKICB9Cl0="
+                        }
+                      ]
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "4ce67832ff20e3d0634f-f6d6a03a96f32d2ad684",
-              "file": "api_tests.spec.js",
-              "line": 41,
-              "column": 3
-            },
-            {
-              "title": "TC_API_001 Every endpoint answers with its expected status and content type",
-              "ok": true,
-              "tags": [
-                "regression",
-                "api"
-              ],
-              "tests": [
-                {
-                  "timeout": 90000,
-                  "annotations": [
-                    {
-                      "type": "test_case",
-                      "description": "TC_API_001",
-                      "location": {
-                        "file": "/Users/kskinner/QA-framework-template/tests/api_tests.spec.js",
-                        "line": 28,
-                        "column": 3
-                      }
-                    },
-                    {
-                      "type": "skip",
-                      "description": "Request-only check: runs once, on the desktop project",
-                      "location": {
-                        "file": "/Users/kskinner/QA-framework-template/test-helpers.js",
-                        "line": 220,
-                        "column": 12
-                      }
-                    }
-                  ],
-                  "expectedStatus": "skipped",
-                  "projectId": "production-mobile",
-                  "projectName": "production-mobile",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 1,
-                      "status": "skipped",
-                      "duration": 8,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-10-05T15:37:36.859Z",
-                      "annotations": [
-                        {
-                          "type": "test_case",
-                          "description": "TC_API_001",
-                          "location": {
-                            "file": "/Users/kskinner/QA-framework-template/tests/api_tests.spec.js",
-                            "line": 28,
-                            "column": 3
-                          }
-                        },
-                        {
-                          "type": "skip",
-                          "description": "Request-only check: runs once, on the desktop project",
-                          "location": {
-                            "file": "/Users/kskinner/QA-framework-template/test-helpers.js",
-                            "line": 220,
-                            "column": 12
-                          }
-                        }
-                      ],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "skipped"
-                }
-              ],
-              "id": "4ce67832ff20e3d0634f-ea0c070436f23fcb6f00",
-              "file": "api_tests.spec.js",
-              "line": 28,
-              "column": 3
-            },
-            {
-              "title": "TC_API_002 Every JSON endpoint returns the fields it promises",
-              "ok": true,
-              "tags": [
-                "regression",
-                "api"
-              ],
-              "tests": [
-                {
-                  "timeout": 90000,
-                  "annotations": [
-                    {
-                      "type": "test_case",
-                      "description": "TC_API_002",
-                      "location": {
-                        "file": "/Users/kskinner/QA-framework-template/tests/api_tests.spec.js",
-                        "line": 41,
-                        "column": 3
-                      }
-                    },
-                    {
-                      "type": "skip",
-                      "description": "Request-only check: runs once, on the desktop project",
-                      "location": {
-                        "file": "/Users/kskinner/QA-framework-template/test-helpers.js",
-                        "line": 220,
-                        "column": 12
-                      }
-                    }
-                  ],
-                  "expectedStatus": "skipped",
-                  "projectId": "production-mobile",
-                  "projectName": "production-mobile",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 1,
-                      "status": "skipped",
-                      "duration": 1,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-10-05T15:37:36.886Z",
-                      "annotations": [
-                        {
-                          "type": "test_case",
-                          "description": "TC_API_002",
-                          "location": {
-                            "file": "/Users/kskinner/QA-framework-template/tests/api_tests.spec.js",
-                            "line": 41,
-                            "column": 3
-                          }
-                        },
-                        {
-                          "type": "skip",
-                          "description": "Request-only check: runs once, on the desktop project",
-                          "location": {
-                            "file": "/Users/kskinner/QA-framework-template/test-helpers.js",
-                            "line": 220,
-                            "column": 12
-                          }
-                        }
-                      ],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "skipped"
-                }
-              ],
-              "id": "4ce67832ff20e3d0634f-ed96196cd07e3fe711c8",
-              "file": "api_tests.spec.js",
-              "line": 41,
+              "id": "db5b0d4268a782a438b9-089648f04039cabb708a",
+              "file": "performance_tests.spec.js",
+              "line": 49,
               "column": 3
             }
           ]
@@ -540,10 +410,10 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-05T15:37:36.530Z",
-    "duration": 1336.53,
+    "startTime": "2026-10-05T16:43:22.536Z",
+    "duration": 3719.6549999999997,
     "expected": 2,
-    "skipped": 2,
+    "skipped": 0,
     "unexpected": 0,
     "flaky": 0
   }
