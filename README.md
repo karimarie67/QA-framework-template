@@ -100,6 +100,11 @@ sites, logins, proving each test can fail) is in
   real. The workflow's comments give the conditions an Engagement switches on
   to run them on every push and PR (`/new-engagement` step 5).
 - The `link-check` job runs only on manual dispatch, with `links` or `all`.
+- Dependabot ([`.github/dependabot.yml`](./.github/dependabot.yml)) opens a
+  weekly PR for npm updates (minor and patch grouped, each major on its own)
+  and one for GitHub Actions, a week after each release. They run the same
+  checks and are never merged automatically. Before merging a Playwright
+  upgrade, re-run the logged-in no-leak check (the file's comments say how).
 
 ## Learn more
 
