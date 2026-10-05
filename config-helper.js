@@ -70,6 +70,11 @@ export function buildURL(testInfo, path = '/', options = {}) {
  *   targets); `pages` lists the paths to measure (default: every page above);
  *   `settleMs` is how long to wait after load for late paints and shifts
  *   (default 1000).
+ * - visual: visual regression checks for tests/visual_tests.spec.js, or null
+ *   for none. `pages` lists the paths to compare (default: every page above);
+ *   `mask` lists CSS selectors to blank out (a clock, a carousel, a name);
+ *   `maxDiffPixelRatio` is how much may differ (default 0.01). They run in
+ *   Playwright's Docker image only: npm run test:visual.
  */
 export const defaultSiteConfig = {
   // TODO(Engagement): every page to check, from the probe.
@@ -105,6 +110,9 @@ export const defaultSiteConfig = {
   // TODO(Engagement): performance budgets from the brief's targets, e.g.
   //   { budgets: { lcpMs: 2500, cls: 0.1, ttfbMs: 800, loadMs: 4000 } }
   perf: null,
+  // TODO(Engagement): visual checks, if the brief asks for them, e.g.
+  //   { pages: ['/', '/pricing'], mask: ['.carousel'], maxDiffPixelRatio: 0.01 }
+  visual: null,
 };
 
 /**

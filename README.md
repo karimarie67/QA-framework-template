@@ -58,6 +58,8 @@ npm run test:regression      # tests tagged @regression (error handling, forms, 
 npm run test:a11y            # tests tagged @a11y, desktop and phone
 npx playwright test --grep @api --project=staging  # the API tests (siteConfig.api)
 npx playwright test --grep @perf --project=staging   # the performance budgets (siteConfig.perf)
+npm run test:visual          # visual checks against the baselines, in Playwright's Docker image (siteConfig.visual)
+npm run test:visual:update   # make or refresh the baselines, then review and commit them
 npx playwright test --grep @forms --project=staging   # any tag
 npm run test:skeleton        # the skeleton specs, the login, and the API tests against the committed fixture site
 npm run test:links           # link checker

@@ -104,6 +104,13 @@ page's Web Vitals (LCP, CLS, TTFB, load time) in Chromium during a normal load
 and fails a page over the budgets the brief sets (`siteConfig.perf`). The
 numbers are attached to each run's report. Tagged `@regression` and `@perf`.
 
+**Visual checks**: `tests/visual_tests.spec.js` compares each page's
+screenshot with a committed baseline (`siteConfig.visual`). Screenshots differ
+by operating system, so it runs only in Playwright's Docker image: `npm run
+test:visual` to compare, `npm run test:visual:update` to make or refresh the
+baselines, which are reviewed and committed like code. Tagged `@regression`
+and `@visual`; it skips in any other run.
+
 **Manual testing** stays manual when a script can't judge it well:
 exploratory sessions, visual review, accessibility with assistive technology,
 and one-off checks. Each lasting manual check is still a test case, labeled
