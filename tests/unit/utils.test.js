@@ -1,8 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import {
   BLOCKED_STATUSES,
   MAX_FULL_PAGE_SCREENSHOT_PX,
+  captureEvidence,
   classifyLinkResult,
   evidencePath,
   wantsFullPage,
@@ -75,5 +79,23 @@ test('evidencePath', async t => {
 
   await t.test('takes another root', () => {
     assert.equal(evidencePath(info([{ type: 'test_case', description: 'TC_X_001' }]), 'out'), 'out/TC_X_001/production.png');
+  });
+});
+
+test('captureEvidence', async t => {
+  const info = { annotations: [{ type: 'test_case', description: 'TC_X_001' }], title: 'x', project: { name: 'production' } };
+
+  await t.test('QA_EVIDENCE=off saves nothing and never touches the page', async () => {
+    const page = { evaluate: () => assert.fail('no page call'), screenshot: () => assert.fail('no screenshot') };
+    assert.equal(await captureEvidence(page, info, 'out', { QA_EVIDENCE: 'off' }), null);
+  });
+
+  await t.test('otherwise it takes the screenshot at evidencePath', async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'evidence-'));
+    let taken;
+    const page = { evaluate: async () => 500, screenshot: async opts => { taken = opts.path; } };
+    const saved = await captureEvidence(page, info, root, {});
+    assert.equal(saved, evidencePath(info, root));
+    assert.equal(taken, saved);
   });
 });
