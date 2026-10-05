@@ -56,8 +56,9 @@ npx playwright install chromium
 npm run test:smoke           # tests tagged @smoke, desktop and phone (staging projects)
 npm run test:regression      # tests tagged @regression (error handling, forms, accessibility, logged-in pages), desktop and phone
 npm run test:a11y            # tests tagged @a11y, desktop and phone
+npx playwright test --grep @api --project=staging  # the API tests (siteConfig.api)
 npx playwright test --grep @forms --project=staging   # any tag
-npm run test:skeleton        # the four skeleton specs, and the login, against the committed fixture site
+npm run test:skeleton        # the skeleton specs, the login, and the API tests against the committed fixture site
 npm run test:links           # link checker
 npm run test:unit            # unit tests for the Site config, helpers, scripts, and dashboard
 npm run test:template-check  # structural check: the config imports, the specs are found, and every spec CI names exists
@@ -93,7 +94,7 @@ sites, logins, proving each test can fail) is in
 
 - `unit-tests` and `template-check` run on every push and PR to
   `main`/`develop`, with no configuration needed.
-- `skeleton-self-test` runs the four skeleton specs, and the login with the
+- `skeleton-self-test` runs the skeleton specs, the API tests, and the login with the
   logged-in spec, against the committed fixture site (`tests/fixtures/site/`)
   on every push and PR, so a change that
   breaks a spec is caught before an Engagement meets it.

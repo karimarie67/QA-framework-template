@@ -94,6 +94,11 @@ the Engagement's actual choice, including any scheduled monitoring.
 ones tagged `@smoke` (`npx playwright test --grep @smoke`). Keep the set
 small enough to finish in minutes.
 
+**API tests** check what the site's own API answers, without a browser:
+`tests/api_tests.spec.js` reads each endpoint in `siteConfig.api` (GET only)
+and checks its status, content type, and the JSON fields it promises. Tagged
+`@regression` and `@api`.
+
 **Manual testing** stays manual when a script can't judge it well:
 exploratory sessions, visual review, accessibility with assistive technology,
 and one-off checks. Each lasting manual check is still a test case, labeled
