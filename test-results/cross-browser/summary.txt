@@ -1,0 +1,13 @@
+== Without QA_BROWSERS: Total: 46 tests in 7 files (unchanged from main: 46)
+== QA_BROWSERS=all: which specs each extra project runs
+production-firefox accessibility_tests.spec.js error_handling_tests.spec.js forms_tests.spec.js smoke_tests.spec.js
+production-iphone accessibility_tests.spec.js error_handling_tests.spec.js forms_tests.spec.js smoke_tests.spec.js
+production-webkit accessibility_tests.spec.js error_handling_tests.spec.js forms_tests.spec.js smoke_tests.spec.js
+staging-firefox accessibility_tests.spec.js error_handling_tests.spec.js forms_tests.spec.js smoke_tests.spec.js
+staging-iphone accessibility_tests.spec.js error_handling_tests.spec.js forms_tests.spec.js smoke_tests.spec.js
+staging-webkit accessibility_tests.spec.js error_handling_tests.spec.js forms_tests.spec.js smoke_tests.spec.js
+projects: 18
+== QA_BROWSERS=chrome: QA_BROWSERS names an unknown browser: chrome (use firefox, webkit, iphone, or all)
+== The skeleton on the fixture, production-firefox, -webkit, -iphone: expected 21, unexpected 0, skipped 0
+== template-check with QA_BROWSERS=all: template-check: PASS
+== npm run test:skeleton (Chromium, as in CI): 19 passed (4.2s)
