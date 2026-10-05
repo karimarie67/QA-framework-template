@@ -1,4 +1,6 @@
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { devices } from '@playwright/test';
 
 /**
@@ -55,6 +57,8 @@ export function buildURL(testInfo, path = '/', options = {}) {
  *   required. The forms spec only reads them; it never types or submits.
  * - a11y.exclude: CSS selectors the accessibility scan skips (third-party
  *   embeds the client doesn't control).
+ * - auth: the site's login, for the logged-in specs (*.auth.spec.js), or null
+ *   when the site has none. See authConfig below.
  */
 export const defaultSiteConfig = {
   // TODO(Engagement): every page to check, from the probe.
@@ -82,6 +86,8 @@ export const defaultSiteConfig = {
     },
   ],
   a11y: { exclude: [] },
+  // TODO(Engagement): the login, if the site has one (see authConfig).
+  auth: null,
 };
 
 /**
@@ -107,6 +113,60 @@ export function loadSiteConfig(env = process.env) {
 }
 
 export const siteConfig = loadSiteConfig();
+
+/**
+ * The site's login, for tests/auth.setup.js and the logged-in specs, or null
+ * when there's none: auth is null, or missing (a QA_SITE_CONFIG file replaces
+ * the whole config, so an older one has no auth key).
+ *
+ * When set: { loginPath, usernameLabel, passwordLabel, submitName,
+ * successText, protectedPath, protectedText }. The fields are found by their
+ * exact label and the button by its name; a login has worked when the page
+ * leaves loginPath and shows successText. protectedPath is a page that needs
+ * the login, showing protectedText. The account itself comes from the
+ * environment (QA_USERNAME and QA_PASSWORD; repo secrets in CI), never from
+ * this config.
+ * @param {object} config
+ */
+export function authConfig(config = siteConfig) {
+  return config?.auth ?? null;
+}
+
+/**
+ * Where tests/auth.setup.js saves an environment's login session, and its
+ * logged-in projects read it: playwright/.auth/<env>.json, git-ignored. Never
+ * commit it, never keep it as evidence: it logs whoever holds it in.
+ * @param {string} env - "staging" or "production"
+ */
+export function authStatePath(env) {
+  return path.join(path.dirname(fileURLToPath(import.meta.url)), 'playwright', '.auth', `${env}.json`);
+}
+
+/**
+ * The login variables that aren't set: names only, never values.
+ * @param {Record<string, string | undefined>} env
+ */
+export function missingCredentials(env = process.env) {
+  return ['QA_USERNAME', 'QA_PASSWORD'].filter(name => !env[name]);
+}
+
+/**
+ * Why the login and the logged-in specs skip, or null when they run:
+ * - no login configured;
+ * - no credentials, on a pull request GitHub gives no secrets (a fork's or
+ *   Dependabot's), which the workflow marks with QA_PR_WITHOUT_SECRETS=true.
+ * Missing credentials anywhere else aren't a skip: the setup fails, naming
+ * the variable (missingCredentials).
+ * @param {object} config
+ * @param {Record<string, string | undefined>} env
+ */
+export function authSkipReason(config = siteConfig, env = process.env) {
+  if (!authConfig(config)) return 'no login configured (siteConfig.auth is not set)';
+  if (missingCredentials(env).length === 2 && env.QA_PR_WITHOUT_SECRETS === 'true') {
+    return "the login secrets aren't available to this pull request (from a fork or Dependabot)";
+  }
+  return null;
+}
 
 /**
  * A page title from siteConfig as Playwright expects it: "/pattern/flags" is a

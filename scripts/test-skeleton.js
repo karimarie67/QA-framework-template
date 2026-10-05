@@ -13,8 +13,13 @@
  * - Runs Playwright with --retries=0 (CI would otherwise allow a retry and
  *   hide a flaky spec), with QA_BASE_URL set to the fixture and
  *   QA_SITE_CONFIG set to its site.json, unless QA_SITE_CONFIG is already set.
+ * - Logs in to the fixture as qa-fixture, with FIXTURE_PASSWORD if the caller
+ *   set it, otherwise a random password for this run; it goes to the server
+ *   and to Playwright (QA_USERNAME, QA_PASSWORD) and is never printed.
  * - With no arguments, runs the four skeleton specs on production and
- *   production-mobile. Spec paths given replace the default specs, and
+ *   production-mobile, and the logged-in spec on production-auth and
+ *   production-auth-mobile (after production-setup, the login). Spec paths
+ *   given replace the default specs, and
  *   --project given replaces the default projects; other arguments (such as
  *   --reporter) pass through. BREAK=<id> passes through to the server.
  * - Never opens the HTML report (Playwright would serve it after a failure
@@ -28,6 +33,7 @@
  */
 
 import { spawn } from 'node:child_process';
+import crypto from 'node:crypto';
 import net from 'node:net';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -42,8 +48,26 @@ export const DEFAULT_SPECS = [
   'tests/error_handling_tests.spec.js',
   'tests/forms_tests.spec.js',
   'tests/accessibility_tests.spec.js',
+  'tests/account.auth.spec.js',
 ];
-export const DEFAULT_PROJECTS = ['production', 'production-mobile'];
+// production-setup (the login) runs too, as the -auth projects' dependency.
+export const DEFAULT_PROJECTS = ['production', 'production-mobile', 'production-auth', 'production-auth-mobile'];
+export const FIXTURE_USERNAME = 'qa-fixture';
+
+/**
+ * The fixture login's account, for the server (FIXTURE_*) and for Playwright
+ * (QA_*): a fixed username, and the caller's FIXTURE_PASSWORD or else a random
+ * one for this run, so no password is ever written down. Never printed.
+ * @param {Record<string, string | undefined>} env
+ * @param {() => string} random
+ */
+export function fixtureLogin(env = process.env, random = () => crypto.randomBytes(18).toString('base64url')) {
+  const secret = env.FIXTURE_PASSWORD || random();
+  return {
+    server: { FIXTURE_USERNAME, FIXTURE_PASSWORD: secret },
+    playwright: { QA_USERNAME: FIXTURE_USERNAME, QA_PASSWORD: secret },
+  };
+}
 
 /**
  * The Playwright arguments for a run: given specs replace the default specs,
@@ -109,10 +133,11 @@ async function main() {
     process.exit(1);
   }
 
+  const login = fixtureLogin();
   const python = process.env.PYTHON || (process.platform === 'win32' ? 'python' : 'python3');
   const server = spawn(python, [path.join(repoRoot, 'tests/fixtures/site/server.py')], {
     cwd: repoRoot,
-    env: { ...process.env, PORT: String(PORT) },
+    env: { ...process.env, ...login.server, PORT: String(PORT) },
     stdio: ['ignore', 'inherit', 'inherit'],
   });
   const stopServer = () => { if (server.exitCode === null && server.signalCode === null) server.kill(); };
@@ -131,6 +156,7 @@ async function main() {
 
   const env = {
     ...process.env,
+    ...login.playwright,
     // Outside CI, Playwright's HTML reporter serves the report after a failure
     // and waits for Ctrl-C, so the run would never end. Never open it here,
     // unless the caller asks (the report is still written to playwright-report/).

@@ -1,13 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { playwrightArgs, exitCodeFor, DEFAULT_SPECS, DEFAULT_PROJECTS } from '../../scripts/test-skeleton.js';
+import { playwrightArgs, exitCodeFor, fixtureLogin, DEFAULT_SPECS, DEFAULT_PROJECTS, FIXTURE_USERNAME } from '../../scripts/test-skeleton.js';
 
 test('playwrightArgs', async t => {
-  await t.test('no arguments: the four skeleton specs on production and production-mobile, no retries', () => {
+  await t.test('no arguments: the skeleton and logged-in specs on the production projects, no retries', () => {
     assert.deepEqual(playwrightArgs([]), [
       'test', ...DEFAULT_SPECS, ...DEFAULT_PROJECTS.map(p => `--project=${p}`), '--retries=0',
     ]);
-    assert.equal(DEFAULT_SPECS.length, 4);
+    assert.equal(DEFAULT_SPECS.length, 5);
+    assert.ok(DEFAULT_SPECS.includes('tests/account.auth.spec.js'));
+    assert.deepEqual(DEFAULT_PROJECTS, ['production', 'production-mobile', 'production-auth', 'production-auth-mobile']);
   });
 
   await t.test('a spec replaces the default specs, and --project replaces the default projects', () => {
@@ -42,5 +44,28 @@ test('exitCodeFor', async t => {
   await t.test('killed by a signal (no code) is a failure', () => {
     assert.equal(exitCodeFor(null, 'SIGKILL'), 1);
     assert.equal(exitCodeFor(null, null), 1);
+  });
+});
+
+test('fixtureLogin', async t => {
+  await t.test("the caller's FIXTURE_PASSWORD goes to the server and to Playwright", () => {
+    const given = 'from-the-caller';
+    const login = fixtureLogin({ FIXTURE_PASSWORD: given }, () => assert.fail('no random value needed'));
+    assert.equal(login.server.FIXTURE_PASSWORD, given);
+    assert.equal(login.playwright.QA_PASSWORD, given);
+  });
+
+  await t.test('without one, a random value for the run, the same on both sides', () => {
+    const a = fixtureLogin({});
+    const b = fixtureLogin({});
+    assert.ok(a.server.FIXTURE_PASSWORD.length >= 20);
+    assert.equal(a.playwright.QA_PASSWORD, a.server.FIXTURE_PASSWORD);
+    assert.notEqual(a.server.FIXTURE_PASSWORD, b.server.FIXTURE_PASSWORD);
+  });
+
+  await t.test('the username is the fixed fixture name on both sides', () => {
+    const login = fixtureLogin({});
+    assert.equal(login.server.FIXTURE_USERNAME, FIXTURE_USERNAME);
+    assert.equal(login.playwright.QA_USERNAME, FIXTURE_USERNAME);
   });
 });

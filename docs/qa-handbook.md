@@ -192,6 +192,7 @@ Decide which of these it is before doing anything else:
 | Reusable flows | `test-helpers.js` (`testPatterns`, `testElementVisibility`, …) |
 | Base URLs per environment | `playwright.config.js` projects (`staging`, `production`, …) |
 | The test | The spec for its area under `tests/` |
+| A test that needs a login | A spec named `*.auth.spec.js`: only the `-auth` projects run it, from the session `tests/auth.setup.js` saves (`siteConfig.auth`). No screenshots or evidence captures in it: a logged-in page can show the account's data |
 
 ### Anatomy
 

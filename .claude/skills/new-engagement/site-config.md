@@ -68,10 +68,49 @@ update `tests/unit/` to match. Two exceptions:
 
 The brief says which accounts the tests may use. Never write a password into
 the repo: the Atlas guard blocks any file write that holds one, and a pushed
-secret can only be removed by rewriting history. A real account's password
-goes in a CI secret, named in the brief. A demo site that prints its password
-on the page (a practice store, say) is read from the page when the test runs,
-so it's never in the repo at all.
+secret can only be removed by rewriting history. A demo site that prints its
+password on the page (a practice store, say) is read from the page when the
+test runs, so it's never in the repo at all.
+
+**A site with a login.** The template logs in once per run per environment
+and runs the specs that need it from the saved session; every other spec
+keeps running logged out.
+
+- **Fill in `siteConfig.auth`** in `config-helper.js`: `loginPath`, the
+  fields' exact labels (`usernameLabel`, `passwordLabel`), the button's name
+  (`submitName`), the text that shows once logged in (`successText`), and a
+  page that needs the login with text it shows (`protectedPath`,
+  `protectedText`). Leave it `null` for a site with no login: the login and
+  the logged-in specs then skip.
+- **Name a spec `*.auth.spec.js`** to run it logged in. Only the `-auth`
+  projects (`staging-auth`, `production-auth`, and their `-mobile`) run those
+  specs, after the `-setup` project's login (`tests/auth.setup.js`); the other
+  projects ignore them. `tests/account.auth.spec.js` checks the session works
+  (TC_AUTH_002) and that the protected page needs it (TC_AUTH_003).
+- **The account is `QA_USERNAME` and `QA_PASSWORD`**: environment variables
+  locally, repo secrets in CI (`functional-tests` passes them to its run step
+  only). Setting the secrets is a **hand-off**: the human sets them, out of
+  band; never ask for the values. A PR from a fork or Dependabot gets no
+  secrets, so its login skips; any other run without them fails, naming the
+  missing variable.
+- **SSO or MFA:** edit the login steps in `tests/auth.setup.js`, keeping its
+  rules: the password entered without `fill` (a fill step's title holds the
+  value, in the HTML report), the field cleared on failure, short step
+  timeouts, and no trace, screenshot, or video.
+- **The login never retries**, so a wrong password is tried once and the
+  account isn't locked out. A command-line `--retries` overrides that, so
+  never pass `--retries` to a run that includes the logged-in projects.
+- **The test account holds no real personal data.** A logged-in page's
+  failure output (the error message, the page snapshot) can show what's on
+  it, and CI's artifacts are public on a public repo.
+- **Session files** (`playwright/.auth/`) are git-ignored: never commit one,
+  keep one as evidence, or upload one. Whoever holds it is logged in.
+- **Evidence from a run against a real account is its JSON and log only:
+  never commit or upload its HTML report or `playwright-output/`.** The setup
+  is built so neither holds the password, but they show the logged-in pages.
+  The template's own CI jobs and the self-test's fixture runs are safe.
+- Sessions can expire: one login per run keeps a run inside one session. A
+  site whose sessions last only minutes needs the login in each spec instead.
 
 ## Phones
 
@@ -150,8 +189,9 @@ too: `template-check` fails while `package.json`, `qa-test.yml`, or
 **Two overrides** let the same specs run against another address without
 editing the config: `QA_BASE_URL` (the staging and production projects'
 base URL) and `QA_SITE_CONFIG` (a JSON Site config). The template uses them
-for its own self-test: `npm run test:skeleton` runs the four specs against a
-small committed fixture site (`tests/fixtures/site/`), and CI's
+for its own self-test: `npm run test:skeleton` runs the four specs, and the
+login with the logged-in spec, against a small committed fixture site
+(`tests/fixtures/site/`, with a random password per run), and CI's
 `skeleton-self-test` job runs that on every push and PR. An Engagement may
 keep the fixture and job as a check of its specs' plumbing, or remove them.
 

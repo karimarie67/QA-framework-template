@@ -54,9 +54,9 @@ npm install
 npx playwright install chromium
 
 npm run test:smoke           # smoke tests, desktop and phone (staging projects)
-npm run test:regression      # regression suite (error handling, forms, accessibility), desktop and phone
+npm run test:regression      # regression suite (error handling, forms, accessibility, logged-in pages), desktop and phone
 npm run test:a11y            # the accessibility scan only, desktop and phone
-npm run test:skeleton        # the four skeleton specs against the committed fixture site
+npm run test:skeleton        # the four skeleton specs, and the login, against the committed fixture site
 npm run test:links           # link checker
 npm run test:unit            # unit tests for the Site config, helpers, scripts, and dashboard
 npm run test:template-check  # structural check: the config imports, the specs are found, and every spec CI names exists
@@ -78,6 +78,10 @@ A new Engagement edits the Site config across a few files, all marked with
 - The skeleton specs under `tests/`: keep what fits the site, rewrite it, or
   remove it. Each has `TODO(Engagement)` markers at the assertions that need
   real content.
+- A site with a login: `siteConfig.auth` in `config-helper.js`, and the test
+  account as `QA_USERNAME` and `QA_PASSWORD` (environment variables locally,
+  repo secrets in CI, never in the repo). The tests log in once per run and
+  run the logged-in specs from the saved session; the rest run logged out.
 
 How to probe the site and fill these in so the tests hold up (phones, live
 sites, logins, proving each test can fail) is in
@@ -87,11 +91,12 @@ sites, logins, proving each test can fail) is in
 
 - `unit-tests` and `template-check` run on every push and PR to
   `main`/`develop`, with no configuration needed.
-- `skeleton-self-test` runs the four skeleton specs against the committed
-  fixture site (`tests/fixtures/site/`) on every push and PR, so a change that
+- `skeleton-self-test` runs the four skeleton specs, and the login with the
+  logged-in spec, against the committed fixture site (`tests/fixtures/site/`)
+  on every push and PR, so a change that
   breaks a spec is caught before an Engagement meets it.
 - The browser e2e jobs (`smoke-tests`, and `functional-tests` for error
-  handling, forms, and accessibility) run the desktop and phone projects, but only via manual `workflow_dispatch` until the Site config is
+  handling, forms, accessibility, and the logged-in pages) run the desktop and phone projects, but only via manual `workflow_dispatch` until the Site config is
   real. The workflow's comments give the conditions an Engagement switches on
   to run them on every push and PR (`/new-engagement` step 5).
 - The `link-check` job runs only on manual dispatch, with `links` or `all`.

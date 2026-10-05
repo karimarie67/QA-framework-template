@@ -20,9 +20,9 @@ rereading this guide.
 | unit | `npm run test:unit` | Unit tests for Site config (config-helper, selectors), coverage map, dashboard generator, board/label setup, and import-test-cases scripts | On every push/PR to main/develop, as part of the automatic gate | verified |
 | template-check | `npm run test:template-check` | Structural smoke check that the template's config/spec files are intact | On every push/PR to main/develop, as part of the automatic gate | verified |
 | smoke | `npm run test:smoke` | Critical-path validation (tests/smoke_tests.spec.js), desktop and phone (`staging`, `staging-mobile`) | Manual dispatch only, pending real Site config (playwright.config.js's placeholder baseURLs) | inferred |
-| regression | `npm run test:regression` | Error-handling, forms (read-only), and accessibility suites, desktop and phone (`staging`, `staging-mobile`) | Manual dispatch only, pending real Site config (playwright.config.js's placeholder baseURLs) | inferred |
+| regression | `npm run test:regression` | Error-handling, forms (read-only), and accessibility suites, desktop and phone (`staging`, `staging-mobile`), and the logged-in spec after the login (`staging-auth`, `staging-auth-mobile`; it skips with no `siteConfig.auth`) | Manual dispatch only, pending real Site config (playwright.config.js's placeholder baseURLs) | inferred |
 | links | `npm run test:links` | Link-checker suite | Manual dispatch only (`links` or `all`), and locally | inferred |
-| skeleton | `npm run test:skeleton` | The four skeleton specs against the committed fixture site (`tests/fixtures/site/`), desktop and phone | On every push/PR to main/develop (`skeleton-self-test` job), and locally | verified |
+| skeleton | `npm run test:skeleton` | The four skeleton specs, and the login with the logged-in spec, against the committed fixture site (`tests/fixtures/site/`), desktop and phone | On every push/PR to main/develop (`skeleton-self-test` job), and locally | verified |
 
 `verified` means the command ran successfully here. `inferred` means configuration names it but setup did not execute it. `unavailable` is an explicit gap.
 

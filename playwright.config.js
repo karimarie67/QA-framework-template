@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import { authStatePath } from './config-helper.js';
 
 // QA_BASE_URL points every staging and production project at one address, for
 // testing the template against its fixture site (npm run test:skeleton) or a
@@ -9,7 +10,40 @@ if (QA_BASE_URL) console.log(`QA_BASE_URL in use: ${QA_BASE_URL}`);
 const site = placeholder => QA_BASE_URL || placeholder;
 
 // The link checker crawls the whole site: it runs only on its own project.
+// Logged-in specs (*.auth.spec.js) run only on the logged-in projects.
 const notTheLinkChecker = /check-links\.spec\.js$/;
+const loggedIn = /\.auth\.spec\.js$/;
+const publicOnly = [notTheLinkChecker, loggedIn];
+
+// The login and the logged-in projects for one environment. They record no
+// trace, screenshot, or video: a trace holds what was typed and the session
+// cookie, and a logged-in page can show the account's data. The login never
+// retries, so a wrong password is tried once and a real account isn't locked
+// out (a --retries flag would override this: never pass one to these).
+const noRecording = { trace: 'off', screenshot: 'off', video: 'off' };
+function loginProjects(env, baseURL) {
+  const session = { storageState: authStatePath(env), baseURL, browserName: 'chromium', headless: true, ...noRecording };
+  return [
+    {
+      name: `${env}-setup`,
+      testMatch: /auth\.setup\.js$/,
+      retries: 0,
+      use: { baseURL, browserName: 'chromium', headless: true, viewport: { width: 1280, height: 720 }, ...noRecording },
+    },
+    {
+      name: `${env}-auth`,
+      testMatch: loggedIn,
+      dependencies: [`${env}-setup`],
+      use: { ...session, viewport: { width: 1280, height: 720 } },
+    },
+    {
+      name: `${env}-auth-mobile`,
+      testMatch: loggedIn,
+      dependencies: [`${env}-setup`],
+      use: { ...devices['Pixel 5'], ...session },
+    },
+  ];
+}
 
 export default defineConfig({
   // Playwright empties its output directory at the start of every run. Keep it
@@ -23,7 +57,7 @@ export default defineConfig({
   projects: [
     {
       name: 'local',
-      testIgnore: notTheLinkChecker,
+      testIgnore: publicOnly,
       use: {
         baseURL: 'http://localhost:8000',
         browserName: 'chromium',
@@ -35,7 +69,7 @@ export default defineConfig({
     
     {
       name: 'staging',
-      testIgnore: notTheLinkChecker,
+      testIgnore: publicOnly,
       use: {
         // TODO(Engagement): replace with your actual staging URL
         baseURL: site('https://staging.example.com'),
@@ -47,7 +81,7 @@ export default defineConfig({
     },
     {
       name: 'production',
-      testIgnore: notTheLinkChecker,
+      testIgnore: publicOnly,
       use: {
         // TODO(Engagement): replace with your actual production URL
         baseURL: site('https://www.example.com'),
@@ -59,7 +93,7 @@ export default defineConfig({
     },
     {
       name: 'staging-mobile',
-      testIgnore: notTheLinkChecker,
+      testIgnore: publicOnly,
       use: {
         // A phone emulation, not a narrow desktop window: many sites send phones
         // a separate layout (for example a menu button instead of the header menu).
@@ -73,7 +107,7 @@ export default defineConfig({
     },
     {
       name: 'production-mobile',
-      testIgnore: notTheLinkChecker,
+      testIgnore: publicOnly,
       use: {
         // A phone emulation, not a narrow desktop window: many sites send phones
         // a separate layout (for example a menu button instead of the header menu).
@@ -85,6 +119,9 @@ export default defineConfig({
         trace: 'on-first-retry',
       },
     },
+    // TODO(Engagement): the same staging and production URLs as above.
+    ...loginProjects('staging', site('https://staging.example.com')),
+    ...loginProjects('production', site('https://www.example.com')),
     // Special project for link checking - no traces/screenshots to avoid thousands of files
     {
       name: 'link-checker',

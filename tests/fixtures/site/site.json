@@ -23,5 +23,14 @@
       ]
     }
   ],
-  "a11y": { "exclude": [] }
+  "a11y": { "exclude": [] },
+  "auth": {
+    "loginPath": "/login",
+    "usernameLabel": "Username",
+    "passwordLabel": "Password",
+    "submitName": "Log in",
+    "successText": "You're logged in",
+    "protectedPath": "/account",
+    "protectedText": "Your account"
+  }
 }
