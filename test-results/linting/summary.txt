@@ -1,0 +1,30 @@
+== Step 1: npm ci, npm run lint, forbidOnly
+npm ci: exit 0
+npm run lint: exit 0
+forbidOnly with CI=true: true
+forbidOnly without CI: false
+== Step 2: the lint can fail
+-- missing-await (tests/probe.spec.js): exit 1, names playwright/missing-playwright-await
+-- test-only (tests/probe.spec.js): exit 1, names playwright/no-focused-test
+-- unused-var (tests/probe.spec.js): exit 1, names no-unused-vars
+-- document-in-script (scripts/probe.js): exit 1, names no-undef
+-- document-in-unit-test (tests/unit/probe.test.js): exit 1, names no-undef
+-- document-in-spec (tests/probe.spec.js): exit 0, no-undef not reported (a spec's page callbacks may use browser globals). A first, one-line version exited 1 on two unrelated warnings (consistent-spacing-between-blocks, expect-expect) and no no-undef; rewritten as a well-formed test.
+== Step 3: no behavior change
+test:unit: exit 0, ℹ pass 343 ℹ fail 0 
+template-check: exit 0, template-check: PASS
+test:skeleton: exit 0, expected 19, unexpected 0, skipped 0, flaky 0
+== Step 4: npm audit
+{"info":0,"low":0,"moderate":2,"high":0,"critical":0,"total":2}
+== Step 5: inline disables, and the Dependabot config
+(three inline disables, each with a reason; the eslint.config.js line is its comment explaining the convention, not a disable)
+eslint.config.js:8:// inline `eslint-disable-next-line <rule> -- <reason>`.
+tests/check-links.spec.js:161:    // eslint-disable-next-line playwright/no-eval -- unchanged: no automatic check runs the link checker to prove a rewrite
+tests/check-links.spec.js:201:    // eslint-disable-next-line playwright/no-wait-for-timeout -- deliberate spacing between requests to a live site
+tests/forms_tests.spec.js:33:      // eslint-disable-next-line playwright/no-networkidle -- waits for the page's own requests, so the test can fail on a write
+dependabot.yml: valid; npm groups in order: ['lint', 'npm-minor-and-patch']
+== Step 6: CI on PR #39
+- 24cd145 (the implementation): Lint, Unit Tests, Template Structural Check, Skeleton Self-Test all success (run 37324009779)
+- eb22c66 (TEMPORARY: test.only on TC_SMOKE_001): Lint failure (playwright/no-focused-test, smoke_tests.spec.js:15), Skeleton Self-Test failure (forbidOnly), Unit Tests success; https://github.com/karimarie67/QA-framework-template/actions/runs/37324366788
+  Deviation from the plan's expected result: Template Structural Check also failed. It runs `playwright test --list` under CI=true, which forbidOnly also refuses. So a stray test.only is caught three times, not twice.
+- fb1de6d (revert commit, no force-push): all four success; https://github.com/karimarie67/QA-framework-template/actions/runs/37324644703
