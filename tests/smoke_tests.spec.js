@@ -12,7 +12,7 @@ const s = selectors.site;
 
 test.describe('Smoke Tests', () => {
 
-  test.only('TC_SMOKE_001 Every page loads with its title and one main heading', {
+  test('TC_SMOKE_001 Every page loads with its title and one main heading', {
     tag: '@smoke',
     annotation: [{ type: 'test_case', description: 'TC_SMOKE_001' }],
   }, async ({ page }, testInfo) => {
