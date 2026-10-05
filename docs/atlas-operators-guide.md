@@ -46,7 +46,7 @@ Atlas runs these commands to prove that a change works.
 | smoke | `npm run test:smoke` | Critical-path validation (tests tagged `@smoke`), desktop and phone (`staging`, `staging-mobile`) | Manual dispatch only, pending real Site config (playwright.config.js's placeholder baseURLs) | inferred |
 | regression | `npm run test:regression` | Tests tagged `@regression`: error-handling, forms (read-only), and accessibility suites, desktop and phone (`staging`, `staging-mobile`), and the logged-in spec after the login (`staging-auth`, `staging-auth-mobile`; it skips with no `siteConfig.auth`) | Manual dispatch only, pending real Site config (playwright.config.js's placeholder baseURLs) | inferred |
 | links | `npm run test:links` | Link-checker suite | Manual dispatch only (`links` or `all`), and locally | inferred |
-| skeleton | `npm run test:skeleton` | The four skeleton specs, and the login with the logged-in spec, against the committed fixture site (`tests/fixtures/site/`), desktop and phone | On every push/PR to main/develop (`skeleton-self-test` job), and locally | verified |
+| skeleton | `npm run test:skeleton` | The skeleton specs, the API tests, and the login with the logged-in spec, against the committed fixture site (`tests/fixtures/site/`), desktop and phone | On every push/PR to main/develop (`skeleton-self-test` job), and locally | verified |
 | lint | `npm run lint` | ESLint over the template's JavaScript (outside `examples/`): recommended rules, and the Playwright plugin's for the specs; fails on any error or warning | On every push/PR to main/develop (`lint` job), and before a PR | verified |
 
 `verified` means setup ran the command here and it worked. `inferred` means the

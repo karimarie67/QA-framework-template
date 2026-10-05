@@ -1,29 +1,66 @@
 {
   "pages": [
-    { "path": "/", "title": "Home | Fixture" },
-    { "path": "/about", "title": "About | Fixture" },
-    { "path": "/contact", "title": "Contact | Fixture" }
+    {
+      "path": "/",
+      "title": "Home | Fixture"
+    },
+    {
+      "path": "/about",
+      "title": "About | Fixture"
+    },
+    {
+      "path": "/contact",
+      "title": "Contact | Fixture"
+    }
   ],
   "nav": [
-    { "name": "Home", "path": "/" },
-    { "name": "About", "path": "/about" },
-    { "name": "Contact", "path": "/contact" }
+    {
+      "name": "Home",
+      "path": "/"
+    },
+    {
+      "name": "About",
+      "path": "/about"
+    },
+    {
+      "name": "Contact",
+      "path": "/contact"
+    }
   ],
-  "footer": { "links": ["Privacy", "Terms"] },
+  "footer": {
+    "links": [
+      "Privacy",
+      "Terms"
+    ]
+  },
   "notFoundPath": "/this-page-does-not-exist",
   "notFoundText": "Page not found",
-  "malformedPaths": ["/%ZZ", "/..%2f..%2f", "/<script>"],
+  "malformedPaths": [
+    "/%ZZ",
+    "/..%2f..%2f",
+    "/<script>"
+  ],
   "forms": [
     {
       "path": "/contact",
       "selector": "form",
       "fields": [
-        { "label": "Name", "type": "text", "required": true },
-        { "label": "Email", "type": "email", "required": true }
+        {
+          "label": "Name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "label": "Email",
+          "type": "email",
+          "required": true
+        }
       ]
     }
   ],
-  "a11y": { "exclude": [] },
+  "a11y": {
+    "exclude": []
+  },
   "auth": {
     "loginPath": "/login",
     "usernameLabel": "Username",
@@ -32,5 +69,28 @@
     "successText": "You're logged in",
     "protectedPath": "/account",
     "protectedText": "Your account"
+  },
+  "api": {
+    "endpoints": [
+      {
+        "path": "/api/health",
+        "status": 200,
+        "contentType": "application/json",
+        "jsonKeys": [
+          "status",
+          "version"
+        ]
+      },
+      {
+        "path": "/api/items",
+        "status": 200,
+        "contentType": "application/json",
+        "itemKeys": [
+          "id",
+          "name"
+        ],
+        "minItems": 1
+      }
+    ]
   }
 }

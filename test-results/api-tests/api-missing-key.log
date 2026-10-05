@@ -1,0 +1,59 @@
+fixture site on http://127.0.0.1:8765 (BREAK=api-missing-key)
+QA_BASE_URL in use: http://127.0.0.1:8765
+
+Running 4 tests using 2 workers
+
+QA_BASE_URL in use: http://127.0.0.1:8765
+QA_BASE_URL in use: http://127.0.0.1:8765
+  -  2 [production-mobile] › tests/api_tests.spec.js:28:3 › API Tests › TC_API_001 Every endpoint answers with its expected status and content type @regression @api
+  -  3 [production-mobile] › tests/api_tests.spec.js:41:3 › API Tests › TC_API_002 Every JSON endpoint returns the fields it promises @regression @api
+  ✓  1 [production] › tests/api_tests.spec.js:28:3 › API Tests › TC_API_001 Every endpoint answers with its expected status and content type @regression @api (356ms)
+  ✘  4 [production] › tests/api_tests.spec.js:41:3 › API Tests › TC_API_002 Every JSON endpoint returns the fields it promises @regression @api (602ms)
+
+
+  1) [production] › tests/api_tests.spec.js:41:3 › API Tests › TC_API_002 Every JSON endpoint returns the fields it promises @regression @api 
+
+    Error: /api/items item 0 has the field "name"
+
+    expect(received).toHaveProperty(path)
+
+    Expected path: "name"
+    Received path: []
+
+    Received value: {"id": 1}
+
+      58 |         body.forEach((item, i) => {
+      59 |           for (const key of e.itemKeys) {
+    > 60 |             expect.soft(item, `${e.path} item ${i} has the field "${key}"`).toHaveProperty(key);
+         |                                                                             ^
+      61 |           }
+      62 |         });
+      63 |       }
+        at forEach (/Users/kskinner/QA-framework-template/tests/api_tests.spec.js:60:77)
+        at /Users/kskinner/QA-framework-template/tests/api_tests.spec.js:58:14
+
+    Error: /api/items item 1 has the field "name"
+
+    expect(received).toHaveProperty(path)
+
+    Expected path: "name"
+    Received path: []
+
+    Received value: {"id": 2}
+
+      58 |         body.forEach((item, i) => {
+      59 |           for (const key of e.itemKeys) {
+    > 60 |             expect.soft(item, `${e.path} item ${i} has the field "${key}"`).toHaveProperty(key);
+         |                                                                             ^
+      61 |           }
+      62 |         });
+      63 |       }
+        at forEach (/Users/kskinner/QA-framework-template/tests/api_tests.spec.js:60:77)
+        at /Users/kskinner/QA-framework-template/tests/api_tests.spec.js:58:14
+
+    Error Context: playwright-output/api_tests-API-Tests-TC-API-9672f-urns-the-fields-it-promises-production/error-context.md
+
+  1 failed
+    [production] › tests/api_tests.spec.js:41:3 › API Tests › TC_API_002 Every JSON endpoint returns the fields it promises @regression @api 
+  2 skipped
+  1 passed (1.3s)

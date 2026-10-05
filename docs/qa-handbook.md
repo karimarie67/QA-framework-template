@@ -98,6 +98,11 @@ the Engagement's actual choice, including any scheduled monitoring.
 ones tagged `@smoke` (`npx playwright test --grep @smoke`). Keep the set
 small enough to finish in minutes.
 
+**API tests** check what the site's own API answers, without a browser:
+`tests/api_tests.spec.js` reads each endpoint in `siteConfig.api` (GET only)
+and checks its status, content type, and the JSON fields it promises. Tagged
+`@regression` and `@api`.
+
 **Other browsers**: the projects run Chromium on desktop and a Pixel 5
 emulation. When the brief asks, `QA_BROWSERS` adds Firefox, WebKit (Safari's
 engine), and an iPhone emulation for the public specs (see

@@ -16,7 +16,7 @@
  * - Logs in to the fixture as qa-fixture, with FIXTURE_PASSWORD if the caller
  *   set it, otherwise a random password for this run; it goes to the server
  *   and to Playwright (QA_USERNAME, QA_PASSWORD) and is never printed.
- * - With no arguments, runs the four skeleton specs on production and
+ * - With no arguments, runs the five skeleton specs on production and
  *   production-mobile, and the logged-in spec on production-auth and
  *   production-auth-mobile (after production-setup, the login). Spec paths
  *   given replace the default specs, and
@@ -51,6 +51,7 @@ export const DEFAULT_SPECS = [
   'tests/forms_tests.spec.js',
   'tests/accessibility_tests.spec.js',
   'tests/account.auth.spec.js',
+  'tests/api_tests.spec.js',
 ];
 // production-setup (the login) runs too, as the -auth projects' dependency.
 export const DEFAULT_PROJECTS = ['production', 'production-mobile', 'production-auth', 'production-auth-mobile'];

@@ -172,7 +172,7 @@ When the tests run against the live site, keep the load gentle:
 
 ## Skeleton specs
 
-The template ships four site-agnostic specs, driven by one `siteConfig` block
+The template ships five site-agnostic specs, driven by one `siteConfig` block
 in `config-helper.js`:
 
 | Spec | Checks |
@@ -181,12 +181,18 @@ in `config-helper.js`:
 | `error_handling_tests.spec.js` | An unknown address gets a 404 with a not-found message; a malformed address never causes a 5xx |
 | `forms_tests.spec.js` | Each form's fields have their label, type, and required state. **Read-only**: it never types or submits, and fails if a request other than GET or HEAD goes to the site's own origin |
 | `accessibility_tests.spec.js` | An axe-core scan of every page against WCAG 2.1 A and AA: fails on serious and critical violations, and lists the rest |
+| `api_tests.spec.js` | Each API endpoint in `siteConfig.api` answers with its status and content type, and each JSON one returns the fields it promises. **Read-only** (GET, spaced out), on the desktop project only. Skips when `siteConfig.api` is `null` |
 
 Fill in `siteConfig` from the probe: `pages` (path and title; a title in
 slashes is a pattern), `nav` and `footer.links` (by accessible name),
 `notFoundPath` and `notFoundText`, `malformedPaths`, `forms` (path, a CSS
-`selector`, and fields by exact label), and `a11y.exclude` (third-party
-embeds). An empty list fails its test on purpose, so a test can't pass
+`selector`, and fields by exact label), `a11y.exclude` (third-party
+embeds), and `api.endpoints` if the site has an API to test (each GET
+endpoint's path, status, content type, and the JSON fields it promises:
+`jsonKeys` for an object, `itemKeys` and `minItems` for a list). Find the
+endpoints in the browser's network panel while using the site, or in the
+client's API docs; test only what the brief allows, and never an endpoint
+that changes data. An empty list fails its test on purpose, so a test can't pass
 checking nothing. Then extend the specs with the site's own checks, or add
 specs, by its areas. Give each one suite tag (`@smoke` or `@regression`,
 usually on its `describe`), since CI selects tests by it; see the handbook's
@@ -203,7 +209,7 @@ the npm scripts select by tag, so they need no edit.
 **Two overrides** let the same specs run against another address without
 editing the config: `QA_BASE_URL` (the staging and production projects'
 base URL) and `QA_SITE_CONFIG` (a JSON Site config). The template uses them
-for its own self-test: `npm run test:skeleton` runs the four specs, and the
+for its own self-test: `npm run test:skeleton` runs the five specs, and the
 login with the logged-in spec, against a small committed fixture site
 (`tests/fixtures/site/`, with a random password per run), and CI's
 `skeleton-self-test` job runs that on every push and PR. An Engagement may

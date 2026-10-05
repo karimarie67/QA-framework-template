@@ -1,0 +1,550 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/25.7.0/bin/node",
+      "/Users/kskinner/QA-framework-template/node_modules/@playwright/test/cli.js",
+      "test",
+      "tests/api_tests.spec.js",
+      "--project=production",
+      "--project=production-mobile",
+      "--retries=0",
+      "--reporter=list,json"
+    ],
+    "configFile": "/Users/kskinner/QA-framework-template/playwright.config.js",
+    "rootDir": "/Users/kskinner/QA-framework-template/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "local",
+        "name": "local",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "staging",
+        "name": "staging",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "production",
+        "name": "production",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "staging-mobile",
+        "name": "staging-mobile",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "production-mobile",
+        "name": "production-mobile",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [
+          "/check-links\\.spec\\.js$/",
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "testMatch": [
+          "**/*.spec.js"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "staging-setup",
+        "name": "staging-setup",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/auth\\.setup\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "staging-auth",
+        "name": "staging-auth",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "staging-auth-mobile",
+        "name": "staging-auth-mobile",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "production-setup",
+        "name": "production-setup",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/auth\\.setup\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "production-auth",
+        "name": "production-auth",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "production-auth-mobile",
+        "name": "production-auth-mobile",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/\\.auth\\.spec\\.js$/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "link-checker",
+        "name": "link-checker",
+        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/check-links\\.spec\\.js$/"
+        ],
+        "timeout": 1800000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 5,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "api_tests.spec.js",
+      "file": "api_tests.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "API Tests",
+          "file": "api_tests.spec.js",
+          "line": 25,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC_API_001 Every endpoint answers with its expected status and content type",
+              "ok": true,
+              "tags": [
+                "regression",
+                "api"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_API_001",
+                      "location": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/api_tests.spec.js",
+                        "line": 28,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production",
+                  "projectName": "production",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 368,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T15:37:36.852Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_API_001",
+                          "location": {
+                            "file": "/Users/kskinner/QA-framework-template/tests/api_tests.spec.js",
+                            "line": 28,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4ce67832ff20e3d0634f-3b37cbdcd2224d66f148",
+              "file": "api_tests.spec.js",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "TC_API_002 Every JSON endpoint returns the fields it promises",
+              "ok": true,
+              "tags": [
+                "regression",
+                "api"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_API_002",
+                      "location": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/api_tests.spec.js",
+                        "line": 41,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production",
+                  "projectName": "production",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 600,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T15:37:37.241Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_API_002",
+                          "location": {
+                            "file": "/Users/kskinner/QA-framework-template/tests/api_tests.spec.js",
+                            "line": 41,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4ce67832ff20e3d0634f-f6d6a03a96f32d2ad684",
+              "file": "api_tests.spec.js",
+              "line": 41,
+              "column": 3
+            },
+            {
+              "title": "TC_API_001 Every endpoint answers with its expected status and content type",
+              "ok": true,
+              "tags": [
+                "regression",
+                "api"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_API_001",
+                      "location": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/api_tests.spec.js",
+                        "line": 28,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "type": "skip",
+                      "description": "Request-only check: runs once, on the desktop project",
+                      "location": {
+                        "file": "/Users/kskinner/QA-framework-template/test-helpers.js",
+                        "line": 220,
+                        "column": 12
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "production-mobile",
+                  "projectName": "production-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "skipped",
+                      "duration": 8,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T15:37:36.859Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_API_001",
+                          "location": {
+                            "file": "/Users/kskinner/QA-framework-template/tests/api_tests.spec.js",
+                            "line": 28,
+                            "column": 3
+                          }
+                        },
+                        {
+                          "type": "skip",
+                          "description": "Request-only check: runs once, on the desktop project",
+                          "location": {
+                            "file": "/Users/kskinner/QA-framework-template/test-helpers.js",
+                            "line": 220,
+                            "column": 12
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4ce67832ff20e3d0634f-ea0c070436f23fcb6f00",
+              "file": "api_tests.spec.js",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "TC_API_002 Every JSON endpoint returns the fields it promises",
+              "ok": true,
+              "tags": [
+                "regression",
+                "api"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_API_002",
+                      "location": {
+                        "file": "/Users/kskinner/QA-framework-template/tests/api_tests.spec.js",
+                        "line": 41,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "type": "skip",
+                      "description": "Request-only check: runs once, on the desktop project",
+                      "location": {
+                        "file": "/Users/kskinner/QA-framework-template/test-helpers.js",
+                        "line": 220,
+                        "column": 12
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "production-mobile",
+                  "projectName": "production-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "skipped",
+                      "duration": 1,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T15:37:36.886Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_API_002",
+                          "location": {
+                            "file": "/Users/kskinner/QA-framework-template/tests/api_tests.spec.js",
+                            "line": 41,
+                            "column": 3
+                          }
+                        },
+                        {
+                          "type": "skip",
+                          "description": "Request-only check: runs once, on the desktop project",
+                          "location": {
+                            "file": "/Users/kskinner/QA-framework-template/test-helpers.js",
+                            "line": 220,
+                            "column": 12
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4ce67832ff20e3d0634f-ed96196cd07e3fe711c8",
+              "file": "api_tests.spec.js",
+              "line": 41,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-05T15:37:36.530Z",
+    "duration": 1336.53,
+    "expected": 2,
+    "skipped": 2,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

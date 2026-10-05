@@ -59,6 +59,12 @@ export function buildURL(testInfo, path = '/', options = {}) {
  *   embeds the client doesn't control).
  * - auth: the site's login, for the logged-in specs (*.auth.spec.js), or null
  *   when the site has none. See authConfig below.
+ * - api: the site's API, for tests/api_tests.spec.js, or null when there's
+ *   none to test. `endpoints` lists each GET endpoint: its path, the status
+ *   and content type it answers with, and for JSON the fields it promises:
+ *   `jsonKeys` for an object's top-level fields, or `itemKeys` (with
+ *   `minItems`) for each item of an array. The API spec only reads (GET); it
+ *   never sends data.
  */
 export const defaultSiteConfig = {
   // TODO(Engagement): every page to check, from the probe.
@@ -88,6 +94,9 @@ export const defaultSiteConfig = {
   a11y: { exclude: [] },
   // TODO(Engagement): the login, if the site has one (see authConfig).
   auth: null,
+  // TODO(Engagement): the API's GET endpoints, if the site has an API, e.g.
+  //   { endpoints: [{ path: '/api/health', status: 200, contentType: 'application/json', jsonKeys: ['status'] }] }
+  api: null,
 };
 
 /**

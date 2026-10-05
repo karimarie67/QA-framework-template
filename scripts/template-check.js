@@ -42,6 +42,7 @@ const EXPECTED_SPECS = [
   'check-links.spec.js',
   'account.auth.spec.js',
   'auth.setup.js',
+  'api_tests.spec.js',
 ];
 
 async function checkModuleImports() {

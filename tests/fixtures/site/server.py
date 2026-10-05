@@ -26,6 +26,9 @@ checks (see the plan, template issue #30):
   no-submit      /login has no "Log in" button            TC_AUTH_001 (with the field filled)
   account-public /account opens without the session       TC_AUTH_003
   session-ignored /account ignores the session (the login still works) TC_AUTH_002
+  api-500        /api/health answers 500                  TC_API_001
+  api-html       /api/items answers HTML, not JSON        TC_API_001 (and TC_API_002: not JSON)
+  api-missing-key /api/items' items lack "name"           TC_API_002 (TC_API_001 still passes)
 
 The login (/login) accepts FIXTURE_USERNAME (default qa-fixture) and
 FIXTURE_PASSWORD from the environment; with no FIXTURE_PASSWORD, every login
@@ -34,6 +37,7 @@ session cookie and goes to /welcome, which doesn't need it; /account does.
 """
 
 import hmac
+import json
 import os
 import secrets
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -172,10 +176,32 @@ def login_matches(fields):
     return hmac.compare_digest(name, LOGIN_NAME) and hmac.compare_digest(given, LOGIN_SECRET)
 
 
+def api_health():
+    return 500 if BREAK == "api-500" else 200, {"status": "ok", "version": "1.0"}
+
+
+def api_items():
+    items = [{"id": 1, "name": "First"}, {"id": 2, "name": "Second"}]
+    if BREAK == "api-missing-key":
+        items = [{"id": i["id"]} for i in items]
+    return 200, items
+
+
+API_ROUTES = {"/api/health": api_health, "/api/items": api_items}
+
 ROUTES = {"/": home, "/about": about, "/contact": contact, "/login": login, "/welcome": welcome}
 
 
 class Handler(BaseHTTPRequestHandler):
+    def send_json(self, status, data):
+        body = json.dumps(data).encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        if self.command != "HEAD":
+            self.wfile.write(body)
+
     def send_html(self, status, html):
         body = html.encode("utf-8")
         self.send_response(status)
@@ -193,6 +219,11 @@ class Handler(BaseHTTPRequestHandler):
             return self.send_html(400, page("Bad request", "Bad request", ""))
         if path == "/about" and BREAK == "page-404":
             return self.send_html(404, not_found())
+        if path in API_ROUTES:
+            status, data = API_ROUTES[path]()
+            if path == "/api/items" and BREAK == "api-html":
+                return self.send_html(status, page("Items", "Items", "<p>Not JSON.</p>"))
+            return self.send_json(status, data)
         if path == "/account":
             logged_in = f"session={SESSION}" in (self.headers.get("Cookie") or "")
             if BREAK == "account-public" or (logged_in and BREAK != "session-ignored"):
