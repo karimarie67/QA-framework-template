@@ -51,6 +51,9 @@ user story ──► test case(s) ──► automated test ──► CI run ─�
 4. **CI and dashboard**: the workflow runs the tests and publishes results
    to `dashboards/qa-metrics.md`.
 
+A client that tracks work in Jira keeps the same chain, with the stories,
+test cases, and bugs in Jira: see [`jira.md`](./jira.md).
+
 ### Test case IDs
 
 ```

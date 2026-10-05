@@ -117,6 +117,8 @@ sites, logins, proving each test can fail) is in
   bugs and severity, and writing and maintaining automated tests.
 - [Test management](./docs/github_test_management.md): stories, Test Case
   issues, labels, and the board.
+- [Running an Engagement with Jira](./docs/jira.md): for a client who tracks
+  work in Jira instead of GitHub Issues.
 - [`QA-jahnelgroup`](https://github.com/karimarie67/QA-jahnelgroup): a
   finished Engagement built with `/new-engagement`, to see the end result.
 

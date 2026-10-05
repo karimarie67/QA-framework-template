@@ -79,6 +79,7 @@ for this product:
 
 - **Chat:** <channel>
 - **Access needed:** <repos, environments, dashboards; who grants it>
+- **Tracker:** <GitHub Issues and this repo's project board (the default), or the client's Jira: the site and project key, the issue types for stories, test cases and bugs, how automation status is recorded, and the status mapping (see `docs/jira.md`)>
 
 ## Kickoff checklist
 
