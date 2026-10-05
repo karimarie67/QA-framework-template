@@ -22,8 +22,9 @@ This handbook deliberately leaves two kinds of content out:
 | Commands, and what counts as proof of work | [`docs/agents/testing.md`](./agents/testing.md) |
 | How to run the tests day to day | [`README.md`](../README.md) |
 
-The original Boost.org handbook this was extracted from lives in
-[`examples/boost/QA_handbook.md`](../examples/boost/QA_handbook.md).
+The original Boost.org handbook this was extracted from is kept in the
+repository's history:
+[`examples/boost/QA_handbook.md`](https://github.com/karimarie67/QA-framework-template/blob/76f455d8c78d58589a7ff4e00c26c1cbda07be7d/examples/boost/QA_handbook.md).
 
 ---
 

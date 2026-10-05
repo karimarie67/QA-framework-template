@@ -45,7 +45,7 @@ the setup. The process itself is in the [QA Handbook](./docs/qa-handbook.md).
 | `scripts/` | Label and board setup, the coverage map, and the `template-check` structural check |
 | `test-results/` | Committed proof of work, one folder per test. Playwright's own run output goes to `playwright-output/`, which isn't committed |
 | `.claude/skills/` | The `/new-engagement` and `/import-test-cases` skills |
-| `examples/` | A past Engagement's documents and test case spreadsheets, for reference |
+| `examples/` | Sample test case spreadsheets from a past Engagement, for trying `/import-test-cases` |
 
 ## Quick start
 
