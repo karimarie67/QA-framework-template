@@ -220,6 +220,9 @@ export async function politeGet(request, url, options = {}) {
  */
 export function skipOnPhone(testInfo) {
   const use = testInfo.project.use || {};
-  const desktopChromium = !use.isMobile && (use.browserName ?? 'chromium') === 'chromium' && !testInfo.project.name.endsWith('-mobile');
+  // Playwright's device presets ('Desktop Firefox') name the browser in
+  // defaultBrowserType, not browserName.
+  const browser = use.browserName ?? use.defaultBrowserType ?? 'chromium';
+  const desktopChromium = !use.isMobile && browser === 'chromium' && !testInfo.project.name.endsWith('-mobile');
   testInfo.skip(!desktopChromium, 'Request-only check: runs once, on the desktop Chromium project');
 }

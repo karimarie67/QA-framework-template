@@ -71,6 +71,14 @@ test('skipOnPhone', async t => {
     }
   });
 
+  await t.test("skips on a device preset's browser (defaultBrowserType), as the QA_BROWSERS projects use", () => {
+    for (const [name, use] of [['production-firefox', { defaultBrowserType: 'firefox' }], ['production-webkit', { defaultBrowserType: 'webkit' }]]) {
+      const i = info(name, use);
+      skipOnPhone(i);
+      assert.equal(i.calls[0][0], true, name);
+    }
+  });
+
   await t.test('runs on desktop Chromium, named or by default', () => {
     const i = info('production', { browserName: 'chromium' });
     skipOnPhone(i);
