@@ -102,5 +102,24 @@
       "TC_FORM_001 Every form field has its label, type, and required state"
     ],
     "runNumber": "68"
+  },
+  {
+    "date": "2026-10-05",
+    "time": "2026-10-05T14:41:18.275Z",
+    "total": 19,
+    "passed": 0,
+    "failed": 14,
+    "passRate": 0,
+    "duration": 10.749000000000002,
+    "failedTestNames": [
+      "TC_SMOKE_001 Every page loads with its title and one main heading",
+      "TC_SMOKE_002 The header menu links reach their pages",
+      "TC_SMOKE_003 The footer is there, with its links",
+      "TC_A11Y_001 No page has a serious or critical accessibility violation",
+      "TC_ERROR_001 An unknown address shows a not-found page",
+      "TC_ERROR_002 A malformed address never causes a server error",
+      "TC_FORM_001 Every form field has its label, type, and required state"
+    ],
+    "runNumber": "85"
   }
 ]

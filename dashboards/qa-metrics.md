@@ -2,8 +2,8 @@
 
 > **Automated Quality Gate Report**
 
-**Last Updated:** Monday, October 5, 2026 at 9:06 AM | **Env:** STAGING | **Branch:** feat/logged-in-apps
-**Run:** [#68](https://github.com/karimarie67/QA-framework-template/actions/runs/37314075829)
+**Last Updated:** Monday, October 5, 2026 at 10:41 AM | **Env:** STAGING | **Branch:** dependabot/github_actions/actions-e674aeb039
+**Run:** [#85](https://github.com/karimarie67/QA-framework-template/actions/runs/37326543954)
 
 ---
 
@@ -12,8 +12,8 @@
 | Metric | Current Value | Status |
 |--------|---------------|----------------|
 | **Pass Rate** | **0.0%** | 🔴 Attention |
-| **Duration** | **6.0s** | ✅ Good |
-| **Total Tests** | 13 | 0 Pass (0 flaky) / 8 Fail / 5 Skipped |
+| **Duration** | **10.7s** | ✅ Good |
+| **Total Tests** | 19 | 0 Pass (0 flaky) / 14 Fail / 5 Skipped |
 | **Functional** | 13 Tests | ✅ Active |
 
 ---
@@ -22,9 +22,9 @@
 
 | Project | Pass Rate | Status |
 |---|---|---|
-| **staging-setup** | NaN% | 🔴 |
 | **staging** | 0.0% | 🔴 |
 | **staging-mobile** | 0.0% | 🔴 |
+| **staging-setup** | NaN% | 🔴 |
 | **staging-auth** | NaN% | 🔴 |
 | **staging-auth-mobile** | NaN% | 🔴 |
 
@@ -34,7 +34,14 @@
 ## 🔍 Detailed Test Results
 
 ### 🔥 Smoke Tests
-> *No tests found in this category* 
+| Test Name | Status | Duration | Project |
+|-----------|--------|----------|---------|
+| TC_SMOKE_001 Every page loads with its title and one main heading | ❌ failed | <1s ×2 | staging |
+| TC_SMOKE_002 The header menu links reach their pages | ❌ failed | <1s ×2 | staging |
+| TC_SMOKE_003 The footer is there, with its links | ❌ failed | <1s ×2 | staging |
+| TC_SMOKE_001 Every page loads with its title and one main heading | ❌ failed | <1s ×2 | staging-mobile |
+| TC_SMOKE_002 The header menu links reach their pages | ❌ failed | <1s ×2 | staging-mobile |
+| TC_SMOKE_003 The footer is there, with its links | ❌ failed | <1s ×2 | staging-mobile |
 
 
 ### 🧩 Functional Tests
@@ -60,6 +67,7 @@
 ## 📈 History (Last 10 Runs)
 | Date | Pass Rate | Duration | Failures |
 |------|-----------|----------|----------|
+| Oct 5 | 0.0% | 10.7s | 14 |
 | Oct 5 | 0.0% | 6.0s | 8 |
 | Oct 2 | 0.0% | 5.8s | 8 |
 | Oct 1 | 12.9% | 2m 48s | 27 |
