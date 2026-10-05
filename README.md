@@ -56,6 +56,7 @@ npx playwright install chromium
 npm run test:smoke           # smoke tests, desktop and phone (staging projects)
 npm run test:regression      # regression suite (error handling, forms, accessibility, logged-in pages), desktop and phone
 npm run test:a11y            # the accessibility scan only, desktop and phone
+QA_BROWSERS=all npx playwright test --project=staging-firefox --project=staging-webkit --project=staging-iphone  # other browsers, opt-in
 npm run test:skeleton        # the four skeleton specs, and the login, against the committed fixture site
 npm run test:links           # link checker
 npm run test:unit            # unit tests for the Site config, helpers, scripts, and dashboard

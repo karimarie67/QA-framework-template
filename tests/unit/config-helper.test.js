@@ -15,6 +15,8 @@ import {
   authConfig,
   missingCredentials,
   authSkipReason,
+  EXTRA_BROWSERS,
+  parseBrowsers,
 } from '../../config-helper.js';
 
 // Minimal fake TestInfo shape - these functions only ever read
@@ -181,6 +183,34 @@ test('authConfig, missingCredentials, authSkipReason (the login)', async t => {
 
   await t.test('one variable missing on a PR without secrets is not a skip', () => {
     assert.equal(authSkipReason(login, { ...withVars('QA_USERNAME'), QA_PR_WITHOUT_SECRETS: 'true' }), null);
+  });
+});
+
+test('parseBrowsers (QA_BROWSERS)', async t => {
+  await t.test('unset or empty means none', () => {
+    assert.deepEqual(parseBrowsers(undefined), []);
+    assert.deepEqual(parseBrowsers(''), []);
+    assert.deepEqual(parseBrowsers(' , '), []);
+  });
+
+  await t.test('names, trimmed, any case, each once', () => {
+    assert.deepEqual(parseBrowsers('firefox, WebKit,firefox'), ['firefox', 'webkit']);
+  });
+
+  await t.test('all means every opt-in browser', () => {
+    assert.deepEqual(parseBrowsers('all'), ['firefox', 'webkit', 'iphone']);
+    assert.deepEqual(Object.keys(EXTRA_BROWSERS), ['firefox', 'webkit', 'iphone']);
+  });
+
+  await t.test('an unknown name throws, naming the valid ones', () => {
+    assert.throws(() => parseBrowsers('firefox,chrome'), /unknown browser: chrome \(use firefox, webkit, iphone, or all\)/);
+  });
+
+  await t.test('each opt-in browser is the engine it says', () => {
+    assert.equal(EXTRA_BROWSERS.firefox.defaultBrowserType, 'firefox');
+    assert.equal(EXTRA_BROWSERS.webkit.defaultBrowserType, 'webkit');
+    assert.equal(EXTRA_BROWSERS.iphone.defaultBrowserType, 'webkit');
+    assert.equal(EXTRA_BROWSERS.iphone.isMobile, true);
   });
 });
 

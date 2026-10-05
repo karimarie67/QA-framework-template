@@ -192,6 +192,33 @@ export function requireEntries(name, list) {
 }
 
 /**
+ * The opt-in browsers (QA_BROWSERS): each adds a project per environment
+ * (`<env>-firefox`, `<env>-webkit`, `<env>-iphone`), running the public specs.
+ * Install them first: `npx playwright install firefox webkit`.
+ */
+export const EXTRA_BROWSERS = {
+  firefox: devices['Desktop Firefox'],
+  webkit: devices['Desktop Safari'],
+  iphone: devices['iPhone 13'],
+};
+
+/**
+ * QA_BROWSERS, as a list of EXTRA_BROWSERS names: "firefox,webkit", "all",
+ * or unset/empty for none. An unknown name throws, naming the valid ones.
+ * @param {string | undefined} value
+ * @returns {string[]}
+ */
+export function parseBrowsers(value) {
+  const names = (value || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+  if (names.includes('all')) return Object.keys(EXTRA_BROWSERS);
+  const unknown = names.filter(n => !(n in EXTRA_BROWSERS));
+  if (unknown.length) {
+    throw new Error(`QA_BROWSERS names an unknown browser: ${unknown.join(', ')} (use ${Object.keys(EXTRA_BROWSERS).join(', ')}, or all)`);
+  }
+  return [...new Set(names)];
+}
+
+/**
  * Test data constants
  */
 export const testData = {
