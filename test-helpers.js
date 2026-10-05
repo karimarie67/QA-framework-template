@@ -212,10 +212,14 @@ export async function politeGet(request, url, options = {}) {
 }
 
 /**
- * Skip a request-only test on the phone projects: its result can't differ by
- * device, and running it twice doubles the load on the live site.
+ * Skip a request-only test everywhere but the desktop Chromium project: its
+ * result can't differ by device or browser, and running it on each one
+ * multiplies the load on the live site. (Phones, and the opt-in Firefox,
+ * WebKit, and iPhone projects, skip it.)
  * @param {import('@playwright/test').TestInfo} testInfo
  */
 export function skipOnPhone(testInfo) {
-  testInfo.skip(testInfo.project.name.endsWith('-mobile'), 'Request-only check: runs once, on the desktop project');
+  const use = testInfo.project.use || {};
+  const desktopChromium = !use.isMobile && (use.browserName ?? 'chromium') === 'chromium' && !testInfo.project.name.endsWith('-mobile');
+  testInfo.skip(!desktopChromium, 'Request-only check: runs once, on the desktop Chromium project');
 }

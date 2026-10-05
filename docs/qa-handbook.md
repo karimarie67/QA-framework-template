@@ -22,8 +22,9 @@ This handbook deliberately leaves two kinds of content out:
 | Commands, and what counts as proof of work | [`docs/agents/testing.md`](./agents/testing.md) |
 | How to run the tests day to day | [`README.md`](../README.md) |
 
-The original Boost.org handbook this was extracted from lives in
-[`examples/boost/QA_handbook.md`](../examples/boost/QA_handbook.md).
+The original Boost.org handbook this was extracted from is kept in the
+repository's history:
+[`examples/boost/QA_handbook.md`](https://github.com/karimarie67/QA-framework-template/blob/76f455d/examples/boost/QA_handbook.md).
 
 ---
 
@@ -50,6 +51,9 @@ user story ──► test case(s) ──► automated test ──► CI run ─�
    dashboard can trace it back.
 4. **CI and dashboard**: the workflow runs the tests and publishes results
    to `dashboards/qa-metrics.md`.
+
+A client that tracks work in Jira keeps the same chain, with the stories,
+test cases, and bugs in Jira: see [`jira.md`](./jira.md).
 
 ### Test case IDs
 
@@ -93,6 +97,11 @@ the Engagement's actual choice, including any scheduled monitoring.
 **Smoke tests** are the few tests that prove the critical paths work: the
 ones tagged `@smoke` (`npx playwright test --grep @smoke`). Keep the set
 small enough to finish in minutes.
+
+**Other browsers**: the projects run Chromium on desktop and a Pixel 5
+emulation. When the brief asks, `QA_BROWSERS` adds Firefox, WebKit (Safari's
+engine), and an iPhone emulation for the public specs (see
+`site-config.md`, "Phones").
 
 **Manual testing** stays manual when a script can't judge it well:
 exploratory sessions, visual review, accessibility with assistive technology,
