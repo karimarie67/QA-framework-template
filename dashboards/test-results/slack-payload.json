@@ -1,1 +1,1 @@
-{"text":"QA alert: 14 failed, 0 flaky on fix/dashboard-single-artifact","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"🚨 QA alert: *14 failed* on `fix/dashboard-single-artifact`\n<https://github.com/karimarie67/QA-framework-template/actions/runs/37383121029|View the run>"}}]}
+{"text":"QA alert: 8 failed, 0 flaky on fix/dashboard-single-artifact","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"🚨 QA alert: *8 failed* on `fix/dashboard-single-artifact`\n<https://github.com/karimarie67/QA-framework-template/actions/runs/37381291437|View the run>"}}]}
