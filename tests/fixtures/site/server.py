@@ -32,6 +32,7 @@ checks (see the plan, template issue #30):
   slow-page      /about takes 1.5 s to answer             TC_PERF_001 (TTFB, and LCP)
   layout-shift   / pushes its content down after loading  TC_PERF_001 (CLS)
   late-content   /'s main content appears after 0.7 s     TC_PERF_001 (LCP)
+  restyle        the header and footer change colour      TC_VISUAL_001 (every other test passes)
 
 The login (/login) accepts FIXTURE_USERNAME (default qa-fixture) and
 FIXTURE_PASSWORD from the environment; with no FIXTURE_PASSWORD, every login
@@ -82,6 +83,9 @@ MENU_SCRIPT = """
 """
 
 
+RESTYLE = "header { background: #b00020; } footer { background: #0a5; color: #fff; }"
+
+
 def page(title, h1, body, extra_head=""):
     lang = ' lang="en" xml:lang="fr"' if BREAK == "lang-mismatch" else ' lang="en"'
     about_href = "/missing" if BREAK == "nav-404" else "/about"
@@ -95,7 +99,7 @@ def page(title, h1, body, extra_head=""):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title} | Fixture</title>
-<style>{STYLE}</style>
+<style>{STYLE}{RESTYLE if BREAK == "restyle" else ""}</style>
 {extra_head}
 </head>
 <body>

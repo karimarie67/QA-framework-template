@@ -1,0 +1,15 @@
+== Baselines made with npm run test:visual:update (aarch64), from the intact fixture
+   about-production-linux.png
+   about-production-mobile-linux.png
+   home-production-linux.png
+   home-production-mobile-linux.png
+== Compare, unchanged, twice
+-- unchanged-1: exit 0; production passed | production-mobile passed
+-- unchanged-2: exit 0; production passed | production-mobile passed
+== Compare with BREAK=restyle
+-- restyle (BREAK=restyle): exit 1; production failed (Error: / looks like its baseline; Error: /about looks like its baseline) | production-mobile failed (Error: / looks like its baseline; Error: /about looks like its baseline)
+   diff image: about-diff.png
+   diff image: home-diff.png
+== Compare, unchanged, on x86_64 (linux/amd64, as GitHub's runners and most Windows machines)
+-- amd64: exit 0; production passed | production-mobile passed
+== The baselines above were moved here after the runs (fixture-baselines/): an Engagement makes its own with npm run test:visual:update

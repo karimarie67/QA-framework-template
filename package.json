@@ -22,7 +22,9 @@
     "test:links": "playwright test tests/check-links.spec.js --project=link-checker",
     "test:a11y": "playwright test --grep @a11y --project=staging --project=staging-mobile",
     "test:skeleton": "node scripts/test-skeleton.js",
-    "lint": "eslint . --max-warnings=0"
+    "lint": "eslint . --max-warnings=0",
+    "test:visual": "node scripts/visual.js",
+    "test:visual:update": "node scripts/visual.js --update"
   },
   "keywords": [
     "qa",

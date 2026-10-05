@@ -101,5 +101,12 @@
       "loadMs": 2000
     },
     "settleMs": 1000
+  },
+  "visual": {
+    "pages": [
+      "/",
+      "/about"
+    ],
+    "maxDiffPixelRatio": 0.01
   }
 }

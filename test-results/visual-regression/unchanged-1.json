@@ -1,16 +1,17 @@
 {
   "config": {
     "argv": [
-      "/opt/homebrew/Cellar/node/25.7.0/bin/node",
-      "/Users/kskinner/QA-framework-template/node_modules/@playwright/test/cli.js",
+      "/usr/bin/node",
+      "/work/node_modules/.bin/playwright",
       "test",
-      "tests/performance_tests.spec.js",
+      "--grep",
+      "@visual",
       "--project=production",
-      "--retries=0",
+      "--project=production-mobile",
       "--reporter=list,json"
     ],
-    "configFile": "/Users/kskinner/QA-framework-template/playwright.config.js",
-    "rootDir": "/Users/kskinner/QA-framework-template/tests",
+    "configFile": "/work/playwright.config.js",
+    "rootDir": "/work/tests",
     "failOnFlakyTests": false,
     "forbidOnly": false,
     "fullyParallel": false,
@@ -21,20 +22,20 @@
     "grepInvert": null,
     "maxFailures": 0,
     "metadata": {
-      "actualWorkers": 1
+      "actualWorkers": 2
     },
     "preserveOutput": "always",
     "projects": [
       {
-        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "outputDir": "/work/playwright-output",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 2
         },
         "id": "local",
         "name": "local",
-        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testDir": "/work/tests",
         "testIgnore": [
           "/check-links\\.spec\\.js$/",
           "/\\.auth\\.spec\\.js$/"
@@ -45,15 +46,15 @@
         "timeout": 90000
       },
       {
-        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "outputDir": "/work/playwright-output",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 2
         },
         "id": "staging",
         "name": "staging",
-        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testDir": "/work/tests",
         "testIgnore": [
           "/check-links\\.spec\\.js$/",
           "/\\.auth\\.spec\\.js$/"
@@ -64,15 +65,15 @@
         "timeout": 90000
       },
       {
-        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "outputDir": "/work/playwright-output",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 2
         },
         "id": "production",
         "name": "production",
-        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testDir": "/work/tests",
         "testIgnore": [
           "/check-links\\.spec\\.js$/",
           "/\\.auth\\.spec\\.js$/"
@@ -83,15 +84,15 @@
         "timeout": 90000
       },
       {
-        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "outputDir": "/work/playwright-output",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 2
         },
         "id": "staging-mobile",
         "name": "staging-mobile",
-        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testDir": "/work/tests",
         "testIgnore": [
           "/check-links\\.spec\\.js$/",
           "/\\.auth\\.spec\\.js$/"
@@ -102,15 +103,15 @@
         "timeout": 90000
       },
       {
-        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "outputDir": "/work/playwright-output",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 2
         },
         "id": "production-mobile",
         "name": "production-mobile",
-        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testDir": "/work/tests",
         "testIgnore": [
           "/check-links\\.spec\\.js$/",
           "/\\.auth\\.spec\\.js$/"
@@ -121,15 +122,15 @@
         "timeout": 90000
       },
       {
-        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "outputDir": "/work/playwright-output",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 2
         },
         "id": "staging-setup",
         "name": "staging-setup",
-        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testDir": "/work/tests",
         "testIgnore": [],
         "testMatch": [
           "/auth\\.setup\\.js$/"
@@ -137,15 +138,15 @@
         "timeout": 90000
       },
       {
-        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "outputDir": "/work/playwright-output",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 2
         },
         "id": "staging-auth",
         "name": "staging-auth",
-        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testDir": "/work/tests",
         "testIgnore": [],
         "testMatch": [
           "/\\.auth\\.spec\\.js$/"
@@ -153,15 +154,15 @@
         "timeout": 90000
       },
       {
-        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "outputDir": "/work/playwright-output",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 2
         },
         "id": "staging-auth-mobile",
         "name": "staging-auth-mobile",
-        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testDir": "/work/tests",
         "testIgnore": [],
         "testMatch": [
           "/\\.auth\\.spec\\.js$/"
@@ -169,15 +170,15 @@
         "timeout": 90000
       },
       {
-        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "outputDir": "/work/playwright-output",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 2
         },
         "id": "production-setup",
         "name": "production-setup",
-        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testDir": "/work/tests",
         "testIgnore": [],
         "testMatch": [
           "/auth\\.setup\\.js$/"
@@ -185,15 +186,15 @@
         "timeout": 90000
       },
       {
-        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "outputDir": "/work/playwright-output",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 2
         },
         "id": "production-auth",
         "name": "production-auth",
-        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testDir": "/work/tests",
         "testIgnore": [],
         "testMatch": [
           "/\\.auth\\.spec\\.js$/"
@@ -201,15 +202,15 @@
         "timeout": 90000
       },
       {
-        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "outputDir": "/work/playwright-output",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 2
         },
         "id": "production-auth-mobile",
         "name": "production-auth-mobile",
-        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testDir": "/work/tests",
         "testIgnore": [],
         "testMatch": [
           "/\\.auth\\.spec\\.js$/"
@@ -217,15 +218,15 @@
         "timeout": 90000
       },
       {
-        "outputDir": "/Users/kskinner/QA-framework-template/playwright-output",
+        "outputDir": "/work/playwright-output",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 1
+          "actualWorkers": 2
         },
         "id": "link-checker",
         "name": "link-checker",
-        "testDir": "/Users/kskinner/QA-framework-template/tests",
+        "testDir": "/work/tests",
         "testIgnore": [],
         "testMatch": [
           "/check-links\\.spec\\.js$/"
@@ -256,78 +257,60 @@
   },
   "suites": [
     {
-      "title": "performance_tests.spec.js",
-      "file": "performance_tests.spec.js",
+      "title": "visual_tests.spec.js",
+      "file": "visual_tests.spec.js",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Performance Tests",
-          "file": "performance_tests.spec.js",
-          "line": 46,
+          "title": "Visual Tests",
+          "file": "visual_tests.spec.js",
+          "line": 18,
           "column": 6,
           "specs": [
             {
-              "title": "TC_PERF_001 Every page loads within its performance budgets",
+              "title": "TC_VISUAL_001 Every page looks like its baseline",
               "ok": true,
               "tags": [
                 "regression",
-                "perf"
+                "visual"
               ],
               "tests": [
                 {
                   "timeout": 90000,
                   "annotations": [
                     {
-                      "type": "skip",
-                      "description": "no performance budgets configured (siteConfig.perf is not set)",
-                      "location": {
-                        "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
-                        "line": 47,
-                        "column": 8
-                      }
-                    },
-                    {
                       "type": "test_case",
-                      "description": "TC_PERF_001",
+                      "description": "TC_VISUAL_001",
                       "location": {
-                        "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
-                        "line": 49,
+                        "file": "/work/tests/visual_tests.spec.js",
+                        "line": 22,
                         "column": 3
                       }
                     }
                   ],
-                  "expectedStatus": "skipped",
+                  "expectedStatus": "passed",
                   "projectId": "production",
                   "projectName": "production",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 408,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-05T16:43:48.041Z",
+                      "startTime": "2026-10-05T17:19:40.203Z",
                       "annotations": [
                         {
-                          "type": "skip",
-                          "description": "no performance budgets configured (siteConfig.perf is not set)",
-                          "location": {
-                            "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
-                            "line": 47,
-                            "column": 8
-                          }
-                        },
-                        {
                           "type": "test_case",
-                          "description": "TC_PERF_001",
+                          "description": "TC_VISUAL_001",
                           "location": {
-                            "file": "/Users/kskinner/QA-framework-template/tests/performance_tests.spec.js",
-                            "line": 49,
+                            "file": "/work/tests/visual_tests.spec.js",
+                            "line": 22,
                             "column": 3
                           }
                         }
@@ -335,12 +318,69 @@
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
-              "id": "db5b0d4268a782a438b9-1f6eb32520440a4a930a",
-              "file": "performance_tests.spec.js",
-              "line": 49,
+              "id": "d78ef287327910b59350-7b2a68a65af4f00bfcfc",
+              "file": "visual_tests.spec.js",
+              "line": 22,
+              "column": 3
+            },
+            {
+              "title": "TC_VISUAL_001 Every page looks like its baseline",
+              "ok": true,
+              "tags": [
+                "regression",
+                "visual"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [
+                    {
+                      "type": "test_case",
+                      "description": "TC_VISUAL_001",
+                      "location": {
+                        "file": "/work/tests/visual_tests.spec.js",
+                        "line": 22,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "production-mobile",
+                  "projectName": "production-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 380,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T17:19:40.203Z",
+                      "annotations": [
+                        {
+                          "type": "test_case",
+                          "description": "TC_VISUAL_001",
+                          "location": {
+                            "file": "/work/tests/visual_tests.spec.js",
+                            "line": 22,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d78ef287327910b59350-3900d3fc2ebd4f605f79",
+              "file": "visual_tests.spec.js",
+              "line": 22,
               "column": 3
             }
           ]
@@ -350,10 +390,10 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-05T16:43:48.027Z",
-    "duration": 15.616000000000042,
-    "expected": 0,
-    "skipped": 1,
+    "startTime": "2026-10-05T17:19:39.637Z",
+    "duration": 1518.549,
+    "expected": 2,
+    "skipped": 0,
     "unexpected": 0,
     "flaky": 0
   }
