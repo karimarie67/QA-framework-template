@@ -1,0 +1,54 @@
+fixture site on http://127.0.0.1:8765 (BREAK=api-html)
+QA_BASE_URL in use: http://127.0.0.1:8765
+
+Running 4 tests using 2 workers
+
+QA_BASE_URL in use: http://127.0.0.1:8765
+QA_BASE_URL in use: http://127.0.0.1:8765
+  -  2 [production-mobile] › tests/api_tests.spec.js:28:3 › API Tests › TC_API_001 Every endpoint answers with its expected status and content type @regression @api
+  -  3 [production-mobile] › tests/api_tests.spec.js:41:3 › API Tests › TC_API_002 Every JSON endpoint returns the fields it promises @regression @api
+  ✘  1 [production] › tests/api_tests.spec.js:28:3 › API Tests › TC_API_001 Every endpoint answers with its expected status and content type @regression @api (359ms)
+QA_BASE_URL in use: http://127.0.0.1:8765
+  ✘  4 [production] › tests/api_tests.spec.js:41:3 › API Tests › TC_API_002 Every JSON endpoint returns the fields it promises @regression @api (361ms)
+
+
+  1) [production] › tests/api_tests.spec.js:28:3 › API Tests › TC_API_001 Every endpoint answers with its expected status and content type @regression @api 
+
+    Error: /api/items is application/json
+
+    expect(received).toContain(expected) // indexOf
+
+    Expected substring: "application/json"
+    Received string:    "text/html; charset=utf-8"
+
+      34 |       expect.soft(response.status(), `${e.path} answers ${e.status ?? 200}`).toBe(e.status ?? 200);
+      35 |       if (e.contentType) {
+    > 36 |         expect.soft(response.headers()['content-type'] ?? '', `${e.path} is ${e.contentType}`).toContain(e.contentType);
+         |                                                                                                ^
+      37 |       }
+      38 |     }
+      39 |   });
+        at /Users/kskinner/QA-framework-template/tests/api_tests.spec.js:36:96
+
+    Error Context: playwright-output/api_tests-API-Tests-TC-API-3f0c2-ted-status-and-content-type-production/error-context.md
+
+  2) [production] › tests/api_tests.spec.js:41:3 › API Tests › TC_API_002 Every JSON endpoint returns the fields it promises @regression @api 
+
+    Error: /api/items: the body isn't valid JSON
+
+      19 |     return await response.json();
+      20 |   } catch {
+    > 21 |     throw new Error(`${path}: the body isn't valid JSON`);
+         |           ^
+      22 |   }
+      23 | }
+      24 |
+        at jsonOf (/Users/kskinner/QA-framework-template/tests/api_tests.spec.js:21:11)
+        at /Users/kskinner/QA-framework-template/tests/api_tests.spec.js:49:20
+
+    Error Context: playwright-output/api_tests-API-Tests-TC-API-9672f-urns-the-fields-it-promises-production/error-context.md
+
+  2 failed
+    [production] › tests/api_tests.spec.js:28:3 › API Tests › TC_API_001 Every endpoint answers with its expected status and content type @regression @api 
+    [production] › tests/api_tests.spec.js:41:3 › API Tests › TC_API_002 Every JSON endpoint returns the fields it promises @regression @api 
+  2 skipped

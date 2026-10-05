@@ -1,0 +1,7 @@
+-- no BREAK: exit 0; production TC_API_001 passed, production TC_API_002 passed, production-mobile TC_API_001 skipped, production-mobile TC_API_002 skipped
+-- api-500: exit 1; production TC_API_001 failed, production TC_API_002 passed, production-mobile TC_API_001 skipped, production-mobile TC_API_002 skipped
+-- api-html: exit 1; production TC_API_001 failed, production TC_API_002 failed, production-mobile TC_API_001 skipped, production-mobile TC_API_002 skipped
+-- api-missing-key: exit 1; production TC_API_001 passed, production TC_API_002 failed, production-mobile TC_API_001 skipped, production-mobile TC_API_002 skipped
+-- full self-test: expected 21, unexpected 0, skipped 2
+-- CI's functional selection (--grep @regression, four staging projects): 4, of Total: 17 tests in 6 files
+-- api: null: exit 0; expected 0, unexpected 0, skipped 2; no API configured (siteConfig.api is not set)
