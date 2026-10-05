@@ -1,0 +1,68 @@
+Found smoke results: /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-011vow/smoke-test-results/smoke-results.json
+Found functional results: /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-011vow/functional-test-results/functional-results.json
+⚠️ No smoke results (looked in /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-b2H1Um/smoke-test-results/smoke-results.json and /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-b2H1Um/smoke-results.json)
+⚠️ No functional results (looked in /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-b2H1Um/functional-test-results/functional-results.json and /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-b2H1Um/functional-results.json)
+⚠️ No smoke results (looked in /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-7wjIM6/smoke-test-results/smoke-results.json and /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-7wjIM6/smoke-results.json)
+Found functional results: /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-7wjIM6/functional-results.json
+Found smoke results: /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-B2eI6P/smoke-results.json
+⚠️ No functional results (looked in /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-B2eI6P/functional-test-results/functional-results.json and /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-B2eI6P/functional-results.json)
+⚠️ No smoke results (looked in /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-8uboow/smoke-test-results/smoke-results.json and /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-8uboow/smoke-results.json)
+Found functional results: /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-8uboow/functional-test-results/functional-results.json
+🔄 Generating QA Dashboard...
+⚠️ No smoke results (looked in /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-a1a55i/smoke-test-results/smoke-results.json and /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-a1a55i/smoke-results.json)
+Found functional results: /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-a1a55i/functional-results.json
+✅ Dashboard generated successfully!
+🔄 Generating QA Dashboard...
+⚠️ No smoke results (looked in /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-5bHhsN/smoke-test-results/smoke-results.json and /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-5bHhsN/smoke-results.json)
+⚠️ No functional results (looked in /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-5bHhsN/functional-test-results/functional-results.json and /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-5bHhsN/functional-results.json)
+🔄 Generating QA Dashboard...
+⚠️ No smoke results (looked in /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-ZKekYz/smoke-test-results/smoke-results.json and /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-ZKekYz/smoke-results.json)
+Found functional results: /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-ZKekYz/functional-results.json
+🔄 Generating QA Dashboard...
+⚠️ No smoke results (looked in /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-wab4Gs/smoke-test-results/smoke-results.json and /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-wab4Gs/smoke-results.json)
+Found functional results: /var/folders/53/p5c_lg7d1t1b1rp23mt_6brc0000gp/T/artifacts-wab4Gs/functional-test-results/functional-results.json
+▶ testStatus
+  ✔ maps Playwright verdicts (0.757916ms)
+  ✔ without a verdict, uses the last attempt (0.103709ms)
+✔ testStatus (2.234708ms)
+▶ parsePlaywrightJson and calculateMetrics
+  ✔ reads every test, including nested suites (0.863167ms)
+  ✔ a test's duration is its last attempt's, with its attempts counted; the error comes from a failed one (0.092208ms)
+  ✔ the run's total duration counts every attempt (1.45825ms)
+  ✔ skipped tests are left out of the pass rate; flaky counts as a pass (0.129084ms)
+✔ parsePlaywrightJson and calculateMetrics (3.823834ms)
+▶ failedTestNames
+  ✔ a test failing on desktop and phone is listed once (0.133833ms)
+✔ failedTestNames (0.292291ms)
+▶ slackPayload
+  ✔ a clean run has nothing to report (0.09425ms)
+  ✔ a failing run names its failures and links the run (0.126167ms)
+  ✔ a flaky-only run is reported as flaky, not as failed (0.067125ms)
+  ✔ uses Slack's bold (single asterisks), not Markdown's (0.060875ms)
+✔ slackPayload (0.566542ms)
+▶ collectTestResults
+  ✔ reads the smoke and the functional artifact, with their test counts (0.856542ms)
+  ✔ finds nothing where no artifacts were downloaded (0.364875ms)
+✔ collectTestResults (2.025458ms)
+▶ collectTestResults: where a single artifact lands
+  ✔ a functional file at the root alone (a regression-only run) is read (0.749333ms)
+  ✔ a smoke file at the root alone (a smoke-only run) is read (0.464208ms)
+  ✔ the subfolder is preferred when a file is in both places (1.05ms)
+✔ collectTestResults: where a single artifact lands (2.481042ms)
+▶ generate
+  ✔ with results: writes the dashboard, a history row, and the latest results (14.698583ms)
+  ✔ no results file: throws, and leaves every file as it was (1.417084ms)
+  ✔ an empty results file: throws, and leaves every file as it was (1.048167ms)
+  ✔ a results file with no tests: throws, and leaves every file as it was (1.199834ms)
+✔ generate (18.725125ms)
+▶ the generator as CI runs it, with no artifacts
+  ✔ exits 1 with an ::error:: line, and the committed dashboard files are unchanged (87.562084ms)
+✔ the generator as CI runs it, with no artifacts (88.788583ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 263.307667
