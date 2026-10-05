@@ -24,7 +24,7 @@ unit tests' Boost-format fixture copies these columns
 The rest of the Boost Engagement's files (its specs, scripts, guides, and
 original QA handbook) were removed from the template on 2026-10-05. They're
 in this repository's history, at
-[`76f455d`](https://github.com/karimarie67/QA-framework-template/tree/76f455d8c78d58589a7ff4e00c26c1cbda07be7d/examples/boost),
+[`76f455d`](https://github.com/karimarie67/QA-framework-template/tree/76f455d/examples/boost),
 and the complete Boost.org repo is
 [`karimarie67/QA-boost`](https://github.com/karimarie67/QA-boost) (archived).
 Nothing here runs in CI or is found by `playwright.config.js`.

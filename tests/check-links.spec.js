@@ -313,7 +313,7 @@ function printSummary() {
   }
 }
 
-test.describe('Production Link Check', () => {
+test.describe('Production Link Check', { tag: '@links' }, () => {
   test.setTimeout(1800000); // 30 minutes for the whole test
 
   test.beforeEach(() => {

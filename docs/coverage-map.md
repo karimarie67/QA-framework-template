@@ -6,14 +6,14 @@
 
 | Test case | Client case | Issue | Tags | Spec | Test |
 |---|---|---|---|---|---|
-| TC_A11Y_001 | — | — | — | `accessibility_tests.spec.js` | Accessibility Tests › TC_A11Y_001 No page has a serious or critical accessibility violation |
-| TC_AUTH_001 | — | — | — | `auth.setup.js` | TC_AUTH_001 Logs in and saves the session |
-| TC_AUTH_002 | — | — | — | `account.auth.spec.js` | Logged-in pages › TC_AUTH_002 A page that needs a login opens with the saved session |
-| TC_AUTH_003 | — | — | — | `account.auth.spec.js` | Logged-in pages › without a session › TC_AUTH_003 Without a session, that page sends you to the login page |
-| TC_ERROR_001 | — | — | — | `error_handling_tests.spec.js` | Error Handling Tests › TC_ERROR_001 An unknown address shows a not-found page |
-| TC_ERROR_002 | — | — | — | `error_handling_tests.spec.js` | Error Handling Tests › TC_ERROR_002 A malformed address never causes a server error |
-| TC_FORM_001 | — | — | — | `forms_tests.spec.js` | Forms Tests › TC_FORM_001 Every form field has its label, type, and required state |
-| TC_LINKS_001 | — | — | — | `check-links.spec.js` | Production Link Check › TC_LINKS_001 No link between the site's pages is broken |
+| TC_A11Y_001 | — | — | `@regression` `@a11y` | `accessibility_tests.spec.js` | Accessibility Tests › TC_A11Y_001 No page has a serious or critical accessibility violation |
+| TC_AUTH_001 | — | — | `@regression` `@auth` | `auth.setup.js` | TC_AUTH_001 Logs in and saves the session |
+| TC_AUTH_002 | — | — | `@regression` `@auth` | `account.auth.spec.js` | Logged-in pages › TC_AUTH_002 A page that needs a login opens with the saved session |
+| TC_AUTH_003 | — | — | `@regression` `@auth` | `account.auth.spec.js` | Logged-in pages › without a session › TC_AUTH_003 Without a session, that page sends you to the login page |
+| TC_ERROR_001 | — | — | `@regression` `@errors` | `error_handling_tests.spec.js` | Error Handling Tests › TC_ERROR_001 An unknown address shows a not-found page |
+| TC_ERROR_002 | — | — | `@regression` `@errors` | `error_handling_tests.spec.js` | Error Handling Tests › TC_ERROR_002 A malformed address never causes a server error |
+| TC_FORM_001 | — | — | `@regression` `@forms` | `forms_tests.spec.js` | Forms Tests › TC_FORM_001 Every form field has its label, type, and required state |
+| TC_LINKS_001 | — | — | `@links` | `check-links.spec.js` | Production Link Check › TC_LINKS_001 No link between the site's pages is broken |
 | TC_SMOKE_001 | — | — | `@smoke` | `smoke_tests.spec.js` | Smoke Tests › TC_SMOKE_001 Every page loads with its title and one main heading |
 | TC_SMOKE_002 | — | — | `@smoke` | `smoke_tests.spec.js` | Smoke Tests › TC_SMOKE_002 The header menu links reach their pages |
 | TC_SMOKE_003 | — | — | `@smoke` | `smoke_tests.spec.js` | Smoke Tests › TC_SMOKE_003 The footer is there, with its links |

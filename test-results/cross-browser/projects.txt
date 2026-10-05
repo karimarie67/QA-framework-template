@@ -1,7 +1,0 @@
-production-firefox accessibility_tests.spec.js error_handling_tests.spec.js forms_tests.spec.js smoke_tests.spec.js
-production-iphone accessibility_tests.spec.js error_handling_tests.spec.js forms_tests.spec.js smoke_tests.spec.js
-production-webkit accessibility_tests.spec.js error_handling_tests.spec.js forms_tests.spec.js smoke_tests.spec.js
-staging-firefox accessibility_tests.spec.js error_handling_tests.spec.js forms_tests.spec.js smoke_tests.spec.js
-staging-iphone accessibility_tests.spec.js error_handling_tests.spec.js forms_tests.spec.js smoke_tests.spec.js
-staging-webkit accessibility_tests.spec.js error_handling_tests.spec.js forms_tests.spec.js smoke_tests.spec.js
-projects: 18

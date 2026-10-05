@@ -37,7 +37,10 @@ function saveEmptySession(file) {
   fs.writeFileSync(file, JSON.stringify({ cookies: [], origins: [] }));
 }
 
+// Tagged for the tag check and the coverage map only: the login runs as the
+// -auth projects' dependency whatever --grep selects.
 setup('TC_AUTH_001 Logs in and saves the session', {
+  tag: ['@regression', '@auth'],
   annotation: [{ type: 'test_case', description: 'TC_AUTH_001' }],
 }, async ({ page }, testInfo) => {
   const file = authStatePath(testInfo.project.name.replace(/-setup$/, ''));
