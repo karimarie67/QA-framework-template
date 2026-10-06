@@ -30,8 +30,11 @@ test.describe('Forms Tests', { tag: ['@regression', '@forms'] }, () => {
 
     for (const f of forms) {
       await page.goto(buildURL(testInfo, f.path), { waitUntil: 'load' });
-      // eslint-disable-next-line playwright/no-networkidle -- waits for the page's own requests, so the test can fail on a write
-      await page.waitForLoadState('networkidle');
+      // Give the page's own scripts time to send anything they send on load,
+      // so the test can fail on a write. At most 10 s: a page with polling,
+      // analytics, or reCAPTCHA traffic may never go idle.
+      // eslint-disable-next-line playwright/no-networkidle -- see above
+      await page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {});
       // By CSS selector, not by role: a <form> only has the form role when it
       // has an accessible name, which most real forms lack.
       const form = page.locator(f.selector || 'form').first();
