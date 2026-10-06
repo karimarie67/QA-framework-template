@@ -1,0 +1,14 @@
+Update QA Dashboard	Generate Dashboard	﻿2026-10-05T19:52:08.1159442Z ##[group]Run node dashboards/scripts/generate-dashboard.js
+Update QA Dashboard	Generate Dashboard	2026-10-05T19:52:08.1159922Z ^[[36;1mnode dashboards/scripts/generate-dashboard.js^[[0m
+Update QA Dashboard	Generate Dashboard	2026-10-05T19:52:08.1221010Z shell: /usr/bin/bash -e {0}
+Update QA Dashboard	Generate Dashboard	2026-10-05T19:52:08.1221302Z env:
+Update QA Dashboard	Generate Dashboard	2026-10-05T19:52:08.1221496Z   TEST_ENV: staging
+Update QA Dashboard	Generate Dashboard	2026-10-05T19:52:08.1221738Z   GITHUB_RUN_ID: 37364536332
+Update QA Dashboard	Generate Dashboard	2026-10-05T19:52:08.1221983Z   GITHUB_RUN_NUMBER: 110
+Update QA Dashboard	Generate Dashboard	2026-10-05T19:52:08.1222265Z   GITHUB_REF: refs/heads/fix/dashboard-single-artifact
+Update QA Dashboard	Generate Dashboard	2026-10-05T19:52:08.1222592Z ##[endgroup]
+Update QA Dashboard	Generate Dashboard	2026-10-05T19:52:08.1615792Z 🔄 Generating QA Dashboard...
+Update QA Dashboard	Generate Dashboard	2026-10-05T19:52:08.1624556Z ⚠️ No smoke results (looked in /home/runner/work/QA-framework-template/QA-framework-template/artifacts/smoke-test-results/smoke-results.json and /home/runner/work/QA-framework-template/QA-framework-template/artifacts/smoke-results.json)
+Update QA Dashboard	Generate Dashboard	2026-10-05T19:52:08.1652653Z ##[error]No test results to report: no tests in /home/runner/work/QA-framework-template/QA-framework-template/artifacts/smoke-test-results/smoke-results.json or /home/runner/work/QA-framework-template/QA-framework-template/artifacts/smoke-results.json, or in /home/runner/work/QA-framework-template/QA-framework-template/artifacts/functional-test-results/functional-results.json or /home/runner/work/QA-framework-template/QA-framework-template/artifacts/functional-results.json. The dashboard was left unchanged.
+Update QA Dashboard	Generate Dashboard	2026-10-05T19:52:08.1663294Z ⚠️ No functional results (looked in /home/runner/work/QA-framework-template/QA-framework-template/artifacts/functional-test-results/functional-results.json and /home/runner/work/QA-framework-template/QA-framework-template/artifacts/functional-results.json)
+Update QA Dashboard	Generate Dashboard	2026-10-05T19:52:08.1666292Z ##[error]Process completed with exit code 1.

@@ -1,0 +1,40 @@
+Dashboard fix verification (2026-10-05). Plan: a focused red-team review, passed (5 warnings, 6 minor, answered in the build).
+
+== Unit tests: unit-generate-dashboard.txt (29 pass): both layouts, the subfolder preferred, an empty file and a file with no tests (throws, every file unchanged), and the script run as CI runs it (exit 1, ::error::, the committed dashboard files unchanged). Full suite: 385 pass.
+
+== The failure path in CI (no results): runs 37364536332 and 37366268579, whose test jobs GitHub cancelled during its Actions incident (no runner assigned). The dashboard job ran with no artifacts: Generate Dashboard failed with '::error::No test results to report…', Commit Dashboard Updates was skipped, nothing pushed (ci-no-results-run-37364536332.log).
+
+== One artifact (a regression dispatch):
+== regression dispatch: https://github.com/karimarie67/QA-framework-template/actions/runs/37381291437
+  Template Structural Check: success
+  Lint: success
+  Unit Tests: success
+  Skeleton Self-Test: success
+  Functional Tests (@regression): failure
+  Update QA Dashboard: success
+  artifact: functional-test-results
+  branch head: d2d1d37 📊 Update QA Dashboard - Run #112 [fix/dashboard-single-artifact]
+  artifacts: total 21, passed 0, failed 8
+  history row: run 112, total 21, passed 0, failed 8
+  match: YES
+  dashboard is the no-data placeholder: false
+
+== Two artifacts (an all dispatch):
+== all dispatch: https://github.com/karimarie67/QA-framework-template/actions/runs/37383121029
+  Smoke Tests (Quick Validation): failure
+  Template Structural Check: success
+  Unit Tests: success
+  Link Check: failure
+  Functional Tests (@regression): failure
+  Lint: success
+  Skeleton Self-Test: success
+  Update QA Dashboard: success
+  artifact: smoke-test-results
+  artifact: functional-test-results
+  branch head: b294e53 📊 Update QA Dashboard - Run #113 [fix/dashboard-single-artifact]
+  artifacts: total 27, passed 0, failed 14
+  history row: run 113, total 27, passed 0, failed 14
+  match: YES
+  dashboard is the no-data placeholder: false
+
+Each dispatch's dashboard commit is reverted on the branch (net-zero diff).
