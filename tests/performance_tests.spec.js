@@ -57,6 +57,11 @@ test.describe('Performance Tests', { tag: ['@regression', '@perf'] }, () => {
       await page.goto(buildURL(testInfo, path), { waitUntil: 'load' });
       const m = await measure(page, perf.settleMs ?? 1000);
       results.push({ path, ...m });
+      // A metric that was never reported reads 0, which is within any budget:
+      // it must fail, not pass.
+      for (const metric of ['lcp', 'ttfb', 'load']) {
+        expect.soft(m[metric], `${path}: ${metric.toUpperCase()} was measured`).toBeGreaterThan(0);
+      }
       for (const [budgetKey, metric, label, show] of BUDGETS) {
         if (budgets[budgetKey] === undefined) continue;
         expect.soft(m[metric], `${path}: ${label} ${show(m[metric])}, budget ${show(budgets[budgetKey])}`).toBeLessThanOrEqual(budgets[budgetKey]);
